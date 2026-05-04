@@ -1,0 +1,185 @@
+filters:
+  and:
+    - file.inFolder("notes")
+    - file.ext == "md"
+formulas:
+  cover: image("attachments/" + cover_file)
+  video_icon: if(has_video, "🎬", "")
+properties:
+  file.name:
+    displayName: Name
+  category:
+    displayName: Category
+  difficulty:
+    displayName: Difficulty
+  mood:
+    displayName: Mood
+  has_video:
+    displayName: Video
+  source_id:
+    displayName: ID
+  formula.cover:
+    displayName: " "
+  formula.video_icon:
+    displayName: 🎥
+views:
+  - type: cards
+    name: Gallery
+    order:
+      - file.name
+      - category
+      - difficulty
+      - mood
+      - formula.video_icon
+    cardSize: 360
+    image: formula.cover
+    imageFit: cover
+    imageAspectRatio: 0.5625
+  - type: table
+    name: All 150
+    order:
+      - formula.cover
+      - file.name
+      - category
+      - difficulty
+      - mood
+      - formula.video_icon
+    rowHeight: tall
+  - type: table
+    name: By Category
+    groupBy:
+      property: category
+      direction: ASC
+    order:
+      - formula.cover
+      - file.name
+      - difficulty
+      - mood
+      - formula.video_icon
+    rowHeight: tall
+  - type: cards
+    name: Camera Work
+    filters:
+      and:
+        - category == "Camera Work"
+    order:
+      - file.name
+      - difficulty
+      - mood
+    cardSize: 320
+    image: formula.cover
+    imageFit: cover
+    imageAspectRatio: 0.5625
+  - type: cards
+    name: Lighting
+    filters:
+      and:
+        - category == "Lighting"
+    order:
+      - file.name
+      - difficulty
+      - mood
+    cardSize: 320
+    image: formula.cover
+    imageFit: cover
+    imageAspectRatio: 0.5625
+  - type: cards
+    name: Composition
+    filters:
+      and:
+        - category == "Composition"
+    order:
+      - file.name
+      - difficulty
+      - mood
+    cardSize: 320
+    image: formula.cover
+    imageFit: cover
+    imageAspectRatio: 0.5625
+  - type: cards
+    name: Editing
+    filters:
+      and:
+        - category == "Editing"
+    order:
+      - file.name
+      - difficulty
+      - mood
+    cardSize: 320
+    image: formula.cover
+    imageFit: cover
+    imageAspectRatio: 0.5625
+  - type: cards
+    name: Storytelling
+    filters:
+      and:
+        - category == "Storytelling"
+    order:
+      - file.name
+      - difficulty
+      - mood
+    cardSize: 320
+    image: formula.cover
+    imageFit: cover
+    imageAspectRatio: 0.5625
+  - type: cards
+    name: VFX
+    filters:
+      and:
+        - category == "Visual Effects & Promptable FX"
+    order:
+      - file.name
+      - difficulty
+      - mood
+    cardSize: 320
+    image: formula.cover
+    imageFit: cover
+    imageAspectRatio: 0.5625
+  - type: cards
+    name: Genres & Styles
+    filters:
+      and:
+        - category == "Genres & Styles"
+    order:
+      - file.name
+      - difficulty
+      - mood
+    cardSize: 320
+    image: formula.cover
+    imageFit: cover
+    imageAspectRatio: 0.5625
+  - type: table
+    name: By Difficulty
+    groupBy:
+      property: difficulty
+      direction: ASC
+    order:
+      - formula.cover
+      - file.name
+      - category
+      - mood
+    rowHeight: tall
+  - type: table
+    name: By Mood
+    groupBy:
+      property: mood
+      direction: ASC
+    order:
+      - formula.cover
+      - file.name
+      - category
+      - difficulty
+    rowHeight: tall
+  - type: cards
+    name: Has Video
+    filters:
+      and:
+        - has_video
+    order:
+      - file.name
+      - difficulty
+      - mood
+    cardSize: 320
+    image: formula.cover
+    imageFit: cover
+    imageAspectRatio: 0.5625
