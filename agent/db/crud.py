@@ -18,7 +18,7 @@ def _validate_table(table: str) -> None:
 # Column whitelists per table — prevents SQL injection via kwargs keys
 _COLUMNS = {
     "character": {"name", "slug", "entity_type", "description", "image_prompt", "voice_description", "reference_image_url", "media_id", "updated_at"},
-    "project": {"name", "description", "story", "thumbnail_url", "language", "status", "user_paygate_tier", "narrator_voice", "narrator_ref_audio", "material", "allow_music", "allow_voice", "orientation", "updated_at"},
+    "project": {"name", "description", "story", "thumbnail_url", "language", "status", "user_paygate_tier", "narrator_voice", "narrator_ref_audio", "material", "allow_music", "allow_voice", "orientation", "social_caption", "updated_at"},
     "video": {"title", "story", "display_order", "status", "orientation", "vertical_url", "horizontal_url",
               "thumbnail_url", "duration", "resolution", "youtube_id", "privacy", "tags", "updated_at"},
     "scene": {"prompt", "image_prompt", "video_prompt", "character_names", "parent_scene_id", "chain_type",

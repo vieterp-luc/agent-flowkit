@@ -1,0 +1,62 @@
+{
+  "morning_tea": {
+    "id": "morning_tea",
+    "title": "Morning Tea ☕ Soft Lo-Fi for a Peaceful Start",
+    "description": "Slow morning lo-fi to ease into your day with matcha and gentle piano. Perfect for journaling, light reading, or a calm morning routine.",
+    "music_prompt": "lo-fi hip hop, soft jazzy piano, organic percussion, 80bpm, fresh morning tea atmosphere, slow living aesthetic, instrumental only, no vocals",
+    "ambience": ["coffee_shop", "tea_pour"],
+    "ambience_volume": 0.25,
+    "music_volume": 0.75,
+    "image_prompt": "A sunlit cozy corner, a cup of matcha tea with steam rising, a small flower vase on a light oak table, gentle morning light streaming through linen curtains, cinematic soft focus, Ghibli watercolor aesthetic, warm pastel palette",
+    "color_palette": "sage green, warm wood, cream",
+    "youtube_tags": ["lofi", "lofi morning", "matcha lofi", "study music", "slow living", "morning routine"]
+  },
+  "night_focus": {
+    "id": "night_focus",
+    "title": "Night Focus 🕯️ Cozy Atelier Lo-Fi for Deep Work",
+    "description": "Late-night lo-fi for deep work and study sessions. Rhodes piano, soft rain, and vinyl crackle to keep you in flow.",
+    "music_prompt": "chill lo-fi beats, minimalist rhodes piano, 75bpm, muffled sound, cozy atelier night ambience, focus music, no vocals, instrumental",
+    "ambience": ["rain_light", "vinyl_crackle", "fireplace"],
+    "ambience_volume": 0.30,
+    "music_volume": 0.70,
+    "image_prompt": "A warm artist studio at night, dim candlelight, a tea pot and an open book on a wooden desk, rainy window in the background, cozy and serene atmosphere, dark indigo and amber tones, Ghibli aesthetic, painterly brushwork",
+    "color_palette": "indigo, amber, candle warm",
+    "youtube_tags": ["lofi", "lofi focus", "deep work music", "night lofi", "study lofi", "atelier"]
+  },
+  "vintage_cafe": {
+    "id": "vintage_cafe",
+    "title": "Vintage Tea Corner 🎷 1940s Lo-Fi Jazz",
+    "description": "1940s nostalgic lo-fi jazz. Muted saxophone, double bass, vinyl crackle. For dreamers and old souls.",
+    "music_prompt": "vintage lo-fi jazz, 1940s nostalgic, dusty vinyl crackle, slow and sentimental, 70bpm, warm and grainy texture, muted saxophone, double bass, brushed drums, instrumental",
+    "ambience": ["vinyl_crackle", "coffee_shop"],
+    "ambience_volume": 0.30,
+    "music_volume": 0.70,
+    "image_prompt": "A vintage 1940s tea cafe corner, warm sepia tones, a steaming cup on a marble table, gramophone in background, dusty sunlight through lace curtains, vintage film grain aesthetic, art deco accents",
+    "color_palette": "sepia, brown, cream, gold",
+    "youtube_tags": ["lofi jazz", "vintage lofi", "1940s music", "cafe music", "nostalgic", "study jazz"]
+  },
+  "sunday_reset": {
+    "id": "sunday_reset",
+    "title": "Sunday Reset ✨ Lo-Fi to Recharge Your Week",
+    "description": "Hopeful sunday lo-fi to reset and recharge. Acoustic guitar, mellow brushes, and a calm rainy window.",
+    "music_prompt": "uplifting lo-fi, soft acoustic guitar, mellow brushed drums, 78bpm, sunday morning reset, hopeful warm, instrumental, no vocals",
+    "ambience": ["rain_light", "tea_pour"],
+    "ambience_volume": 0.25,
+    "music_volume": 0.75,
+    "image_prompt": "A peaceful sunday morning bedroom, sunbeams through linen curtains, an open book and a coffee cup on a quilted bed, plants on the windowsill, soft pastel light, Ghibli watercolor style",
+    "color_palette": "pastel blue, cream, sage",
+    "youtube_tags": ["lofi", "sunday lofi", "weekly reset", "calm music", "sunday morning"]
+  },
+  "cozy_evening": {
+    "id": "cozy_evening",
+    "title": "Cozy Evening 🌙 Lo-Fi for Tea & Quiet Time",
+    "description": "Intimate evening lo-fi. Double bass, muted trumpet, brushed snare, fireplace warmth. For tea and quiet thoughts.",
+    "music_prompt": "soft lo-fi, double bass, muted trumpet, brushed snare, 72bpm, evening tea ceremony, intimate and warm, instrumental, no vocals",
+    "ambience": ["fireplace", "vinyl_crackle"],
+    "ambience_volume": 0.30,
+    "music_volume": 0.70,
+    "image_prompt": "A cozy evening living room, warm fireplace glow, a steaming teacup on a wool blanket, a sleeping cat curled up beside it, golden hour amber light, Ghibli aesthetic, soft painterly textures",
+    "color_palette": "amber, deep brown, golden",
+    "youtube_tags": ["lofi", "lofi evening", "cozy lofi", "tea time", "relax music", "fireplace"]
+  }
+}

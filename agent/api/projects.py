@@ -255,9 +255,14 @@ async def create(body: ProjectCreate):
 
 @router.get("", response_model=list[Project])
 async def list_all(status: str = None):
-    repo = _get_repo()
-    rows = await repo.list("project", **({} if status is None else {"status": status}))
-    return [repo._row_to_project(r) for r in rows]
+    try:
+        repo = _get_repo()
+        rows = await repo.list("project", **({} if status is None else {"status": status}))
+        return [repo._row_to_project(r) for r in rows]
+    except Exception as e:
+        import traceback
+        logger.error("list_all error: %s\n%s", e, traceback.format_exc())
+        raise HTTPException(500, detail=str(e))
 
 
 @router.get("/{pid}", response_model=Project)
@@ -375,6 +380,21 @@ async def get_output_dir(pid: str):
     return {"slug": slug, "path": f"output/{slug}", "meta": meta}
 
 
+@router.post("/{pid}/open-output")
+async def open_output_dir(pid: str):
+    """Open project output folder in Finder (macOS)."""
+    import subprocess
+    repo = _get_repo()
+    project = await repo.get_project(pid)
+    if not project:
+        raise HTTPException(404, "Project not found")
+    project_name = project.name if hasattr(project, "name") else project["name"]
+    output_dir = BASE_DIR / "output" / slugify(project_name)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    subprocess.Popen(["open", str(output_dir)])
+    return {"ok": True, "path": str(output_dir)}
+
+
 _ASPECT_RATIO_MAP = {
     "LANDSCAPE": "IMAGE_ASPECT_RATIO_LANDSCAPE",
     "PORTRAIT": "IMAGE_ASPECT_RATIO_PORTRAIT",
@@ -384,7 +404,7 @@ _ASPECT_RATIO_MAP = {
 class ThumbnailRequest(BaseModel):
     prompt: str | None = None
     character_names: list[str] = []
-    aspect_ratio: str = "LANDSCAPE"
+    aspect_ratio: str = "PORTRAIT"
     output_filename: str = "thumbnail.png"
 
 
@@ -595,24 +615,33 @@ Respond with valid JSON containing a single key "entities" mapping to the array.
 
 
 def _build_thumbnail_prompt(project) -> str:
-    """Auto-generate a cinematic YouTube thumbnail prompt from project metadata."""
+    """Auto-generate a cinematic thumbnail prompt from project metadata.
+
+    Story/description is summarized to a short visual subject only — full text dumps cause
+    Imagen-3 to render the prompt itself as caption text (especially marketing phrases
+    like "Discover X" or "100% real"). Keep this concise + add explicit no-text guard.
+    """
     name = getattr(project, "name", None) or "Untitled"
     story = getattr(project, "story", None) or ""
     description = getattr(project, "description", None) or ""
 
-    context = story or description or name
-    # Truncate to keep prompt focused (Flow has input limits)
-    if len(context) > 300:
-        context = context[:300] + "..."
+    raw_context = story or description or name
+    # Tighten to ~120 chars and drop sentences containing marketing triggers
+    bad_triggers = (
+        "discover", "100%", "real.", "click", "subscribe", "watch", "find out",
+        "khám phá", "có thật", "click ngay", "đăng ký", "theo dõi", "nhấn",
+    )
+    sentences = [s.strip() for s in raw_context.replace("\n", " ").split(".") if s.strip()]
+    clean = [s for s in sentences if not any(t in s.lower() for t in bad_triggers)]
+    context = ". ".join(clean) or name
+    if len(context) > 120:
+        context = context[:120].rsplit(" ", 1)[0] + "..."
 
     return (
-        f"YouTube thumbnail, cinematic dramatic scene, "
-        f"{context}, "
-        f"intense emotion, epic composition, vivid saturated colors, "
-        f"dynamic lighting with rim light and volumetric rays, "
-        f"shallow depth of field, bokeh background, "
-        f"4K, 8K, masterpiece, highly detailed, sharp focus, HDR, "
-        f"1280x720, 16:9 YouTube thumbnail format"
+        f"cinematic dramatic photograph of {context}. "
+        f"Intense emotion, epic composition, vivid saturated colors, "
+        f"dynamic rim lighting, volumetric rays, shallow depth of field, bokeh. "
+        f"No text in image, no caption, no watermark, no labels, no subtitle."
     )
 
 
@@ -746,3 +775,120 @@ async def generate_thumbnail(pid: str, body: ThumbnailRequest | None = None):
         output_path=str(output_path),
         prompt=full_prompt,
     )
+
+
+class SocialCaptionResponse(BaseModel):
+    fb_caption: str
+    fb_hashtags: str
+    tiktok_caption: str
+    tiktok_hashtags: str
+
+
+@router.get("/{pid}/social-caption")
+async def get_social_caption(pid: str):
+    """Return saved social caption for a project, or null if none."""
+    import json as _json
+    repo = _get_repo()
+    project = await repo.get_project(pid)
+    if not project:
+        raise HTTPException(404, "Project not found")
+    raw = getattr(project, "social_caption", None)
+    if not raw:
+        return None
+    try:
+        return SocialCaptionResponse(**_json.loads(raw))
+    except Exception:
+        return None
+
+
+@router.post("/{pid}/social-caption", response_model=SocialCaptionResponse)
+async def save_social_caption(pid: str, body: SocialCaptionResponse):
+    """Manually save social caption for a project."""
+    import json as _json
+    repo = _get_repo()
+    if not await repo.get_project(pid):
+        raise HTTPException(404, "Project not found")
+    await repo.update("project", pid, social_caption=_json.dumps(body.model_dump(), ensure_ascii=False))
+    return body
+
+
+@router.post("/{pid}/gen-social-caption", response_model=SocialCaptionResponse)
+async def gen_social_caption(pid: str):
+    """Generate FB Reels + TikTok caption and hashtags from project context using Gemini."""
+    import json as _json
+    from agent.config import GOOGLE_API_KEY
+
+    repo = _get_repo()
+    project = await repo.get_project(pid)
+    if not project:
+        raise HTTPException(404, "Project not found")
+
+    name = getattr(project, "name", "") or ""
+    story = getattr(project, "story", "") or ""
+    description = getattr(project, "description", "") or ""
+
+    # Collect narrator texts from all scenes
+    narrator_texts = []
+    try:
+        videos = await repo.list_videos(pid)
+        for video in videos:
+            scenes = await repo.list_scenes(video.id)
+            for scene in scenes:
+                nt = getattr(scene, "narrator_text", None) or (scene.get("narrator_text") if isinstance(scene, dict) else None)
+                if nt:
+                    narrator_texts.append(nt)
+    except Exception:
+        pass
+
+    context_parts = [f"Tên video: {name}"]
+    if story:
+        context_parts.append(f"Nội dung: {story}")
+    if description:
+        context_parts.append(f"Mô tả: {description}")
+    if narrator_texts:
+        context_parts.append(f"Lời thoại: {' '.join(narrator_texts)}")
+    context = "\n".join(context_parts)
+
+    prompt = f"""Dựa vào thông tin video sau, viết caption và hashtag cho Facebook Reels và TikTok bằng tiếng Việt.
+
+{context}
+
+Yêu cầu:
+- Facebook caption: 2-3 câu ngắn gọn, gợi cảm xúc, kêu gọi xem video. Không dùng hashtag trong phần caption.
+- Facebook hashtags: 5-8 hashtag phổ biến liên quan (bắt đầu bằng #, cách nhau khoảng trắng).
+- TikTok caption: 1-2 câu ngắn, trendy, có thể dùng emoji. Không dùng hashtag trong phần caption.
+- TikTok hashtags: 8-12 hashtag ngắn, viral, trending (bắt đầu bằng #, cách nhau khoảng trắng).
+
+Trả về JSON với đúng 4 trường: "fb_caption", "fb_hashtags", "tiktok_caption", "tiktok_hashtags"."""
+
+    try:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={GOOGLE_API_KEY}"
+        payload = {
+            "contents": [{"parts": [{"text": prompt}]}],
+            "generationConfig": {"responseMimeType": "application/json"},
+        }
+        connector = aiohttp.TCPConnector(ssl=False)
+        async with aiohttp.ClientSession(connector=connector) as session:
+            async with session.post(url, json=payload) as resp:
+                if resp.status != 200:
+                    raise HTTPException(502, f"Gemini API error: {resp.status}")
+                raw = await resp.json()
+
+        text = raw["candidates"][0]["content"]["parts"][0]["text"]
+        data = _json.loads(text)
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error("gen_social_caption error: %s", e)
+        raise HTTPException(500, str(e))
+
+    result = SocialCaptionResponse(
+        fb_caption=data.get("fb_caption", ""),
+        fb_hashtags=data.get("fb_hashtags", ""),
+        tiktok_caption=data.get("tiktok_caption", ""),
+        tiktok_hashtags=data.get("tiktok_hashtags", ""),
+    )
+    # Persist to DB so dashboard can load it without re-generating
+    import json as _json
+    await repo.update("project", pid, social_caption=_json.dumps(result.model_dump(), ensure_ascii=False))
+    return result

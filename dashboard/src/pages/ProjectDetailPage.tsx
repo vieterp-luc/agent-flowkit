@@ -35,7 +35,7 @@ export default function ProjectDetailPage({ projectId, onBack, onRefresh }: Prop
       const saved = localStorage.getItem(`project_config_${projectId}`)
       if (saved) return JSON.parse(saved)
     } catch(e){}
-    return { minChars: 2, maxChars: 5, minLocs: 1, maxLocs: 3, minOthers: 0, maxOthers: 8, videosCount: 1, scenesPerVideo: 5, charMode: 'AUTO', locMode: 'AUTO', otherMode: 'MANUAL' }
+    return { minChars: 2, maxChars: 5, minLocs: 1, maxLocs: 3, minOthers: 0, maxOthers: 8, videosCount: 1, scenesPerVideo: 5, charMode: 'AUTO', locMode: 'AUTO', otherMode: 'MANUAL', ttsTemplate: null, videoLang: 'vi' }
   })
 
   useEffect(() => {

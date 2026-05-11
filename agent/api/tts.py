@@ -5,7 +5,8 @@ import logging
 import re
 from pathlib import Path
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, UploadFile, File, Form
+from fastapi.responses import FileResponse
 
 from agent.config import TTS_TEMPLATES_DIR, SHARED_OUTPUT_DIR, OUTPUT_DIR
 from agent.utils.slugify import slugify
@@ -64,15 +65,53 @@ def _validate_ref_audio(ref_audio: str) -> None:
         raise HTTPException(400, "ref_audio must be within allowed directories")
 
 
+@router.post("/tts/upload-ref")
+async def upload_ref_audio(file: UploadFile = File(...)):
+    """Upload a reference audio file (MP3/WAV) for use in voice template creation."""
+    suffix = Path(file.filename or "ref.mp3").suffix.lower()
+    if suffix not in {".mp3", ".wav", ".m4a", ".ogg", ".flac"}:
+        raise HTTPException(400, "Unsupported audio format")
+    TEMPLATES_DIR.mkdir(parents=True, exist_ok=True)
+    import uuid as _uuid
+    dest = TEMPLATES_DIR / f"ref_{_uuid.uuid4().hex[:8]}{suffix}"
+    dest.write_bytes(await file.read())
+    return {"path": str(dest), "filename": file.filename}
+
+
 @router.post("/tts/generate", response_model=TTSGenerateResponse)
 async def tts_generate(body: TTSGenerateRequest):
     """Generate speech for a single text string. Returns path to WAV file."""
-    if body.ref_audio:
-        _validate_ref_audio(body.ref_audio)
+    ref_audio = body.ref_audio
+    ref_text = body.ref_text
 
-    SHARED_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    # Resolve voice template if provided (priority: template > explicit ref_audio)
+    if body.template:
+        meta = _load_templates_meta()
+        if body.template not in meta:
+            raise HTTPException(404, f"Voice template '{body.template}' not found")
+        tmpl = meta[body.template]
+        ref_audio = tmpl["audio_path"]
+        ref_text = tmpl.get("text")
+        logger.info("Using voice template '%s' as reference", body.template)
+    elif ref_audio and not ref_text:
+        # Auto-resolve ref_text from registered template metadata
+        meta = _load_templates_meta()
+        for tmpl in meta.values():
+            if tmpl["audio_path"] == ref_audio:
+                ref_text = tmpl.get("text")
+                logger.info("Auto-resolved ref_text from template '%s'", tmpl["name"])
+                break
+
+    if ref_audio:
+        _validate_ref_audio(ref_audio)
+
     import uuid as _uuid
-    out_path = str(SHARED_OUTPUT_DIR / f"{_uuid.uuid4()}.wav")
+    if body.output_path:
+        out_path = body.output_path
+        Path(out_path).parent.mkdir(parents=True, exist_ok=True)
+    else:
+        SHARED_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+        out_path = str(SHARED_OUTPUT_DIR / f"{_uuid.uuid4()}.wav")
 
     async with _TTS_SEMAPHORE:
         try:
@@ -80,8 +119,8 @@ async def tts_generate(body: TTSGenerateRequest):
                 text=body.text,
                 output_path=out_path,
                 instruct=body.instruct,
-                ref_audio=body.ref_audio,
-                ref_text=body.ref_text,
+                ref_audio=ref_audio,
+                ref_text=ref_text,
                 speed=body.speed,
             )
         except Exception as e:
@@ -217,8 +256,22 @@ async def narrate_video(vid: str, body: NarrateVideoRequest):
 @router.post("/tts/templates", response_model=VoiceTemplateResponse)
 async def create_voice_template(body: VoiceTemplateRequest):
     """Generate and save a voice template for consistent narration."""
-    # name already validated by Pydantic pattern — double-check here for defense-in-depth
     _validate_template_name(body.name)
+
+    if not body.instruct and not body.ref_audio:
+        raise HTTPException(400, "Either instruct or ref_audio must be provided")
+
+    ref_audio = None
+    if body.ref_audio:
+        ref_audio_path = Path(body.ref_audio).resolve()
+        if not ref_audio_path.exists():
+            raise HTTPException(400, f"ref_audio file not found: {body.ref_audio}")
+        # Copy to templates dir so path stays valid long-term
+        import shutil
+        dest = TEMPLATES_DIR / f"{body.name}_ref{ref_audio_path.suffix}"
+        TEMPLATES_DIR.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(ref_audio_path, dest)
+        ref_audio = str(dest)
 
     TEMPLATES_DIR.mkdir(parents=True, exist_ok=True)
     wav_path = str(TEMPLATES_DIR / f"{body.name}.wav")
@@ -229,6 +282,8 @@ async def create_voice_template(body: VoiceTemplateRequest):
                 text=body.text,
                 output_path=wav_path,
                 instruct=body.instruct,
+                ref_audio=ref_audio,
+                ref_text=body.text if ref_audio else None,
                 speed=body.speed,
             )
         except Exception as e:
@@ -244,6 +299,7 @@ async def create_voice_template(body: VoiceTemplateRequest):
         "audio_path": wav_path,
         "text": body.text,
         "instruct": body.instruct,
+        "ref_audio": ref_audio,
         "duration": duration,
     }
     _save_templates_meta(meta)
@@ -262,6 +318,19 @@ async def list_voice_templates():
         VoiceTemplateListItem(name=v["name"], audio_path=v["audio_path"], duration=v.get("duration"))
         for v in meta.values()
     ]
+
+
+@router.get("/tts/templates/{name}/audio")
+async def stream_template_audio(name: str):
+    """Stream the WAV file for a voice template (for browser playback)."""
+    _validate_template_name(name)
+    meta = _load_templates_meta()
+    if name not in meta:
+        raise HTTPException(404, f"Voice template '{name}' not found")
+    wav = Path(meta[name]["audio_path"])
+    if not wav.exists():
+        raise HTTPException(404, "Audio file not found")
+    return FileResponse(str(wav), media_type="audio/wav")
 
 
 @router.get("/tts/templates/{name}", response_model=VoiceTemplateResponse)

@@ -32,6 +32,7 @@ class Project(DomainModel):
     orientation: str = "HORIZONTAL"
     narrator_voice: Optional[str] = None
     narrator_ref_audio: Optional[str] = None
+    social_caption: Optional[str] = None
     created_at: Optional[str] = None
     updated_at: Optional[str] = None
 

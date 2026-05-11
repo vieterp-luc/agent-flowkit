@@ -2,6 +2,7 @@
 import asyncio
 import json
 import logging
+import signal
 import sys
 from contextlib import asynccontextmanager
 
@@ -25,10 +26,17 @@ from agent.api.skills import router as skills_router
 from agent.api.music import router as music_router
 from agent.api.models import router as models_router
 from agent.api.active_project import router as active_project_router
+from agent.api.gemini import router as gemini_router, handle_music_captured, set_gemini_ws
+from agent.api.lofi import router as lofi_router
+from agent.api.reup import router as reup_router
+from agent.api.book import router as book_router
+from agent.api.ken_burns import router as ken_burns_router
 from agent.worker.processor import get_worker_controller
 from agent.services.flow_client import get_flow_client
 from agent.services.event_bus import event_bus
 from agent.sdk import init_sdk
+
+GEMINI_WS_PORT = 9223
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
 logger = logging.getLogger(__name__)
@@ -71,6 +79,40 @@ async def run_ws_server():
         await asyncio.Future()  # run forever
 
 
+# ─── Gemini Bridge WebSocket Server ──────────────────────────
+
+async def gemini_ws_handler(websocket):
+    """Handle a Gemini Bridge Chrome extension WebSocket connection."""
+    logger.info("Gemini extension connected from %s", websocket.remote_address)
+    set_gemini_ws(websocket)
+    try:
+        async for raw in websocket:
+            try:
+                data = json.loads(raw)
+                msg_type = data.get("type")
+                if msg_type == "music_captured":
+                    entry = data.get("entry", {})
+                    if entry:
+                        handle_music_captured(entry)
+                elif msg_type == "ping":
+                    await websocket.send(json.dumps({"type": "pong"}))
+                # extension_ready, token_captured — no-op, just log
+            except json.JSONDecodeError:
+                logger.warning("Invalid JSON from Gemini extension")
+    except websockets.ConnectionClosed:
+        pass
+    finally:
+        set_gemini_ws(None)
+        logger.info("Gemini extension disconnected")
+
+
+async def run_gemini_ws_server():
+    """Run WebSocket server for Gemini Bridge extension."""
+    async with websockets.serve(gemini_ws_handler, WS_HOST, GEMINI_WS_PORT):
+        logger.info("Gemini WS server listening on ws://%s:%d", WS_HOST, GEMINI_WS_PORT)
+        await asyncio.Future()
+
+
 # ─── FastAPI App ─────────────────────────────────────────────
 
 @asynccontextmanager
@@ -102,15 +144,25 @@ async def lifespan(app: FastAPI):
 
     # Start background tasks
     ws_task = asyncio.create_task(run_ws_server())
+    gemini_ws_task = asyncio.create_task(run_gemini_ws_server())
     worker_task = asyncio.create_task(controller.start())
-    logger.info("WS server + worker started")
+    logger.info("WS server + Gemini WS server + worker started")
 
     yield
 
     controller.request_shutdown()
     await controller.drain()
     ws_task.cancel()
+    gemini_ws_task.cancel()
     worker_task.cancel()
+
+    # Shutdown Playwright browser if it was lazily initialized by /api/gemini/browser/*
+    try:
+        from agent.services.gemini_browser import shutdown_browser
+        await shutdown_browser()
+    except Exception as e:
+        logger.warning("gemini_browser shutdown error: %s", e)
+
     await close_db()
     logger.info("Flow Kit stopped")
 
@@ -138,6 +190,11 @@ app.include_router(skills_router, prefix="/api")
 app.include_router(music_router, prefix="/api")
 app.include_router(models_router)
 app.include_router(active_project_router)
+app.include_router(gemini_router, prefix="/api")
+app.include_router(reup_router, prefix="/api")
+app.include_router(lofi_router, prefix="/api")
+app.include_router(book_router, prefix="/api")
+app.include_router(ken_burns_router, prefix="/api")
 
 
 import secrets as _secrets

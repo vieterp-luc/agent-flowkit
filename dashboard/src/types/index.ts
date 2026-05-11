@@ -19,6 +19,7 @@ export interface Project {
   material: string
   narrator_voice: string | null
   narrator_ref_audio: string | null
+  social_caption: string | null
   allow_music: boolean
   allow_voice: boolean
   orientation: Orientation

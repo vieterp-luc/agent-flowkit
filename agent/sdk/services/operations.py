@@ -37,6 +37,18 @@ def _char_matches(c: dict, name_set: set) -> bool:
     name = c.get("name", "")
     return (slug and slug in name_set) or (name and name in name_set)
 
+
+def _effective_tier(project: dict | None, default: str = "PAYGATE_TIER_ONE") -> str:
+    """Normalize project tier for model selection.
+
+    PAYGATE_TIER_NOT_PAID is a DB-sync value but invalid for Flow API video
+    model keys — Flow rejects portrait/advanced models with that tier string.
+    Map it to PAYGATE_TIER_ONE (free-tier behavior) so model lookup and
+    clientContext both use a tier Flow actually understands.
+    """
+    raw = (project or {}).get("user_paygate_tier", default) or default
+    return "PAYGATE_TIER_ONE" if raw == "PAYGATE_TIER_NOT_PAID" else raw
+
 import aiohttp
 
 from agent.db import crud
@@ -185,7 +197,7 @@ class OperationService:
         # CONTINUATION scenes: enrich prompt with transformation context
         if scene.get("parent_scene_id") and not scene.get("image_prompt"):
             prompt = _build_continuation_prompt(prompt)
-        tier = project.get("user_paygate_tier", "PAYGATE_TIER_TWO") if project else "PAYGATE_TIER_TWO"
+        tier = _effective_tier(project, "PAYGATE_TIER_TWO")
         pid = scene.get("_project_id", "0")
 
         # Resolve character reference media_ids
@@ -236,7 +248,7 @@ class OperationService:
         """
         project = await crud.get_project(scene.get("_project_id", "0"))
         aspect = "IMAGE_ASPECT_RATIO_PORTRAIT" if orientation == "VERTICAL" else "IMAGE_ASPECT_RATIO_LANDSCAPE"
-        tier = project.get("user_paygate_tier", "PAYGATE_TIER_ONE") if project else "PAYGATE_TIER_ONE"
+        tier = _effective_tier(project, "PAYGATE_TIER_ONE")
         pid = scene.get("_project_id", "0")
 
         src = source_media_id
@@ -296,7 +308,7 @@ class OperationService:
 
         project = await crud.get_project(scene.get("_project_id", "0"))
         aspect = "VIDEO_ASPECT_RATIO_PORTRAIT" if orientation == "VERTICAL" else "VIDEO_ASPECT_RATIO_LANDSCAPE"
-        tier = project.get("user_paygate_tier", "PAYGATE_TIER_TWO") if project else "PAYGATE_TIER_TWO"
+        tier = _effective_tier(project, "PAYGATE_TIER_TWO")
         pid = scene.get("_project_id", "0")
         end_id = scene.get(f"{prefix}_end_scene_media_id")
 
@@ -376,7 +388,7 @@ class OperationService:
         """
         project = await crud.get_project(scene.get("_project_id", "0"))
         aspect = "VIDEO_ASPECT_RATIO_PORTRAIT" if orientation == "VERTICAL" else "VIDEO_ASPECT_RATIO_LANDSCAPE"
-        tier = project.get("user_paygate_tier", "PAYGATE_TIER_TWO") if project else "PAYGATE_TIER_TWO"
+        tier = _effective_tier(project, "PAYGATE_TIER_TWO")
         pid = scene.get("_project_id", "0")
         prefix = "vertical" if orientation == "VERTICAL" else "horizontal"
         end_id = scene.get(f"{prefix}_end_scene_media_id")
@@ -613,7 +625,7 @@ class OperationService:
         prompt = char.get("image_prompt") or f"Character reference: {char['name']}. {char.get('description', '')}"
 
         project = await crud.get_project(pid) if pid != "0" else None
-        tier = project.get("user_paygate_tier", "PAYGATE_TIER_TWO") if project else "PAYGATE_TIER_TWO"
+        tier = _effective_tier(project, "PAYGATE_TIER_TWO")
         aspect = _reference_aspect_ratio(entity_type)
 
         result = await self._client.generate_images(

@@ -3,6 +3,11 @@ import json
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+
+# Load .env from project root (gitignored). Silent no-op if file absent.
+load_dotenv(Path(__file__).parent.parent / ".env")
+
 # ─── Paths ───────────────────────────────────────────────────
 BASE_DIR = Path(os.environ.get("FLOW_AGENT_DIR", Path(__file__).parent.parent))
 DB_PATH = BASE_DIR / "flow_agent.db"
@@ -17,7 +22,23 @@ WS_PORT = int(os.environ.get("WS_PORT", "9222"))
 
 # ─── Google Flow API ────────────────────────────────────────
 GOOGLE_FLOW_API = "https://aisandbox-pa.googleapis.com"
-GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY", "AIzaSyBtrm0o5ab1c-Ec8ZuLcGt3oJAA5VWt3pY")
+GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY", "")  # Set in .env for Flow API auth
+
+
+def _parse_gemini_keys() -> list[str]:
+    """Parse Gemini API keys for the script writer. Supports multi-key rotation.
+
+    Priority: GEMINI_API_KEYS (comma-separated) > GEMINI_API_KEY (single) > [].
+    Use multiple keys to bypass per-key free-tier rate limits.
+    """
+    multi = os.environ.get("GEMINI_API_KEYS", "").strip()
+    if multi:
+        return [k.strip() for k in multi.split(",") if k.strip()]
+    single = os.environ.get("GEMINI_API_KEY", "").strip()
+    return [single] if single else []
+
+
+GEMINI_API_KEYS: list[str] = _parse_gemini_keys()
 RECAPTCHA_SITE_KEY = os.environ.get("RECAPTCHA_SITE_KEY", "6LdsFiUsAAAAAIjVDZcuLhaHiDn5nnHVXVRQGeMV")
 
 # ─── Worker ──────────────────────────────────────────────────

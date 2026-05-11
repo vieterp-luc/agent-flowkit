@@ -360,7 +360,14 @@ CREATE INDEX IF NOT EXISTS idx_request_scene ON request(scene_id);
                 await db.execute("ALTER TABLE chat_message ADD COLUMN session_id TEXT REFERENCES chat_session(id) ON DELETE CASCADE")
                 await db.execute("CREATE INDEX IF NOT EXISTS idx_chat_message_session ON chat_message(session_id)")
                 logger.info("Migrated: added session_id column to chat_message table")
-            
+
+        # Migration: add social_caption to project if missing
+        cursor = await db.execute("PRAGMA table_info(project)")
+        proj_columns = {row[1] for row in await cursor.fetchall()}
+        if "social_caption" not in proj_columns:
+            await db.execute("ALTER TABLE project ADD COLUMN social_caption TEXT")
+            logger.info("Migrated: added social_caption column to project table")
+
         await db.commit()
     logger.info("Database initialized at %s", DB_PATH)
 

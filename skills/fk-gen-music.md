@@ -1,12 +1,85 @@
-# fk-gen-music — Generate Music via Suno
+# fk-gen-music — Generate Music
 
-Generate background music or songs for video projects using the Suno API (sunoapi.org).
+Generate background music for video projects. Two providers:
+
+| Provider | Best for | Cost | Duration | Lyrics |
+|----------|----------|------|----------|--------|
+| **Gemini Lyria** (Playwright) | Instrumental BGM, free with AI Plus | $0 (browser) | 30s (Nhanh) / 2-3min (Pro) | No |
+| **Suno** (API) | Songs with vocals + custom lyrics | ~10 credits/gen | 2-8 min | Yes (section markers) |
+
+**Default: Gemini Lyria for instrumental BGM.** Use Suno when you need vocals or specific lyrics.
 
 ## Prerequisites
 
 - GLA server running: `curl http://127.0.0.1:8100/health`
-- Suno API key configured: `export SUNO_API_KEY=your-key`
-- Get API key at https://sunoapi.org/api-key
+- For **Gemini Lyria**: bootstrap browser login once
+  ```bash
+  venv/bin/python scripts/gemini_bootstrap.py
+  # → Đăng nhập Google account có AI Plus → đóng cửa sổ
+  ```
+- For **Suno**: `export SUNO_API_KEY=your-key` (https://sunoapi.org/api-key)
+
+---
+
+## Path A: Gemini Lyria (Browser Automation)
+
+Drives the Gemini chat UI via Playwright — captures the rendered MP4 directly. No API key, no f.req reverse-engineering.
+
+### Generate
+
+```bash
+# Pro mode — 2-3 min track (recommended for video BGM)
+curl -X POST http://127.0.0.1:8100/api/gemini/browser/generate-music \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "prompt": "deep cinematic ambient, slow piano, atmospheric strings",
+    "model": "Pro",
+    "timeout": 300,
+    "headless": true
+  }'
+
+# Response:
+# {"ok": true, "path": "output/_shared/gemini_music/track_name.mp4",
+#  "filename": "track_name.mp4", "size_kb": 7467, "model": "Pro"}
+```
+
+| Field | Default | Notes |
+|-------|---------|-------|
+| `prompt` | (required) | Style/mood description in any language |
+| `model` | `"Pro"` | `"Pro"` (2-3min) \| `"Nhanh"` (30s, fast) \| `"Tư duy"` |
+| `timeout` | `300` | Seconds to wait for music render |
+| `headless` | `true` | `false` to see Chromium window (debug) |
+
+### Status & Diagnostics
+
+```bash
+# Check browser singleton state
+curl -s http://127.0.0.1:8100/api/gemini/browser/status
+# → {"available": true, "ready": bool, "profile_dir": "...", "profile_exists": bool}
+```
+
+### Common errors
+
+| Error | Cause | Fix |
+|-------|-------|-----|
+| `LOGIN_EXPIRED` | Google session expired | Re-run `scripts/gemini_bootstrap.py` |
+| `MODEL_NOT_AVAILABLE: 'Pro'` | No AI Plus subscription | Upgrade or use `"Nhanh"` |
+| `MUSIC_TIMEOUT after Ns` | UI changed or render hung | Increase `timeout`, try `headless: false` to inspect |
+| `QUOTA_REACHED` | Daily Gemini limit | Wait or use Suno (Path B below) |
+| `PLAYWRIGHT_NOT_INSTALLED` | Missing dep | `venv/bin/pip install playwright && venv/bin/python -m playwright install chromium` |
+
+### Tips
+
+- Pro mode files are ~6-12 MB MP4 (video container, audio-only); duration 2'40"-3'00"
+- First request takes ~3-5s extra for lazy browser init; subsequent requests reuse singleton
+- Lock per browser → only 1 concurrent gen; queue serialized automatically
+- Persistent profile lives at `output/_shared/gemini_profile/` — gitignored
+
+---
+
+## Path B: Suno API
+
+Use this when you need **vocals + custom lyrics** with section markers.
 
 ## Workflow
 
@@ -186,6 +259,13 @@ curl -s http://127.0.0.1:8100/api/music/credits
 
 ## API Reference
 
+### Gemini Lyria (Path A)
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/gemini/browser/generate-music` | POST | Generate music via Playwright (returns saved file path) |
+| `/api/gemini/browser/status` | GET | Browser singleton readiness + profile path |
+
+### Suno (Path B)
 | Endpoint | Method | Description |
 |----------|--------|-------------|
 | `/api/music/templates` | GET | List all song templates |

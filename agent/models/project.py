@@ -51,6 +51,7 @@ class ProjectUpdate(BaseModel):
     allow_music: Optional[bool] = None
     allow_voice: Optional[bool] = None
     orientation: Optional[str] = None
+    social_caption: Optional[str] = None
 
 
 class Project(BaseModel):
@@ -68,5 +69,6 @@ class Project(BaseModel):
     orientation: str = "HORIZONTAL"
     narrator_voice: Optional[str] = None
     narrator_ref_audio: Optional[str] = None
+    social_caption: Optional[str] = None
     created_at: Optional[str] = None
     updated_at: Optional[str] = None

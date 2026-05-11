@@ -37,6 +37,7 @@ class SQLiteRepository(Repository):
             orientation=row.get("orientation", "HORIZONTAL"),
             narrator_voice=row.get("narrator_voice"),
             narrator_ref_audio=row.get("narrator_ref_audio"),
+            social_caption=row.get("social_caption"),
             created_at=row.get("created_at"),
             updated_at=row.get("updated_at"),
             _repo=self,

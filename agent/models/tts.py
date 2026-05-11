@@ -8,7 +8,9 @@ class TTSGenerateRequest(BaseModel):
     instruct: Optional[str] = Field(None, max_length=200)
     ref_audio: Optional[str] = Field(None, max_length=500)
     ref_text: Optional[str] = None
+    template: Optional[str] = Field(None, pattern=r"^[a-zA-Z0-9_-]{1,64}$")  # Voice template name (resolves to ref_audio + ref_text)
     speed: float = Field(1.0, ge=0.5, le=3.0)
+    output_path: Optional[str] = Field(None, max_length=1000)
 
 
 class TTSGenerateResponse(BaseModel):
@@ -52,9 +54,10 @@ class NarrateVideoResponse(BaseModel):
 
 
 class VoiceTemplateRequest(BaseModel):
-    text: str = Field(..., min_length=1, max_length=5000)  # Sample text to generate voice template
-    instruct: str = Field(..., max_length=200)  # Voice design: "male, low pitch, young adult"
-    name: str = Field("voice_template_1", pattern=r"^[a-zA-Z0-9_-]{1,64}$")  # Template name for saving
+    text: str = Field(..., min_length=1, max_length=5000)
+    instruct: Optional[str] = Field(None, max_length=200)
+    ref_audio: Optional[str] = Field(None, max_length=1000)  # Path to user voice recording
+    name: str = Field("voice_template_1", pattern=r"^[a-zA-Z0-9_-]{1,64}$")
     speed: float = Field(1.0, ge=0.5, le=3.0)
 
 
@@ -62,7 +65,7 @@ class VoiceTemplateResponse(BaseModel):
     name: str
     audio_path: str
     text: str
-    instruct: str
+    instruct: Optional[str] = None
     duration: Optional[float] = None
     sample_rate: int = 24000
 

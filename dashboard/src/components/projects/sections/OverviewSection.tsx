@@ -1,16 +1,61 @@
 import { useState, useEffect } from 'react'
-import { fetchAPI, patchAPI, postAPI } from '../../../api/client'
+import { patchAPI, postAPI, fetchAPI } from '../../../api/client'
 import type { Project } from '../../../types'
 import EditableText from '../../projects/EditableText'
 import { Badge } from '../ui'
 import { MaterialBrowseModal } from '../modals/MaterialBrowseModal'
 import { formatDate } from '../utils'
 
+interface SocialCaption {
+  fb_caption: string
+  fb_hashtags: string
+  tiktok_caption: string
+  tiktok_hashtags: string
+}
+
+function CopyField({ label, value }: { label: string; value: string }) {
+  const [copied, setCopied] = useState(false)
+  function copy() {
+    navigator.clipboard.writeText(value).then(() => {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1500)
+    })
+  }
+  return (
+    <div className="flex flex-col gap-0.5">
+      <div className="flex items-center justify-between">
+        <span className="text-[9px] font-black uppercase tracking-wider" style={{ color: 'var(--muted)' }}>{label}</span>
+        <button onClick={copy} className="text-[9px] font-bold px-1.5 py-0.5 rounded" style={{ background: 'var(--surface)', border: '1px solid var(--border)', color: copied ? 'green' : 'var(--muted)', cursor: 'pointer' }}>
+          {copied ? '✓' : 'Copy'}
+        </button>
+      </div>
+      <div className="text-[11px] rounded px-2 py-1.5" style={{ background: 'var(--surface)', border: '1px solid var(--border)', color: 'var(--text)', whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
+        {value}
+      </div>
+    </div>
+  )
+}
+
+const VIDEO_LANGUAGES = [
+  { code: 'vi', label: 'Tiếng Việt' },
+  { code: 'en', label: 'English' },
+  { code: 'ja', label: '日本語' },
+  { code: 'ko', label: '한국어' },
+  { code: 'zh', label: '中文' },
+  { code: 'fr', label: 'Français' },
+  { code: 'es', label: 'Español' },
+]
+
 export function OverviewSection({ project, config, setConfig, onRefresh, onOpenPipelineModal, pipelineLoading }: { project: Project; config: any; setConfig: (c: any) => void; onRefresh: () => void; onOpenPipelineModal?: () => void; pipelineLoading?: string | false }) {
   const [thumbLoading, setThumbLoading] = useState(false)
   const [models, setModels] = useState<Record<string, unknown> | null>(null)
   const [modelLoading, setModelLoading] = useState(false)
   const [showMaterialModal, setShowMaterialModal] = useState(false)
+  const [ttsTemplates, setTtsTemplates] = useState<{ name: string; duration?: number }[]>([])
+
+  const socialCaption: SocialCaption | null = (() => {
+    try { return project.social_caption ? JSON.parse(project.social_caption) : null } catch { return null }
+  })()
 
   async function patch(field: string, value: string) {
     await patchAPI(`/api/projects/${project.id}`, { [field]: value })
@@ -30,6 +75,12 @@ export function OverviewSection({ project, config, setConfig, onRefresh, onOpenP
     finally { setModelLoading(false) }
   }
 
+  async function handleOpenOutput() {
+    try {
+      await postAPI(`/api/projects/${project.id}/open-output`, {})
+    } catch (e) { console.error(e) }
+  }
+
   async function handleGenThumbnail() {
     setThumbLoading(true)
     try {
@@ -43,6 +94,9 @@ export function OverviewSection({ project, config, setConfig, onRefresh, onOpenP
     fetchAPI<Record<string, unknown>>('/api/models')
       .then(setModels)
       .catch(() => setModels(null))
+    fetchAPI<{ name: string; duration?: number }[]>('/api/tts/templates')
+      .then(setTtsTemplates)
+      .catch(() => setTtsTemplates([]))
   }, [])
 
   const isImgGem = (models?.image_models as Record<string, string>)?.['NANO_BANANA_PRO'] === 'GEM_PIX_2'
@@ -81,11 +135,11 @@ export function OverviewSection({ project, config, setConfig, onRefresh, onOpenP
           <div className="flex flex-col gap-2 mt-2">
             <div className="nb-label mb-0">THUMBNAIL</div>
             {project.thumbnail_url ? (
-              <div className="overflow-hidden rounded-md aspect-video" style={{ border: 'var(--border-w) solid var(--border)' }}>
+              <div className="overflow-hidden rounded-md" style={{ border: 'var(--border-w) solid var(--border)', aspectRatio: '9/16', maxHeight: 240 }}>
                 <img src={project.thumbnail_url} alt="Thumbnail" className="w-full h-full object-cover" />
               </div>
             ) : (
-              <div className="flex items-center justify-center rounded-md aspect-video" style={{ background: 'var(--surface)', border: 'var(--border-w) solid var(--border)', color: 'var(--muted)' }}>
+              <div className="flex items-center justify-center rounded-md" style={{ background: 'var(--surface)', border: 'var(--border-w) solid var(--border)', aspectRatio: '9/16', maxHeight: 240, color: 'var(--muted)' }}>
                 No thumbnail yet
               </div>
             )}
@@ -93,10 +147,29 @@ export function OverviewSection({ project, config, setConfig, onRefresh, onOpenP
               {thumbLoading ? 'Generating...' : 'Generate Thumbnail'}
             </button>
           </div>
-          
-          <button onClick={onOpenPipelineModal} disabled={!!pipelineLoading} className="nb-btn nb-btn-primary mt-2" style={{ background: 'var(--yellow)', color: 'black', borderColor: 'black', boxShadow: '4px 4px 0px rgba(0,0,0,0.2)' }}>
-            {pipelineLoading ? `🚀 ${pipelineLoading}` : '🚀 Full-Throttle Pipeline'}
-          </button>
+
+          {socialCaption && (
+            <div className="flex flex-col gap-2 mt-1">
+              <div className="nb-label mb-0">📱 CAPTION MXH</div>
+              <div className="flex flex-col gap-1.5">
+                <div className="text-[9px] font-black uppercase tracking-wider" style={{ color: 'var(--blue)' }}>Facebook</div>
+                <CopyField label="Caption" value={socialCaption.fb_caption} />
+                <CopyField label="Hashtags" value={socialCaption.fb_hashtags} />
+                <div className="text-[9px] font-black uppercase tracking-wider mt-1" style={{ color: 'var(--text)' }}>TikTok</div>
+                <CopyField label="Caption" value={socialCaption.tiktok_caption} />
+                <CopyField label="Hashtags" value={socialCaption.tiktok_hashtags} />
+              </div>
+            </div>
+          )}
+
+          <div className="flex gap-2 mt-2">
+            <button onClick={onOpenPipelineModal} disabled={!!pipelineLoading} className="nb-btn nb-btn-primary flex-1" style={{ background: 'var(--yellow)', color: 'black', borderColor: 'black', boxShadow: '4px 4px 0px rgba(0,0,0,0.2)' }}>
+              {pipelineLoading ? `🚀 ${pipelineLoading}` : '🚀 Full-Throttle Pipeline'}
+            </button>
+            <button onClick={handleOpenOutput} className="nb-btn nb-btn-ghost" title="Open output folder" style={{ minWidth: 40 }}>
+              📂
+            </button>
+          </div>
         </div>
 
         {/* Middle: metadata + config */}
@@ -230,7 +303,38 @@ export function OverviewSection({ project, config, setConfig, onRefresh, onOpenP
               </div>
               
               <div className="w-full h-px" style={{ background: 'var(--border)' }}></div>
-              
+
+              {/* TTS Template */}
+              <div className="flex flex-col gap-1">
+                <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: 'var(--text)' }}>Narrator (TTS)</span>
+                <select
+                  className="nb-input w-full text-[11px] p-2"
+                  value={config.ttsTemplate || ''}
+                  onChange={e => setConfig({ ...config, ttsTemplate: e.target.value || null })}
+                >
+                  <option value="">— None —</option>
+                  {ttsTemplates.map(t => (
+                    <option key={t.name} value={t.name}>{t.name}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Video Language */}
+              <div className="flex flex-col gap-1">
+                <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: 'var(--text)' }}>Language</span>
+                <select
+                  className="nb-input w-full text-[11px] p-2"
+                  value={config.videoLang || 'vi'}
+                  onChange={e => setConfig({ ...config, videoLang: e.target.value })}
+                >
+                  {VIDEO_LANGUAGES.map(l => (
+                    <option key={l.code} value={l.code}>{l.label}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="w-full h-px" style={{ background: 'var(--border)' }}></div>
+
               <div className="flex flex-col gap-1">
                 <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: 'var(--text)' }}>Structure</span>
                 <div className="flex items-center gap-2">
@@ -258,13 +362,13 @@ export function OverviewSection({ project, config, setConfig, onRefresh, onOpenP
           </div>
         </div>
       </div>
-      <MaterialBrowseModal 
-        open={showMaterialModal} 
-        onClose={() => setShowMaterialModal(false)} 
+      <MaterialBrowseModal
+        open={showMaterialModal}
+        onClose={() => setShowMaterialModal(false)}
         onSelect={(m) => {
           patch('material', m)
           setShowMaterialModal(false)
-        }} 
+        }}
       />
     </>
   )

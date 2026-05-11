@@ -1,5 +1,5 @@
 import { BrowserRouter, NavLink, Routes, Route, useLocation } from 'react-router-dom'
-import { LayoutDashboard, FolderOpen, ScrollText, Film, Star, Zap } from 'lucide-react'
+import { LayoutDashboard, FolderOpen, ScrollText, Film, Star, Zap, Mic, Video } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { useWebSocket } from './api/useWebSocket'
 import { fetchAPI } from './api/client'
@@ -8,6 +8,8 @@ import ProjectsPage from './pages/ProjectsPage'
 import LogsPage from './pages/LogsPage'
 import GalleryPage from './pages/GalleryPage'
 import LibraryPage from './pages/LibraryPage'
+import TTSPage from './pages/TTSPage'
+import ReupPage from './pages/ReupPage'
 
 type NavItem = { to: string; icon: React.ComponentType<{ size: number }>; label: string; exact: boolean }
 
@@ -16,6 +18,8 @@ const NAV: NavItem[] = [
   { to: '/projects', icon: FolderOpen, label: 'Projects', exact: false },
   { to: '/gallery', icon: Film, label: 'Gallery', exact: false },
   { to: '/library', icon: ScrollText, label: 'Library', exact: false },
+  { to: '/tts', icon: Mic, label: 'TTS', exact: false },
+  { to: '/reup', icon: Video, label: 'Reup', exact: false },
   { to: '/logs', icon: ScrollText, label: 'Logs', exact: false },
 ]
 
@@ -154,6 +158,8 @@ function Layout() {
             <Route path="/logs" element={<LogsPage />} />
             <Route path="/gallery" element={<GalleryPage />} />
             <Route path="/library" element={<LibraryPage />} />
+            <Route path="/tts" element={<TTSPage />} />
+            <Route path="/reup" element={<ReupPage />} />
           </Routes>
         </main>
       </div>

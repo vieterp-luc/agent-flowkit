@@ -16,9 +16,16 @@ PYTHON_BIN = os.environ.get("TTS_PYTHON_BIN", "python3.10")
 
 # Inline script template for TTS generation via subprocess
 _TTS_SCRIPT = """
-import sys, json, torch, torchaudio
+import sys, json, torch, numpy as np, random
+import soundfile as sf
 
 args = json.loads(sys.argv[1])
+# Deterministic generation: fix seed for consistent voice prosody across calls
+seed = args.get("seed", 42)
+torch.manual_seed(seed)
+np.random.seed(seed)
+random.seed(seed)
+
 from omnivoice import OmniVoice
 
 model = OmniVoice.from_pretrained(args["model"], device_map="cpu", dtype=torch.float32)
@@ -33,16 +40,28 @@ if args.get("speed") and args["speed"] != 1.0:
     kwargs["speed"] = args["speed"]
 
 audio = model.generate(**kwargs)
-torchaudio.save(args["output"], audio[0], args["sample_rate"])
+wav = audio[0]
+if isinstance(wav, torch.Tensor):
+    wav = wav.cpu().numpy()
+if wav.ndim > 1:
+    wav = wav[0]
+wav = wav.astype(np.float32)
+sf.write(args["output"], wav, args["sample_rate"])
 print(json.dumps({"ok": True, "path": args["output"]}))
 """
 
 # Batch script — loads model once, generates for multiple texts
 _TTS_BATCH_SCRIPT = """
-import sys, json, torch, torchaudio
+import sys, json, torch, numpy as np, random
+import soundfile as sf
 from pathlib import Path
 
 args = json.loads(sys.argv[1])
+seed = args.get("seed", 42)
+torch.manual_seed(seed)
+np.random.seed(seed)
+random.seed(seed)
+
 from omnivoice import OmniVoice
 
 model = OmniVoice.from_pretrained(args["model"], device_map="cpu", dtype=torch.float32)
@@ -61,10 +80,16 @@ for item in args["items"]:
 
         audio = model.generate(**kwargs)
         Path(item["output"]).parent.mkdir(parents=True, exist_ok=True)
-        torchaudio.save(item["output"], audio[0], args["sample_rate"])
+        wav = audio[0]
+        if isinstance(wav, torch.Tensor):
+            wav = wav.cpu().numpy()
+        if wav.ndim > 1:
+            wav = wav[0]
+        wav = wav.astype(np.float32)
+        sf.write(item["output"], wav, args["sample_rate"])
 
-        info = torchaudio.info(item["output"])
-        duration = info.num_frames / info.sample_rate
+        info = sf.info(item["output"])
+        duration = info.duration
         results.append({"id": item["id"], "ok": True, "path": item["output"], "duration": duration})
     except Exception as e:
         results.append({"id": item["id"], "ok": False, "error": str(e)})
@@ -112,7 +137,7 @@ def _run_tts_subprocess(args: dict) -> dict:
     """Run TTS subprocess."""
     proc = subprocess.run(
         [PYTHON_BIN, "-c", _TTS_SCRIPT, json.dumps(args)],
-        capture_output=True, text=True, timeout=120,
+        capture_output=True, text=True, timeout=600,
     )
     if proc.returncode != 0:
         return {"ok": False, "error": proc.stderr[-500:] if proc.stderr else "unknown error"}
