@@ -58,7 +58,16 @@
       "Bash(ffmpeg -nostats -i output/dac_nhan_tam/ep_06_nho-ten-rieng/final.mp4 -af volumedetect -f null /dev/null)",
       "Bash(kill -9 67835)",
       "Bash(ffmpeg -y -i output/dac_nhan_tam/ep_06_nho-ten-rieng/concat_scenes.mp4 -i output/dac_nhan_tam/ep_06_nho-ten-rieng/tts/narrator.wav -i output/dac_nhan_tam/ep_06_nho-ten-rieng/music/bgm.wav -filter_complex '[1:a]volume=1.5[tts];[2:a]volume=0.15[music];[tts][music]amix=inputs=2:duration=longest:dropout_transition=2[aout]' -map 0:v -map '[aout]' -c:v copy -c:a aac -ar 48000 -ac 2 -b:a 192k -movflags +faststart -t 86 output/dac_nhan_tam/ep_06_nho-ten-rieng/final.mp4)",
-      "Bash(/Users/vieterp/code/Research/agent-flowkit/venv/bin/pip list *)"
+      "Bash(/Users/vieterp/code/Research/agent-flowkit/venv/bin/pip list *)",
+      "Bash(cat)",
+      "Bash(chmod +x /tmp/batch_hvtcx2.sh)",
+      "Bash(nohup /tmp/batch_hvtcx2.sh)",
+      "Read(//private/tmp/**)",
+      "Read(//Users/vieterp/Downloads/**)",
+      "Bash(ls -lh \"Drone_descending_over_silent_vil\"*.mp4 \"Lake_Nyos_at_golden_hour\"*.mp4 \"Gas_cloud_erupts_from_lake\"*.mp4 \"Gas_cloud_rolls_toward_village\"*.mp4 \"Aerial_shot_over_Lake_Kivu\"*.mp4)",
+      "Bash(ffprobe \"/Users/vieterp/Downloads/welcome_back_dear_listener_today_we_open_a_e89ee2a1-b9d4-4668-82ab-4fb2546e6d55.mp3\")",
+      "Bash(ffmpeg -y -ss 0 -t 13.5 -i /Users/vieterp/Downloads/welcome_back_dear_listener_today_we_open_a_e89ee2a1-b9d4-4668-82ab-4fb2546e6d55.mp3 -ac 1 -ar 24000 -c:a pcm_s16le /Users/vieterp/code/Research/agent-flowkit/output/_shared/tts_templates/Andrew_TTS.wav)",
+      "Bash(/opt/homebrew/bin/python3.13 -c \"import fastapi; print\\('fastapi:', fastapi.__version__\\)\")"
     ]
   },
   "statusLine": {

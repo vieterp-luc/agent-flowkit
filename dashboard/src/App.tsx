@@ -49,8 +49,8 @@ function Layout() {
   }, [])
 
   useEffect(() => {
-    fetchAPI<{ credits: number; tier: string }>('/api/flow/credits')
-      .then(setCredits)
+    fetchAPI<{ credits?: number; userPaygateTier?: string; tier?: string }>('/api/flow/credits')
+      .then(r => setCredits({ credits: r.credits ?? 0, tier: r.tier || r.userPaygateTier || '' }))
       .catch(() => setCredits(null))
   }, [])
 
@@ -132,7 +132,7 @@ function Layout() {
               <span className="flex items-center gap-1.5">
                 <Zap size={12} />
                 <span style={{ color: (credits.tier ?? '').includes('TWO') ? 'var(--text)' : 'var(--muted)' }}>
-                  {credits.credits.toLocaleString()} {credits.tier}
+                  {(credits.credits ?? 0).toLocaleString()} {credits.tier || ''}
                 </span>
               </span>
             )}
