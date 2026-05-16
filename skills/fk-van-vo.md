@@ -1,0 +1,480 @@
+# fk-van-vo — Tóm Tắt Văn Học Phong Cách "Văn Vở" (Gen Z Slang)
+
+Long-form chapter-by-chapter video tóm tắt tác phẩm văn học VN/foreign theo phong cách kênh **Văn Vở** —
+slang Gen Z + internet meme + chương đặt tên phim bom tấn + ads hài + đắc nhân tâm chốt cuối.
+
+**Tone:** "Lầy lội nhưng nhân văn". Kể trung thành cốt truyện nhưng dán nhãn nhân vật/sự kiện qua lăng kính internet 2020s.
+**Format mặc định:** chapter-by-chapter (mỗi chương / arc lớn = 1 video 10-15 min), 11-15 scenes.
+**Voice mặc định:** `Thang_QC_TTS` @ speed `0.9` — locked sau demo test trên Sơn Tinh Thủy Tinh. Không A/B nữa trừ khi user explicit override `--voice`.
+**Output:** local-only — `output/<book_slug>_vanvo/` — upload defer v2.
+
+Khác biệt với `/fk-tom-tac-sach` (cùng long-form VN nhưng tone nghiêm túc):
+- Script: slang dictionary + commentary "vô tri" — **NO ad break** (user explicit rejected)
+- Chapter name: map sang title phim bom tấn (Fight Club / Endgame / No Way Home...)
+- Image: nhân vật phiên bản "boi phố" (oversized hoodie, undercut moi, sneakers) trên nền classical
+- Voice: locked Thang_QC_TTS @ 0.9 (trẻ năng lượng cao, A/B'd qua Sơn Tinh demo)
+- Ken Burns motion: face-safe rule (static/pan/zoom_out cho character scenes, zoom_in only cho atmospheric)
+
+Usage:
+```
+/fk-van-vo                                    # status dashboard
+/fk-van-vo --detail                           # per-book/per-ep breakdown
+/fk-van-vo --next                             # 3 next actions
+/fk-van-vo --batch <slug> <range>             # produce + build batch
+
+# Bootstrap:
+/fk-van-vo "Dế Mèn Phiêu Lưu Ký"              # auto-detect fiction → chapter format
+/fk-van-vo "Số Đỏ" --episodes 20              # override episode count
+
+# Voice override (default Thang_QC_TTS @ 0.9 — không cần A/B nữa):
+/fk-van-vo <slug> --voice <name> --speed 0.9
+```
+
+---
+
+## Data Sources
+
+| File | Purpose |
+|------|---------|
+| `output/_shared/van-vo-roadmap.json` | All books + chapter/movie-title map + voice + ad slots |
+| `output/_shared/tts_templates/templates.json` | Available Vietnamese voices |
+| `output/<book_slug>_vanvo/ep*/` | Built episode dirs |
+| `output/<book_slug>_vanvo/_ab/` | A/B voice test outputs (ep1 × N voices) |
+
+Separate roadmap from `tom-tac-sach-roadmap.json` — different tone/format/audience.
+
+---
+
+## Default Workflow (status dashboard)
+
+Same skeleton as `/fk-tom-tac-sach` — load roadmap, count built eps, output 1-screen summary. Don't duplicate logic here.
+
+Dashboard format:
+```
+🎤 VĂN VỞ  —  Status @ <today ICT>
+
+📚 Active: <Book> (<Author>) — <built>/<total> tập đã build
+   ├─ Voice:         Thang_QC_TTS @ 0.9 (locked default)
+   ├─ Aesthetic:     vanvo_modern
+   ├─ Chapter map:   <N> chương → movie-title mapped
+   └─ Slang density: ~1 term/scene (locked threshold)
+
+📅 Backlog:
+   ep<N>: <Ch.X — "Movie Title (Year)"> e.g. "Fight Club (1999)"
+   ep<N+1>: ...
+
+🎯 NEXT:
+   1. ...
+   2. ...
+
+📖 Books trong roadmap:
+   ✅ <slug> (in_progress, <done>/<total>, voice=<locked>)
+   ⚠️  <slug> (voice A/B pending)
+   ⏳ <slug> (planned)
+```
+
+Decision tree:
+1. Backlog > 0? → Suggest `--batch <slug> <range>`
+2. All built? → Suggest book mới
+
+---
+
+## Bootstrap New Book
+
+### Step 0 — Copyright + suitability check
+
+Same PD rules as `/fk-tom-tac-sach` Step 0. Văn Vở style fits BEST với:
+- Truyện thiếu nhi/phiêu lưu có nhân vật phi-người (Dế Mèn, Truyện Cổ tích)
+- Tiểu thuyết hiện thực có nhân vật mưu mẹo (Số Đỏ, Tắt Đèn)
+- Sử thi/anh hùng ca có combat (Truyện Kiều fight scenes, Tây Du Ký)
+- Truyện ngắn có twist (Lão Hạc, Chí Phèo, Vợ Nhặt)
+
+KHÔNG phù hợp:
+- Thơ trữ tình thuần (Tản Đà, Nguyễn Bính lyric)
+- Triết học (Nhật Ký Trong Tù — mood sai)
+- Self-help (không có nhân vật để slang hóa)
+
+### Step 1 — Chapter → Movie title mapping
+
+Skill prompts Gemini với system instruction:
+```
+Map từng chương/arc của <book> sang 1 tên phim bom tấn Hollywood/quốc tế
+có chủ đề/nội dung tương đồng. Format:
+{
+  "ep": 1,
+  "chapter_original": "Chương 1: Tôi sống độc lập",
+  "movie_title": "The Pursuit of Happyness (2006)",
+  "rationale": "Cả 2 đều là arc 'self-made độc lập tuổi trẻ'"
+}
+```
+
+Tham khảo bản map cho **Dế Mèn Phiêu Lưu Ký** (canonical reference):
+| Ch | Movie Title | Theme |
+|----|-------------|-------|
+| 1 | The Pursuit of Happyness (2006) | Ra ở riêng, tự lập |
+| 2 | Fight Club (1999) | Đánh nhau với Dế Choắt arc |
+| 3 | Spider-Man: No Way Home (2021) | Trở về sau biến cố |
+| 4 | The Revenant (2015) | Bị bắt, sống sót |
+| 5 | The Hangover (2009) | Phiêu lưu hỗn loạn cùng Dế Trũi |
+| 11 | Avengers: Endgame (2019) | Đại chiến cuối — kiến vs châu chấu |
+
+User review map → adjust if mismatched → save vào roadmap.
+
+### Step 2 — Aesthetic profile
+
+Single preset: `vanvo_modern`. Không có alternative — đặc trưng của brand.
+
+```
+vanvo_modern preset (validated qua Sơn Tinh + Dế Mèn samples):
+Modern Vietnamese street fashion x classical literature setting hybrid,
+nhân vật phiên bản "boi phố" 2020s:
+- Mặc: oversized hoodie / áo khoác bomber, jeans rách, sneakers (Air Force 1, Yeezy slide),
+  hoặc áo polo + quần short streetwear — SOLID COLOR ONLY, no graffiti, no printed pattern, no logo
+- Tóc: undercut, moi style (hai bên cạo, đỉnh dài), tóc nhuộm bạch kim / bordeaux / xanh
+- Phụ kiện: dây chuyền vàng cỡ lớn, kính mát aviator, đồng hồ Casio, AirPods Pro
+- Bối cảnh: vẫn giữ era gốc (làng quê 1930s / cung đình 19th c) NHƯNG nhân vật anachronistic streetwear
+- Style: anime/manhwa Hàn Quốc colored, vibrant neon palette, dramatic rim lighting,
+  comic book panel framing, dynamic action poses
+- Pose: NATURAL confident stance (hands in pockets, leaning, walking, sitting squat)
+  — AVOID gym flex pose, AVOID bodybuilder arm pose, AVOID muscle pose
+- Mood: ironic juxtaposition — boi phố walking through áo nâu sòng làng cảnh
+- Palette lock (series consistency): cyan + gold + neon magenta accent
+- STRICTLY NO TEXT in image, NO logos, NO graffiti/printed letters on clothing, NO subtitles
+- VERTICAL/HORIZONTAL per video orientation
+```
+
+Side note: với nhân vật phi-người (Dế Mèn = côn trùng), apply anthropomorphic-streetwear — humanoid body + giữ đặc trưng loài (râu, mắt to, body color), trang phục SOLID COLOR (no graffiti/print), pose tự nhiên không gym flex. Vd Dế Mèn: hoodie đen solid + cargo shorts + chunky sneakers + gold chain + aviator sunglasses + tóc bạc moi, pose ngồi xổm hàng rào.
+
+### Step 3 — Create Flow project
+
+```bash
+POST /api/projects
+{
+  "name": "<Book slug>_VanVo",
+  "description": "Tóm tắt <Book> phong cách Văn Vở — Gen Z slang + modern hybrid visuals.",
+  "story": "<2-3 câu giới thiệu sách + bối cảnh + dòng chữ 'aesthetic vanvo_modern hybrid'>",
+  "material": "realistic",
+  "image_style": "Modern Vietnamese street fashion hybrid với era gốc của tác phẩm. Anime/manhwa Korean color, vibrant cyan + gold + neon magenta palette, dramatic rim lighting, comic book panel framing. Clothing SOLID COLOR ONLY — no graffiti, no printed pattern, no logo, no letters. Natural confident pose — AVOID gym flex/bodybuilder/muscle pose. STRICTLY NO TEXT, NO subtitles, NO signs. HORIZONTAL 16:9 cinematic.",
+  "language": "vi",
+  "orientation": "HORIZONTAL"
+}
+```
+
+### Step 4 — Wave 1 entities
+
+5-8 nhân vật chính + locations chính. Description chứa:
+- Era gốc cultural cues (áo dài / làng quê)
+- **PLUS** streetwear hybrid spec: "wearing oversized hoodie, undercut hair, gold chain"
+- Personality slang tag: "tân thủ / boi phố chính hiệu / idol quốc dân / ông bad boy / scammer chuyên nghiệp"
+
+Pause cho user review roster + slang tags.
+
+### Step 5 — Gen Wave 1 refs
+
+Standard batch GENERATE_CHARACTER_IMAGE → poll → download `output/<slug>_vanvo/refs/`. Spot-check nhân vật brand-defining.
+
+### Step 6 — Extract chapter map + slang assignment
+
+Per chapter, Gemini extract:
+```json
+{
+  "ep": 1,
+  "movie_title": "...",
+  "key_events": ["...", "..."],
+  "slang_tags_per_event": {
+    "event_1": ["tân thủ", "gói bảo hộ tân thủ"],
+    "event_2": ["combat", "wombo combo"]
+  },
+  "moral_wrap_up": "Bài học: ..."
+}
+```
+
+Map vào roadmap entry.
+
+### Step 7 — Register trong roadmap
+
+```json
+{
+  "active_book": "<slug>",
+  "books": {
+    "<slug>": {
+      "title": "...",
+      "author": "...",
+      "voice": "Thang_QC_TTS",
+      "speed": 0.9,
+      "aesthetic_preset": "vanvo_modern",
+      "slang_density": "high",
+      "flow_project_id": "...",
+      "local_dir": "output/<slug>_vanvo",
+      "total_episodes": <N>,
+      "status": "in_progress | done",
+      "chapter_map": [
+        {"ep": 1, "movie_title": "...", "key_events": [...], "slang_tags_per_event": {...}, "moral_wrap_up": "..."}
+      ],
+    }
+  }
+}
+```
+
+### Step 8 — Suggest first batch
+
+```
+🎉 <Book> bootstrapped (Văn Vở style).
+   Chapter map: ✅ <N> chương mapped to movie titles
+   Wave 1: ✅ <N> entities (boi phố hybrid)
+   Voice: Thang_QC_TTS @ 0.9 (default)
+
+🎯 NEXT:
+   1. Build batch: /fk-van-vo --batch <slug> 1-5
+   2. Test 1 ep trước → review flow + slang density → adjust nếu cần
+```
+
+---
+
+## --batch Workflow (produce + build)
+
+```
+/fk-van-vo --batch <slug> <start>-<end>
+```
+
+Per ep:
+
+### Stage 1: Script generation (Gemini in-skill, NOT backend yet)
+
+System instruction template cho Gemini call:
+```
+Bạn viết kịch bản cho video YouTube tóm tắt văn học phong cách kênh "VĂN VỞ".
+
+INPUT:
+- Sách: <title>, tác giả <author>
+- Chương <X>: <chapter_original_name> (mapped → "<movie_title>")
+- Key events: <list>
+- Slang tags assigned: <map>
+- Moral wrap-up: <text>
+
+CONSTRAINTS:
+- Tổng 11-14 scenes, mỗi scene narrator_text 20-22 từ Tiếng Việt — NO AD BREAK scene
+- Scene 1 (Hook, ~1 min = 3 narrator sentences):
+  - Mở bằng nhận xét "giang hồ" hoặc so sánh xã hội hiện đại
+  - Dán title "<movie_title>" như poster phim
+- Scene 2-3 (recap "Previously" — SKIP nếu ep1)
+- Scene 4-12 (Body, 8-9 scenes):
+  - Kể trung thành sự kiện
+  - Bắt buộc dùng slang tag được assign mỗi 1-2 câu
+  - Chèn 1-2 câu commentary "vô tri" mỗi scene (tone hài, không quá dài)
+  - Time connectors: "Đầu tiên / Sau đó / Bỗng nhiên / Trong lúc đó / Cuối cùng"
+- Scene 13 (Climax/resolution event ~1 scene)
+- Scene 14 (Moral wrap-up "Thuật đắc nhân tâm", 2-3 narrator sentences):
+  - Chốt bài học cuộc sống nghiêm túc
+  - Tone shift: từ lầy lội → sâu sắc
+  - Format: "Câu chuyện <chương> dạy ta rằng... <bài học>. Đây không chỉ là <slang reference> mà còn là <giá trị nhân văn>."
+
+SLANG DICTIONARY — RULE: density ~1 slang/scene (max). Quá dày → "cringe overload". Audio scene Moral wrap-up = 0 slang.
+
+ALLOWED (mainstream VN, phổ thông hiểu ngay):
+- Nhân vật: boi phố chính hiệu, dân chơi, idol quốc dân, đại boss, ông trùm
+- Combat: combat, combo, hành gà, nắc cho thân tàn ma dại
+- Exit/thua: AFK, đành chịu thua, hàng tạm, đăng xuất
+- Psychological: tâm lý vỡ vụn, sang chấn, cười xỉu, đứng hình
+- Scam/lừa: scam, lừa đảo trắng trợn
+- Locations: biệt thự triệu đô, view thoáng đét, siêu phèn, tã, lầy lội
+- Status: flex, lú, cực kỳ bá, khét lẹt
+
+BANNED (niche/cringe — KHÔNG dùng):
+PTSD, NPC, OP, top server, inventory full, one-shot, ez game, wombo combo,
+gank, GG, full bão tố, nerf, buff, stun, tutorial mode, gói bảo hộ tân thủ,
+main character energy, mid, trauma dump
+
+FLOW RULE — narrator text phải đọc tự nhiên, KHÔNG over-chop:
+- `?` chỉ khi câu hỏi GENUINE (không rhetorical)
+- `!` chỉ khi cảm thán climax thật (không cho từng câu đơn)
+- `—` em-dash max 1-2/scene, dùng cho định danh ("Mị Nương — idol quốc dân")
+- `...` ellipsis chỉ khi suspense thật, không filler
+- Mặc định dùng `,` `.` cho nhịp tự nhiên
+- Total special punctuation max 2/scene
+- Anti-pattern: "Tâm lý vỡ vụn. PTSD nặng. Nuôi hận muôn đời." (chặt vụn)
+- Đúng: "tâm lý vỡ vụn, sang chấn nặng nề, nuôi hận muôn đời" (gộp liền)
+
+OUTPUT JSON:
+[
+  {
+    "scene": 1,
+    "narrator_text": "...",
+    "scene_prompt": "<image prompt theo aesthetic vanvo_modern, mô tả cảnh + nhân vật hybrid streetwear>",
+    "is_ad": false,
+    "is_moral_wrap_up": false
+  },
+  ...
+]
+```
+
+### Stage 2: Create video + scenes in Flow
+
+Standard `POST /api/videos` + scenes append.
+
+### Stage 3: Mass batch GENERATE_IMAGE
+
+Standard. Aesthetic preset đã set ở project level.
+
+### Stage 4: Per-ep audio + concat
+
+- TTS: `Thang_QC_TTS` @ speed=0.9 (locked default), volume 1.5×
+- Music: gen via `/fk-gen-music` với prompt "lofi hip-hop trap fusion, modern beat, ironic vibe matching <book era>, MP3" (transcode MP4→MP3 default)
+- Music volume: 0.10× (slightly lower than tom-tac-sach vì narration faster + more slang dense)
+- Ken Burns motion (FACE-SAFE rule per scene content):
+  - Character close-up / portrait / emotional / poster: `static` only
+  - Character medium / 2-shot: `static`, `pan_left`, `pan_right`
+  - Character action wide / split-screen: `static`, `pan_*`, `zoom_out`
+  - Atmospheric / landscape / flycam / no-character: `zoom_in`, `zoom_out`, `pan_*`
+  - **AVOID `zoom_in` cho bất kỳ scene nào có nhân vật** (crops face)
+  - Vary motion để tránh consecutive repeat NHƯNG ưu tiên safety > variety
+- Concat → `output/<slug>_vanvo/ep<NN>/ep<NN>_final.mp4`
+- Narrator concat: 1.0s silence between scenes (fits well-paced Ken Burns motion buffer)
+- Concat → `output/<slug>_vanvo/ep<NN>/<slug>_vanvo_ep<NN>_final.mp4`
+- NO brand overlay (v1, local-only)
+
+### Stage 5: Caption + slang report
+
+Output ngoài video file:
+- `caption.txt` — caption MXH (TikTok/YT description) chứa: hashtag `#vanvo #<book> #genzliterature`, hook 1 câu slang, link tới full video
+- `slang_report.json` — log slang nào dùng trong ep này → tránh lặp ep sau
+
+---
+
+## Pipeline Standard (locked defaults)
+
+| Setting | Value |
+|---------|-------|
+| Default voice | `Thang_QC_TTS` (locked from Sơn Tinh demo) |
+| Default speed | 0.9 (down from initial 0.95 — user feedback prefers slower) |
+| Narrator word count | 20-22 từ per sentence (locked rule from memory) |
+| Resolution | 1920×1080 HORIZONTAL (long-form default) |
+| FPS | 30 |
+| TTS volume | 1.5× |
+| Music volume | 0.10× (lower do narrator nhanh + dense) |
+| Music style | lofi hip-hop / trap fusion / ironic match era |
+| Music output | MP3 (Lyria MP4 → MP3 transcode) |
+| Scene count | 11-14 per ep (Hook=1-3 + Recap=0-2 + Body=8-9 + Moral=1-2) — NO ad break |
+| Ad break | **REMOVED** (user explicit reject) |
+| Moral wrap-up | Mandatory (non-negotiable — defining feature) |
+| Aesthetic | `vanvo_modern` only (no alternatives) |
+| Image text policy | STRICTLY NO TEXT (defensive prompt from memory) |
+| Brand overlay | OFF (v1 local-only) |
+
+---
+
+## Slang Dictionary (Quick Reference — Mainstream Only)
+
+**Rule khắc: max 1 slang/scene. Moral wrap-up = 0 slang.** Source-of-truth là threshold lưu trong memory `feedback-van-vo-slang-threshold.md`.
+
+ALLOWED:
+| Concept | Slang |
+|---------|-------|
+| Nhân vật chính tự tin | boi phố chính hiệu, dân chơi |
+| Nhân vật quyền lực | idol quốc dân, đại boss, ông trùm |
+| Đánh nhau | combat, combo |
+| Thắng dễ dàng | hành gà, ngon ơ, một phát ăn ngay |
+| Đánh tàn nhẫn | nắc cho thân tàn ma dại |
+| Chết/thua/rút lui | AFK, đành chịu thua, hàng tạm, đăng xuất |
+| Bị choáng | đứng hình, cười xỉu |
+| Trauma | tâm lý vỡ vụn, sang chấn nặng nề |
+| Bị lừa | scam, lừa đảo trắng trợn |
+| Nhà giàu | biệt thự triệu đô, view thoáng đét |
+| Nhà nghèo | siêu phèn, tã, lầy lội |
+| Khoe khoang | flex |
+| Trạng thái | lú, cực kỳ bá, khét lẹt |
+
+BANNED (KHÔNG dùng — niche/cringe):
+PTSD, NPC, OP, top server, inventory full, one-shot, ez game, wombo combo,
+gank, GG, full bão tố, nerf, buff, stun, tutorial mode, gói bảo hộ tân thủ,
+main character energy, mid, trauma dump, phishing.
+
+---
+
+## Movie Title Mapping (Reference Patterns)
+
+Common arc → movie suggestion (Gemini extends khi bootstrap):
+
+| Arc pattern | Suggested movies |
+|-------------|------------------|
+| Origin / coming of age | Batman Begins, X-Men: First Class, Spider-Man: Homecoming, Lady Bird |
+| Self-discovery độc lập | The Pursuit of Happyness, Eat Pray Love, Wild |
+| First fight / training | Karate Kid, Rocky, Fight Club, Cobra Kai |
+| Adventure khởi đầu | The Hobbit, LOTR: Fellowship, Pirates of Caribbean |
+| Bị bắt / khủng hoảng | The Revenant, 127 Hours, The Shawshank Redemption |
+| Trở về | Spider-Man: No Way Home, LOTR: Return of King, Homeward Bound |
+| Phản bội | The Godfather, Game of Thrones (Red Wedding), Star Wars: Revenge of Sith |
+| Tình yêu | La La Land, Titanic, Eternal Sunshine, Notebook |
+| Đại chiến cuối | Avengers: Endgame, Star Wars: Rise of Skywalker, LOTR: Return of King |
+| Phiêu lưu hỗn loạn | The Hangover, Inception, Mad Max: Fury Road |
+| Tragedy | A Star Is Born, Schindler's List, Manchester by the Sea |
+| Heist / mưu mẹo | Ocean's 11, Catch Me If You Can, The Sting |
+| Twist ending | The Sixth Sense, Shutter Island, Gone Girl |
+
+Năm phát hành phải accurate — checked qua web nếu cần. Gemini có thể hallucinate năm.
+
+---
+
+## Voice (Locked)
+
+Default: `Thang_QC_TTS` @ speed `0.9`. A/B'd qua Sơn Tinh Thủy Tinh demo (`output/_demo/vanvo_son-tinh_thang-qc_v5.wav`).
+
+Override per book (rare): `/fk-van-vo <slug> --voice <name> --speed 0.9`. Phải có lý do (vd nhân vật nữ chính → cần voice nữ Hong_Hanh_podcast_TTS).
+
+---
+
+## Common Errors
+
+| Error | Fix |
+|-------|-----|
+| Slang quá dày → text quá dài > 22 từ | Drop slang xuống max 1/scene, re-extract |
+| Slang dùng từ BANNED list | Re-extract với constraint mạnh hơn về dictionary |
+| Narrator TTS ngắt giật cục | Check punctuation — bỏ `?!—...` thừa, gộp câu bằng `,` |
+| Image gen ra text (chữ hoodie, biển hiệu) | Defensive prompt "STRICTLY NO TEXT" + "SOLID COLOR clothing only" — nếu vẫn ra graffiti giả, regen với prompt nhấn mạnh hơn |
+| Image gen ra pose gym flex/bodybuilder | Add "natural confident stance, hands in pockets / leaning / walking, AVOID muscle pose" |
+| Clothing có graffiti pattern ngẫu nhiên | Re-prompt: "clothing solid color only, no print, no graffiti, no graphic" |
+| Image gen sai hybrid (full classical OR full modern) | Re-prompt explicit: "Character wears 2020s streetwear, background remains <era>" |
+| Movie title hallucinated năm sai | Web search verify trước khi save roadmap |
+| Moral wrap-up tone vẫn lầy lội (không shift được) | Manual edit narrator_text scene cuối, Gemini sometimes fails tone shift |
+| Ken Burns zoom_in crop mặt nhân vật | Đổi sang `static` (portrait/close-up) / `pan_*` (medium) / `zoom_out` (wide). zoom_in chỉ dùng cho atmospheric no-character scenes |
+| Ad break placeholder vẫn xuất hiện trong script | Re-prompt Gemini với explicit "NO AD BREAK scene" — user rule absolute |
+
+---
+
+## Pre-flight Checks (Flow quota safety)
+
+Before --batch (Flow quota safety from memory):
+1. Check `extension_connected: true`
+2. Pre-flight credits qua `/api/account/credits` — abort nếu insufficient
+3. Probe 1 scene image gen trước batch — abort nếu QUOTA error
+4. Halt worker auto-retry on QUOTA / no-operations errors
+
+Same pattern as `/fk-podcast-book` and `/fk-tom-tac-sach`.
+
+---
+
+## Backend Extension (v1.1+, deferrable)
+
+Skill v1 dùng Gemini in-skill cho script gen (không cần backend extend).
+
+V1.1 (nếu sản xuất scale > 5 books): extend `agent/services/book_script_writer.py` với
+`write_chapter_vanvo_script_vi()` — bake slang dictionary + movie-title + ad break vào server-side để
+script gen deterministic + cache-able. Until then, in-skill Gemini là OK.
+
+---
+
+## v2 Roadmap
+
+- Channel branding (logo Văn Vở, intro/outro animation)
+- Auto-upload YouTube + cross-post TikTok cut-down (extract scene 6-8 cao trào → Shorts)
+- Optional sponsor integration (per-user opt-in only, NOT default — current rule = no ads)
+- Multi-voice dialogue (nhân vật khác nhau = voice khác nhau — thay vì 1 narrator kể tất)
+- Slang freshness tracker — slang outdate sau 6-12 tháng, skill ping warn nếu dictionary cần update
+
+---
+
+## Output Length Discipline
+
+**Default = 1 screen.** Dashboard + 3 actions, no logs, no long explanations.
+**Don't** repeat slang dictionary trong response — user check skill file.
+**Don't** invoke backend on default — chỉ check roadmap + local files.

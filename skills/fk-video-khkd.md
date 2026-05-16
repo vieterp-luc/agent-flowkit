@@ -116,9 +116,57 @@ Poll Wave 1 → 15s/lần. Submit Wave 2 ngay khi Wave 1 `done: true`.
 
 ## Bước 4: Generate videos (`/fk-gen-videos`)
 
-- Submit tất cả 5 scenes 1 batch
+> ⚠️ **Quota safety** — đây là bước đốt credits nhiều nhất. Worker auto-retry `MAX_RETRIES=5` lần mỗi scene → 1 lần failure systemic = **5 scenes × 5 retries = 25 submissions** burn quota im lặng. Bắt buộc 3 guardrails dưới.
+
+### 4.1 Pre-flight quota check (BẮT BUỘC)
+
+```bash
+curl -s http://127.0.0.1:8100/api/flow/credits
+```
+
+**Abort nếu:**
+- `credits` field thiếu hoặc < 30 → quota chưa đủ cho 5 scenes (mỗi scene ~5-15 credits)
+- `userPaygateTier` không khớp với project
+
+Nếu credits thấp → báo user, KHÔNG submit. Resume sau khi reset.
+
+### 4.2 Probe-first (1 scene → wait → 4 scenes còn lại)
+
+**Không submit batch 5 ngay.** Probe 1 scene để verify pipeline OK trước:
+
+```bash
+# Submit chỉ scene 0
+POST /api/requests/batch  { requests: [{ scene_id: <S0>, ... }] }
+
+# Poll 30s/lần, MAX 4 phút
+# Nếu COMPLETED → submit 4 scenes còn lại
+# Nếu FAILED → STOP, đi qua 4.3
+```
+
+### 4.3 Halt-on-quota-error (chặn auto-retry)
+
+Khi error message chứa **bất kỳ** pattern dưới:
+- `QUOTA_REACHED`
+- `no operations`
+- `MODEL_ACCESS_DENIED`
+- `UNSAFE_GENERATION` (3 lần liên tiếp)
+
+**NGAY LẬP TỨC** chặn worker auto-retry tất cả PENDING/PROCESSING requests của video này:
+
+```bash
+# Force terminal (retry_count = MAX_RETRIES) cho tất cả pending requests
+for rid in $(curl -s "/api/requests?video_id=<VID>&type=GENERATE_VIDEO" | jq -r '.[] | select(.status=="PENDING" or .status=="PROCESSING") | .id'); do
+  curl -X PATCH "/api/requests/$rid" -d '{"status":"FAILED","retry_count":5}'
+done
+```
+
+Sau đó diagnose → fix prompt/config → reset 1 scene → submit lại như 4.2.
+
+### 4.4 Normal flow (sau khi probe OK)
+
+- Submit 4 scenes còn lại 1 batch
 - Poll 30s/lần (video gen lâu hơn image)
-- Nếu 1 scene `FAILED`: PATCH `vertical_video_status` → `PENDING`, resubmit
+- Nếu 1 scene `FAILED`: chạy 4.3 trước, KHÔNG resubmit ngay
 - Verify tất cả `COMPLETED` với UUID media_id
 
 ---
@@ -188,7 +236,8 @@ Sau khi có file `{slug}_narrator_cut.mp4`, chạy `/fk-gen-caption` để tạo
 [ ] /fk-create-project — 5 scenes, VERTICAL, realistic, narrator texts 20-22 từ
 [ ] /fk-gen-refs       — 4 entities, 1 batch, poll 15s
 [ ] /fk-gen-images     — Wave 1 ROOT, Wave 2 CONTINUATION (EDIT_IMAGE)
-[ ] /fk-gen-videos     — 1 batch, poll 30s, retry FAILED scenes
+[ ] Pre-flight quota check (/api/flow/credits ≥ 30)
+[ ] /fk-gen-videos     — PROBE 1 scene → verify OK → submit 4 còn lại; halt-on-quota-error trước khi worker auto-retry 5×
 [ ] /fk-gen-narrator   — Anh_Khoi_TTS speed 0.95, output tts/scene_IDX3_SID.wav
 [ ] /fk-concat-fit-narrator — download 4k, trim, xfade S1+S2, concat
 [ ] /fk-gen-caption        — tạo caption từ narrator text
@@ -215,6 +264,8 @@ Sau khi có file `{slug}_narrator_cut.mp4`, chạy `/fk-gen-caption` để tạo
 | TTS bị cắt giữa câu | >22 từ thật | Viết lại ngắn hơn |
 | Dead air cuối scene | <18 từ | Thêm câu kết |
 | `GENERATE_VIDEO` skip FAILED | Status chưa reset | PATCH `vertical_video_status: PENDING` trước |
+| Quota burn 25× im lặng | Worker auto-retry MAX_RETRIES=5/scene × 5 scenes | Probe-first (4.2) + halt-on-quota-error (4.3) trước khi batch |
+| "Video gen returned no operations" | Thường mask QUOTA_REACHED hoặc Flow filter | Check `/api/flow/credits` ngay; nếu credits OK → simplify prompt (remove violently/motionless/no movement) |
 | JSON parse error | Em-dash trong narrator_text | Dùng Python subprocess + `ensure_ascii=False` |
 | Scene bị trùng display_order | API tạo duplicate | DELETE scene thừa trước khi gen images |
 | mean_volume = -inf | Audio track bị mất | Kiểm tra `-an` flag, luôn dùng `-ar 48000 -ac 2` |
