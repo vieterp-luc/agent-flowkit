@@ -9,6 +9,9 @@ output/
 youtube
 agent/active_project.json
 
+# Runtime artifacts
+.claude/scheduled_tasks.lock
+
 # Generated AI tool configs (run: python setup.py)
 .claude/commands/fk:*
 .gemini/commands/
