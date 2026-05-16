@@ -86,8 +86,11 @@ def slugify_vi(text: str) -> str:
     return re.sub(r"[\s_]+", "-", text)
 
 
+BOOKS_BASE = Path("output/podcast-book")
+
+
 def load_calendar(book_slug: str) -> tuple[dict, Path]:
-    path = Path(f"output/{book_slug}/calendar.json")
+    path = BOOKS_BASE / book_slug / "calendar.json"
     if not path.exists():
         raise FileNotFoundError(f"Calendar not found: {path}")
     return json.loads(path.read_text()), path
@@ -132,17 +135,23 @@ def extract_topic_script(ep: dict, book: dict, ep_dir: Path,
         logger.info("[skip] script.json exists")
         return json.loads(out.read_text())["data"]["script"][0]
 
+    outline = book.get("outline") or f"{book['title']}: 30 nguyên tắc giao tiếp ứng xử của {book['author']}"
+    # Optional: enforce specific character/setting in scene_prompts (e.g., insects vs humans)
+    char_ctx = (book.get("character_context") or "").strip()
+    topic = f"{ep['title']} — {ep['key_idea']}"
+    if char_ctx:
+        topic = f"{topic}\n\nCHARACTER & SETTING CONTEXT (must enforce in every scene_prompt): {char_ctx}"
     payload = {
         "mode": "manual",
         "format": "quote",
         "source": {
-            "outline": f"{book['title']}: 30 nguyên tắc giao tiếp ứng xử của {book['author']}",
+            "outline": outline,
             "metadata": book,
         },
         "options": {
             "count": 1,
             "target_seconds": target_seconds,
-            "topic": f"{ep['title']} — {ep['key_idea']}",
+            "topic": topic,
         },
     }
     data = _api_post_with_retry("/api/book/extract-script", payload, timeout=120)
@@ -151,8 +160,12 @@ def extract_topic_script(ep: dict, book: dict, ep_dir: Path,
 
 
 def gen_flow_images(script: dict, book_slug: str, ep_id: int, ep: dict,
-                    ep_dir: Path, scene_count: int = 7) -> list[Path]:
-    """Step: create Flow project + scenes + gen images. Idempotent."""
+                    ep_dir: Path, scene_count: int = 7,
+                    book: Optional[dict] = None) -> list[Path]:
+    """Step: create Flow project + scenes + gen images. Idempotent.
+    If `book["image_style"]` set, prepend to every scene_prompt to enforce visual style
+    (e.g. "Cartoon colorful illustration style:"). Defaults to realistic.
+    """
     images_dir = ep_dir / "images"
     scene_ids_file = ep_dir / "scene_ids.json"
 
@@ -160,6 +173,8 @@ def gen_flow_images(script: dict, book_slug: str, ep_id: int, ep: dict,
     if all(p.exists() and p.stat().st_size > 1000 for p in expected):
         logger.info("[skip] %d images exist", scene_count)
         return expected
+
+    style_prefix = (book or {}).get("image_style", "").strip()
 
     # Create project + video + scenes
     if not scene_ids_file.exists():
@@ -184,6 +199,10 @@ def gen_flow_images(script: dict, book_slug: str, ep_id: int, ep: dict,
             # Even spread sample
             step = max(1, len(prompts) // scene_count)
             prompts = [prompts[i * step] for i in range(scene_count)]
+
+        # Prepend book-level style prefix to enforce consistent visual style
+        if style_prefix:
+            prompts = [f"{style_prefix} {p}" for p in prompts]
 
         scene_ids = []
         for idx, prompt in enumerate(prompts):
@@ -306,7 +325,7 @@ def concat_scenes(clips: list[Path], durations: list[int], ep_dir: Path) -> Path
     return out
 
 
-def gen_tts(narrator_text: str, voice: str, ep_dir: Path) -> Path:
+def gen_tts(narrator_text: str, voice: str, ep_dir: Path, speed: float = 0.95) -> Path:
     """Step: generate TTS. Long timeout, idempotent."""
     out = ep_dir / "tts" / "narrator.wav"
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -316,7 +335,7 @@ def gen_tts(narrator_text: str, voice: str, ep_dir: Path) -> Path:
     r = requests.post(f"{API_BASE}/api/tts/generate", json={
         "text": narrator_text,
         "template": template_name,  # API resolves ref_audio + ref_text from registry
-        "speed": 0.95,
+        "speed": speed,
         "output_path": str(out),
     }, timeout=600)
     if not (out.exists() and out.stat().st_size > 10000):
@@ -354,11 +373,12 @@ def gen_music(ep_dir: Path, prompt: Optional[str] = None,
 
 def mix_final(concat_video: Path, tts_audio: Path, music_src: Path,
               ep_dir: Path, target_dur: int) -> Path:
-    """Step: trim video+music to TTS duration (+2s buffer), mix, output final.mp4.
+    """Step: trim video+music to TTS duration (+2s buffer), mix, output _main.mp4
+    (intermediate — branding step overlays logo + produces final.mp4).
 
     Video duration is now driven by TTS to avoid silent music tail.
     """
-    out = ep_dir / "final.mp4"
+    out = ep_dir / "_main.mp4"
     if out.exists() and out.stat().st_size > 10000:
         return out
 
@@ -411,6 +431,7 @@ def gen_caption(script: dict, ep: dict, ep_dir: Path, book: dict) -> Path:
         "[empty line]\n"
         "Line 4: 7-10 hashtags Vietnamese + English mix.\n\n"
         "Rules:\n"
+        "- KHÔNG bao gồm tên sách / tên tập / dòng tiêu đề (sẽ được prepend tự động)\n"
         "- Hook KHÔNG mention tên sách/tác giả\n"
         f"- Hashtags MUST include: {book_tag}, niche tags (#sachhay #podcast #tinhhoasach), topic tags\n"
         "- 1-2 emoji optional\n"
@@ -427,7 +448,10 @@ def gen_caption(script: dict, ep: dict, ep_dir: Path, book: dict) -> Path:
         "contents": [{"parts": [{"text": user_prompt}]}],
     }
     result = call_gemini_sync(payload, model="gemini-2.5-flash", timeout=60)
-    text = result["candidates"][0]["content"]["parts"][0]["text"].strip()
+    body = result["candidates"][0]["content"]["parts"][0]["text"].strip()
+
+    title_line = f"{book['title']} - (EP{ep['id']}) {ep['title']}."
+    text = f"{title_line}\n{body}"
     out.write_text(text)
     return out
 
@@ -439,6 +463,45 @@ def get_video_duration(path: Path) -> float:
         "-of", "default=noprint_wrappers=1:nokey=1", str(path),
     ], capture_output=True, text=True, check=True)
     return float(r.stdout.strip())
+
+
+def apply_branding(main_video: Path, channel: str,
+                   logo_size: int = 150, logo_pos: str = "top-left") -> Path:
+    """Step: overlay channel logo on intermediate _main.mp4 → produce final.mp4.
+    Logo is REQUIRED for this skill; aborts if missing.
+    Idempotent — skips if final.mp4 already exists.
+    """
+    out = main_video.parent / "final.mp4"
+    if out.exists() and out.stat().st_size > 100000:
+        logger.info("[skip] final.mp4 exists")
+        return out
+
+    logo = Path(f"youtube/channels/{channel}/{channel}_icon.png")
+    if not logo.exists():
+        raise FileNotFoundError(
+            f"Channel logo required but missing: {logo}\n"
+            f"Place a square PNG (transparent bg) at this path before rendering."
+        )
+
+    pos_map = {
+        "top-left":     f"{24}:{24}",
+        "top-right":    f"W-w-{24}:{24}",
+        "bottom-left":  f"{24}:H-h-{24}",
+        "bottom-right": f"W-w-{24}:H-h-{24}",
+    }
+    overlay_xy = pos_map.get(logo_pos, pos_map["top-left"])
+
+    subprocess.run([
+        "ffmpeg", "-y",
+        "-i", str(main_video), "-i", str(logo),
+        "-filter_complex",
+        f"[1:v]scale={logo_size}:{logo_size},format=rgba[icon];"
+        f"[0:v][icon]overlay={overlay_xy}",
+        "-c:v", "libx264", "-preset", "fast", "-crf", "20", "-pix_fmt", "yuv420p",
+        "-c:a", "copy", "-movflags", "+faststart",
+        str(out),
+    ], check=True, capture_output=True)
+    return out
 
 
 def extend_last_scene_if_needed(images: list[Path], clips: list[Path],

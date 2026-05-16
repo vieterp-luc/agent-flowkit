@@ -514,6 +514,26 @@ async def _handle_failure(rid: str, req: dict, result: dict, retry_after: dict =
     if "not found" in str(error_msg).lower():
         recovered = await _recover_entity_not_found(req)
         if recovered:
+            req_type = req.get("type", "")
+            # Expensive ops (video, upscale): each submission costs ~15-25 credits.
+            # Auto-resubmitting after recovery double-charges the user (first submit
+            # already paid Flow's billing, second submit pays again). Mark FAILED so
+            # user can manually retry once they verify the image is good. Total cost
+            # stays at 1× video gen instead of 2×.
+            # See memory feedback-flow-quota-safety + 2026-05-13 incident.
+            if req_type in ("GENERATE_VIDEO", "REGENERATE_VIDEO", "GENERATE_VIDEO_REFS", "UPSCALE_VIDEO"):
+                await crud.update_request(
+                    rid, status="FAILED",
+                    error_message=f"recovered media (manual resubmit needed to avoid double-charge): {error_msg}",
+                )
+                await _mark_scene_failed(req)
+                logger.warning(
+                    "Request %s: recovered expired media but NOT auto-resubmitting (%s is expensive). "
+                    "User must manually resubmit to avoid double Flow charge.",
+                    rid[:8], req_type,
+                )
+                return
+            # Cheap ops (image gen): auto-resubmit is fine (~5 credits per attempt).
             logger.info("Request %s: recovered expired media, retrying", rid[:8])
             await crud.update_request(rid, status="PENDING", error_message=f"recovered: {error_msg}")
             return
@@ -530,6 +550,18 @@ async def _handle_failure(rid: str, req: dict, result: dict, retry_after: dict =
     if "extension reconnected" in error_lower or "extension disconnected" in error_lower or "extension not connected" in error_lower:
         await crud.update_request(rid, status="PENDING", error_message=str(error_msg))
         logger.info("Request %s transient WS error, will retry (no retry increment): %s", rid[:8], error_msg)
+        return
+
+    # Quota / no-operations errors: TERMINAL — never retry (each retry burns credits silently).
+    # See memory feedback-flow-quota-safety: user burned ~80 credits on 2026-05-13 when worker
+    # auto-retried "no operations" 5× per request × 2 requests = 10 silent Veo invocations.
+    quota_patterns = ["no operations", "quota_reached", "model_access_denied",
+                      "public_error_user_quota", "quotaexceeded"]
+    if any(p in error_lower for p in quota_patterns):
+        await crud.update_request(rid, status="FAILED", error_message=str(error_msg))
+        await _mark_scene_failed(req)
+        logger.error("Request %s HALTED (quota/no-ops, retry disabled to preserve credits): %s",
+                     rid[:8], error_msg)
         return
 
     # reCAPTCHA errors: retry up to 10 times — deferred dict in main loop handles delay
@@ -560,7 +592,14 @@ async def _handle_failure(rid: str, req: dict, result: dict, retry_after: dict =
     else:
         await crud.update_request(rid, status="FAILED", error_message=str(error_msg))
         await _mark_scene_failed(req)
-        logger.error("Request %s FAILED permanently: %s", rid[:8], error_msg)
+        if MAX_RETRIES <= 1:
+            # MAX_RETRIES=1 means single attempt — surface the failure prominently so user notices
+            logger.error("⚠️  Request %s FAILED (single attempt, no retry per MAX_RETRIES=%d). "
+                         "Type=%s scene=%s. User must investigate: %s",
+                         rid[:8], MAX_RETRIES, req.get("type"), (req.get("scene_id") or "")[:8], error_msg)
+        else:
+            logger.error("Request %s FAILED permanently (after %d retries): %s",
+                         rid[:8], MAX_RETRIES, error_msg)
 
 
 async def _mark_scene_failed(req: dict):

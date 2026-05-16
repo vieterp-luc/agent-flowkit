@@ -2,9 +2,9 @@
 
 Pipeline:
   1. Load preset from assets/lofi-presets.json
-  2. Generate 4 unique music tracks via Gemini Lyria Pro (sequential due to browser lock)
-  3. Concat → 12min unique block
-  4. Loop block to target duration
+  2. Generate 8 unique music tracks via Gemini Lyria Pro (sequential due to browser lock)
+  3. Concat → ~24min unique block
+  4. Loop block to target duration with per-iteration pitch shift (disguises repetition)
   5. Mix with ambience .wav layer (music 70-75%, ambience 25-30%)
   6. Generate 1 cinematic image via Flow API
   7. Convert image → ken-burns slow zoom video at target duration
@@ -27,7 +27,7 @@ AMBIENCE_DIR = Path("assets/ambience")
 GEMINI_MUSIC_DIR = Path("output/_shared/gemini_music")
 LOFI_OUT_ROOT = Path("output/lofi")
 
-MUSIC_TRACK_COUNT = 3  # Gen 3 unique 3min tracks → 9min block before loop (4 sometimes hits Gemini rate limit)
+MUSIC_TRACK_COUNT = 8  # Gen 8 unique tracks → ~24min unique block. Pitch-shift on each loop disguises repetition further.
 KENBURNS_FPS = 30
 KENBURNS_RES = "1920x1080"
 
@@ -61,17 +61,26 @@ def list_presets() -> list[dict]:
 
 
 # Variation suffixes added to prompts to (a) avoid Gemini duplicate-suppression and
-# (b) yield 4 musically-distinct tracks for less obvious looping
+# (b) yield N musically-distinct tracks for less obvious looping
 _PROMPT_VARIATIONS = (
     "",
     ", with a slightly more melancholic feel",
     ", with a brighter and more uplifting energy",
     ", with more space, reverb and ambient texture",
+    ", with intimate close-mic feel and softer dynamics",
+    ", with warmer brass and woodwind colors",
+    ", with crystalline piano lead and sparser arrangement",
+    ", with a subtle outdoor wind ambience layer",
 )
 
 
-MIN_TRACKS_REQUIRED = 2  # Allow partial success — proceed if >= 2 of 4 succeed
+MIN_TRACKS_REQUIRED = 4  # Allow partial success — need at least 4 tracks for usable variation
 INTER_REQUEST_DELAY_S = 5  # Pause between gens to avoid rate-limit bursts
+
+
+# Pitch-shift sequence applied per loop iteration to disguise loop boundaries.
+# Values in cents (100¢ = 1 semitone). Cycles per loop iteration; 0¢ = original.
+_LOOP_PITCH_CENTS = (0, 30, -20, 50, -50, 20, -30, 40)
 
 
 async def _generate_music_tracks(
@@ -143,16 +152,88 @@ def _concat_music(tracks: list[Path], output: Path) -> Path:
     return output
 
 
-def _loop_audio(input_path: Path, target_sec: int, output: Path) -> Path:
-    """Loop input audio to reach target_sec duration."""
+def _ffprobe_duration(path: Path) -> float:
+    out = subprocess.check_output([
+        "ffprobe", "-v", "quiet", "-show_entries", "format=duration",
+        "-of", "csv=p=0", str(path),
+    ]).decode().strip()
+    return float(out)
+
+
+def _probe_sample_rate(path: Path) -> int:
+    out = subprocess.check_output([
+        "ffprobe", "-v", "quiet", "-select_streams", "a:0",
+        "-show_entries", "stream=sample_rate", "-of", "csv=p=0", str(path),
+    ]).decode().strip()
+    return int(out)
+
+
+def _pitch_shift_block(input_path: Path, cents: int, output: Path) -> Path:
+    """Pitch-shift audio by `cents` (±) without changing tempo.
+
+    `asetrate` reinterprets the stream's sample rate (changing pitch+tempo together) and
+    must be parameterised by the source SR. `aresample` then restores it, and `atempo`
+    compensates the speed change so duration stays constant. Net effect: pitch only.
+    """
+    ratio = 2 ** (cents / 1200.0)
+    src_sr = _probe_sample_rate(input_path)
+    asetrate = int(src_sr * ratio)
+    atempo = 1.0 / ratio
     cmd = [
         "ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
-        "-stream_loop", "-1", "-i", str(input_path),
+        "-i", str(input_path),
+        "-af", f"asetrate={asetrate},aresample={src_sr},atempo={atempo:.6f}",
+        "-c:a", "libmp3lame", "-b:a", "192k",
+        str(output),
+    ]
+    subprocess.run(cmd, check=True)
+    return output
+
+
+def _loop_audio(input_path: Path, target_sec: int, output: Path) -> Path:
+    """Loop input audio to target_sec, applying a rotating pitch shift per iteration.
+
+    Each loop iteration uses a different pitch offset from `_LOOP_PITCH_CENTS` so that
+    listeners perceive variation instead of identical repetition. The first iteration is
+    always 0¢ (untouched). Final result is trimmed to exact target_sec.
+    """
+    block_dur = _ffprobe_duration(input_path)
+    if block_dur >= target_sec:
+        # Block already long enough — just trim.
+        cmd = [
+            "ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
+            "-i", str(input_path), "-t", str(target_sec),
+            "-c:a", "libmp3lame", "-b:a", "192k", str(output),
+        ]
+        subprocess.run(cmd, check=True)
+        return output
+
+    import math
+    n_loops = math.ceil(target_sec / block_dur)
+    tmp_dir = output.parent / "_loop_segments"
+    tmp_dir.mkdir(exist_ok=True)
+    segments: list[Path] = []
+    for i in range(n_loops):
+        cents = _LOOP_PITCH_CENTS[i % len(_LOOP_PITCH_CENTS)]
+        if cents == 0:
+            seg = input_path  # reuse original block, no re-encode needed
+        else:
+            seg = tmp_dir / f"seg_{i:02d}_{cents:+d}c.mp3"
+            _pitch_shift_block(input_path, cents, seg)
+        segments.append(seg)
+
+    list_file = tmp_dir / "_loop_list.txt"
+    list_file.write_text("\n".join(f"file '{s.absolute()}'" for s in segments))
+    cmd = [
+        "ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
+        "-f", "concat", "-safe", "0", "-i", str(list_file),
         "-t", str(target_sec),
         "-c:a", "libmp3lame", "-b:a", "192k",
         str(output),
     ]
     subprocess.run(cmd, check=True)
+    # Cleanup intermediates (keep concat list for debugging? no, remove)
+    shutil.rmtree(tmp_dir, ignore_errors=True)
     return output
 
 

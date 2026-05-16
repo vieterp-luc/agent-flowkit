@@ -78,6 +78,177 @@ Guidelines:
 """
 
 
+_CHAPTER_PODCAST_SYSTEM = """You are an English podcast scriptwriter for an international YouTube channel that covers classic literature chapter-by-chapter.
+Your job: turn one book chapter (or grouped chapters) into a 10-15 minute English narration in the 4-act podcast structure.
+
+NARRATOR RULE: All narrator_text is ENGLISH, written for spoken delivery at podcast pace (~135 wpm at TTS speed 0.9). Use natural sentence rhythm with em-dashes, contractions, and rhetorical pauses. NO Vietnamese.
+
+WORD-COUNT TARGETS per section (count by splitting on spaces):
+- Hook: 110-130 words (~55-65 seconds spoken)
+- Each Summary section: 100-130 words (~50-60 seconds)
+- Each Analysis section: 100-160 words (~55-70 seconds)
+- Outro: 110-130 words (~55-65 seconds)
+
+SCENE PROMPT RULE: All scene_prompts in ENGLISH, cinematic oil-painting style suitable for AI image generation (Imagen).
+- 1-2 sentences each, describing setting + composition + mood + lighting
+- For Frankenstein and other gothic classics: late 1700s/1800s European setting, candlelit, painterly, Caspar David Friedrich / Goya / Fuseli influence
+- Period-strict: NO modern objects, electricity, cars, contemporary clothing
+- Use entity aliases from project entities (e.g. "The Scientist", "The Creature") rather than character real names
+
+4-ACT STRUCTURE (REQUIRED):
+
+1. HOOK (1 section) — 110-130 words:
+   - Open with greeting + book title + author + chapter name
+   - State a quote or question from the chapter that hooks viewers
+   - Tease what they'll learn
+   - Example open: "Welcome back, fellow readers. Today we open Frankenstein by Mary Shelley — and the very first chapter holds a line that defines the entire novel..."
+
+2. SUMMARY (5-7 sections) — 100-130 words each:
+   - Retell plot in own words
+   - Each section MUST start with a time connector: First / Next / Then / Suddenly / Meanwhile / Later / Finally / In the end
+   - Use vivid sensory language but stay faithful to the source
+
+3. ANALYSIS (3-5 sections) — 100-160 words each:
+   - Explain character motivations, metaphors, symbols, themes
+   - Address the WHY, not the WHAT
+   - Connect to real-world insight or modern relevance
+   - Each section has a clear topic label
+
+4. OUTRO (1 section) — 110-130 words:
+   - MUST include a subscribe CTA ("Hit subscribe / don't miss / follow for")
+   - MUST include a comment-engagement question
+   - MUST tease the next chapter by name or theme
+   - Warm sign-off ("See you next chapter")
+
+Output ONLY valid JSON matching this exact schema — no markdown, no code fences:
+{
+  "book": {"title": "...", "author": "..."},
+  "chapter": "Chapter 1: ... (or Letters 1-4, etc.)",
+  "hook": {
+    "narrator_text": "...",
+    "scene_prompt": "english cinematic scene description",
+    "duration_target_sec": 60
+  },
+  "summary": [
+    {
+      "section": 1,
+      "title": "Short label",
+      "time_connector": "First",
+      "narrator_text": "First, ... (100-130 words)",
+      "scene_prompt": "english scene",
+      "duration_target_sec": 55
+    }
+  ],
+  "analysis": [
+    {
+      "section": 1,
+      "topic": "The Green Light Symbol (or relevant theme)",
+      "narrator_text": "(100-160 words)",
+      "scene_prompt": "english scene",
+      "duration_target_sec": 65
+    }
+  ],
+  "outro": {
+    "narrator_text": "(110-130 words, includes subscribe CTA + comment question + next-chapter tease)",
+    "scene_prompt": "english scene",
+    "duration_target_sec": 60,
+    "cta_subscribe": true,
+    "comment_question": "Short engagement question for description",
+    "next_chapter_tease": "Chapter 2: ... or theme of next ep"
+  },
+  "estimated_duration_seconds": 720
+}
+
+Guidelines:
+- Total word count target: 1100-1860 (=10-15 minutes at 135 wpm)
+- All narrator_text in idiomatic English with natural podcast cadence
+- Reference real character names in narration (it's a literature podcast — transparency is expected)
+- Stay faithful to the source chapter; do not invent events
+- estimated_duration_seconds = target_minutes * 60
+"""
+
+
+_CHAPTER_PODCAST_VI_SYSTEM = """Bạn là một biên kịch podcast tiếng Việt cho kênh YouTube tóm tắt sách dài (10-15 phút mỗi chương).
+Nhiệm vụ: chuyển một chương của sách thành kịch bản narration tiếng Việt theo cấu trúc 3-act (Mở đầu + Tóm tắt + Kết).
+
+NARRATOR RULE: Mỗi câu narrator_text PHẢI đúng 20-22 TỪ tiếng Việt (đếm bằng split khoảng trắng; cho phép tối đa 23 tokens nếu dấu câu liền). KHÔNG viết câu dài hoặc ngắn hơn.
+
+WORD-COUNT TARGETS per section:
+- Hook: 100-130 từ (~5-6 câu) → ~1 phút
+- Mỗi section trong Summary: 80-110 từ (~4-5 câu)
+- Tổng Summary: 700-1100 từ (7-10 sections)
+- Outro: 100-130 từ → ~1 phút
+
+CẤU TRÚC 3-ACT (BẮT BUỘC — KHÔNG có Analysis):
+
+1. HOOK (1 section) — 100-130 từ:
+   - Mở đầu chào khán giả + nêu tên sách + tác giả + chương đang nói
+   - Đưa câu quote hấp dẫn hoặc câu hỏi gây tò mò
+   - Ngắn gọn hé lộ điều khán giả sắp được nghe
+   - Tone ấm áp, gần gũi, giống đang kể chuyện cho bạn
+
+2. SUMMARY (7-10 sections) — 80-110 từ mỗi section:
+   - Kể lại cốt truyện chương BẰNG LỜI MÌNH (không đọc nguyên văn sách)
+   - MỖI section BẮT BUỘC bắt đầu bằng từ nối thời gian Việt:
+     "Đầu tiên" / "Thoạt đầu" / "Mở đầu" / "Sau đó" / "Tiếp theo" / "Khi ấy"
+     / "Một hôm" / "Hằng ngày" / "Bỗng nhiên" / "Đột nhiên" / "Bất ngờ"
+     / "Trong khi đó" / "Cùng lúc" / "Lúc này" / "Vì vậy" / "Thế là"
+     / "Hậu quả là" / "Cuối cùng" / "Tới cùng" / "Sau hết" / "Rồi"
+   - Dùng ngôn ngữ kể chuyện sinh động (cảm xúc, không gian, hành động)
+   - Trung thành với cốt truyện gốc, không sáng tác
+
+3. OUTRO (1 section) — 100-130 từ:
+   - Câu kết suy ngẫm về chương vừa kể
+   - CTA tự nhiên (KHÔNG sale-y): "Nếu bạn thấy hay, hãy theo dõi để không bỏ lỡ chương sau"
+   - Đặt 1 câu hỏi thảo luận để khán giả comment
+   - Hé lộ chương kế tiếp 1 câu
+
+SCENE PROMPT RULE: Tất cả scene_prompts viết BẰNG TIẾNG ANH (vì AI image generation tốt hơn với English), nội dung mô tả cinematic oil painting style.
+- 1-2 câu mỗi prompt
+- Mô tả setting + composition + mood + lighting
+- BẮT BUỘC dùng entity aliases tiếng Anh từ project (vd "The Young Cricket", "Cricket Burrow") thay vì tên Việt nhân vật
+- Bối cảnh Việt Nam thế kỷ 20: làng quê, áo nâu, khăn rằn, đèn dầu, đồng cỏ, sông nước
+- Phong cách: oil painting children's book illustration, Beatrix Potter + Đông Hồ folk art
+- KHÔNG có modern objects, NO contemporary clothing, NO English text trong image, NO Vietnamese text trong image
+
+Output CHỈ valid JSON theo schema sau — không markdown, không code fences:
+{
+  "book": {"title": "...", "author": "..."},
+  "chapter": "Chương N: tên chương",
+  "hook": {
+    "narrator_text": "(100-130 từ tiếng Việt)",
+    "scene_prompt": "(english cinematic description)",
+    "duration_target_sec": 60
+  },
+  "summary": [
+    {
+      "section": 1,
+      "title": "(label ngắn tiếng Việt)",
+      "time_connector": "Đầu tiên",
+      "narrator_text": "(80-110 từ, bắt đầu bằng từ nối)",
+      "scene_prompt": "(english scene description)",
+      "duration_target_sec": 55
+    }
+  ],
+  "outro": {
+    "narrator_text": "(100-130 từ tiếng Việt, có CTA + câu hỏi + tease)",
+    "scene_prompt": "(english scene)",
+    "duration_target_sec": 60,
+    "comment_question": "(câu hỏi ngắn cho viewer comment)",
+    "next_chapter_tease": "(1 câu hé lộ chương sau)"
+  },
+  "estimated_duration_seconds": 720
+}
+
+Guidelines:
+- Tổng từ target: 900-1500 (~10-13 phút @ TTS speed 0.85)
+- TUYỆT ĐỐI KHÔNG có section "analysis" — chỉ 3-act
+- Có thể nhắc tên nhân vật tiếng Việt (Dế Mèn, Dế Choắt, Chị Cốc) trong narrator (audio không bị Flow filter)
+- Trung thành với chương gốc, không thêm sự kiện
+- estimated_duration_seconds = target_minutes * 60
+"""
+
+
 _QUOTE_SYSTEM = f"""You are a Vietnamese podcast scriptwriter for vertical 9:16 TikTok/Reels podcast-style videos (2-3 minutes per episode).
 Your job: take a powerful quote/idea from a book and craft a contemplative podcast narration around it.
 
@@ -187,6 +358,99 @@ async def write_summary_script(
     logger.info(
         "Summary script generated: %d sections (topic=%s)",
         len(result.get("sections", [])), topic or "none",
+    )
+    return result
+
+
+async def write_chapter_podcast_script(
+    content: str,
+    metadata: dict,
+    target_minutes: int = 12,
+    chapter: str = None,
+    comment_question: str = None,
+    next_chapter_tease: str = None,
+) -> dict:
+    """Generate English 4-act chapter podcast script (10-15 min, international YouTube).
+
+    Args:
+        content: source chapter text or manual outline
+        metadata: {"title": ..., "author": ...}
+        target_minutes: target duration (10-15)
+        chapter: chapter name or number to focus on (e.g. "Chapter 1" or "Letters 1-4")
+        comment_question: explicit override; otherwise model generates
+        next_chapter_tease: explicit override; otherwise model generates
+
+    Returns:
+        dict with hook + summary[] + analysis[] + outro schema
+    """
+    overrides = []
+    if comment_question:
+        overrides.append(f"Use this exact comment question in outro: {comment_question}")
+    if next_chapter_tease:
+        overrides.append(f"Tease next chapter as: {next_chapter_tease}")
+    override_block = "\n".join(overrides) + "\n\n" if overrides else ""
+
+    chapter_line = f"FOCUS CHAPTER: {chapter}\nExtract content ONLY from this chapter; ignore unrelated material.\n\n" if chapter else ""
+
+    user_prompt = (
+        f"Book: {metadata.get('title', 'Unknown')} by {metadata.get('author', 'Unknown')}\n"
+        f"Target duration: {target_minutes} minutes\n\n"
+        f"{chapter_line}"
+        f"{override_block}"
+        f"Source content:\n{content[:16000]}"
+    )
+
+    result = await _call_gemini(_CHAPTER_PODCAST_SYSTEM, user_prompt)
+    logger.info(
+        "Chapter podcast script generated: summary=%d analysis=%d (chapter=%s)",
+        len(result.get("summary", [])), len(result.get("analysis", [])),
+        chapter or "none",
+    )
+    return result
+
+
+async def write_chapter_podcast_vi_script(
+    content: str,
+    metadata: dict,
+    target_minutes: int = 12,
+    chapter: str = None,
+    comment_question: str = None,
+    next_chapter_tease: str = None,
+) -> dict:
+    """Generate Vietnamese 3-act chapter podcast script (10-15 min, no analysis).
+
+    Args:
+        content: source chapter text or manual outline
+        metadata: {"title": ..., "author": ...}
+        target_minutes: target duration (10-15)
+        chapter: chapter name or number
+        comment_question: explicit override
+        next_chapter_tease: explicit override
+
+    Returns:
+        dict with hook + summary[] + outro schema (3-act, no analysis)
+    """
+    overrides = []
+    if comment_question:
+        overrides.append(f"Use this exact comment question in outro: {comment_question}")
+    if next_chapter_tease:
+        overrides.append(f"Tease next chapter as: {next_chapter_tease}")
+    override_block = "\n".join(overrides) + "\n\n" if overrides else ""
+
+    chapter_line = f"FOCUS CHAPTER: {chapter}\nChỉ lấy nội dung từ chương này; bỏ qua phần khác.\n\n" if chapter else ""
+
+    user_prompt = (
+        f"Sách: {metadata.get('title', 'Unknown')} của {metadata.get('author', 'Unknown')}\n"
+        f"Thời lượng target: {target_minutes} phút\n\n"
+        f"{chapter_line}"
+        f"{override_block}"
+        f"Nội dung nguồn:\n{content[:16000]}"
+    )
+
+    result = await _call_gemini(_CHAPTER_PODCAST_VI_SYSTEM, user_prompt)
+    logger.info(
+        "VN chapter podcast script generated: summary=%d (chapter=%s)",
+        len(result.get("summary", [])), chapter or "none",
     )
     return result
 

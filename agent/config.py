@@ -44,7 +44,7 @@ RECAPTCHA_SITE_KEY = os.environ.get("RECAPTCHA_SITE_KEY", "6LdsFiUsAAAAAIjVDZcuL
 # ─── Worker ──────────────────────────────────────────────────
 POLL_INTERVAL = int(os.environ.get("POLL_INTERVAL", "5"))
 VIDEO_POLL_INTERVAL = int(os.environ.get("VIDEO_POLL_INTERVAL", "10"))  # polling interval for video/upscale status
-MAX_RETRIES = int(os.environ.get("MAX_RETRIES", "5"))
+MAX_RETRIES = int(os.environ.get("MAX_RETRIES", "1"))  # 1 = single attempt, fail loudly to user (was 5; aggressive retries burn quota silently)
 VIDEO_POLL_TIMEOUT = int(os.environ.get("VIDEO_POLL_TIMEOUT", "420"))
 API_COOLDOWN = int(os.environ.get("API_COOLDOWN", "10"))  # seconds between API calls (anti-spam)
 MAX_CONCURRENT_REQUESTS = int(os.environ.get("MAX_CONCURRENT_REQUESTS", "5"))  # Google Flow max parallel requests

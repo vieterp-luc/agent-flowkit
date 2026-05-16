@@ -10,7 +10,8 @@ from agent.models.book import (
 )
 from agent.services.book_extractor import extract_book, chunk_text
 from agent.services.book_script_writer import (
-    write_summary_script, write_quote_script, extract_chapters,
+    write_summary_script, write_quote_script, write_chapter_podcast_script,
+    write_chapter_podcast_vi_script, extract_chapters,
 )
 
 logger = logging.getLogger(__name__)
@@ -21,8 +22,8 @@ router = APIRouter(tags=["book"])
 def _validate_request(body: ExtractScriptRequest) -> None:
     if body.mode not in ("auto", "manual"):
         raise HTTPException(400, "mode must be 'auto' or 'manual'")
-    if body.format not in ("summary", "quote"):
-        raise HTTPException(400, "format must be 'summary' or 'quote'")
+    if body.format not in ("summary", "quote", "chapter_podcast", "chapter_podcast_vi"):
+        raise HTTPException(400, "format must be 'summary', 'quote', 'chapter_podcast', or 'chapter_podcast_vi'")
     if body.mode == "auto" and not body.source.file_path:
         raise HTTPException(400, "source.file_path required for auto mode")
     if body.mode == "manual" and not body.source.outline:
@@ -57,6 +58,24 @@ async def extract_script(body: ExtractScriptRequest):
                 metadata=metadata,
                 target_minutes=body.options.target_minutes,
                 topic=body.options.topic,
+            )
+        elif body.format == "chapter_podcast":
+            data = await write_chapter_podcast_script(
+                content=content,
+                metadata=metadata,
+                target_minutes=body.options.target_minutes,
+                chapter=body.options.chapter or body.options.topic,
+                comment_question=body.options.comment_question,
+                next_chapter_tease=body.options.next_chapter_tease,
+            )
+        elif body.format == "chapter_podcast_vi":
+            data = await write_chapter_podcast_vi_script(
+                content=content,
+                metadata=metadata,
+                target_minutes=body.options.target_minutes,
+                chapter=body.options.chapter or body.options.topic,
+                comment_question=body.options.comment_question,
+                next_chapter_tease=body.options.next_chapter_tease,
             )
         else:
             data = await write_quote_script(

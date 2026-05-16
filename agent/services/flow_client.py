@@ -204,48 +204,77 @@ class FlowClient:
             return {"error": "Project not found"}
         project_slug = slugify(project["name"])
         
-        refreshed = 0
+        # Categorize recovery outcomes
         found = 0
-        
-        # Check Characters
-        chars = await crud.get_project_characters(project_id)
-        for char in chars:
-            mid = char.get("media_id")
-            url = char.get("reference_image_url")
-            if mid and url and is_url_expired(url):
-                found += 1
-                local_path = get_local_path("GENERATE_CHARACTER_IMAGE", project_slug, char)
-                ok, err = await check_and_recover_media(mid, url, project_id, local_path, auto_reupload=False)
-                if ok: refreshed += 1
-                if ok and err and err.startswith("RECOVERED:"):
-                    await crud.update_character(char["id"], media_id=err.split(":")[1])
-        
-        # Check Scenes
-        videos = await crud.list_videos(project_id)
-        for v in videos:
-            v_scenes = await crud.list_scenes(v["id"])
-            for scene in v_scenes:
-                # Check horizontal & vertical image/video/upscale
+        refreshed_url = 0   # fresh signed URL from Flow API
+        recovered_local = 0 # data saved to local backup (from encodedVideo or already-present file)
+        failed = 0          # both URL refresh AND local recovery failed
+        failed_ids: list[str] = []
+
+        async def _handle(mid, url, req_type, scene_or_char, on_recover_mid):
+            nonlocal found, refreshed_url, recovered_local, failed
+            if not (mid and url and is_url_expired(url)):
+                return
+            found += 1
+            local_path = get_local_path(req_type, project_slug, scene_or_char)
+            ok, err = await check_and_recover_media(mid, url, project_id, local_path, auto_reupload=False)
+            if not ok:
+                failed += 1
+                failed_ids.append(mid[:12])
+                return
+            if err and err.startswith("RECOVERED:"):
+                await on_recover_mid(err.split(":")[1])
+                recovered_local += 1
+            elif err == "LOCAL":
+                recovered_local += 1
+            else:
+                refreshed_url += 1
+
+        # Characters (images only)
+        for char in await crud.get_project_characters(project_id):
+            await _handle(
+                char.get("media_id"), char.get("reference_image_url"),
+                "GENERATE_CHARACTER_IMAGE", char,
+                lambda new_mid, cid=char["id"]: crud.update_character(cid, media_id=new_mid),
+            )
+
+        # Scenes (image/video/upscale × horizontal/vertical)
+        for v in await crud.list_videos(project_id):
+            for scene in await crud.list_scenes(v["id"]):
                 for prefix in ("horizontal", "vertical"):
                     for mtype in ("image", "video", "upscale"):
-                        mid = scene.get(f"{prefix}_{mtype}_media_id")
-                        url = scene.get(f"{prefix}_{mtype}_url")
-                        if mid and url and is_url_expired(url):
-                            found += 1
-                            req_type = "GENERATE_IMAGE"
-                            if mtype == "video": req_type = "GENERATE_VIDEO"
-                            elif mtype == "upscale": req_type = "UPSCALE_VIDEO"
-                            local_path = get_local_path(req_type, project_slug, scene)
-                            ok, err = await check_and_recover_media(mid, url, project_id, local_path, auto_reupload=False)
-                            if ok: refreshed += 1
-                            if ok and err and err.startswith("RECOVERED:"):
-                                await crud.update_scene(scene["id"], **{f"{prefix}_{mtype}_media_id": err.split(":")[1]})
+                        req_type = {
+                            "image": "GENERATE_IMAGE",
+                            "video": "GENERATE_VIDEO",
+                            "upscale": "UPSCALE_VIDEO",
+                        }[mtype]
+                        field = f"{prefix}_{mtype}_media_id"
+                        await _handle(
+                            scene.get(field), scene.get(f"{prefix}_{mtype}_url"),
+                            req_type, scene,
+                            lambda new_mid, sid=scene["id"], k=field: crud.update_scene(sid, **{k: new_mid}),
+                        )
 
+        refreshed = refreshed_url + recovered_local
         if refreshed > 0:
             from agent.services.event_bus import event_bus
             await event_bus.emit("project_updated", {"id": project_id})
-            
-        return {"refreshed": refreshed, "found": found, "note": "Auto-recovered via get_media and local backup"}
+
+        note_parts = []
+        if refreshed_url:    note_parts.append(f"{refreshed_url} via fresh URL")
+        if recovered_local:  note_parts.append(f"{recovered_local} via local backup/encoded")
+        if failed:           note_parts.append(f"{failed} unrecoverable")
+        if not note_parts:   note_parts.append("nothing to refresh")
+
+        return {
+            "found": found,
+            "refreshed": refreshed,
+            "refreshed_url": refreshed_url,
+            "recovered_local": recovered_local,
+            "failed": failed,
+            "failed_media_ids": failed_ids,
+            "note": "; ".join(note_parts),
+        }
 
     async def _send(self, method: str, params: dict, timeout: float = 300) -> dict:
         """Send request to extension and wait for response.

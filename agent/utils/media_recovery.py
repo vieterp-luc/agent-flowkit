@@ -57,40 +57,64 @@ async def download_media_to_local(url: str, project_slug: str, req_type: str, sc
         logger.warning("Failed to save local media %s: %s", url[:60], e)
 
 async def check_and_recover_media(media_id: str, url: str, project_id: str, local_path: Path | None, auto_reupload: bool = True) -> tuple[bool, str | None]:
-    """Returns (is_available, optional_error_message). 
-    If expired, tries to refresh from Google API. If deleted and auto_reupload is True, uploads local file to get new media_id."""
+    """Returns (is_available, optional_error_message).
+    Recovery order:
+      1. Fresh signed URL via get_media (data.fifeUrl / data.servingUri) — images mostly
+      2. encodedVideo/encodedImage in get_media response — save to local backup
+      3. Existing local backup file
+      4. Re-upload local backup to get new media_id (only if auto_reupload=True)
+    Returns (True, None) on signed URL refresh or encoded recovery,
+            (True, "LOCAL") when only local backup is usable,
+            (True, "RECOVERED:<new_mid>") when re-uploaded,
+            (False, "<reason>") otherwise."""
     if not media_id:
         return False, "No media_id provided"
-        
+
     if not is_url_expired(url):
         return True, None
-        
+
     client = get_flow_client()
     logger.info("Media URL expired for %s, trying to refresh via get_media", media_id[:12])
-    
-    # 1. Try to refresh via get_media
+
+    # 1. Try to refresh via get_media — handles both fresh URL and encoded inline content
     try:
         res = await client.get_media(media_id)
         if isinstance(res, dict) and not res.get("error") and res.get("status") == 200:
             data = res.get("data", {})
+
+            # 1a. Fresh signed URL (typical for images)
             fresh_url = data.get("fifeUrl") or data.get("servingUri")
             if fresh_url:
                 media_type = "image"
                 if local_path and local_path.suffix == ".mp4":
                     media_type = "video"
-                # This will update DB via the flow_client method
                 await client._refresh_media_urls([{"mediaId": media_id, "mediaType": media_type, "url": fresh_url}])
                 logger.info("Successfully refreshed media URL for %s", media_id[:12])
                 return True, None
+
+            # 1b. Encoded inline content (typical for videos — `{"video":{"encodedVideo":"..."}}`)
+            encoded = (data.get("video") or {}).get("encodedVideo") \
+                   or (data.get("image") or {}).get("encodedImage")
+            if encoded and local_path:
+                try:
+                    content = base64.b64decode(encoded)
+                    local_path.parent.mkdir(parents=True, exist_ok=True)
+                    local_path.write_bytes(content)
+                    logger.info("Recovered media %s from encodedVideo (%d bytes) → %s",
+                                media_id[:12], len(content), local_path)
+                    return True, "LOCAL"
+                except Exception as e:
+                    logger.warning("Failed to decode encoded content for %s: %s", media_id[:12], e)
     except Exception as e:
         logger.warning("Refresh get_media failed for %s: %s", media_id[:12], e)
 
-    # 2. If get_media failed (meaning Google deleted it), try to upload from local
+    # 2. Local backup file already exists — usable without re-upload
+    if local_path and local_path.exists() and not auto_reupload:
+        logger.info("Using existing local backup for %s: %s", media_id[:12], local_path)
+        return True, "LOCAL"
+
+    # 3. Re-upload local backup to get a new media_id (requires auto_reupload=True)
     if local_path and local_path.exists():
-        if not auto_reupload:
-            logger.info("Google deleted media %s, but auto_reupload is False. Fallback deferred.", media_id[:12])
-            return False, "Deleted by Google, reupload deferred"
-            
         logger.info("Google deleted media %s, re-uploading from local %s", media_id[:12], local_path)
         try:
             image_bytes = local_path.read_bytes()

@@ -20,12 +20,17 @@ class ScriptOptions(BaseModel):
     target_minutes: int = 7
     count: int = 3
     target_seconds: int = 150  # for quote format: 120-180s podcast-style
-    topic: Optional[str] = None  # focus extraction on this chapter/topic (e.g. "Cách lắng nghe người khác")
+    topic: Optional[str] = None  # focus extraction on this chapter/topic
+    # chapter_podcast extras
+    chapter: Optional[str] = None  # chapter name or number (e.g. "Letters 1-4" or "3")
+    language: str = "vi"  # "vi" (default for summary/quote) | "en" (chapter_podcast)
+    comment_question: Optional[str] = None  # explicit override for outro engagement question
+    next_chapter_tease: Optional[str] = None  # explicit override for outro tease line
 
 
 class ExtractScriptRequest(BaseModel):
     mode: str  # "auto" | "manual"
-    format: str  # "summary" | "quote"
+    format: str  # "summary" | "quote" | "chapter_podcast"
     source: BookSource
     options: ScriptOptions = ScriptOptions()
 
