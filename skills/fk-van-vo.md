@@ -30,6 +30,19 @@ Usage:
 /fk-van-vo <slug> --voice <name> --speed 0.9
 ```
 
+## Production Pipeline (automated)
+
+Pipeline module: `scripts/vanvo_render_pipeline.py` + `scripts/vanvo_books_data.py`.
+
+```bash
+python scripts/vanvo_render_pipeline.py            # batch all books in BOOKS dict
+python scripts/vanvo_render_pipeline.py <slug>     # single book
+```
+
+Pipeline auto-handles: project create → 15 scenes (intro+14) → batch image gen → TTS → Ken Burns → concat → mix → thumbnail + caption. Resumable via `_project.json` marker.
+
+To add new book: append to `BOOKS` dict in `vanvo_books_data.py` with fields: slug, title, story_summary, scripts[14], image_prompts[14], motions[15], caption_hook/bullets/moral.
+
 ---
 
 ## Data Sources
@@ -38,8 +51,9 @@ Usage:
 |------|---------|
 | `output/_shared/van-vo-roadmap.json` | All books + chapter/movie-title map + voice + ad slots |
 | `output/_shared/tts_templates/templates.json` | Available Vietnamese voices |
-| `output/<book_slug>_vanvo/ep*/` | Built episode dirs |
-| `output/<book_slug>_vanvo/_ab/` | A/B voice test outputs (ep1 × N voices) |
+| `output/van_vo/<book_slug>/ep*/` | Built episode dirs (centralized under van_vo/) |
+| `scripts/vanvo_books_data.py` | All book configs (scripts + image prompts + motions) |
+| `scripts/vanvo_render_pipeline.py` | Automated pipeline module |
 
 Separate roadmap from `tom-tac-sach-roadmap.json` — different tone/format/audience.
 
@@ -254,7 +268,8 @@ INPUT:
 
 CONSTRAINTS:
 - **Scene 0 (INTRO — MANDATORY first scene):** narrator = "Chào mừng anh em đến với seri cổ tích thời gen z." image_prompt = branding intro card storybook + magical neon swirls. Motion = static.
-- Scene 1-N (Hook + Body + Moral): 11-14 scenes, mỗi scene narrator_text 3-5 câu (60-100 từ) — kể CHI TIẾT có dialogue + magical phrases, KHÔNG tóm tắt 1-câu
+- **Hook (2 scenes max, 25-35s tổng):** Scene 1 = greeting + giới thiệu truyện (~40-50 từ). Scene 2 = plot tease nhanh (~40-50 từ). Hook TRÁNH English slang dày (no "main character energy", "combat hero" etc) — VN-leaning: dân chơi, drama, khét lẹt. Movie title mapping CHUYỂN sang scene 3 (body 1), KHÔNG đặt trong hook.
+- **Body (11 scenes):** mỗi scene 3-5 câu (60-100 từ) — kể CHI TIẾT. **PHẢI bao gồm iconic phrases verbatim** khi có (vd "Đàn kêu tích tịch tình tang, ai mang công chúa dưới hang trở về" / "bống bống bang bang lên ăn cơm vàng cơm bạc" / "khắc nhập khắc nhập" / "ăn một quả trả một cục vàng"). Cho phép >100 từ nếu cần chỗ cho iconic phrase.
 - Scene duration target 15-30s/scene → total video 5-15 min long-form
 - NO AD BREAK scene
 - Scene 1 (Hook, ~1 min = 3 narrator sentences):
@@ -322,8 +337,7 @@ Standard. Aesthetic preset đã set ở project level.
 ### Stage 4: Per-ep audio + concat
 
 - TTS: `Thang_QC_TTS` @ speed=0.9 (locked default), volume 1.5×
-- Music: gen via `/fk-gen-music` với prompt "lofi hip-hop trap fusion, modern beat, ironic vibe matching <book era>, MP3" (transcode MP4→MP3 default)
-- Music volume: 0.10× (slightly lower than tom-tac-sach vì narration faster + more slang dense)
+- Music: **NONE** (user explicit reject — no BGM, narrator-only mix)
 - Ken Burns motion (FACE-SAFE — DEFAULT static, only deviate when img composition supports it):
   - DEFAULT all scenes: `static` (safest, never crops)
   - `zoom_in`: ONLY atmospheric/landscape scenes (NO characters at all)
@@ -374,9 +388,7 @@ drawtext=fontfile='/Library/Fonts/Arial Unicode.ttf':text='<TÊN TRUYỆN>':font
 | Resolution | 1920×1080 HORIZONTAL (long-form default) |
 | FPS | 30 |
 | TTS volume | 1.5× |
-| Music volume | 0.10× (lower do narrator nhanh + dense) |
-| Music style | lofi hip-hop / trap fusion / ironic match era |
-| Music output | MP3 (Lyria MP4 → MP3 transcode) |
+| Background music | **DISABLED** (user explicit reject — narrator-only audio) |
 | Scene count | 11-14 per ep (Hook=1-3 + Recap=0-2 + Body=8-9 + Moral=1-2) — NO ad break |
 | Ad break | **REMOVED** (user explicit reject) |
 | Moral wrap-up | Mandatory (non-negotiable — defining feature) |
