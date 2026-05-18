@@ -117,7 +117,7 @@ SO_DUA_BOOK = {
         # Scene 2 — Hook short plot tease
         "Câu chuyện có người mẹ già hiếm muộn, có đứa con dị hình biết nói, có cô út tinh tế phát hiện chàng tráng sĩ ẩn giấu. Có hai chị xảo trá đẩy em xuống biển bị cá kình nuốt, drama đầy đủ.",
         # Scene 3 — Body 1: sinh ra + iconic plea + movie mapping
-        "Ngày xửa ngày xưa, có một người đàn bà hiếm muộn đã già mà chưa có con. Một hôm bà đi rừng khát nước, thấy cái sọ dừa đựng đầy nước mưa liền bưng lên uống. Về nhà bà có thai, đến kỳ sinh ra một đứa con không tay chân chỉ có cái đầu tròn như quả dừa. Bà hoảng sợ định vứt đi, đứa bé bỗng cất tiếng nói: mẹ ơi con là người đấy, mẹ đừng vứt con đi mà tội. Bà nghe vậy động lòng giữ lại nuôi và đặt tên là Sọ Dừa. Câu chuyện này giải nén kiểu phim Beauty and the Beast của Disney, vẻ ngoài kỳ dị nhưng bên trong là hoàng tử.",
+        "Ngày xửa ngày xưa, có một người đàn bà hiếm muộn đã già mà chưa có con. Một hôm bà đi rừng khát nước, thấy cái sọ dừa đựng đầy nước mưa liền bưng lên uống. Về nhà bà có thai, đến kỳ sinh ra một đứa con không tay chân chỉ có cái đầu tròn như quả dừa. Bà hoảng sợ định vứt đi, đứa bé bỗng cất tiếng nói: mẹ ơi con là người đấy, mẹ đừng vứt con đi mà tội. Bà nghe vậy động lòng giữ lại nuôi và đặt tên là Sọ Dừa.",
         # Scene 4 — Body 2: Sọ Dừa lớn lên đi làm thuê
         "Sọ Dừa lớn lên không có chân tay, di chuyển bằng cách lăn tròn khắp sân nhà. Dù vậy cậu rất ngoan ngoãn hiếu thảo, một hôm xin mẹ cho đi chăn trâu giúp người ta kiếm tiền. Bà mẹ ban đầu can ngăn nhưng cuối cùng đành để con đi làm thuê cho phú ông trong làng. Phú ông thấy đứa trẻ dị hình thì cười nhạo nhưng vẫn cho làm vì rẻ tiền công, không tốn bao nhiêu.",
         # Scene 5 — Body 3: thổi sáo + 3 cô mang cơm
@@ -202,7 +202,7 @@ CAY_TRE_BOOK = {
         # Scene 2 — Hook short plot tease
         "Câu chuyện có anh nông dân chăm chỉ làm thuê 3 năm tận tụy, có ông phú ông tham lam lật mặt. Có ông Bụt từ bi ban thần chú, có cây tre trăm đốt phép thuật, có drama trừng phạt cuối siêu hay.",
         # Scene 3 — Body 1: anh nông dân làm thuê + movie mapping
-        "Ngày xửa ngày xưa, có một anh nông dân nghèo sống một mình không cha mẹ vợ con. Anh đi làm thuê cho nhà phú ông trong làng để kiếm cơm ăn qua ngày, không có một xu dính túi. Phú ông thấy anh khỏe mạnh chăm chỉ liền hứa: con cứ làm thuê cho ta đủ ba năm thì ta sẽ gả con gái cho. Anh nông dân nghe vậy mừng rỡ, ra sức làm lụng từ sáng đến tối không hề dám nghỉ một ngày nào. Câu chuyện này giải nén kiểu phim Aladdin của Disney, chàng trai nghèo có magical helper outsmart kẻ giàu tham lam.",
+        "Ngày xửa ngày xưa, có một anh nông dân nghèo sống một mình không cha mẹ vợ con. Anh đi làm thuê cho nhà phú ông trong làng để kiếm cơm ăn qua ngày, không có một xu dính túi. Phú ông thấy anh khỏe mạnh chăm chỉ liền hứa: con cứ làm thuê cho ta đủ ba năm thì ta sẽ gả con gái cho. Anh nông dân nghe vậy mừng rỡ, ra sức làm lụng từ sáng đến tối không hề dám nghỉ một ngày nào.",
         # Scene 4 — Body 2: phú ông trở mặt
         "Ba năm trôi qua, anh nông dân đã làm việc đến rạc người vì hy vọng được cưới con gái phú ông. Đến hạn anh tới xin phú ông giữ lời hứa, không ngờ phú ông trở mặt ngay lập tức không thèm nhìn. Hắn cười khẩy bảo: ta vừa gả con cho con trai nhà giàu Nguyễn ở làng bên rồi, mày đi chỗ khác làm thuê đi. Hóa ra phú ông đã âm thầm bán đứng anh để gả con cho người có tiền hơn, lừa đảo trắng trợn.",
         # Scene 5 — Body 3: bắt tìm cây tre trăm đốt
@@ -287,7 +287,7 @@ AN_KHE_BOOK = {
         # Scene 2 — Hook short plot tease
         "Câu chuyện có 2 anh em mồ côi chia tài sản, có cây khế bình thường mà ai cũng thấy. Có chim phượng hoàng kỳ diệu trả vàng cho người tốt, có biển sâu nuốt chửng kẻ tham không biết đủ.",
         # Scene 3 — Body 1: 2 anh em chia tài sản + movie mapping
-        "Ngày xửa ngày xưa có hai anh em ruột, cha mẹ mất sớm để lại một ít gia tài. Anh trai vốn tham lam ngay từ nhỏ, lén chiếm hết ruộng nương nhà cửa trâu bò vàng bạc cho riêng mình. Em trai hiền lành không tranh giành, chỉ được chia đúng một cây khế cằn cỗi và túp lều rách nát. Em chấp nhận không một lời oán trách, dọn ra ở căn lều cạnh cây khế bắt đầu cuộc sống mới. Câu chuyện này giải nén kiểu phim Wolf of Wall Street năm hai ngàn mười ba, lòng tham không đáy dẫn đến kết cục bi thảm.",
+        "Ngày xửa ngày xưa có hai anh em ruột, cha mẹ mất sớm để lại một ít gia tài. Anh trai vốn tham lam ngay từ nhỏ, lén chiếm hết ruộng nương nhà cửa trâu bò vàng bạc cho riêng mình. Em trai hiền lành không tranh giành, chỉ được chia đúng một cây khế cằn cỗi và túp lều rách nát. Em chấp nhận không một lời oán trách, dọn ra ở căn lều cạnh cây khế bắt đầu cuộc sống mới.",
         # Scene 4 — Body 2: em chăm sóc cây khế
         "Em trai chăm chỉ làm thuê làm mướn để kiếm cơm, đồng thời chăm sóc cây khế hằng ngày tưới nước. Sau một thời gian, cây khế bắt đầu trổ hoa ra trái ngọt lịm sai trĩu cành nặng. Em mừng rỡ chia cho làng xóm cùng ăn, không hề ích kỷ giữ riêng cho mình. Mọi người trong làng đều khen em trai hiền lành và biết chia sẻ, dù nghèo nhưng giàu lòng nhân từ siêu hiếm có.",
         # Scene 5 — Body 3: chim đến ăn khế
@@ -372,7 +372,7 @@ SON_TINH_BOOK = {
         # Scene 2 — Hook short plot tease
         "Câu chuyện có Vua Hùng kén rể cho Mị Nương, có 2 chàng trai siêu bá tranh nhau. Có sính lễ oái oăm, có đại chiến dâng núi nuốt nước, có giải thích vì sao Bắc Bộ năm nào cũng lụt.",
         # Scene 3 — Body 1: Vua Hùng + Mị Nương + movie mapping
-        "Ngày xửa ngày xưa, vào đời vua Hùng Vương thứ mười tám, vua có một cô con gái duy nhất tên là Mị Nương. Cô công chúa lúc bấy giờ đẹp nghiêng nước nghiêng thành, tính tình lại dịu dàng đoan trang nức tiếng khắp Văn Lang. Vua Hùng cưng con như báu vật, muốn tìm cho con một chàng rể thật xứng đáng. Vua ra chiếu rộng cả nước, ai có tài năng và đức độ đều có thể đến cầu hôn công chúa. Câu chuyện này giải nén kiểu phim Crazy Rich Asians năm hai ngàn mười tám, kén rể gia tộc quyền lực drama đầy đủ.",
+        "Ngày xửa ngày xưa, vào đời vua Hùng Vương thứ mười tám, vua có một cô con gái duy nhất tên là Mị Nương. Cô công chúa lúc bấy giờ đẹp nghiêng nước nghiêng thành, tính tình lại dịu dàng đoan trang nức tiếng khắp Văn Lang. Vua Hùng cưng con như báu vật, muốn tìm cho con một chàng rể thật xứng đáng. Vua ra chiếu rộng cả nước, ai có tài năng và đức độ đều có thể đến cầu hôn công chúa.",
         # Scene 4 — Body 2: 2 ứng viên xuất hiện
         "Một ngày đẹp trời, bỗng nhiên có hai boi phố chính hiệu cùng đến cầu hôn một lúc khiến cả triều ngỡ ngàng. Một người tên Sơn Tinh, chúa tể vùng núi Tản Viên cao ngất, có phép thuật dời non lấp biển. Người kia tên Thủy Tinh, chúa tể biển khơi mênh mông, có phép hô mưa gọi gió dâng nước. Cả hai đều tài giỏi không ai kém ai, cả hai đều siêu bá đến mức Vua Hùng không thể chọn được người nào.",
         # Scene 5 — Body 3: Vua Hùng phán sính lễ iconic (FULL list)
@@ -458,7 +458,7 @@ TAM_CAM_BOOK = {
         # Scene 2 — Hook short plot tease
         "Câu chuyện có dì ghẻ ác độc, có Bụt từ bi giúp đỡ, có cá bống huyền thoại, có bầy chim sẻ kỳ diệu. Có hóa kiếp 4 lần để trả thù, có drama kết cục tàn khốc nhất trong cổ tích Việt.",
         # Scene 3 — Body 1: Tấm mồ côi + movie mapping
-        "Ngày xửa ngày xưa, có cô gái tên là Tấm mồ côi mẹ từ khi còn nhỏ, sống cùng dì ghẻ và em gái Cám. Cha Tấm tục huyền lấy người dì có sẵn con riêng, không lâu sau cha cũng qua đời để lại Tấm tội nghiệp. Cuộc đời Tấm từ đó siêu phèn, sáng dậy sớm quét nhà, chiều giặt giũ nấu ăn không một phút nghỉ. Câu chuyện này giải nén kiểu phim Cinderella Disney năm hai ngàn mười lăm, có công chúa giày lạc hoàng tử nhưng kết thúc đen tối hơn nhiều.",
+        "Ngày xửa ngày xưa, có cô gái tên là Tấm mồ côi mẹ từ khi còn nhỏ, sống cùng dì ghẻ và em gái Cám. Cha Tấm tục huyền lấy người dì có sẵn con riêng, không lâu sau cha cũng qua đời để lại Tấm tội nghiệp. Cuộc đời Tấm từ đó siêu phèn, sáng dậy sớm quét nhà, chiều giặt giũ nấu ăn không một phút nghỉ.",
         # Scene 4 — Body 2: Bắt tép challenge
         "Một hôm dì ghẻ đưa hai chị em mỗi người một cái giỏ, bảo ra đồng bắt tép suốt cả buổi sáng. Bà ta hứa nếu ai bắt được đầy giỏ trước, sẽ được thưởng một cái yếm đỏ thắm xinh xắn. Tấm cắm cúi xuống ruộng cẩn thận xúc từng con tép một, còn Cám thì lười biếng nằm chơi trên bờ chẳng làm gì cả.",
         # Scene 5 — Body 3: Cám scam + iconic dialogue

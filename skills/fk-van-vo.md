@@ -268,7 +268,8 @@ INPUT:
 
 CONSTRAINTS:
 - **Scene 0 (INTRO — MANDATORY first scene):** narrator = "Chào mừng anh em đến với seri cổ tích thời gen z." image_prompt = branding intro card storybook + magical neon swirls. Motion = static.
-- **Hook (2 scenes max, 25-35s tổng):** Scene 1 = greeting + giới thiệu truyện (~40-50 từ). Scene 2 = plot tease nhanh (~40-50 từ). Hook TRÁNH English slang dày (no "main character energy", "combat hero" etc) — VN-leaning: dân chơi, drama, khét lẹt. Movie title mapping CHUYỂN sang scene 3 (body 1), KHÔNG đặt trong hook.
+- **Hook (2 scenes max, 25-35s tổng):** Scene 1 = greeting + giới thiệu truyện (~40-50 từ). Scene 2 = plot tease nhanh (~40-50 từ). Hook TRÁNH English slang dày (no "main character energy", "combat hero" etc) — VN-leaning: dân chơi, drama, khét lẹt.
+- **KHÔNG dùng câu "Câu chuyện này giải nén kiểu phim..." trong bất kỳ scene nào** — movie title mapping chỉ dùng nội bộ (`chapter_map.movie_title` cho image_prompt poster scene + thumbnail), KHÔNG đề cập trong narrator text. Audience không cần biết mapping → narrator tập trung kể truyện thuần Việt.
 - **Body (11 scenes):** mỗi scene 3-5 câu (60-100 từ) — kể CHI TIẾT. **PHẢI bao gồm iconic phrases verbatim** khi có (vd "Đàn kêu tích tịch tình tang, ai mang công chúa dưới hang trở về" / "bống bống bang bang lên ăn cơm vàng cơm bạc" / "khắc nhập khắc nhập" / "ăn một quả trả một cục vàng"). Cho phép >100 từ nếu cần chỗ cho iconic phrase.
 - Scene duration target 15-30s/scene → total video 5-15 min long-form
 - NO AD BREAK scene
