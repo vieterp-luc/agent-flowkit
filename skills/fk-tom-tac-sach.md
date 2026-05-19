@@ -249,7 +249,7 @@ Brand-defining visual (vd Chí Phèo cho Nam Cao series, hoặc concept Hook cho
 | Resolution | 1920×1080 HORIZONTAL (long-form) |
 | FPS | 30 |
 | TTS volume | 1.5× |
-| Music volume | 0.12× (mix với narrator) |
+| Music volume | 0.06× (mix với narrator — giảm 1/2 để narrator clear hơn) |
 | Music output | MP3 (transcode Gemini Lyria MP4) |
 | Scene count | 7-10 (summary), 10-14 (chapter) |
 | Ken Burns motion | Vary per scene, no consecutive repeat |
@@ -324,7 +324,7 @@ Style: Edward Hopper meets Caspar David Friedrich.
 | Narrator sentence > 22 từ | Re-extract script với tighter constraint |
 | Voice template không có | List available templates, fall back to phap_van |
 | Foreign self-help → image generates Western faces | Set aesthetic = `concept_minimal` (no characters) hoặc adjust entity descriptions |
-| Music quá to che narration | Lower music_volume từ 0.12 → 0.10 |
+| Music quá to che narration | Lower music_volume từ 0.06 → 0.04 |
 
 ---
 
