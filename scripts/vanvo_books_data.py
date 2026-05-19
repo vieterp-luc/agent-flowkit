@@ -718,6 +718,94 @@ CHU_CUOI_BOOK = {
     "caption_moral": "Câu chuyện dạy ta: lời dặn dò của người thân yêu không bao giờ là thừa, cẩn thận và biết ơn những gì giản dị quanh mình."
 }
 
+# ================ BOOK 9: BÁNH CHƯNG BÁNH DÀY ================
+LANG_LIEU = _char("Lang Liêu hoàng tử thứ 18", "young Vietnamese prince humble: beige plain solid áo dài no royal trim + brown cargo pants, white sneakers, small modest gold chain, undercut black hair, gentle humble determined face")
+VUA_HUNG_BCBD = _char("Vua Hùng Vương đời 6", "elderly Vietnamese king: dark red royal robe with gold trim, aviator sunglasses, Apple Watch, long white beard, sitting on golden throne, thoughtful patriarchal expression")
+TIEN_ONG_BCBD = _char("Tiên ông in dream", "elderly celestial fairy deity: white flowing celestial robe with golden cyan glow aura, long silver-white beard reaching waist, floating in mist with golden halo, kindly wise expression holding wooden staff")
+HOANG_TU_NHA_GIAU = "group of arrogant rich Vietnamese princes hoàng tử: oversized solid bomber jackets in red blue gold no print, multiple gold chains, aviator sunglasses, slicked black hair, smug arrogant expressions holding rare ingredients"
+COURT_BCBD = "ancient Văn Lang royal palace interior: red lacquered wooden columns, hanging red oil lanterns, jade floor tiles, traditional courtiers in áo tứ thân blurred background, gold and red opulent decor"
+LANG_QUE_BCBD = "peaceful rural Vietnamese village: bamboo huts with thatched roofs, golden rice paddies stretching to horizon, banana trees, dirt paths, distant green mountains, harvest season abundance"
+BANH_CHUNG = "square Vietnamese rice cake bánh chưng: dark green dong leaves wrapping a perfectly square cake, tied with bamboo string lạt, golden glutinous rice inside with green mung bean and pork filling visible in cross-section"
+BANH_DAY = "round Vietnamese rice cake bánh dày: pure white sticky rice cake shaped as smooth round disc, glossy surface, placed on green banana leaf"
+
+BANH_CHUNG_BOOK = {
+    "slug": "banh-chung-banh-day",
+    "title": "Sự Tích Bánh Chưng Bánh Dày",
+    "story_summary": "Văn Vở Gen Z. Vua Hùng đời 6 mở cuộc thi truyền ngôi, 22 hoàng tử dâng sơn hào hải vị. Lang Liêu con thứ 18 mồ côi mẹ, nằm mộng được tiên ông chỉ cách làm bánh chưng bánh dày từ gạo nếp, thắng cuộc thi truyền ngôi. Phiên bản kiểu phim Ratatouille (2007).",
+    "scripts": [
+        # Scene 1 — Hook short
+        "Trong kho tàng truyền thuyết Việt Nam, có một câu chuyện về anh hoàng tử khiêm tốn thắng cuộc thi đầu bếp hoàng gia chỉ bằng món ăn quê mùa nhất quả đất. Phiên bản chi tiết của sự tích Bánh Chưng Bánh Dày, anh em ngồi vững nha vì đây là bài học khiêm tốn đến nay vẫn cực kỳ thấm.",
+        # Scene 2 — Hook plot tease
+        "Câu chuyện có vua Hùng già sắp truyền ngôi, có hai mươi mấy hoàng tử tranh nhau dâng sơn hào hải vị. Có giấc mộng tiên ông chỉ điểm cách làm bánh từ gạo nếp, có cú lội ngược dòng đầy drama của anh con thứ mười tám mồ côi mẹ. Và đây cũng là gốc tích của món bánh chưng Tết Việt Nam.",
+        # Scene 3 — Body 1: Vua Hùng setup casting
+        "Ngày xửa ngày xưa vào đời Vua Hùng Vương thứ sáu, ông vua đã già và tới giai đoạn phải chọn người kế vị. Vấn đề là vua có nguyên một đội hai mươi mấy hoàng tử, mỗi ông một tài năng riêng, không ông nào kém ông nào. Vua không phải dạng cha truyền con nối theo công thức, vua thấy ông nào xứng nhất thì cho. Cuối cùng vua nghĩ ra một cách công bằng kiểu thi tuyển hoàng gia, tôi gọi vui là MasterChef Văn Lang phiên bản bốn nghìn năm trước Công nguyên.",
+        # Scene 4 — Body 2: Luật chơi + 22 hoàng tử chuẩn bị
+        "Luật chơi đơn giản, mỗi hoàng tử có một khoảng thời gian nhất định để tự đi tìm hoặc tự làm ra một món ăn dâng cúng tổ tiên. Món nào hợp ý vua cha nhất, ngôi báu trao tay luôn không bàn cãi. Tin vừa thông báo xong thì cả cung nháo nhào lên, mỗi ông một kế hoạch riêng. Ông thì gọi gia nhân lên rừng săn hươu nai báo gấm, ông thì sai người xuống biển bắt cá quý tôm hùm, ông thì cho người đi khắp các nước lân bang tìm gia vị siêu hiếm flex đẳng cấp.",
+        # Scene 5 — Body 3: Lang Liêu profile
+        "Trong giữa cái biển hoàng tử chen nhau khoe tài chính ấy thì có một ông đứng góc, đó là hoàng tử Lang Liêu. Đây là con thứ mười tám của Vua Hùng, mẹ mất sớm từ khi Lang Liêu còn rất nhỏ, không được đại gia đình nâng đỡ như mấy ông anh con dòng chính. Profile của Lang Liêu thì gần như đối lập một trăm tám mươi độ với hình ảnh hoàng tử mà anh em hay tưởng tượng. Em không có gia nhân riêng, không có ngân khố vung tiền săn đồ quý, không có quan hệ thương gia trong lẫn ngoài nước.",
+        # Scene 6 — Body 4: Lang Liêu buồn không có gì để dâng
+        "Nghe vua cha ra đề bài xong thì các ông anh xôn xao lên kế hoạch, còn Lang Liêu thì ngồi yên một góc tâm lý vỡ vụn. Anh biết quá rõ mình không có bất cứ thứ gì để cạnh tranh với hai mươi đối thủ kia. Trong khi mấy ông anh tấp nập xe ngựa chở hàng hiếm về cung thì Lang Liêu chỉ đi tới đi lui trong căn nhà nhỏ nhìn ra cánh đồng lúa vàng. Cảm giác bị bỏ lại phía sau ám ảnh vô cùng, không có ý tưởng nào sáng tạo để vượt mặt mấy ông anh giàu nứt đố đổ vách.",
+        # Scene 7 — Body 5: Tiên ông hiện ra + ICONIC verbatim lần 1
+        "Đêm hôm đó Lang Liêu nằm trằn trọc trên giường nghĩ ngợi mãi, cuối cùng kiệt sức rồi cũng thiếp đi giữa khuya. Trong giấc mộng thì có một ông tiên râu tóc bạc phơ hiện ra giữa làn mây trắng, ánh hào quang vàng rực chiếu khắp căn nhà nhỏ. Tiên ông cười hiền từ rồi nói rõ ràng từng chữ một: trong trời đất không có gì quý bằng hạt gạo, vì gạo là thứ nuôi sống con người. Lang Liêu nghe vậy thì tỉnh ngộ ngay lập tức, ngồi bật dậy lắng nghe tiên ông tiếp tục dặn dò.",
+        # Scene 8 — Body 6: Tiên ông dạy công thức 2 bánh
+        "Tiên ông không dừng ở đây mà còn hướng dẫn chi tiết luôn, kiểu một anh streamer cooking đang giảng công thức cho viewer. Tiên dặn hãy lấy gạo nếp dẻo làm thành hai loại bánh, một loại hình vuông tượng trưng cho mặt đất nuôi dưỡng muôn loài, một loại hình tròn tượng trưng cho bầu trời che chở vạn vật. Bánh vuông gói trong lá dong xanh, bên trong có nhân đậu xanh thịt lợn biểu hiện cho những gì con người trồng nuôi được. Bánh tròn làm từ gạo nếp giã nhuyễn nguyên chất biểu hiện sự thuần khiết của trời cao.",
+        # Scene 9 — Body 7: Lang Liêu tỉnh dậy chọn nguyên liệu
+        "Lang Liêu giật mình tỉnh dậy giữa đêm khuya, đầu vẫn còn nguyên cảm giác công thức nóng hổi từ tiên ông vừa dặn. Sáng hôm sau anh bật dậy lập tức bắt tay vào việc, không một phút trì hoãn. Đầu tiên anh ra đồng tự tay chọn từng hạt gạo nếp dẻo thơm nhất, hạt nào lép thì bỏ ra ngay không tiếc tay. Tiếp đó anh đi rừng hái lá dong xanh mướt, chọn lá to bản không rách không sâu, kích thước vừa đúng để gói được cái bánh vuông đẹp mắt. Lang Liêu xin một con lợn béo nhất làng thui sạch lông cẩn thận.",
+        # Scene 10 — Body 8: Gói bánh chưng + giã bánh dày
+        "Khi mọi nguyên liệu sẵn sàng, Lang Liêu tự tay gói chiếc bánh chưng đầu tiên trong lịch sử Việt Nam, lá dong xếp chéo theo bốn cạnh, gạo nếp rải đều, nhân đậu xanh thịt lợn cho vào giữa, rồi gói lại vuông vức từng góc buộc dây lạt chắc nịch. Bánh dày thì khác, anh nấu chín gạo nếp rồi cho vào cối đá giã nhuyễn bằng chày gỗ. Giã đến khi gạo trở thành khối dẻo mịn không còn hạt rời, anh mới nặn thành những chiếc bánh tròn trịa đẹp mắt. Trải qua mấy ngày cặm cụi không nghỉ tay, Lang Liêu cuối cùng cũng có một mâm bánh đẹp đến mức chính anh cũng đứng hình khi nhìn lại thành quả của mình.",
+        # Scene 11 — Body 9: Ngày final + hoàng tử khác dâng sơn hào
+        "Ngày hẹn đến, các hoàng tử lũ lượt mang sản phẩm vào cung dâng vua cha, cảnh tượng ngoài đại sảnh nhìn không khác gì hội chợ ẩm thực quốc tế. Một ông khiêng nguyên con hươu nai quý hiếm vừa săn được tận rừng sâu, lông còn óng mượt như mới ra từ phim quảng cáo. Một ông khác bưng mâm cua hùm tôm hùm tươi rói còn nhảy tanh tách trên đĩa bạc. Có ông dâng cả một bàn sơn hào với mấy loại gia vị quý hiếm chỉ tìm được ở mấy xứ xa nghìn dặm, mỗi ông một kiểu flex khác nhau cực kỳ căng.",
+        # Scene 12 — Body 10: Lang Liêu dâng bánh + hoàng tử khác cười khẩy
+        "Vua Hùng ngồi trên ngai vàng bình thản quan sát hết một lượt, mặt không lộ vẻ vui hay buồn, cứ giống một giám khảo MasterChef siêu khó tính. Vua nếm món gì cũng chỉ gật nhẹ rồi cho đặt sang một bên, không khen mà cũng không chê một lời. Đến lượt Lang Liêu thì anh khiêm tốn bưng ra một mâm chỉ có hai loại bánh trông cực kỳ đơn giản. Các hoàng tử khác liếc qua thấy thì cười khẩy, có ông còn buông một câu xỉa cười xỉu: chú em này không có gì thì nên rút lui cho đỡ mất mặt.",
+        # Scene 13 — Body 11: Vua nếm + phán quyết + ICONIC verbatim lần 2
+        "Vua nhìn mâm bánh lạ thì cau mày hỏi đây là món gì vậy. Lang Liêu cúi đầu thưa rõ ràng: thưa vua cha, đây là bánh chưng bánh dày con tự làm từ gạo nếp đất nhà. Trong trời đất không có gì quý bằng hạt gạo, bánh chưng hình vuông tượng trưng cho đất, bánh dày hình tròn tượng trưng cho trời. Vua nghe xong gật gù cầm dao cắt một miếng bánh chưng ăn thử, vị dẻo thơm bùi ngậy hòa quyện làm vua mắt sáng rực hài lòng. Vua tuyên bố ngay tại đại sảnh: ta đã quyết, ngai vàng truyền cho Lang Liêu, kẻ duy nhất biết quý trọng những gì trời đất ban tặng cho con người.",
+        # Scene 14 — Moral
+        "Câu chuyện Bánh Chưng Bánh Dày dạy ta một bài học vô cùng sâu sắc, đó là giá trị thực sự của con người không nằm ở sự xa hoa cầu kỳ, mà ở khả năng trân quý và tôn vinh những điều giản dị nhất xung quanh mình. Trong khi các hoàng tử khác chạy theo những thứ quý hiếm xa xôi, Lang Liêu lại biết nhìn xuống chính mảnh đất quê hương để tìm ra báu vật. Cứ mỗi dịp Tết đến, khi gói chiếc bánh chưng vuông vắn buộc bằng dây lạt, người Việt lại nhớ về truyền thuyết này và tự nhắc nhau rằng hạnh phúc nằm trong chính cái nồi bánh chưng đỏ lửa đêm giao thừa.",
+    ],
+    "image_prompts": [
+        # 1 — Hook atmospheric Văn Lang dawn
+        f"Atmospheric establishing wide shot: ancient Vietnamese Văn Lang kingdom at dawn, fishing boats by shore, mist rising from golden rice paddies in valley, distant pagoda silhouettes, no characters visible, mood-setting cinematic.",
+        # 2 — Hook movie poster Ratatouille split
+        f"Movie-poster composition: {LANG_LIEU} on LEFT half humble holding a simple wooden tray with two plain rice cakes ({BANH_CHUNG} and {BANH_DAY}), RIGHT half showing piles of luxurious sơn hào hải vị (whole roasted deer, lobsters, exotic spices) under elaborate gold chandeliers, split lighting underdog vs elite contrast, fairy-tale poster framing.",
+        # 3 — Body 1: Vua Hùng court setup
+        f"Royal court scene: {VUA_HUNG_BCBD} sitting on golden throne thoughtful pondering succession, surrounded by silent courtiers and ministers, {COURT_BCBD}, warm golden lighting, regal patriarchal mood.",
+        # 4 — Body 2: 22 hoàng tử chuẩn bị lên rừng xuống biển
+        f"Dynamic montage scene: {HOANG_TU_NHA_GIAU} departing in different directions, one prince hunting deer in mountain forest, another on coastal boat reaching for sea creatures, another negotiating with foreign merchants for spices in marketplace, ancient Văn Lang setting, energetic preparation mood.",
+        # 5 — Body 3: Lang Liêu profile humble walking village
+        f"Rural humble scene: {LANG_LIEU} walking through {LANG_QUE_BCBD} at golden hour with farmers harvesting rice in background, simple thatched hut visible, peaceful but pensive mood, warm amber lighting contemplative.",
+        # 6 — Body 4: Lang Liêu buồn nhìn cánh đồng
+        f"Emotional scene: {LANG_LIEU} sitting alone on wooden bench outside his simple thatched home, staring out at golden rice paddies at sunset with sad pensive expression hand on chin, soft melancholy warm lighting, {LANG_QUE_BCBD} background.",
+        # 7 — Body 5: Tiên ông hiện ra giấc mộng
+        f"Mystical dream scene: {LANG_LIEU} lying on simple wooden bed sleeping with serene face, {TIEN_ONG_BCBD} floating above him in glowing golden mist with finger raised giving sacred guidance, ethereal cyan-gold magical particles floating around the room, mystical dreamlike lighting.",
+        # 8 — Body 6: Tiên dạy công thức 2 bánh
+        f"Continuing dream sequence: {TIEN_ONG_BCBD} pointing with one hand at floating holographic vision of {BANH_CHUNG} square and {BANH_DAY} round cake side by side, magical golden glow connecting them, swirling stars representing trời đất, {LANG_LIEU} kneeling listening with awe expression, mystical cosmic atmosphere.",
+        # 9 — Body 7: Tỉnh dậy chọn nguyên liệu
+        f"Daybreak preparation scene: {LANG_LIEU} crouched in rice field at sunrise carefully selecting grains of sticky rice nếp into woven basket, bamboo basket of dong leaves beside him, freshly butchered pork laid on banana leaves nearby, determined focused expression, warm morning golden light, {LANG_QUE_BCBD}.",
+        # 10 — Body 8: Gói bánh + giã bánh dày
+        f"Cooking workshop scene: {LANG_LIEU} in simple kitchen interior wrapping {BANH_CHUNG} on a wooden table with precise hand movements arranging dong leaves rice mung bean pork in layers, stone mortar with wooden pestle giã nhuyễn cooked sticky rice for {BANH_DAY} beside him, golden afternoon light streaming through window, craftsman concentration.",
+        # 11 — Body 9: Hoàng tử khác dâng sơn hào hải vị
+        f"Royal banquet hall scene: {HOANG_TU_NHA_GIAU} lined up presenting elaborate dishes - one with whole roasted deer on silver platter, one with platter of live lobsters and crabs, one with bowl of exotic spices and rare delicacies, {VUA_HUNG_BCBD} sitting on throne observing impassively, {COURT_BCBD}, opulent regal lighting.",
+        # 12 — Body 10: Lang Liêu dâng bánh + hoàng tử cười khẩy
+        f"Court humility scene: {LANG_LIEU} kneeling humbly before {VUA_HUNG_BCBD} on golden throne offering a simple wooden tray with one {BANH_CHUNG} and one {BANH_DAY}, {HOANG_TU_NHA_GIAU} in background covering mouths smirking dismissively, {COURT_BCBD}, dramatic spotlight on Lang Liêu amid sneering elite, golden warm lighting on the modest tray.",
+        # 13 — Body 11: Vua truyền ngôi + crowning
+        f"Crowning climactic scene: {VUA_HUNG_BCBD} standing from throne placing a golden royal crown on {LANG_LIEU}'s head with proud expression, {BANH_CHUNG} cut showing vivid layers on a small ceremonial table nearby, {HOANG_TU_NHA_GIAU} standing stunned in background mouths agape, warm golden divine lighting illuminating Lang Liêu, {COURT_BCBD}, triumphant climactic mood.",
+        # 14 — Moral Tết family gathering
+        f"Closing peaceful Tết scene: traditional Vietnamese family gathered around large red glowing fire boiling a giant pot of {BANH_CHUNG} on dark cold winter night, parents children grandparents smiling warmly together, warm amber palette red paper lanterns swaying overhead, oil-painting feel hopeful timeless tradition mood, intergenerational warmth.",
+    ],
+    "motions": ["static","zoom_in","static","static","pan_right","pan_right","static","static","static","static","static","pan_right","static","static","zoom_out"],
+    "caption_hook": "Anh em đã nghe Bánh Chưng Bánh Dày kiểu phim Ratatouille chưa? 🍚🎋 Hoàng tử mồ côi mẹ thắng cuộc thi truyền ngôi chỉ bằng cái bánh quê!",
+    "caption_bullets": [
+        "Vua Hùng đời 6 mở cuộc thi MasterChef truyền ngôi",
+        "22 hoàng tử chen nhau dâng sơn hào hải vị quý hiếm",
+        "Lang Liêu con thứ 18 mồ côi mẹ, không có gì để dâng",
+        "Giấc mộng tiên ông: trong trời đất không có gì quý bằng hạt gạo",
+        "Tự tay gói bánh chưng vuông + bánh dày tròn từ gạo nếp",
+        "Vua nếm hài lòng, truyền ngôi ngay cho Lang Liêu",
+        "Gốc tích bánh chưng bánh dày Tết Việt Nam"
+    ],
+    "caption_moral": "Câu chuyện dạy ta: giá trị thực sự không nằm ở xa hoa cầu kỳ, mà ở khả năng trân quý những điều giản dị nhất quanh mình."
+}
+
 # ================ EXPORT ================
 BOOKS = {
     "thach-sanh": THACH_SANH_BOOK,
@@ -728,4 +816,5 @@ BOOKS = {
     "tam-cam": TAM_CAM_BOOK,
     "mai-an-tiem": MAI_AN_TIEM_BOOK,
     "chu-cuoi-cung-trang": CHU_CUOI_BOOK,
+    "banh-chung-banh-day": BANH_CHUNG_BOOK,
 }
