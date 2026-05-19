@@ -30,6 +30,8 @@ curl -s http://127.0.0.1:8100/health
 | `/fk-review-board` | Visual scene review board for feedback |
 | `/fk-concat` | Download + concat final video |
 | `/fk-concat-fit-narrator` | Concat trimmed to narrator duration |
+| `/fk-reup-url` | Download URL (YT/TikTok/Bilibili) → reup với narrator + TTS (1-shot) |
+| `/fk-sub-url` | Download URL → transcribe + translate + burn dual sub (CN+VN), giữ audio/length gốc |
 | `/fk-gen-narrator` | Generate narrator text + TTS |
 | `/fk-gen-text-overlays` | Generate text overlays from narrator text |
 | `/fk-gen-tts-template` | Create voice template for narration |
