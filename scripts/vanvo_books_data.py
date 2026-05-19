@@ -541,6 +541,94 @@ TAM_CAM_BOOK = {
 # Override motion list for Tấm Cám — scene 1 zoom_in, scene 17 zoom_out, rest static
 TAM_CAM_BOOK["motions"] = ["static","zoom_in"] + ["static"] * 15 + ["zoom_out"]
 
+# ================ BOOK 7: MAI AN TIÊM ================
+MAI_AN_TIEM = _char("Mai An Tiêm", "young Vietnamese man, exiled prince hero: navy solid bomber jacket no print + olive cargo pants, white Air Force sneakers, gold chain, undercut blonde hair, proud self-reliant confident face")
+VO_MAI = _char("vợ Mai An Tiêm", "young Vietnamese wife: beige pastel solid áo dài + white Air Force sneakers, long black hair tied in simple bun, gentle resilient face")
+CON_MAI = _char("con trai Mai An Tiêm", "young Vietnamese boy around 6 years old: simple brown solid shirt no print + dark shorts, white sneakers, short black hair, innocent curious face")
+VUA_HUNG_MAT = _char("Vua Hùng Vương đời 17", "elderly Vietnamese king: red royal robe with aviator sunglasses and Apple Watch, long white beard, sitting on golden throne")
+CHIM_QUA = "flock of glossy black crows chim quạ: iridescent dark feathers, sharp golden eyes, beaks carrying small black seeds, dramatic wingspans"
+DAO_HOANG = "uninhabited tropical island in Vietnamese sea: white sand beach, palm trees, dense green wild vegetation, rocky outcrops, ocean horizon, isolated lonely atmosphere"
+DUA_HAU = "large round watermelon dưa hấu: dark green striped rind, sliced open showing vivid red juicy flesh with black seeds, mouth-watering bright"
+COURT_MAI = "ancient Văn Lang royal palace interior: red lacquered wooden columns, hanging red oil lanterns, jade floor tiles, traditional courtiers in áo tứ thân blurred background"
+
+MAI_AN_TIEM_BOOK = {
+    "slug": "mai-an-tiem",
+    "title": "Mai An Tiêm",
+    "story_summary": "Văn Vở Gen Z. Mai An Tiêm phò mã Vua Hùng tự tin sức mình, bị đày ra đảo hoang, tự tay trồng được dưa hấu khắc tên thả biển, cuối cùng được vua hối hận đón về phổ biến giống dưa khắp Văn Lang. Phiên bản kiểu phim Cast Away (2000).",
+    "scripts": [
+        # Scene 1 — Hook short
+        "Trong kho tàng truyền thuyết Việt Nam, có một câu chuyện về chàng phò mã bị đày ra đảo hoang nhưng cuối cùng vẫn thắng đời. Phiên bản chi tiết của truyện Mai An Tiêm, anh em ngồi vững nha vì đây là bài học khét lẹt về sự tự lập và niềm tin vào chính mình.",
+        # Scene 2 — Hook plot tease
+        "Câu chuyện có vị vua cha nóng tính, có chàng phò mã bị xem là ngạo mạn, có cuộc đày ải ra đảo hoang giữa biển khơi mênh mông. Có đàn quạ thả hạt lạ, có quả dưa hấu đỏ mọng ngọt mát đầu tiên của đất Việt, và một drama hồi cung đầy bài học.",
+        # Scene 3 — Body 1: Mai An Tiêm intro + movie poster
+        "Ngày xửa ngày xưa, vào đời vua Hùng Vương thứ mười bảy có một chàng trai tên Mai An Tiêm. Anh là phò mã được vua nhận làm con nuôi từ nhỏ, lớn lên thông minh giỏi giang nức tiếng cả triều đình Văn Lang. Mai An Tiêm tự tay làm ra của cải, không cần dựa dẫm vào danh phận hoàng tộc, sống cực kỳ tự lập như một boi phố chính hiệu. Vua Hùng cũng yêu mến anh hết mực, ban cho nhiều bổng lộc và quyền cao chức trọng trong triều.",
+        # Scene 4 — Body 2: Câu nói gây họa + ICONIC verbatim lần 1
+        "Một hôm trong tiệc lớn, các quan thần khen ngợi Mai An Tiêm có được tất cả là nhờ ơn vua ban tặng. Anh đáp lại tự tin rằng: của mình làm ra mới quý, còn của người khác cho thì chỉ là tạm bợ. Câu nói lập tức bay đến tai vua Hùng, khiến vua nghe xong đứng hình mất mấy giây không nói nên lời. Vua cho rằng phò mã ngạo mạn vô ơn, không biết kính trên nhường dưới, lập tức nổi cơn thịnh nộ ngay tại cung.",
+        # Scene 5 — Body 3: Vua đày
+        "Vua Hùng giận đến mức tâm lý vỡ vụn, lập tức ra lệnh đày Mai An Tiêm cùng cả gia đình ra một hòn đảo hoang xa xôi. Vua chỉ cho mang theo một ít lương thực và vài thứ đồ đơn giản, không một viên ngọc nào quý giá. Vua phán rằng để xem phò mã làm ra của cải kiểu gì khi không còn dựa vào triều đình nữa. Mai An Tiêm cúi đầu nhận hình phạt không một lời cãi lại, lặng lẽ thu xếp cùng vợ con bước lên thuyền ra biển khơi.",
+        # Scene 6 — Body 4: Lên đảo hoang
+        "Sau nhiều ngày lênh đênh trên biển, gia đình Mai An Tiêm cuối cùng cập bến một hòn đảo hoang vu giữa biển khơi mênh mông. Đảo siêu phèn không một bóng người, chỉ có cây cối hoang dại và sóng biển vỗ về bờ cát trắng. Vợ Mai An Tiêm ôm con khóc nức nở vì sợ chết đói chết khát giữa nơi vô tận. Mai An Tiêm bình tĩnh đặt hành lý xuống, ngước nhìn trời rộng rồi tự nhủ phải tìm cách sống sót bằng mọi giá.",
+        # Scene 7 — Body 5: Động viên vợ con + dựng lều
+        "Mai An Tiêm cầm tay vợ an ủi rằng trời sinh voi sinh cỏ, đảo này tuy hoang nhưng nhất định sẽ có cách. Anh dựng tạm một túp lều tranh bên bờ biển, lấy lá cọ và cành cây ghép lại làm mái che mưa nắng cho cả nhà. Hằng ngày Mai An Tiêm ra biển bắt cá, vào rừng hái rau dại, kiên trì như một dân chơi không bao giờ chịu thua hoàn cảnh. Vợ con thấy chồng cha không nao núng, dần dần cũng vững tâm cùng nhau bắt tay vào lao động.",
+        # Scene 8 — Body 6: Khai hoang chăm chỉ
+        "Ngày qua ngày, Mai An Tiêm khai hoang được một mảnh đất nhỏ ven biển để trồng cây gì đó dành dụm cho tương lai. Anh đốn cây dựng thêm chuồng nuôi gà, đào ao gần lều để chứa nước mưa dùng cho sinh hoạt. Vợ Mai An Tiêm cùng con phụ chồng làm vườn, cả gia đình ngày càng quen với cuộc sống đơn sơ trên đảo. Nhịp sống tuy vất vả nhưng cả nhà cùng nhau vượt qua, không một lời than thở oán trách số phận hẩm hiu.",
+        # Scene 9 — Body 7: Chim quạ thả hạt
+        "Một buổi sáng trong lúc Mai An Tiêm đang ra biển bắt cá, bỗng nhiên có một đàn chim quạ đen bay ngang qua đảo. Đàn chim đậu xuống bãi cát nghỉ chân một lát, rồi vỗ cánh bay đi để lại một nắm hạt nhỏ màu đen lạ lẫm. Mai An Tiêm tò mò nhặt hạt lên xem kỹ, thấy chưa từng gặp loại hạt nào như vậy trong đời. Anh ngước nhìn bầu trời rồi tự nghĩ chim đã ăn quả nào đó nơi xa, ngon ơ đem về thử trồng xem sao.",
+        # Scene 10 — Body 8: Hạt nảy mầm cây dưa lạ
+        "Mai An Tiêm gieo những hạt đen xuống mảnh đất khai hoang, tưới nước đều đặn mỗi sớm mỗi chiều không một ngày bỏ sót. Chỉ vài hôm sau hạt nảy mầm xanh tươi, dây leo bò khắp mặt đất nhanh chóng đến mức không thể tin nổi. Cây ra hoa vàng rồi đậu trái xanh mướt, hình tròn dài lạ mắt to dần lên từng ngày như một loại quả thần kỳ. Vợ chồng Mai An Tiêm khét lẹt mừng rỡ, đợi trái chín hẳn để xem thành quả của công sức bao tháng ngày lao động.",
+        # Scene 11 — Body 9: Bổ dưa hấu lần đầu
+        "Đến ngày trái chín mọng, Mai An Tiêm hái xuống một quả to nhất bổ ra giữa bãi cát trắng. Bên trong là ruột đỏ thắm mọng nước, hạt đen xen kẽ đẹp lạ thường, hương thơm dịu nhẹ lan tỏa khắp túp lều. Cả gia đình cùng nếm thử lát đầu tiên, vị ngọt mát thấm đẫm xua tan mọi mệt nhọc tích tụ bao ngày. Mai An Tiêm đặt tên cho loại quả này là dưa hấu, đại boss của thành quả lao động giữa hoang đảo cô đơn. Anh tự hào trong lòng vì đây chính là minh chứng cho câu nói trước đây của mình.",
+        # Scene 12 — Body 10: Khắc tên thả biển + ICONIC verbatim lần 2
+        "Mai An Tiêm có một ý tưởng táo bạo, anh dùng dao khắc tên mình lên vỏ những trái dưa hấu chín mọng. Anh viết rõ chữ Mai An Tiêm và một dòng nhắn ngắn: của mình làm ra mới quý, ai nhặt được xin báo về đất liền giúp. Anh thả các quả dưa khắc tên xuống biển, theo dòng hải lưu trôi dạt đi muôn phương xa. Suốt nhiều ngày sau, dưa hấu trôi qua các ngư dân và thương lái, dần dần lan tới các vùng cửa biển đất liền. Câu chuyện về chàng trai bị đày ngoài đảo nhưng tự trồng được loại quả lạ mau chóng lan truyền khắp Văn Lang.",
+        # Scene 13 — Body 11: Vua hối hận đón về
+        "Một ngày kia, có sứ giả trình lên vua Hùng một quả dưa hấu lạ nhặt được ngoài cửa biển. Trên vỏ có khắc rõ tên Mai An Tiêm và dòng chữ về câu nói năm xưa, khiến vua đọc xong cười xỉu vì hối hận. Vua nhận ra phò mã ngày xưa nói đúng, không hề ngạo mạn mà là người biết tự lực cánh sinh thực sự. Vua lập tức ra lệnh đoàn sứ giả căng buồm ra đảo, đón Mai An Tiêm cùng cả gia đình trở về cung. Mai An Tiêm mang theo một bao tải hạt dưa hấu về phổ biến cho cả đất nước, từ đó dưa hấu thành đặc sản của Việt Nam.",
+        # Scene 14 — Moral
+        "Câu chuyện Mai An Tiêm dạy ta rằng giá trị thực sự của con người nằm ở khả năng tự lập, không phải ở những thứ được ban tặng dễ dàng. Khi rơi vào hoàn cảnh khó khăn nhất, nếu ta không bỏ cuộc và kiên trì lao động thì trời đất cũng phải mở đường. Sự tự tin vào bản thân không phải là ngạo mạn, mà là niềm tin vững vàng vào chính sức lực và trí tuệ của mình. Đây không chỉ là truyền thuyết về nguồn gốc dưa hấu, mà còn là bài học muôn đời về phẩm giá và sức mạnh nội tại của con người Việt Nam.",
+    ],
+    "image_prompts": [
+        # 1 — Hook atmospheric
+        f"Atmospheric establishing wide shot: ancient Văn Lang coastal village at dawn, fishing boats moored by shore, mist rising over rice paddies, distant green mountains in background, no characters visible, mood-setting cinematic.",
+        # 2 — Hook movie poster Cast Away style split
+        f"Movie-poster composition: {MAI_AN_TIEM} on LEFT half in dignified posture with royal palace setting behind, {DAO_HOANG} on RIGHT half deserted with palm trees and crashing ocean waves, split lighting dramatic high-contrast, fairy-tale poster framing.",
+        # 3 — Body 1: royal court intro
+        f"Royal court scene: {MAI_AN_TIEM} standing confidently before {VUA_HUNG_MAT} on golden throne, traditional officials bowed around, {COURT_MAI}, warm golden lighting two-shot composition.",
+        # 4 — Body 2: banquet shock câu nói
+        f"Royal banquet scene: {MAI_AN_TIEM} raising wine cup speaking proudly with chin lifted, surrounding court officials whispering shocked covering mouths, {VUA_HUNG_MAT} face freezing in surprise on golden throne in background, {COURT_MAI}, dramatic spotlight on Mai An Tiêm.",
+        # 5 — Body 3: vua đày
+        f"Court of judgment: {VUA_HUNG_MAT} pointing dramatically toward open palace doors revealing ocean horizon outside, {MAI_AN_TIEM} kneeling head bowed accepting punishment, {VO_MAI} holding {CON_MAI} crying nearby, {COURT_MAI}, cold blue dramatic lighting.",
+        # 6 — Body 4: arrival deserted island
+        f"Arrival at deserted island: small wooden boat beached on white sand shore, {MAI_AN_TIEM} stepping off carrying basic supplies and bamboo basket, {VO_MAI} holding {CON_MAI} crying behind him, {DAO_HOANG}, midday harsh sun isolation mood.",
+        # 7 — Body 5: hut consoling
+        f"Primitive island hut scene: {MAI_AN_TIEM} kneeling next to {VO_MAI} gently holding her hands consoling her, {CON_MAI} sitting on sand beside them looking up curiously, simple thatched bamboo hut behind, {DAO_HOANG}, warm late afternoon golden hour lighting.",
+        # 8 — Body 6: survival farming
+        f"Daily survival scene: {MAI_AN_TIEM} digging soil with wooden hoe in cleared patch of island ground, {VO_MAI} carrying woven water bucket from rain pond, {CON_MAI} feeding small chickens nearby, simple thatched hut visible behind, {DAO_HOANG}, hopeful perseverance mood.",
+        # 9 — Body 7: chim quạ thả hạt
+        f"Mysterious bird scene: {CHIM_QUA} flock landing on white sand beach scattering small black seeds, {MAI_AN_TIEM} watching from distance with curious expression carrying fishing net, {DAO_HOANG}, magical lighting hint of cyan glow on seeds.",
+        # 10 — Body 8: garden growing watermelon vines
+        f"Lush garden growing scene: green watermelon vines sprawling across cleared patch of island ground with yellow flowers blooming, several large round green-striped watermelons growing among leaves, {MAI_AN_TIEM} watering plants with bamboo bucket with awe pride expression, {DAO_HOANG} background.",
+        # 11 — Body 9: family harvest first watermelon
+        f"Family harvest scene: {MAI_AN_TIEM} cutting open a large {DUA_HAU} with bamboo knife revealing vivid red flesh, {VO_MAI} and {CON_MAI} smiling tasting the first juicy slice together, simple thatched hut behind, {DAO_HOANG} background, warm joyful golden lighting.",
+        # 12 — Body 10: carve name + thả biển (ICONIC)
+        f"Beach send-off scene: {MAI_AN_TIEM} crouched on white sand carefully carving his name onto green watermelon rind with bamboo knife, several carved watermelons floating in shallow waves nearby drifting out to open sea, {DAO_HOANG}, contemplative determined expression, sunset orange-gold lighting.",
+        # 13 — Body 11: vua nhận dưa hối hận
+        f"Royal court revelation: {VUA_HUNG_MAT} sitting on golden throne holding a {DUA_HAU} with carved name clearly visible, expression shifting from skepticism to deep regret with hand on chin, court messenger kneeling presenting more carved watermelons, {COURT_MAI}, warm soft repentant lighting.",
+        # 14 — Moral homecoming distribute seeds
+        f"Closing peaceful homecoming: {MAI_AN_TIEM} standing in Văn Lang village marketplace distributing watermelon seeds to crowd of farmers, {VO_MAI} and {CON_MAI} smiling beside him, villagers eagerly taking seeds with grateful faces, warm amber golden sunset palette, hopeful prosperous oil-painting mood.",
+    ],
+    "motions": ["static","zoom_in","static","static","static","static","static","static","static","static","zoom_out","static","pan_right","static","zoom_out"],
+    "caption_hook": "Anh em nghe truyện Mai An Tiêm kiểu phim Cast Away chưa? 🍉🏝️ Phò mã bị đày đảo hoang, tự tay trồng dưa hấu lan khắp Việt Nam!",
+    "caption_bullets": [
+        "Mai An Tiêm phò mã Vua Hùng, tự tin vào sức mình",
+        "Câu nói 'của mình làm ra mới quý' khiến vua nổi giận",
+        "Cả gia đình bị đày ra đảo hoang giữa biển khơi",
+        "Đàn quạ thả hạt đen lạ trên bãi cát",
+        "Mai An Tiêm trồng được dưa hấu đầu tiên — đỏ mọng ngọt mát",
+        "Khắc tên thả dưa xuống biển trôi về đất liền",
+        "Vua Hùng nhặt được, hối hận đón về phổ biến dưa hấu khắp Văn Lang"
+    ],
+    "caption_moral": "Câu chuyện dạy ta: giá trị thực sự của con người nằm ở khả năng tự lập, kiên trì lao động và niềm tin vững vàng vào chính mình."
+}
+
 # ================ EXPORT ================
 BOOKS = {
     "thach-sanh": THACH_SANH_BOOK,
@@ -549,4 +637,5 @@ BOOKS = {
     "an-khe-tra-vang": AN_KHE_BOOK,
     "son-tinh-thuy-tinh": SON_TINH_BOOK,
     "tam-cam": TAM_CAM_BOOK,
+    "mai-an-tiem": MAI_AN_TIEM_BOOK,
 }

@@ -41,7 +41,7 @@ python scripts/vanvo_render_pipeline.py <slug>     # single book
 
 Pipeline auto-handles: project create → 15 scenes (intro+14) → batch image gen → TTS → Ken Burns → concat → mix → thumbnail + caption. Resumable via `_project.json` marker.
 
-To add new book: append to `BOOKS` dict in `vanvo_books_data.py` with fields: slug, title, story_summary, scripts[14], image_prompts[14], motions[15], caption_hook/bullets/moral.
+To add new book: **STEP 1 — define character constants** at top of book block (see "Character Consistency Rule" below), THEN append to `BOOKS` dict in `vanvo_books_data.py` with fields: slug, title, story_summary, scripts[14], image_prompts[14] (built via f-string referencing constants), motions[15], caption_hook/bullets/moral.
 
 ---
 
@@ -174,18 +174,44 @@ POST /api/projects
 }
 ```
 
-### Step 4 — Wave 1 entities
+### Step 4 — Character Bible (MANDATORY — đồng bộ xuyên suốt mạch truyện)
 
-5-8 nhân vật chính + locations chính. Description chứa:
-- Era gốc cultural cues (áo dài / làng quê)
-- **PLUS** streetwear hybrid spec: "wearing oversized hoodie, undercut hair, gold chain"
-- Personality slang tag: "tân thủ / boi phố chính hiệu / idol quốc dân / ông bad boy / scammer chuyên nghiệp"
+**Rule cốt lõi:** mỗi nhân vật/quái vật/địa điểm có tên = 1 constant string DUY NHẤT, định nghĩa MỘT LẦN ở đầu book block trong `vanvo_books_data.py`, reuse qua f-string trong MỌI scene image_prompt. **Không bao giờ re-describe** trong từng scene riêng.
 
-Pause cho user review roster + slang tags.
+Pattern (canonical, xem `vanvo_books_data.py` THẠCH SANH / TẤM CÁM):
+```python
+# ===== BOOK X: <TÊN> =====
+THACH_SANH = _char("Thạch Sanh", "young Vietnamese man, kind orphan hero: brown cargo shorts + cream solid hoodie no print, white sneakers, gold chain, undercut blonde hair, gentle confident face")
+LY_THONG   = _char("Lý Thông",   "middle-aged scheming Vietnamese man: black bomber jacket solid no print + dark jeans, aviator sunglasses, slick black hair, sly smirk")
+CONG_CHUA  = _char("Princess công chúa", "...")
+# ... rồi mới đến THACH_SANH_BOOK = {...}
+```
 
-### Step 5 — Gen Wave 1 refs
+Constant string PHẢI lock đủ visual identifiers (audience cần nhận ra nhân vật khắp 14 scene):
+1. **Age + build** ("young / middle-aged / elderly", "tall thin / stocky")
+2. **Clothing** — top + bottom + footwear, SOLID COLOR (vd "cream solid hoodie no print + brown cargo shorts + white sneakers")
+3. **Hair** — style + color (vd "undercut blonde / slick black / silver bun")
+4. **Signature accessory** — gold chain / aviator sunglasses / Apple Watch / hair pin
+5. **Default expression / pose tag** ("gentle confident face" / "sly smirk" / "scolding angry hands on hips")
 
-Standard batch GENERATE_CHARACTER_IMAGE → poll → download `output/<slug>_vanvo/refs/`. Spot-check nhân vật brand-defining.
+Mỗi scene image_prompt build qua f-string interpolation, KHÔNG copy-paste description:
+```python
+# ĐÚNG ✅
+f"Village marketplace scene: {LY_THONG} approaching {THACH_SANH} with fake friendly grin..."
+
+# SAI ❌ — re-describe → drift visual
+f"Village scene: Lý Thông (middle-aged man in blue jacket) approaching Thạch Sanh (young man in green shirt)..."
+```
+
+5-8 nhân vật chính + 2-3 quái vật/sinh vật + 1-2 địa điểm signature. Personality slang tag (boi phố / idol quốc dân / đại boss / scammer) ghi vào commentary trong narrator, KHÔNG ghi vào constant (constant = thuần visual).
+
+**Variant rule:** khi story cần nhân vật thay outfit (vd Sọ Dừa head → handsome man, hoặc cưới hỏi áo cưới), define `<NAME>_VARIANT = _char(...)` riêng — KHÔNG mutate constant gốc. Vd `SO_DUA_HEAD` vs `SO_DUA_MAN` trong book 2.
+
+Pause cho user review roster + visual lock trước khi viết image_prompts.
+
+### Step 5 — Gen reference images (optional, spot-check only)
+
+Pipeline thực tế (`scripts/vanvo_render_pipeline.py`) **không** dùng Flow entity ref system — character consistency 100% relies on constant-reuse pattern Step 4. Nếu muốn pre-validate 1 character trước khi render full episode: gen ảnh test với constant string riêng → spot-check → adjust constant nếu drift, RỒI mới mass batch 14 scenes.
 
 ### Step 6 — Extract chapter map + slang assignment
 
@@ -467,6 +493,8 @@ Override per book (rare): `/fk-van-vo <slug> --voice <name> --speed 0.9`. Phải
 | Slang dùng từ BANNED list | Re-extract với constraint mạnh hơn về dictionary |
 | Narrator TTS ngắt giật cục | Check punctuation — bỏ `?!—...` thừa, gộp câu bằng `,` |
 | Image gen ra text (chữ hoodie, biển hiệu) | Defensive prompt "STRICTLY NO TEXT" + "SOLID COLOR clothing only" — nếu vẫn ra graffiti giả, regen với prompt nhấn mạnh hơn |
+| Nhân vật đổi outfit/màu tóc/mặt giữa các scene (character drift) | Re-check `vanvo_books_data.py`: nhân vật ĐÃ ĐƯỢC define thành constant ở đầu book block chưa? Mọi image_prompt liên quan ĐÃ dùng `{CONSTANT}` interpolation chưa? Nếu chưa → refactor về pattern Step 4 ngay, regen scene affected. KHÔNG re-describe nhân vật inline. |
+| Cần nhân vật mặc outfit khác cho 1 scene đặc biệt (vd áo cưới, biến hình) | Define `<NAME>_VARIANT = _char(...)` constant mới (vd `SO_DUA_HEAD` vs `SO_DUA_MAN`), KHÔNG mutate constant gốc. Reference variant chỉ trong scene đó. |
 | Image gen ra pose gym flex/bodybuilder | Add "natural confident stance, hands in pockets / leaning / walking, AVOID muscle pose" |
 | Clothing có graffiti pattern ngẫu nhiên | Re-prompt: "clothing solid color only, no print, no graffiti, no graphic" |
 | Image gen sai hybrid (full classical OR full modern) | Re-prompt explicit: "Character wears 2020s streetwear, background remains <era>" |
