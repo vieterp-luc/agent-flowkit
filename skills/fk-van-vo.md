@@ -52,8 +52,9 @@ To add new book: **STEP 1 — define character constants** at top of book block 
 | `output/_shared/van-vo-roadmap.json` | All books + chapter/movie-title map + voice + ad slots |
 | `output/_shared/tts_templates/templates.json` | Available Vietnamese voices |
 | `output/van_vo/<book_slug>/ep*/` | Built episode dirs (centralized under van_vo/) |
-| `scripts/vanvo_books_data.py` | All book configs (scripts + image prompts + motions) |
+| `scripts/vanvo_books_data.py` | All book configs (scripts + image prompts + motions). **Gold standard voice = `BANH_CHUNG_BOOK`** (book 9) |
 | `scripts/vanvo_render_pipeline.py` | Automated pipeline module |
+| `docs/mau van vo/` | Reference voice samples (Dế Mèn, Số Đỏ, Tây Du Ký 81 kiếp nạn transcripts) — read these để absorb hangout reaction-video voice trước khi viết book mới |
 
 Separate roadmap from `tom-tac-sach-roadmap.json` — different tone/format/audience.
 
@@ -293,21 +294,30 @@ INPUT:
 - Moral wrap-up: <text>
 
 CONSTRAINTS:
+- **VOICE — HANGOUT REACTION-VIDEO (LOCKED, gold standard = book Bánh Chưng Bánh Dày):** first-person "chúng ta / tôi / anh em" như đang reaction video với bạn. Phá rào kể chuyện thường xuyên ("đến đây thì tôi thấy là...", "tôi gọi vui là...", "ai cũng nghĩ giống nhau:"). **KHÔNG dùng "Ngày xửa ngày xưa có..."** mở đầu kiểu traditional storyteller — chỉ dùng từ scene 3 (Body 1) trở đi sau khi đã setup hangout intro.
+- **MODERN FRAME ANACHRONISTIC trên cốt classical** — đây là DNA Văn Vở, mandatory mỗi book: MasterChef Văn Lang phiên bản 4000 năm trước Công nguyên / anh streamer cooking giảng công thức / hội chợ ẩm thực quốc tế / sinh viên năm cuối rải CV / reality cooking show siêu căng / phim quảng cáo / giám khảo MasterChef siêu khó tính. Dấu hiệu nhận biết: "kiểu/như + brand/show name".
+- **PROFILE-STYLE CHARACTER INTRO** (copy pattern từ Xuân Tóc Đỏ Số Đỏ): "Profile của X gần như đối lập 180 độ với hình ảnh...", liệt kê stat-block (tuổi, gia cảnh, không có gì, không có ai), bố cục: hook nhân vật → background → mâu thuẫn → setup arc.
+- **CONVERSATIONAL GLUE thay ngắt chấm cứng:** "Thế là", "Cơ mà", "Đến đây thì", "Ok", "Thành ra", "Vấn đề là", "Ai cũng nghĩ giống nhau:", "Cuối cùng X nghĩ ra một cách...".
+- **HYPERBOLE MODERN:** "quê mùa nhất quả đất", "cực kỳ căng", "siêu khó tính", "không khác gì hội chợ", "kiểu như reality cooking show", "nháo nhào lên", "đứng hình tại chỗ", "im phăng phắc".
 - **Scene 0 (INTRO — MANDATORY first scene):** narrator = "Chào mừng anh em đến với seri cổ tích thời gen z." image_prompt = branding intro card storybook + magical neon swirls. Motion = static.
-- **Hook (2 scenes max, 25-35s tổng):** Scene 1 = greeting + giới thiệu truyện (~40-50 từ). Scene 2 = plot tease nhanh (~40-50 từ). Hook TRÁNH English slang dày (no "main character energy", "combat hero" etc) — VN-leaning: dân chơi, drama, lầy lội.
-- **KHÔNG dùng câu "Câu chuyện này giải nén kiểu phim..." trong bất kỳ scene nào** — movie title mapping chỉ dùng nội bộ (`chapter_map.movie_title` cho image_prompt poster scene + thumbnail), KHÔNG đề cập trong narrator text. Audience không cần biết mapping → narrator tập trung kể truyện thuần Việt.
-- **Body (11 scenes):** mỗi scene 3-5 câu (60-100 từ) — kể CHI TIẾT. **PHẢI bao gồm iconic phrases verbatim** khi có (vd "Đàn kêu tích tịch tình tang, ai mang công chúa dưới hang trở về" / "bống bống bang bang lên ăn cơm vàng cơm bạc" / "khắc nhập khắc nhập" / "ăn một quả trả một cục vàng"). Cho phép >100 từ nếu cần chỗ cho iconic phrase.
+- **Hook (2 scenes max, 25-35s tổng):** Scene 1 = hangout greeting + giới thiệu truyện + movie mapping organic ("Nếu phải so với phim Hollywood thì tôi xếp nó hạng X 20XX") (~55-65 từ). Scene 2 = plot tease ngắn gọn drama/iconic event preview (~55-65 từ). Hook TRÁNH English slang dày — VN-leaning: dân chơi, drama, lầy lội.
+- **KHÔNG dùng "Câu chuyện này giải nén kiểu phim..." trong bất kỳ scene nào** — movie mapping chỉ trong hangout intro (scene 1) hoặc chapter concept title nội bộ, KHÔNG đề cập "kiểu phim X" verbatim trong scene 3+.
+- **Body (11 scenes):** mỗi scene 3-5 câu (60-110 từ) — kể CHI TIẾT. **PHẢI bao gồm iconic phrases verbatim** khi có (vd "Đàn kêu tích tịch tình tang, ai mang công chúa dưới hang trở về" / "bống bống bang bang lên ăn cơm vàng cơm bạc" / "khắc nhập khắc nhập" / "ăn một quả trả một cục vàng" / "trong trời đất không có gì quý bằng hạt gạo" / "có đái thì đái bên đông chớ đái bên tây cây dông lên trời"). Cho phép >110 từ nếu cần chỗ cho iconic phrase + meta-commentary.
+- **7-CHAPTER NARRATIVE STRUCTURE trong 14 scenes (mapped to Bánh Chưng gold standard):**
+  - Scene 1-2: Hook (greeting + plot tease)
+  - Scene 3-4: Chương 1 setup (world/king establishment)
+  - Scene 5-6: Chương 2 underdog profile (main char 180 độ)
+  - Scene 7-8: Chương 3 inception/catalyst (magical event / iconic phrase verbatim lần 1)
+  - Scene 9-10: Chương 4 preparation/journey
+  - Scene 11-12: Chương 5-6 climax (showdown + verdict)
+  - Scene 13: Final resolution (iconic phrase verbatim lần 2)
+  - Scene 14: Moral wrap-up (tone shift sâu sắc, 0 slang)
 - Scene duration target 15-30s/scene → total video 5-15 min long-form
 - NO AD BREAK scene
-- Scene 1 (Hook, ~1 min = 3 narrator sentences):
-  - Mở bằng nhận xét "giang hồ" hoặc so sánh xã hội hiện đại
-  - Dán title "<movie_title>" như poster phim
-- Scene 2-3 (recap "Previously" — SKIP nếu ep1)
-- Scene 4-12 (Body, 8-9 scenes):
-  - Kể trung thành sự kiện
-  - Bắt buộc dùng slang tag được assign mỗi 1-2 câu
-  - Chèn 1-2 câu commentary "vô tri" mỗi scene (tone hài, không quá dài)
-  - Time connectors: "Đầu tiên / Sau đó / Bỗng nhiên / Trong lúc đó / Cuối cùng"
+- Scene 4-12 (Body, kể trung thành sự kiện):
+  - Bắt buộc dùng slang tag được assign mỗi 1-2 scene (sparse ~1/scene)
+  - Chèn meta-commentary "tôi gọi vui là X" / "đến đây thì tôi thấy là Y" mỗi 2-3 scene (tone hài, không quá dài)
+  - Time connectors: "Đầu tiên / Sau đó / Bỗng nhiên / Trong lúc đó / Cuối cùng / Đến lượt / Vấn đề là"
 - Scene 13 (Climax/resolution event ~1 scene)
 - Scene 14 (Moral wrap-up "Thuật đắc nhân tâm", 2-3 narrator sentences):
   - Chốt bài học cuộc sống nghiêm túc
