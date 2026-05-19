@@ -203,7 +203,7 @@ f"Village marketplace scene: {LY_THONG} approaching {THACH_SANH} with fake frien
 f"Village scene: Lý Thông (middle-aged man in blue jacket) approaching Thạch Sanh (young man in green shirt)..."
 ```
 
-5-8 nhân vật chính + 2-3 quái vật/sinh vật + 1-2 địa điểm signature. Personality slang tag (boi phố / idol quốc dân / đại boss / scammer) ghi vào commentary trong narrator, KHÔNG ghi vào constant (constant = thuần visual).
+5-8 nhân vật chính + 2-3 quái vật/sinh vật + 1-2 địa điểm signature. Personality slang tag (boi phố / idol quốc dân / ông trùm / scammer) ghi vào commentary trong narrator, KHÔNG ghi vào constant (constant = thuần visual).
 
 **Variant rule:** khi story cần nhân vật thay outfit (vd Sọ Dừa head → handsome man, hoặc cưới hỏi áo cưới), define `<NAME>_VARIANT = _char(...)` riêng — KHÔNG mutate constant gốc. Vd `SO_DUA_HEAD` vs `SO_DUA_MAN` trong book 2.
 
@@ -294,7 +294,7 @@ INPUT:
 
 CONSTRAINTS:
 - **Scene 0 (INTRO — MANDATORY first scene):** narrator = "Chào mừng anh em đến với seri cổ tích thời gen z." image_prompt = branding intro card storybook + magical neon swirls. Motion = static.
-- **Hook (2 scenes max, 25-35s tổng):** Scene 1 = greeting + giới thiệu truyện (~40-50 từ). Scene 2 = plot tease nhanh (~40-50 từ). Hook TRÁNH English slang dày (no "main character energy", "combat hero" etc) — VN-leaning: dân chơi, drama, khét lẹt.
+- **Hook (2 scenes max, 25-35s tổng):** Scene 1 = greeting + giới thiệu truyện (~40-50 từ). Scene 2 = plot tease nhanh (~40-50 từ). Hook TRÁNH English slang dày (no "main character energy", "combat hero" etc) — VN-leaning: dân chơi, drama, lầy lội.
 - **KHÔNG dùng câu "Câu chuyện này giải nén kiểu phim..." trong bất kỳ scene nào** — movie title mapping chỉ dùng nội bộ (`chapter_map.movie_title` cho image_prompt poster scene + thumbnail), KHÔNG đề cập trong narrator text. Audience không cần biết mapping → narrator tập trung kể truyện thuần Việt.
 - **Body (11 scenes):** mỗi scene 3-5 câu (60-100 từ) — kể CHI TIẾT. **PHẢI bao gồm iconic phrases verbatim** khi có (vd "Đàn kêu tích tịch tình tang, ai mang công chúa dưới hang trở về" / "bống bống bang bang lên ăn cơm vàng cơm bạc" / "khắc nhập khắc nhập" / "ăn một quả trả một cục vàng"). Cho phép >100 từ nếu cần chỗ cho iconic phrase.
 - Scene duration target 15-30s/scene → total video 5-15 min long-form
@@ -317,15 +317,16 @@ CONSTRAINTS:
 SLANG DICTIONARY — RULE: density ~1 slang/scene (max). Quá dày → "cringe overload". Audio scene Moral wrap-up = 0 slang.
 
 ALLOWED (mainstream VN, phổ thông hiểu ngay):
-- Nhân vật: boi phố chính hiệu, dân chơi, idol quốc dân, đại boss, ông trùm
+- Nhân vật: boi phố chính hiệu, dân chơi, idol quốc dân, ông trùm
 - Combat: combat, combo, hành gà, nắc cho thân tàn ma dại
 - Exit/thua: AFK, đành chịu thua, hàng tạm, đăng xuất
 - Psychological: tâm lý vỡ vụn, sang chấn, cười xỉu, đứng hình
 - Scam/lừa: scam, lừa đảo trắng trợn
-- Locations: biệt thự triệu đô, view thoáng đét, siêu phèn, tã, lầy lội
-- Status: flex, lú, cực kỳ bá, khét lẹt
+- Locations: biệt thự triệu đô, view thoáng đét, tã, lầy lội
+- Status: flex, lú, cực kỳ bá
 
-BANNED (niche/cringe — KHÔNG dùng):
+BANNED (niche/cringe / user explicit reject — KHÔNG dùng):
+khét lẹt, siêu phèn, đại boss,
 PTSD, NPC, OP, top server, inventory full, one-shot, ez game, wombo combo,
 gank, GG, full bão tố, nerf, buff, stun, tutorial mode, gói bảo hộ tân thủ,
 main character energy, mid, trauma dump
@@ -433,7 +434,7 @@ ALLOWED:
 | Concept | Slang |
 |---------|-------|
 | Nhân vật chính tự tin | boi phố chính hiệu, dân chơi |
-| Nhân vật quyền lực | idol quốc dân, đại boss, ông trùm |
+| Nhân vật quyền lực | idol quốc dân, ông trùm |
 | Đánh nhau | combat, combo |
 | Thắng dễ dàng | hành gà, ngon ơ, một phát ăn ngay |
 | Đánh tàn nhẫn | nắc cho thân tàn ma dại |
@@ -442,11 +443,12 @@ ALLOWED:
 | Trauma | tâm lý vỡ vụn, sang chấn nặng nề |
 | Bị lừa | scam, lừa đảo trắng trợn |
 | Nhà giàu | biệt thự triệu đô, view thoáng đét |
-| Nhà nghèo | siêu phèn, tã, lầy lội |
+| Nhà nghèo | tã, lầy lội |
 | Khoe khoang | flex |
-| Trạng thái | lú, cực kỳ bá, khét lẹt |
+| Trạng thái | lú, cực kỳ bá |
 
-BANNED (KHÔNG dùng — niche/cringe):
+BANNED (KHÔNG dùng — user explicit reject + niche/cringe):
+**khét lẹt, siêu phèn, đại boss** (rejected 2026-05-19 — overused/cringe trong các book trước),
 PTSD, NPC, OP, top server, inventory full, one-shot, ez game, wombo combo,
 gank, GG, full bão tố, nerf, buff, stun, tutorial mode, gói bảo hộ tân thủ,
 main character energy, mid, trauma dump, phishing.
