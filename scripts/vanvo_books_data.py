@@ -629,6 +629,95 @@ MAI_AN_TIEM_BOOK = {
     "caption_moral": "Câu chuyện dạy ta: giá trị thực sự của con người nằm ở khả năng tự lập, kiên trì lao động và niềm tin vững vàng vào chính mình."
 }
 
+# ================ BOOK 8: CHÚ CUỘI CUNG TRĂNG ================
+CHU_CUOI = _char("Chú Cuội", "young Vietnamese woodcutter: forest-green solid hoodie no print + olive cargo pants, brown work boots, gold chain, undercut black hair, kind honest face carrying small wooden axe")
+VO_CUOI = _char("vợ chú Cuội", "young Vietnamese wife from rich family: pink pastel solid áo dài + white Air Force sneakers, long black hair tied simple, gentle elegant face")
+PHU_ONG_CUOI = _char("phú ông bố vợ Cuội", "middle-aged wealthy Vietnamese man: red royal áo dài with gold trim, aviator sunglasses, gold chain, thin slick beard, generous welcoming face")
+BUT_CUOI = _char("Bụt deity", "kind elderly Buddhist deity: white flowing robe with neon cyan glow aura, long silver beard, holding wooden staff, soft golden halo")
+COP_ME = "adult Vietnamese tiger mother cọp mẹ: orange-black striped fur, powerful muscular body, protective stance, fierce loving eyes"
+COP_CON = "Vietnamese tiger cub cọp con: small fluffy orange-black striped fur, big innocent eyes, weak injured body lying on the ground"
+CAY_DA_THAN = "massive ancient magical banyan tree cây đa thần: thick gnarled trunk, sprawling aerial roots, dense leafy canopy glowing with mystical cyan and gold magical aura, ethereal golden particles floating around leaves"
+LANG_QUE_CUOI = "rural Vietnamese village setting: bamboo huts with thatched roofs, rice paddies, banana trees, dirt paths, distant mountains, peaceful countryside"
+CUNG_TRANG = "lunar palace surface cung trăng: vast crater landscape with glowing crystalline rocks, distant stars in black cosmic sky, ethereal silver-blue ambient lighting, earth visible distant blue marble in background"
+
+CHU_CUOI_BOOK = {
+    "slug": "chu-cuoi-cung-trang",
+    "title": "Sự Tích Chú Cuội Cung Trăng",
+    "story_summary": "Văn Vở Gen Z. Chú Cuội tiều phu nghèo tốt bụng phát hiện cây đa thần cứu mạng, nổi tiếng cưới vợ giàu. Vợ quên rule đái nhầm bên tây cây đa, cây bay lên cung trăng kéo theo Cuội. Phiên bản kiểu phim Interstellar (2014).",
+    "scripts": [
+        # Scene 1 — Hook short
+        "Trong kho tàng cổ tích Việt Nam, có một câu chuyện về chàng tiều phu vô tình bay lên cung trăng vì một cái quên ngớ ngẩn của vợ. Phiên bản chi tiết của truyện Chú Cuội Cung Trăng, anh em ngồi vững nha vì câu chuyện này có cả drama lẫn bài học cuộc đời sâu sắc.",
+        # Scene 2 — Hook plot tease
+        "Câu chuyện có cây đa thần kỳ chữa được người chết sống lại, có chàng tiều phu hiền lành nổi tiếng khắp vùng. Có cô vợ hậu đậu lú một phen, có cây đa bay lên trời mang theo cả người ngồi gốc cây, và lý do vì sao cứ rằm là ta thấy bóng người trên mặt trăng.",
+        # Scene 3 — Body 1: Cuội tiều phu intro + movie mapping
+        "Ngày xửa ngày xưa ở một làng quê nghèo, có chàng trai tên Cuội sống bằng nghề đốn củi qua ngày. Cuội mồ côi cha mẹ từ nhỏ, sống một mình trong túp lều nhỏ ven rừng già hiu quạnh. Tuy nghèo nhưng Cuội tốt bụng và lương thiện, đối xử tử tế với mọi sinh vật xung quanh không phân biệt người hay vật. Hằng ngày anh vác rìu vào rừng sâu chặt củi mang ra chợ bán, sống cuộc đời đơn giản như một boi phố chân chính dù nghèo khó.",
+        # Scene 4 — Body 2: Cuội gặp cọp con bị thương
+        "Một hôm như thường lệ, Cuội vác rìu đi sâu vào rừng tìm gỗ tốt thì bỗng nghe tiếng kêu nhỏ lạ thường. Anh lần theo tiếng kêu đến một bụi cỏ rậm, phát hiện một con cọp con bị thương nằm thoi thóp dưới gốc cây. Cuội thương quá định cứu giúp, nhưng chợt nghĩ tới cọp mẹ có thể trở về thì nguy hiểm vô cùng. Anh đành lui ra xa nấp sau bụi cây để xem tình hình ra sao, đứng hình không dám rời đi vì lo cho con vật tội nghiệp.",
+        # Scene 5 — Body 3: cọp mẹ về đắp lá cứu cọp con
+        "Không lâu sau cọp mẹ to lớn quay về, gầm vang động cả rừng làm Cuội đứng nép tim đập thình thịch. Cọp mẹ thấy con bị thương thì lao đến, không gầm thét nữa mà cẩn thận ngắt vài chiếc lá từ một cây đa cổ thụ gần đó. Cọp mẹ nhai nát lá đa rồi đắp lên vết thương cọp con cẩn thận, chỉ vài phút sau cọp con bỗng tỉnh dậy chạy nhảy bình thường như chưa hề bị gì. Cuội cười xỉu vì kinh ngạc, đợi cọp mẹ con đi xa rồi mới dám lò dò đến gần cây đa quan sát kỹ.",
+        # Scene 6 — Body 4: nhổ cây đa + ICONIC verbatim lần 1
+        "Cuội nhận ra đây là cây đa thần kỳ có thể chữa được mọi vết thương kể cả người chết sống lại. Anh quyết định nhổ cả cây đa mang về nhà trồng để cứu giúp người làng nghèo khổ khắp nơi. Vừa nhổ xong, có một ông lão bụt râu tóc bạc phơ hiện ra dặn dò kỹ lưỡng. Bụt phán rõ ràng: có đái thì đái bên đông, chớ đái bên tây cây dông lên trời. Cuội gật đầu thuộc lòng câu thần chú, vác cả gốc lẫn cành về làng trồng trước sân nhà mình ngay trong đêm khuya.",
+        # Scene 7 — Body 5: cứu chó chết + nổi tiếng
+        "Hôm sau Cuội thử nghiệm sức mạnh cây đa với con chó vàng nhà mình vừa mới chết. Anh ngắt vài chiếc lá đa nhai nát đắp lên người chó, chỉ một lát sau chó vàng bỗng vẫy đuôi sống lại tỉnh táo. Tin Cuội có cây đa cứu mạng người chết lan ra khắp vùng, ai có người thân vừa qua đời đều tìm đến cầu cứu. Cuội tốt bụng cứu hết không lấy một đồng tiền nào, dần dần trở thành idol quốc dân của cả vùng quê chỉ trong vài tháng.",
+        # Scene 8 — Body 6: cứu con gái phú ông + cưới
+        "Một hôm phú ông giàu nhất vùng có cô con gái duy nhất bỗng nhiên mất sớm vì bệnh nặng. Phú ông nghe danh Cuội liền cho người mời gấp đến cứu, hứa nếu cứu được sẽ gả con gái làm vợ ngay. Cuội đến nơi ngắt lá đa thần đắp lên người cô gái, cô bỗng tỉnh dậy hồng hào như chưa hề mất. Phú ông giữ đúng lời hứa giang hồ gả con gái xinh đẹp cho Cuội, anh lú một phen vì vận may bất ngờ đổ xuống đầu mình.",
+        # Scene 9 — Body 7: sống hạnh phúc + nhắc vợ ICONIC verbatim lần 2
+        "Cuội và vợ sống hạnh phúc trong căn nhà nhỏ có cây đa thần trước sân, đời sống ngày càng sung túc. Cuội cẩn thận dặn vợ về quy tắc Bụt đã phán năm xưa: có đái thì đái bên đông, chớ đái bên tây cây dông lên trời. Vợ Cuội cười gật đầu hứa nhớ rõ ràng, không bao giờ dám phạm vào điều cấm kỵ này. Cả gia đình sống yên ổn nhiều năm, Cuội tiếp tục dùng lá đa cứu người gần xa flex tài năng nhân ái mỗi ngày.",
+        # Scene 10 — Body 8: vợ Cuội quên + đổ nước bên tây
+        "Một hôm Cuội đi rừng chặt củi từ sáng sớm, để vợ ở nhà một mình lo việc cơm nước. Trưa hôm ấy vợ Cuội bỗng nhiên đau bụng dữ dội, vội vàng chạy ra sân tìm chỗ giải quyết gấp. Trong lúc luống cuống vội vàng quên hết mọi lời chồng dặn, vợ Cuội ngồi xuống đại ngay bên tây gốc cây đa. Vừa làm xong vợ chợt nhớ ra điều cấm kỵ năm xưa, mặt cắt không còn giọt máu đứng hình vì biết mình đã phạm vào đại điều kiêng.",
+        # Scene 11 — Body 9: cây đa rung chuyển nhổ rễ bay
+        "Vừa lúc đó cây đa thần bắt đầu rung chuyển dữ dội, từng chiếc lá xao động như có cơn bão lớn ập đến. Mặt đất quanh gốc cây bắt đầu nứt nẻ, rễ cây từ từ bật lên khỏi lòng đất một cách kỳ lạ chưa từng thấy. Cây đa khổng lồ bắt đầu nhấc bổng lên không trung, bay lơ lửng cao dần như có sức hút từ trời cao. Vợ Cuội tâm lý vỡ vụn đứng nhìn cây đa bay lên, không biết phải làm sao để cản lại điều này.",
+        # Scene 12 — Body 10: Cuội về thấy cây bay
+        "Đúng lúc đó Cuội từ rừng vác củi trở về, vừa bước qua cổng làng thì thấy cảnh tượng kinh hoàng. Cây đa thần đang bay lên cao mỗi lúc một xa, sắp lên đến tầng mây mỏng tang trên đỉnh trời. Cuội bỏ rơi gánh củi lao về như tên bắn, chạy bán sống bán chết đến tận sân nhà. Anh nhảy bổ lên nắm chặt một rễ cây đa đang lơ lửng cuối cùng, không chịu buông tay vì tiếc báu vật cả đời mới có được.",
+        # Scene 13 — Body 11: Cuội bị kéo lên cung trăng
+        "Cây đa thần bay lên không trung càng lúc càng cao, kéo theo Cuội vẫn nắm chặt rễ không chịu buông tay. Cuội bay lên qua các tầng mây trắng bồng bềnh, qua các ngôi sao lấp lánh trên bầu trời đêm bao la vô tận. Cuối cùng cây đa cùng Cuội cập bến cung trăng xa xôi giữa vũ trụ mênh mông, không cách nào quay về trái đất được nữa. Cuội đành chịu thua hoàn cảnh, ngồi xuống dưới gốc cây đa trên mặt trăng mà nhìn về quê hương dưới đất bằng đôi mắt buồn vô tận.",
+        # Scene 14 — Moral
+        "Câu chuyện Chú Cuội Cung Trăng dạy ta rằng đôi khi chỉ một phút lơ đãng cũng đủ thay đổi cả số phận con người. Lời dặn dò của người thân yêu không bao giờ là thừa, mỗi quy tắc đều có lý do riêng đáng để ta lắng nghe nghiêm túc. Báu vật quý giá nhất không phải vàng bạc hay quyền lực, mà là sự cẩn trọng và lòng biết ơn với những điều mình đang có. Mỗi đêm rằm trông trăng, ta lại nhớ về bài học muôn thuở về sự cẩn thận và trân quý những gì giản dị quanh mình.",
+    ],
+    "image_prompts": [
+        # 1 — Hook atmospheric moonlit village
+        f"Atmospheric establishing wide shot: ancient Vietnamese rural village at midnight under full moon, mist rising from rice paddies, single massive banyan tree silhouette in distance, no characters visible, mystical mood-setting cinematic.",
+        # 2 — Hook movie poster Interstellar split
+        f"Movie-poster composition: {CHU_CUOI} on LEFT half with woodcutter axe and forest backdrop, {CUNG_TRANG} crater surface with banyan tree silhouette on RIGHT half, dramatic split lighting earth-vs-cosmos, fairy-tale poster framing.",
+        # 3 — Body 1: Cuội tiều phu intro walking
+        f"Rural daily scene: {CHU_CUOI} carrying bundle of firewood on shoulder walking through {LANG_QUE_CUOI} at dawn, simple thatched hut visible behind, warm morning golden light, peaceful contemplative mood.",
+        # 4 — Body 2: Cuội gặp cọp con bị thương
+        f"Dense forest scene: {CHU_CUOI} crouching cautiously behind bush peering at {COP_CON} lying injured under tall tree, dappled sunlight through canopy, suspenseful mood with hint of distant mystical green glow.",
+        # 5 — Body 3: cọp mẹ đắp lá đa cứu cọp con
+        f"Magical forest scene: {COP_ME} carefully chewing leaves and pressing them onto {COP_CON}'s wounds, {CAY_DA_THAN} glowing mystically nearby with golden particles, {CHU_CUOI} hidden behind bush wide-eyed in awe, dramatic golden mystical lighting.",
+        # 6 — Body 4: Cuội nhổ cây + Bụt phán rule
+        f"Mystical scene: {CHU_CUOI} pulling up the entire {CAY_DA_THAN} with magical golden roots glowing, {BUT_CUOI} appearing in mist beside him with one finger raised giving sacred warning gesture, dense ancient forest background, mystical cyan-gold lighting.",
+        # 7 — Body 5: cứu chó villagers gathering
+        f"Village front yard scene: {CHU_CUOI} applying glowing magical banyan leaves to a previously deceased yellow village dog now waking up wagging tail, {CAY_DA_THAN} planted in front yard of simple thatched hut, neighboring villagers gathering watching in awe, warm afternoon light.",
+        # 8 — Body 6: cứu vợ phú ông + cưới
+        f"Rich household interior: {CHU_CUOI} applying glowing magical banyan leaves to {VO_CUOI} lying on bed just waking up, {PHU_ONG_CUOI} standing nearby clasping hands in gratitude, lavish room with red lacquered furniture and gold accents, warm golden lighting.",
+        # 9 — Body 7: domestic happy + nhắc rule
+        f"Domestic happy scene: {CHU_CUOI} and {VO_CUOI} sitting together on wooden bench in front of simple thatched home, {CAY_DA_THAN} glowing softly in front yard between them, {CHU_CUOI} pointing toward east side of tree explaining warning, warm late afternoon golden hour, sweet mood.",
+        # 10 — Body 8: vợ Cuội đổ nước bên tây
+        f"Dramatic mistake scene: {VO_CUOI} standing on west side of {CAY_DA_THAN} pouring a wooden bucket of dirty wash water onto roots with worried regretful expression hand to mouth realizing her mistake too late, dimly lit overcast afternoon, subtle ominous wind ruffling the leaves.",
+        # 11 — Body 9: cây đa nhổ rễ bay lên
+        f"Magical uprooting scene: {CAY_DA_THAN} mid-air rising up from cracked earth with golden roots glowing dangling, dust and leaves swirling around the tree, {VO_CUOI} standing below looking up in horror with arms raised helplessly, dramatic dark stormy sky above, cinematic action.",
+        # 12 — Body 10: Cuội về thấy cây bay
+        f"Action scene: {CHU_CUOI} dropping his bundle of firewood mid-run racing through {LANG_QUE_CUOI} toward home, {CAY_DA_THAN} visible flying mid-air above the hut in distance, panicked desperate expression, motion blur, dramatic golden hour light.",
+        # 13 — Body 11: Cuội bay lên cung trăng
+        f"Cosmic ascension scene: {CHU_CUOI} clinging to dangling golden roots of {CAY_DA_THAN} as it floats higher through stars and clouds above earth toward {CUNG_TRANG}, magical golden particle trail, swirling cyan starlight nebula, awe and dread expression.",
+        # 14 — Moral iconic silhouette
+        f"Iconic closing scene: {CHU_CUOI} sitting alone under {CAY_DA_THAN} on {CUNG_TRANG} silhouette against full moon, looking down at distant blue earth visible in night sky below, contemplative bittersweet expression, ethereal silver-blue lighting, oil-painting feel hopeful melancholy mood.",
+    ],
+    "motions": ["static","zoom_in","static","pan_right","static","static","static","static","static","static","static","zoom_out","pan_right","zoom_out","static"],
+    "caption_hook": "Anh em đã nghe Chú Cuội Cung Trăng kiểu phim Interstellar chưa? 🌕🌳 Tiều phu hiền lành lên cung trăng vì vợ quên một câu thần chú!",
+    "caption_bullets": [
+        "Chú Cuội tiều phu nghèo, tốt bụng với mọi sinh vật",
+        "Cọp mẹ đắp lá đa cứu cọp con — Cuội phát hiện cây đa thần",
+        "Bụt phán rule kiêng kỵ: có đái thì đái bên đông, chớ đái bên tây",
+        "Cuội cứu chó cứu con gái phú ông, cưới vợ giàu",
+        "Vợ Cuội quên rule, đại nhầm bên tây cây đa",
+        "Cây đa thần rung chuyển nhổ rễ bay lên trời",
+        "Cuội nắm rễ bay theo lên cung trăng — mỗi đêm rằm còn thấy bóng"
+    ],
+    "caption_moral": "Câu chuyện dạy ta: lời dặn dò của người thân yêu không bao giờ là thừa, cẩn thận và biết ơn những gì giản dị quanh mình."
+}
+
 # ================ EXPORT ================
 BOOKS = {
     "thach-sanh": THACH_SANH_BOOK,
@@ -638,4 +727,5 @@ BOOKS = {
     "son-tinh-thuy-tinh": SON_TINH_BOOK,
     "tam-cam": TAM_CAM_BOOK,
     "mai-an-tiem": MAI_AN_TIEM_BOOK,
+    "chu-cuoi-cung-trang": CHU_CUOI_BOOK,
 }
