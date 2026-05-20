@@ -26,7 +26,7 @@ THACH_SANH_BOOK = {
     "story_summary": "Văn Vở Gen Z phong cách. Thạch Sanh — chàng trai mồ côi tốt bụng, bị Lý Thông lừa đảo, vẫn thắng cuối cùng. Phiên bản giải nén kiểu phim Captain America First Avenger.",
     "scripts": [
         # Scene 1 (Hook short — chào + giới thiệu truyện, ~14s)
-        "Trong kho tàng cổ tích Việt Nam, có một câu chuyện về chàng trai hiền lành bị lừa nhiều lần nhưng cuối cùng vẫn thắng. Phiên bản chi tiết của truyện Thạch Sanh, anh em ngồi vững mà thưởng thức nha.",
+        "Trong kho tàng cổ tích Việt Nam, có một câu chuyện về chàng trai hiền lành bị lừa nhiều lần nhưng cuối cùng vẫn thắng. Phiên bản chi tiết của truyện Thạch Sanh, một câu chuyện cổ tích quen thuộc mà càng nghe lại càng thấm.",
         # Scene 2 (Hook short — plot tease, ~14s)
         "Câu chuyện có chằn tinh ăn thịt người, đại bàn bắt công chúa, cây đàn thần kỳ diệu, và sét trời đánh kẻ phản bội. Đầy đủ drama, đầy đủ bài học, dân chơi mới hiểu được hết các tầng ý nghĩa sâu sắc.",
         # Scene 3 (Body 1 — Thạch Sanh tuổi thơ + movie mapping)
@@ -113,7 +113,7 @@ SO_DUA_BOOK = {
     "story_summary": "Văn Vở Gen Z. Sọ Dừa — chàng trai dị hình bên trong là hoàng tử tốt bụng. Phiên bản giải nén kiểu phim Beauty and the Beast (Disney 2017).",
     "scripts": [
         # Scene 1 — Hook short
-        "Trong kho tàng cổ tích Việt Nam, có một câu chuyện về chàng trai sinh ra trong hình hài kỳ lạ. Phiên bản chi tiết của truyện Sọ Dừa, anh em ngồi vững nha vì câu chuyện này có nhiều bất ngờ thú vị.",
+        "Trong kho tàng cổ tích Việt Nam, có một câu chuyện về chàng trai sinh ra trong hình hài kỳ lạ. Phiên bản chi tiết của truyện Sọ Dừa, một câu chuyện có nhiều tình tiết bất ngờ thú vị.",
         # Scene 2 — Hook short plot tease
         "Câu chuyện có người mẹ già hiếm muộn, có đứa con dị hình biết nói, có cô út tinh tế phát hiện chàng tráng sĩ ẩn giấu. Có hai chị xảo trá đẩy em xuống biển bị cá kình nuốt, drama đầy đủ.",
         # Scene 3 — Body 1: sinh ra + iconic plea + movie mapping
@@ -198,7 +198,7 @@ CAY_TRE_BOOK = {
     "story_summary": "Văn Vở Gen Z. Anh nông dân nghèo bị phú ông lừa, được Bụt giúp với phép thuật khắc nhập khắc xuất. Phiên bản kiểu phim Aladdin (Disney 1992).",
     "scripts": [
         # Scene 1 — Hook short
-        "Trong kho tàng cổ tích Việt Nam, có một câu chuyện về anh nông dân nghèo bị phú ông lừa đảo. Phiên bản chi tiết của truyện Cây Tre Trăm Đốt, anh em ngồi vững nha vì có màn trừng phạt cực kỳ sảng khoái.",
+        "Trong kho tàng cổ tích Việt Nam, có một câu chuyện về anh nông dân nghèo bị phú ông lừa đảo. Phiên bản chi tiết của truyện Cây Tre Trăm Đốt, một câu chuyện có màn trừng phạt cực kỳ sảng khoái.",
         # Scene 2 — Hook short plot tease
         "Câu chuyện có anh nông dân chăm chỉ làm thuê 3 năm tận tụy, có ông phú ông tham lam lật mặt. Có ông Bụt từ bi ban thần chú, có cây tre trăm đốt phép thuật, có drama trừng phạt cuối siêu hay.",
         # Scene 3 — Body 1: anh nông dân làm thuê + movie mapping
@@ -283,7 +283,7 @@ AN_KHE_BOOK = {
     "story_summary": "Văn Vở Gen Z. Hai anh em mồ côi — em hiền lành được phượng hoàng trả vàng, anh tham lam chết vì greed. Phiên bản kiểu phim The Wolf of Wall Street (2013).",
     "scripts": [
         # Scene 1 — Hook short (slang: dân chơi)
-        "Hôm nay anh em sẽ nghe lại một câu chuyện cổ tích quen thuộc nhưng đầy bài học, kể về một ông anh tham không đáy và một người em hiền lành đáo để. Truyện Ăn Khế Trả Vàng, anh em ngồi vững nha vì kết thúc khá là sảng khoái cho những kẻ tham mà không biết đủ. Dân chơi mới hiểu được bài học sâu sắc đằng sau câu chuyện đơn giản này.",
+        "Hôm nay anh em sẽ nghe lại một câu chuyện cổ tích quen thuộc nhưng đầy bài học, kể về một ông anh tham không đáy và một người em hiền lành đáo để. Truyện Ăn Khế Trả Vàng, một câu chuyện có kết thúc khá là sảng khoái cho những kẻ tham mà không biết đủ. Dân chơi mới hiểu được bài học sâu sắc đằng sau câu chuyện đơn giản này.",
         # Scene 2 — Hook plot tease (slang: drama, khét lẹt)
         "Câu chuyện có cuộc chia gia tài đầy drama giữa hai anh em ruột mồ côi. Có cây khế cằn cỗi tưởng vô dụng nhưng lại là cả gia tài, có chim phượng hoàng kỳ diệu biết nói tiếng người. Có túi ba gang khiêm tốn đối đầu túi chín gang khổng lồ, và một cái kết khét lẹt giữa biển khơi sâu thẳm.",
         # Scene 3 — Body 1: chia tài sản (slang: siêu phèn)
@@ -368,7 +368,7 @@ SON_TINH_BOOK = {
     "story_summary": "Văn Vở Gen Z. Sơn Tinh và Thủy Tinh tranh giành Mị Nương — đại chiến núi vs nước. Phiên bản kiểu phim Crazy Rich Asians (2018).",
     "scripts": [
         # Scene 1 — Hook short
-        "Trong kho tàng truyền thuyết Việt Nam, có một câu chuyện về cuộc tranh giành tình yêu giữa 2 vị thần khét. Phiên bản chi tiết của truyện Sơn Tinh Thủy Tinh, anh em ngồi vững nha vì combat núi vs nước siêu epic.",
+        "Trong kho tàng truyền thuyết Việt Nam, có một câu chuyện về cuộc tranh giành tình yêu giữa 2 vị thần khét. Phiên bản chi tiết của truyện Sơn Tinh Thủy Tinh, một câu chuyện có màn combat núi vs nước siêu epic.",
         # Scene 2 — Hook short plot tease
         "Câu chuyện có Vua Hùng kén rể cho Mị Nương, có 2 chàng trai siêu bá tranh nhau. Có sính lễ oái oăm, có đại chiến dâng núi nuốt nước, có giải thích vì sao Bắc Bộ năm nào cũng lụt.",
         # Scene 3 — Body 1: Vua Hùng + Mị Nương + movie mapping
@@ -380,7 +380,7 @@ SON_TINH_BOOK = {
         # Scene 6 — Body 4: Sơn Tinh chuẩn bị + đến trước cưới
         "Sơn Tinh là đại boss vùng núi nên có sẵn nhiều thú lạ và lương thực trong rừng sâu, chuẩn bị sính lễ rất nhanh chóng. Anh sai thuộc hạ đi khắp các đỉnh núi cao, mang về đầy đủ một trăm ván cơm nếp, hai trăm nệp bánh chưng, voi chín ngà, gà chín cựa, ngựa chín hồng mao đủ ba con. Sáng sớm tinh mơ Sơn Tinh đã dẫn đoàn sính lễ kỳ thú đến cung vua trước rồi. Vua Hùng theo lời hứa giữ chữ tín, ngay lập tức gả công chúa Mị Nương cho Sơn Tinh và rước cô về núi Tản Viên.",
         # Scene 7 — Body 5: Thủy Tinh tới muộn + sang chấn
-        "Thủy Tinh ở dưới biển sâu phải vất vả lắm mới tìm được đủ sính lễ kỳ quặc theo yêu cầu. Khi tới cung vua thì đã muộn vài giờ, công chúa Mị Nương đã được Sơn Tinh rước về núi rồi. Thủy Tinh đứng giữa cung điện trống không, tâm lý vỡ vụn sang chấn nặng nề không nói được câu nào. Hận tới tận xương tủy, Thủy Tinh thề sẽ trả thù Sơn Tinh và cướp lại Mị Nương bằng mọi giá.",
+        "Thủy Tinh ở dưới biển sâu phải vất vả lắm mới tìm được đủ sính lễ kỳ quặc theo yêu cầu. Khi tới cung vua thì đã muộn vài giờ, công chúa Mị Nương đã được Sơn Tinh rước về núi rồi. Thủy Tinh đứng giữa cung điện trống không, sang chấn nặng nề không nói được câu nào. Hận tới tận xương tủy, Thủy Tinh thề sẽ trả thù Sơn Tinh và cướp lại Mị Nương bằng mọi giá.",
         # Scene 8 — Body 6: Thủy Tinh combat start
         "Thủy Tinh trở về biển lập tức hô mưa gọi gió, dâng nước cuồn cuộn đuổi theo Sơn Tinh tận núi Tản Viên. Combo bão tố sóng thần liên hoàn cực gắt, nước dâng cao chìm cả đồng bằng Bắc Bộ. Nhà cửa làng mạc đều bị nhấn chìm, gia súc trôi nổi khắp nơi trong biển nước mênh mông. Dân chúng kêu cứu khắp nơi, ai cũng nghĩ đây là ngày tận thế của loài người sắp đến rồi.",
         # Scene 9 — Body 7: Sơn Tinh counter
@@ -454,7 +454,7 @@ TAM_CAM_BOOK = {
     "story_summary": "Văn Vở Gen Z. Tấm mồ côi bị dì ghẻ + Cám hành hạ, được Bụt giúp, lên cung làm hoàng hậu rồi bị giết, hóa kiếp nhiều lần trả thù. Phiên bản kiểu phim Cinderella (Disney 2015).",
     "scripts": [
         # Scene 1 — Hook short
-        "Trong kho tàng cổ tích Việt Nam, có một câu chuyện về cuộc trả thù tàn khốc nhất sau khi bị mưu hại. Phiên bản chi tiết của truyện Tấm Cám, anh em ngồi vững nha vì câu chuyện này có nhiều tình tiết bất ngờ rất khó tin.",
+        "Trong kho tàng cổ tích Việt Nam, có một câu chuyện về cuộc trả thù tàn khốc nhất sau khi bị mưu hại. Phiên bản chi tiết của truyện Tấm Cám, một câu chuyện có nhiều tình tiết bất ngờ rất khó tin.",
         # Scene 2 — Hook short plot tease
         "Câu chuyện có dì ghẻ ác độc, có Bụt từ bi giúp đỡ, có cá bống huyền thoại, có bầy chim sẻ kỳ diệu. Có hóa kiếp 4 lần để trả thù, có drama kết cục tàn khốc nhất trong cổ tích Việt.",
         # Scene 3 — Body 1: Tấm mồ côi + movie mapping
@@ -557,7 +557,7 @@ MAI_AN_TIEM_BOOK = {
     "story_summary": "Văn Vở Gen Z. Mai An Tiêm phò mã Vua Hùng tự tin sức mình, bị đày ra đảo hoang, tự tay trồng được dưa hấu khắc tên thả biển, cuối cùng được vua hối hận đón về phổ biến giống dưa khắp Văn Lang. Phiên bản kiểu phim Cast Away (2000).",
     "scripts": [
         # Scene 1 — Hook short
-        "Trong kho tàng truyền thuyết Việt Nam, có một câu chuyện về chàng phò mã bị đày ra đảo hoang nhưng cuối cùng vẫn thắng đời. Phiên bản chi tiết của truyện Mai An Tiêm, anh em ngồi vững nha vì đây là bài học khét lẹt về sự tự lập và niềm tin vào chính mình.",
+        "Trong kho tàng truyền thuyết Việt Nam, có một câu chuyện về chàng phò mã bị đày ra đảo hoang nhưng cuối cùng vẫn thắng đời. Phiên bản chi tiết của truyện Mai An Tiêm, một bài học sâu sắc về sự tự lập và niềm tin vào chính mình.",
         # Scene 2 — Hook plot tease
         "Câu chuyện có vị vua cha nóng tính, có chàng phò mã bị xem là ngạo mạn, có cuộc đày ải ra đảo hoang giữa biển khơi mênh mông. Có đàn quạ thả hạt lạ, có quả dưa hấu đỏ mọng ngọt mát đầu tiên của đất Việt, và một drama hồi cung đầy bài học.",
         # Scene 3 — Body 1: Mai An Tiêm intro + movie poster
@@ -565,7 +565,7 @@ MAI_AN_TIEM_BOOK = {
         # Scene 4 — Body 2: Câu nói gây họa + ICONIC verbatim lần 1
         "Một hôm trong tiệc lớn, các quan thần khen ngợi Mai An Tiêm có được tất cả là nhờ ơn vua ban tặng. Anh đáp lại tự tin rằng: của mình làm ra mới quý, còn của người khác cho thì chỉ là tạm bợ. Câu nói lập tức bay đến tai vua Hùng, khiến vua nghe xong đứng hình mất mấy giây không nói nên lời. Vua cho rằng phò mã ngạo mạn vô ơn, không biết kính trên nhường dưới, lập tức nổi cơn thịnh nộ ngay tại cung.",
         # Scene 5 — Body 3: Vua đày
-        "Vua Hùng giận đến mức tâm lý vỡ vụn, lập tức ra lệnh đày Mai An Tiêm cùng cả gia đình ra một hòn đảo hoang xa xôi. Vua chỉ cho mang theo một ít lương thực và vài thứ đồ đơn giản, không một viên ngọc nào quý giá. Vua phán rằng để xem phò mã làm ra của cải kiểu gì khi không còn dựa vào triều đình nữa. Mai An Tiêm cúi đầu nhận hình phạt không một lời cãi lại, lặng lẽ thu xếp cùng vợ con bước lên thuyền ra biển khơi.",
+        "Vua Hùng giận sôi máu, lập tức ra lệnh đày Mai An Tiêm cùng cả gia đình ra một hòn đảo hoang xa xôi. Vua chỉ cho mang theo một ít lương thực và vài thứ đồ đơn giản, không một viên ngọc nào quý giá. Vua phán rằng để xem phò mã làm ra của cải kiểu gì khi không còn dựa vào triều đình nữa. Mai An Tiêm cúi đầu nhận hình phạt không một lời cãi lại, lặng lẽ thu xếp cùng vợ con bước lên thuyền ra biển khơi.",
         # Scene 6 — Body 4: Lên đảo hoang
         "Sau nhiều ngày lênh đênh trên biển, gia đình Mai An Tiêm cuối cùng cập bến một hòn đảo hoang vu giữa biển khơi mênh mông. Đảo siêu phèn không một bóng người, chỉ có cây cối hoang dại và sóng biển vỗ về bờ cát trắng. Vợ Mai An Tiêm ôm con khóc nức nở vì sợ chết đói chết khát giữa nơi vô tận. Mai An Tiêm bình tĩnh đặt hành lý xuống, ngước nhìn trời rộng rồi tự nhủ phải tìm cách sống sót bằng mọi giá.",
         # Scene 7 — Body 5: Động viên vợ con + dựng lều
@@ -646,7 +646,7 @@ CHU_CUOI_BOOK = {
     "story_summary": "Văn Vở Gen Z. Chú Cuội tiều phu nghèo tốt bụng phát hiện cây đa thần cứu mạng, nổi tiếng cưới vợ giàu. Vợ quên rule đái nhầm bên tây cây đa, cây bay lên cung trăng kéo theo Cuội. Phiên bản kiểu phim Interstellar (2014).",
     "scripts": [
         # Scene 1 — Hook short
-        "Trong kho tàng cổ tích Việt Nam, có một câu chuyện về chàng tiều phu vô tình bay lên cung trăng vì một cái quên ngớ ngẩn của vợ. Phiên bản chi tiết của truyện Chú Cuội Cung Trăng, anh em ngồi vững nha vì câu chuyện này có cả drama lẫn bài học cuộc đời sâu sắc.",
+        "Trong kho tàng cổ tích Việt Nam, có một câu chuyện về chàng tiều phu vô tình bay lên cung trăng vì một cái quên ngớ ngẩn của vợ. Phiên bản chi tiết của truyện Chú Cuội Cung Trăng, một câu chuyện có cả drama lẫn bài học cuộc đời sâu sắc.",
         # Scene 2 — Hook plot tease
         "Câu chuyện có cây đa thần kỳ chữa được người chết sống lại, có chàng tiều phu hiền lành nổi tiếng khắp vùng. Có cô vợ hậu đậu lú một phen, có cây đa bay lên trời mang theo cả người ngồi gốc cây, và lý do vì sao cứ rằm là ta thấy bóng người trên mặt trăng.",
         # Scene 3 — Body 1: Cuội tiều phu intro + movie mapping
@@ -666,7 +666,7 @@ CHU_CUOI_BOOK = {
         # Scene 10 — Body 8: vợ Cuội quên + đổ nước bên tây
         "Một hôm Cuội đi rừng chặt củi từ sáng sớm, để vợ ở nhà một mình lo việc cơm nước. Trưa hôm ấy vợ Cuội bỗng nhiên đau bụng dữ dội, vội vàng chạy ra sân tìm chỗ giải quyết gấp. Trong lúc luống cuống vội vàng quên hết mọi lời chồng dặn, vợ Cuội ngồi xuống đại ngay bên tây gốc cây đa. Vừa làm xong vợ chợt nhớ ra điều cấm kỵ năm xưa, mặt cắt không còn giọt máu đứng hình vì biết mình đã phạm vào đại điều kiêng.",
         # Scene 11 — Body 9: cây đa rung chuyển nhổ rễ bay
-        "Vừa lúc đó cây đa thần bắt đầu rung chuyển dữ dội, từng chiếc lá xao động như có cơn bão lớn ập đến. Mặt đất quanh gốc cây bắt đầu nứt nẻ, rễ cây từ từ bật lên khỏi lòng đất một cách kỳ lạ chưa từng thấy. Cây đa khổng lồ bắt đầu nhấc bổng lên không trung, bay lơ lửng cao dần như có sức hút từ trời cao. Vợ Cuội tâm lý vỡ vụn đứng nhìn cây đa bay lên, không biết phải làm sao để cản lại điều này.",
+        "Vừa lúc đó cây đa thần bắt đầu rung chuyển dữ dội, từng chiếc lá xao động như có cơn bão lớn ập đến. Mặt đất quanh gốc cây bắt đầu nứt nẻ, rễ cây từ từ bật lên khỏi lòng đất một cách kỳ lạ chưa từng thấy. Cây đa khổng lồ bắt đầu nhấc bổng lên không trung, bay lơ lửng cao dần như có sức hút từ trời cao. Vợ Cuội đứng chết lặng nhìn cây đa bay lên, không biết phải làm sao để cản lại điều này.",
         # Scene 12 — Body 10: Cuội về thấy cây bay
         "Đúng lúc đó Cuội từ rừng vác củi trở về, vừa bước qua cổng làng thì thấy cảnh tượng kinh hoàng. Cây đa thần đang bay lên cao mỗi lúc một xa, sắp lên đến tầng mây mỏng tang trên đỉnh trời. Cuội bỏ rơi gánh củi lao về như tên bắn, chạy bán sống bán chết đến tận sân nhà. Anh nhảy bổ lên nắm chặt một rễ cây đa đang lơ lửng cuối cùng, không chịu buông tay vì tiếc báu vật cả đời mới có được.",
         # Scene 13 — Body 11: Cuội bị kéo lên cung trăng
@@ -734,9 +734,7 @@ BANH_CHUNG_BOOK = {
     "story_summary": "Văn Vở Gen Z. Vua Hùng đời 6 mở cuộc thi truyền ngôi, 22 hoàng tử dâng sơn hào hải vị. Lang Liêu con thứ 18 mồ côi mẹ, nằm mộng được tiên ông chỉ cách làm bánh chưng bánh dày từ gạo nếp, thắng cuộc thi truyền ngôi. Phiên bản kiểu phim Ratatouille (2007).",
     "scripts": [
         # Scene 1 — Hook short
-        "Trong kho tàng truyền thuyết Việt Nam, có một câu chuyện về anh hoàng tử khiêm tốn thắng cuộc thi đầu bếp hoàng gia chỉ bằng món ăn quê mùa nhất quả đất. Phiên bản chi tiết của sự tích Bánh Chưng Bánh Dày, anh em ngồi vững nha vì đây là bài học khiêm tốn đến nay vẫn cực kỳ thấm.",
-        # Scene 2 — Hook plot tease
-        "Câu chuyện có vua Hùng già sắp truyền ngôi, có hai mươi mấy hoàng tử tranh nhau dâng sơn hào hải vị. Có giấc mộng tiên ông chỉ điểm cách làm bánh từ gạo nếp, có cú lội ngược dòng đầy drama của anh con thứ mười tám mồ côi mẹ. Và đây cũng là gốc tích của món bánh chưng Tết Việt Nam.",
+        "Trong kho tàng truyền thuyết Việt Nam, có một cú lội ngược dòng đầy drama của chàng hoàng tử mồ côi, người đã thắng cuộc thi đầu bếp hoàng gia chỉ bằng món ăn quê mùa nhất quả đất. Khi Vua Hùng già sắp truyền ngôi, trong lúc hai mươi mấy người anh em đua nhau dâng sơn hào hải vị, thì chàng hoàng tử thứ 18 lại được tiên ông chỉ điểm cách làm bánh từ hạt gạo nếp. Hãy cùng xem lại sự tích Bánh Chưng Bánh Dày, vì đây là một bài học sâu sắc về sự khiêm tốn mà đến nay vẫn cực kỳ thấm",
         # Scene 3 — Body 1: Vua Hùng setup casting
         "Ngày xửa ngày xưa vào đời Vua Hùng Vương thứ sáu, ông vua đã già và tới giai đoạn phải chọn người kế vị. Vấn đề là vua có nguyên một đội hai mươi mấy hoàng tử, mỗi ông một tài năng riêng, không ông nào kém ông nào. Vua không phải dạng cha truyền con nối theo công thức, vua thấy ông nào xứng nhất thì cho. Cuối cùng vua nghĩ ra một cách công bằng kiểu thi tuyển hoàng gia, tôi gọi vui là MasterChef Văn Lang phiên bản bốn nghìn năm trước Công nguyên.",
         # Scene 4 — Body 2: Luật chơi + 22 hoàng tử chuẩn bị
@@ -744,7 +742,7 @@ BANH_CHUNG_BOOK = {
         # Scene 5 — Body 3: Lang Liêu profile
         "Trong giữa cái biển hoàng tử chen nhau khoe tài chính ấy thì có một ông đứng góc, đó là hoàng tử Lang Liêu. Đây là con thứ mười tám của Vua Hùng, mẹ mất sớm từ khi Lang Liêu còn rất nhỏ, không được đại gia đình nâng đỡ như mấy ông anh con dòng chính. Profile của Lang Liêu thì gần như đối lập một trăm tám mươi độ với hình ảnh hoàng tử mà anh em hay tưởng tượng. Em không có gia nhân riêng, không có ngân khố vung tiền săn đồ quý, không có quan hệ thương gia trong lẫn ngoài nước.",
         # Scene 6 — Body 4: Lang Liêu buồn không có gì để dâng
-        "Nghe vua cha ra đề bài xong thì các ông anh xôn xao lên kế hoạch, còn Lang Liêu thì ngồi yên một góc tâm lý vỡ vụn. Anh biết quá rõ mình không có bất cứ thứ gì để cạnh tranh với hai mươi đối thủ kia. Trong khi mấy ông anh tấp nập xe ngựa chở hàng hiếm về cung thì Lang Liêu chỉ đi tới đi lui trong căn nhà nhỏ nhìn ra cánh đồng lúa vàng. Cảm giác bị bỏ lại phía sau ám ảnh vô cùng, không có ý tưởng nào sáng tạo để vượt mặt mấy ông anh giàu nứt đố đổ vách.",
+        "Nghe vua cha ra đề bài xong thì các ông anh xôn xao lên kế hoạch, còn Lang Liêu thì ngồi yên một góc với tâm trạng nặng trĩu. Anh biết quá rõ mình không có bất cứ thứ gì để cạnh tranh với hai mươi đối thủ kia. Trong khi mấy ông anh tấp nập xe ngựa chở hàng hiếm về cung thì Lang Liêu chỉ đi tới đi lui trong căn nhà nhỏ nhìn ra cánh đồng lúa vàng. Cảm giác bị bỏ lại phía sau ám ảnh vô cùng, không có ý tưởng nào sáng tạo để vượt mặt mấy ông anh giàu nứt đố đổ vách.",
         # Scene 7 — Body 5: Tiên ông hiện ra + ICONIC verbatim lần 1
         "Đêm hôm đó Lang Liêu nằm trằn trọc trên giường nghĩ ngợi mãi, cuối cùng kiệt sức rồi cũng thiếp đi giữa khuya. Trong giấc mộng thì có một ông tiên râu tóc bạc phơ hiện ra giữa làn mây trắng, ánh hào quang vàng rực chiếu khắp căn nhà nhỏ. Tiên ông cười hiền từ rồi nói rõ ràng từng chữ một: trong trời đất không có gì quý bằng hạt gạo, vì gạo là thứ nuôi sống con người. Lang Liêu nghe vậy thì tỉnh ngộ ngay lập tức, ngồi bật dậy lắng nghe tiên ông tiếp tục dặn dò.",
         # Scene 8 — Body 6: Tiên ông dạy công thức 2 bánh
@@ -763,9 +761,7 @@ BANH_CHUNG_BOOK = {
         "Câu chuyện Bánh Chưng Bánh Dày dạy ta một bài học vô cùng sâu sắc, đó là giá trị thực sự của con người không nằm ở sự xa hoa cầu kỳ, mà ở khả năng trân quý và tôn vinh những điều giản dị nhất xung quanh mình. Trong khi các hoàng tử khác chạy theo những thứ quý hiếm xa xôi, Lang Liêu lại biết nhìn xuống chính mảnh đất quê hương để tìm ra báu vật. Cứ mỗi dịp Tết đến, khi gói chiếc bánh chưng vuông vắn buộc bằng dây lạt, người Việt lại nhớ về truyền thuyết này và tự nhắc nhau rằng hạnh phúc nằm trong chính cái nồi bánh chưng đỏ lửa đêm giao thừa.",
     ],
     "image_prompts": [
-        # 1 — Hook atmospheric Văn Lang dawn
-        f"Atmospheric establishing wide shot: ancient Vietnamese Văn Lang kingdom at dawn, fishing boats by shore, mist rising from golden rice paddies in valley, distant pagoda silhouettes, no characters visible, mood-setting cinematic.",
-        # 2 — Hook movie poster Ratatouille split
+        # 1 — Hook (single, merged) movie poster Ratatouille split
         f"Movie-poster composition: {LANG_LIEU} on LEFT half humble holding a simple wooden tray with two plain rice cakes ({BANH_CHUNG} and {BANH_DAY}), RIGHT half showing piles of luxurious sơn hào hải vị (whole roasted deer, lobsters, exotic spices) under elaborate gold chandeliers, split lighting underdog vs elite contrast, fairy-tale poster framing.",
         # 3 — Body 1: Vua Hùng court setup
         f"Royal court scene: {VUA_HUNG_BCBD} sitting on golden throne thoughtful pondering succession, surrounded by silent courtiers and ministers, {COURT_BCBD}, warm golden lighting, regal patriarchal mood.",
@@ -792,7 +788,7 @@ BANH_CHUNG_BOOK = {
         # 14 — Moral Tết family gathering
         f"Closing peaceful Tết scene: traditional Vietnamese family gathered around large red glowing fire boiling a giant pot of {BANH_CHUNG} on dark cold winter night, parents children grandparents smiling warmly together, warm amber palette red paper lanterns swaying overhead, oil-painting feel hopeful timeless tradition mood, intergenerational warmth.",
     ],
-    "motions": ["static","zoom_in","static","static","pan_right","pan_right","static","static","static","static","static","pan_right","static","static","zoom_out"],
+    "motions": ["static","static","static","pan_right","pan_right","static","static","static","static","static","pan_right","static","static","zoom_out"],
     "caption_hook": "Anh em đã nghe Bánh Chưng Bánh Dày kiểu phim Ratatouille chưa? 🍚🎋 Hoàng tử mồ côi mẹ thắng cuộc thi truyền ngôi chỉ bằng cái bánh quê!",
     "caption_bullets": [
         "Vua Hùng đời 6 mở cuộc thi MasterChef truyền ngôi",

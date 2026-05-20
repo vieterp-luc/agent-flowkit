@@ -300,18 +300,19 @@ CONSTRAINTS:
 - **CONVERSATIONAL GLUE thay ngắt chấm cứng:** "Thế là", "Cơ mà", "Đến đây thì", "Ok", "Thành ra", "Vấn đề là", "Ai cũng nghĩ giống nhau:", "Cuối cùng X nghĩ ra một cách...".
 - **HYPERBOLE MODERN:** "quê mùa nhất quả đất", "cực kỳ căng", "siêu khó tính", "không khác gì hội chợ", "kiểu như reality cooking show", "nháo nhào lên", "đứng hình tại chỗ", "im phăng phắc".
 - **Scene 0 (INTRO — MANDATORY first scene):** narrator = "Chào mừng anh em đến với seri cổ tích thời gen z." image_prompt = branding intro card storybook + magical neon swirls. Motion = static.
-- **Hook (2 scenes max, 25-35s tổng):** Scene 1 = hangout greeting + giới thiệu truyện + movie mapping organic ("Nếu phải so với phim Hollywood thì tôi xếp nó hạng X 20XX") (~55-65 từ). Scene 2 = plot tease ngắn gọn drama/iconic event preview (~55-65 từ). Hook TRÁNH English slang dày — VN-leaning: dân chơi, drama, lầy lội.
-- **KHÔNG dùng "Câu chuyện này giải nén kiểu phim..." trong bất kỳ scene nào** — movie mapping chỉ trong hangout intro (scene 1) hoặc chapter concept title nội bộ, KHÔNG đề cập "kiểu phim X" verbatim trong scene 3+.
+- **Hook (1 SCENE DUY NHẤT — locked, 2 hook quá dài):** Scene 1 gộp greeting + giới thiệu truyện + plot tease + movie mapping organic ("Nếu phải so với phim Hollywood thì tôi xếp nó hạng X 20XX") trong 1 đoạn ~90-110 từ. KHÔNG tách thành 2 scene hook riêng. Hook TRÁNH English slang dày — VN-leaning: dân chơi, drama, lầy lội. **KHÔNG dùng cliché "anh em ngồi vững nha"** (verbal tic — user reject) — mở/chốt hook bằng câu tự nhiên ("Hãy cùng xem lại sự tích X, vì đây là...").
+- **KHÔNG dùng "Câu chuyện này giải nén kiểu phim..." trong bất kỳ scene nào** — movie mapping chỉ trong hook (scene 1) hoặc chapter concept title nội bộ, KHÔNG đề cập "kiểu phim X" verbatim trong scene 2+.
 - **Body (11 scenes):** mỗi scene 3-5 câu (60-110 từ) — kể CHI TIẾT. **PHẢI bao gồm iconic phrases verbatim** khi có (vd "Đàn kêu tích tịch tình tang, ai mang công chúa dưới hang trở về" / "bống bống bang bang lên ăn cơm vàng cơm bạc" / "khắc nhập khắc nhập" / "ăn một quả trả một cục vàng" / "trong trời đất không có gì quý bằng hạt gạo" / "có đái thì đái bên đông chớ đái bên tây cây dông lên trời"). Cho phép >110 từ nếu cần chỗ cho iconic phrase + meta-commentary.
-- **7-CHAPTER NARRATIVE STRUCTURE trong 14 scenes (mapped to Bánh Chưng gold standard):**
-  - Scene 1-2: Hook (greeting + plot tease)
-  - Scene 3-4: Chương 1 setup (world/king establishment)
-  - Scene 5-6: Chương 2 underdog profile (main char 180 độ)
-  - Scene 7-8: Chương 3 inception/catalyst (magical event / iconic phrase verbatim lần 1)
-  - Scene 9-10: Chương 4 preparation/journey
-  - Scene 11-12: Chương 5-6 climax (showdown + verdict)
-  - Scene 13: Final resolution (iconic phrase verbatim lần 2)
-  - Scene 14: Moral wrap-up (tone shift sâu sắc, 0 slang)
+- **7-CHAPTER NARRATIVE STRUCTURE trong 13 story scenes (mapped to Bánh Chưng gold standard, scene 0 = intro):**
+  - Scene 1: Hook (1 scene duy nhất — greeting + plot tease + movie mapping gộp)
+  - Scene 2-3: Chương 1 setup (world/king establishment)
+  - Scene 4-5: Chương 2 underdog profile (main char 180 độ)
+  - Scene 6-7: Chương 3 inception/catalyst (magical event / iconic phrase verbatim lần 1)
+  - Scene 8-9: Chương 4 preparation/journey
+  - Scene 10-11: Chương 5-6 climax (showdown + verdict)
+  - Scene 12: Final resolution (iconic phrase verbatim lần 2)
+  - Scene 13: Moral wrap-up (tone shift sâu sắc, 0 slang)
+- Total = 14 scenes (scene 0 intro + 13 story). `scripts[]` có 13 phần tử, `image_prompts[]` 13, `motions[]` 14.
 - Scene duration target 15-30s/scene → total video 5-15 min long-form
 - NO AD BREAK scene
 - Scene 4-12 (Body, kể trung thành sự kiện):
@@ -330,7 +331,7 @@ ALLOWED (mainstream VN, phổ thông hiểu ngay):
 - Nhân vật: boi phố chính hiệu, dân chơi, idol quốc dân, ông trùm
 - Combat: combat, combo, hành gà, nắc cho thân tàn ma dại
 - Exit/thua: AFK, đành chịu thua, hàng tạm, đăng xuất
-- Psychological: tâm lý vỡ vụn, sang chấn, cười xỉu, đứng hình
+- Psychological: sang chấn, cười xỉu, đứng hình, đứng chết lặng
 - Scam/lừa: scam, lừa đảo trắng trợn
 - Locations: biệt thự triệu đô, view thoáng đét, tã, lầy lội
 - Status: flex, lú, cực kỳ bá
@@ -348,8 +349,8 @@ FLOW RULE — narrator text phải đọc tự nhiên, KHÔNG over-chop:
 - `...` ellipsis chỉ khi suspense thật, không filler
 - Mặc định dùng `,` `.` cho nhịp tự nhiên
 - Total special punctuation max 2/scene
-- Anti-pattern: "Tâm lý vỡ vụn. PTSD nặng. Nuôi hận muôn đời." (chặt vụn)
-- Đúng: "tâm lý vỡ vụn, sang chấn nặng nề, nuôi hận muôn đời" (gộp liền)
+- Anti-pattern: "Sang chấn nặng. Đứng hình. Nuôi hận muôn đời." (chặt vụn)
+- Đúng: "sang chấn nặng nề, đứng chết lặng, nuôi hận muôn đời" (gộp liền)
 
 OUTPUT JSON:
 [
@@ -427,7 +428,7 @@ drawtext=fontfile='/Library/Fonts/Arial Unicode.ttf':text='<TÊN TRUYỆN>':font
 | FPS | 30 |
 | TTS volume | 1.5× |
 | Background music | **DISABLED** (user explicit reject — narrator-only audio) |
-| Scene count | 11-14 per ep (Hook=1-3 + Recap=0-2 + Body=8-9 + Moral=1-2) — NO ad break |
+| Scene count | 14 per ep (scene 0 intro + Hook=1 + Body=11 + Moral=1) — NO ad break, NO 2-scene hook |
 | Ad break | **REMOVED** (user explicit reject) |
 | Moral wrap-up | Mandatory (non-negotiable — defining feature) |
 | Aesthetic | `vanvo_modern` only (no alternatives) |
@@ -450,7 +451,7 @@ ALLOWED:
 | Đánh tàn nhẫn | nắc cho thân tàn ma dại |
 | Chết/thua/rút lui | AFK, đành chịu thua, hàng tạm, đăng xuất |
 | Bị choáng | đứng hình, cười xỉu |
-| Trauma | tâm lý vỡ vụn, sang chấn nặng nề |
+| Trauma | sang chấn nặng nề, đứng chết lặng |
 | Bị lừa | scam, lừa đảo trắng trợn |
 | Nhà giàu | biệt thự triệu đô, view thoáng đét |
 | Nhà nghèo | tã, lầy lội |
