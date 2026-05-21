@@ -802,6 +802,91 @@ BANH_CHUNG_BOOK = {
     "caption_moral": "Câu chuyện dạy ta: giá trị thực sự không nằm ở xa hoa cầu kỳ, mà ở khả năng trân quý những điều giản dị nhất quanh mình."
 }
 
+# ================ BOOK 10: SỰ TÍCH HỒ GƯƠM ================
+LE_LOI = _char("Lê Lợi", "young Vietnamese man, heroic uprising leader: navy-blue solid warrior tunic no print over dark streetwear trousers, leather boots, gold chain, undercut black hair, strong determined charismatic face")
+LE_LOI_VUA = _char("Lê Lợi as King Lê Thái Tổ", "the same young Vietnamese man now as emperor: golden-yellow royal dragon robe, royal crown, gold chain, undercut black hair, dignified regal face — same person as Lê Lợi warrior")
+LE_THAN = _char("Lê Thận", "young Vietnamese fisherman: simple brown solid tunic no print + rolled-up trousers, sandals, weathered honest face, undercut black hair")
+RUA_VANG = "giant Golden Turtle Rùa Vàng: enormous ancient turtle with a luminous golden-bronze shell, wise glowing eyes, emerging from lake water, mystical golden aura"
+GUOM_TT = "the magic sword Thuận Thiên: a glowing legendary Vietnamese sword, jade-and-gold studded hilt, gleaming steel blade with faint engraved characters, emanating golden cyan magical light"
+GIAC_MINH = "Ming dynasty invader soldiers giặc Minh: armored 15th-century Chinese soldiers in dark lacquered armor with red banners, menacing"
+NGHIA_QUAN = "Lam Sơn rebel army nghĩa quân: ragtag Vietnamese rebel fighters in simple brown tunics and conical hats, bamboo spears and swords, determined peasant warriors"
+RUNG_LAM_SON = "dense misty mountain forest of the Lam Sơn region: tall ancient trees, fog, rugged terrain, hidden rebel camp atmosphere"
+LAKE_TA_VONG = "serene lake in the ancient Vietnamese capital: calm green water, a small turtle tower islet, willow trees on the banks, traditional pavilions, peaceful misty atmosphere"
+
+HO_GUOM_BOOK = {
+    "slug": "su-tich-ho-guom",
+    "title": "Sự Tích Hồ Gươm",
+    "story_summary": "Văn Vở Gen Z. Giặc Minh đô hộ, Lê Lợi khởi nghĩa Lam Sơn yếu thế. Đức Long Quân cho mượn gươm thần Thuận Thiên — Lê Thận vớt lưỡi gươm, Lê Lợi tìm chuôi gươm, ráp vừa khít. Nghĩa quân đại thắng đuổi giặc Minh, Lê Lợi lên ngôi. Một năm sau Rùa Vàng đòi gươm, hồ Tả Vọng thành Hồ Hoàn Kiếm. Phiên bản kiểu phim Excalibur (1981).",
+    "scripts": [
+        # Scene 1 — Hook (1 scene duy nhất)
+        "Hôm nay chúng ta sẽ nói về một truyền thuyết gắn liền với trái tim của thủ đô Hà Nội, đó là sự tích Hồ Gươm. Nếu phải so với một bộ phim để anh em dễ hình dung thì tôi xếp nó ngang hàng Excalibur, câu chuyện về một thanh gươm huyền thoại và vị vua được trời chọn. Câu chuyện có giặc Minh đô hộ tàn bạo, có nghĩa quân Lam Sơn khởi nghĩa từ con số không, có thanh gươm thần Thuận Thiên ráp từ hai mảnh ở hai nơi khác nhau. Và có cả màn trả gươm cho Rùa Vàng, giải thích vì sao giữa lòng Hà Nội lại có một cái hồ mang tên Hoàn Kiếm.",
+        # Scene 2 — Chương 1: giặc Minh đô hộ
+        "Câu chuyện bắt đầu vào đầu thế kỷ mười lăm, khi giặc Minh từ phương Bắc tràn sang đô hộ nước ta. Anh em cứ hình dung kiểu một tập đoàn nước ngoài siêu mạnh nhảy vào thâu tóm toàn bộ thị trường, vơ vét của cải và bóc lột dân ta đến tận xương tủy. Dân chúng khắp nơi sống trong cảnh lầm than, ai dám phản kháng là bị đàn áp dã man không nương tay. Trong bối cảnh ngột ngạt đó, lòng dân ai cũng sục sôi mong có một người đứng lên dẹp loạn, giành lại đất nước.",
+        # Scene 3 — Chương 1: Lê Lợi khởi nghĩa Lam Sơn yếu thế
+        "Giữa lúc đó, tại vùng đất Lam Sơn xứ Thanh Hóa, có một người tên là Lê Lợi đứng ra dựng cờ khởi nghĩa. Profile của Lê Lợi thì giống một anh founder khởi nghiệp đầy nhiệt huyết nhưng vốn liếng gần như con số không. Nghĩa quân Lam Sơn ngày đầu quân số ít ỏi, vũ khí thô sơ, lương thực thiếu thốn, đúng kiểu một startup non trẻ phải đấu với ông trùm độc quyền của cả ngành. Những trận đầu ra quân, nghĩa quân thua liên tiếp, nhiều phen bị giặc Minh truy đuổi tan tác phải rút sâu vào rừng ẩn náu.",
+        # Scene 4 — Chương 2: Long Quân cho mượn gươm + Lê Thận vớt lưỡi gươm
+        "Thấy nghĩa quân Lam Sơn nhiều lần thất bại, Đức Long Quân ở dưới thủy cung quyết định ngầm giúp một tay, cho nghĩa quân mượn một thanh gươm thần. Nhưng cách trao gươm thì không hề đơn giản, Long Quân chia thanh gươm làm hai mảnh đặt ở hai nơi cách xa nhau. Ở vùng ven sông có một người đánh cá nghèo tên là Lê Thận, đêm nọ anh quăng lưới kéo lên thì thấy một thanh sắt nặng trịch. Lê Thận bực mình ném đi rồi quăng lưới chỗ khác, nhưng kéo lên vẫn đúng thanh sắt đó, lần thứ ba vẫn vậy khiến anh đứng hình.",
+        # Scene 5 — Chương 2: Lê Thận soi đuốc + gia nhập nghĩa quân + gươm sáng
+        "Lê Thận lấy làm lạ, đưa thanh sắt lại gần ngọn đuốc soi cho rõ, thì hóa ra đó là một lưỡi gươm sáng loáng. Anh không nghĩ nhiều, đem lưỡi gươm về nhà cất đi như một kỷ vật bình thường. Ít lâu sau, Lê Thận gia nhập nghĩa quân Lam Sơn, chiến đấu gan dạ nên được mọi người quý mến. Một hôm Lê Lợi cùng vài người tùy tùng ghé thăm nhà Lê Thận, vừa bước vào thì lưỡi gươm trong góc nhà bỗng sáng rực lên một cách kỳ lạ, như muốn chào đón chủ nhân thật sự của nó.",
+        # Scene 6 — Chương 3: chữ Thuận Thiên + Lê Lợi chạy rừng thấy ánh sáng
+        "Lê Lợi tò mò cầm lưỡi gươm lên xem, thì phát hiện trên thân gươm có khắc hai chữ Thuận Thiên, nghĩa là thuận theo ý trời. Lúc đó không ai hiểu rõ ý nghĩa của hai chữ này, mọi người chỉ nghĩ đây là một thanh gươm quý rồi cũng không để tâm lắm. Cho đến một ngày, Lê Lợi bị giặc Minh truy đuổi gắt gao phải một mình chạy trốn vào rừng sâu. Đang lúc hớt hải băng qua rừng, anh chợt thấy một ánh sáng kỳ lạ phát ra từ ngọn cây đa cổ thụ phía trước mặt.",
+        # Scene 7 — Chương 3: chuôi gươm + ráp lại vừa khít
+        "Lê Lợi trèo lên cây xem thử, thì hóa ra ánh sáng phát ra từ một cái chuôi gươm nạm ngọc lấp lánh tuyệt đẹp. Anh chợt nhớ đến lưỡi gươm khắc chữ Thuận Thiên ở nhà Lê Thận, linh cảm hai thứ này có liên quan đến nhau. Lê Lợi đem chuôi gươm về tra thử vào lưỡi gươm kia, thì kỳ lạ thay hai mảnh khớp vào nhau vừa khít như được đo đúc sẵn cho nhau từ trước. Lê Thận cùng mọi người chứng kiến đều quỳ xuống, nâng gươm dâng cho Lê Lợi và nói rằng đây chính là ý trời giao phó việc cứu nước cho ngài.",
+        # Scene 8 — Chương 4: có gươm thần sức mạnh tăng vọt
+        "Từ ngày có thanh gươm thần Thuận Thiên trong tay, nhuệ khí của nghĩa quân Lam Sơn lên cao chưa từng thấy. Anh em cứ hình dung như một đội game vừa nhặt được món vũ khí tối thượng, chỉ số sức mạnh tăng vọt lên một đẳng cấp hoàn toàn mới. Lê Lợi cầm gươm xông trận, đi tới đâu quân Minh khiếp vía tới đó, nghĩa quân từ thế bị truy đuổi chuyển sang thế chủ động tấn công. Quân số ngày càng đông, dân chúng khắp nơi nghe tin kéo về xin gia nhập, thanh thế nghĩa quân lớn mạnh như vũ bão.",
+        # Scene 9 — Chương 4: combat thắng trận liên tiếp
+        "Có gươm thần tiếp sức, nghĩa quân Lam Sơn mở hàng loạt trận combat lớn nhỏ và thắng gần như tuyệt đối. Những trận đánh từng khiến nghĩa quân thua tan tác ngày trước, giờ đây đều xoay chuyển hoàn toàn cục diện. Gươm Thuận Thiên trong tay Lê Lợi như có thần lực, chém tướng phá thành không gì cản nổi. Quân Minh dù đông đảo và trang bị tốt hơn, nhưng trước khí thế của nghĩa quân thì cũng dần thất thế, co cụm phòng thủ rồi tháo chạy khắp nơi.",
+        # Scene 10 — Chương 5: đuổi sạch giặc Minh + Lê Lợi lên ngôi
+        "Sau nhiều năm chiến đấu bền bỉ, cuối cùng nghĩa quân Lam Sơn cũng quét sạch giặc Minh ra khỏi bờ cõi, giành lại trọn vẹn đất nước. Cuộc khởi nghĩa từ một nhóm nhỏ trong rừng sâu đã làm nên điều tưởng chừng không thể, đánh bại cả một đế chế xâm lược hùng mạnh. Lê Lợi lên ngôi vua, lấy hiệu là Lê Thái Tổ, mở ra một triều đại mới cho nước nhà. Nhân dân khắp nơi mừng vui khôn xiết, sau bao năm khói lửa cuối cùng cũng được sống trong cảnh thái bình thịnh trị.",
+        # Scene 11 — Chương 6: một năm sau dạo hồ Tả Vọng
+        "Khoảng một năm sau ngày đất nước thái bình, vào một buổi đẹp trời, vua Lê Thái Tổ cưỡi thuyền rồng dạo chơi trên hồ Tả Vọng ở giữa kinh thành. Lúc này chiến tranh đã lùi xa, nhà vua thong dong ngắm cảnh non nước hữu tình, trong lòng nhẹ nhõm thư thái. Thanh gươm thần Thuận Thiên vẫn luôn được nhà vua mang theo bên mình như một báu vật gắn liền với cả cuộc khởi nghĩa. Nhưng nhà vua đâu ngờ rằng, đây chính là ngày thanh gươm sắp hoàn thành sứ mệnh của nó.",
+        # Scene 12 — Final: Rùa Vàng đòi gươm (ICONIC verbatim)
+        "Bỗng nhiên giữa mặt hồ, một con rùa vàng khổng lồ từ từ nổi lên, bơi lại gần thuyền rồng của nhà vua. Cả đoàn tùy tùng còn đang đứng hình ngơ ngác, thì Rùa Vàng cất tiếng nói rõ ràng như người: xin bệ hạ hoàn gươm lại cho Long Quân. Lúc này Lê Lợi mới hiểu ra, thanh gươm thần năm xưa là do Đức Long Quân cho nghĩa quân mượn để đánh giặc cứu nước. Nay giặc đã tan và đất nước thái bình, thanh gươm phải được trả lại cho chủ cũ. Nhà vua liền nâng gươm bằng hai tay, trang trọng trao trả cho Rùa Vàng.",
+        # Scene 13 — Moral
+        "Rùa Vàng ngậm lấy thanh gươm rồi từ từ lặn sâu xuống đáy hồ, mang theo ánh hào quang cuối cùng của một thời khói lửa. Từ đó, hồ Tả Vọng được đổi tên thành hồ Hoàn Kiếm, nghĩa là hồ trả gươm, cái tên còn lưu giữ đến tận ngày nay. Câu chuyện sự tích Hồ Gươm dạy ta rằng sức mạnh dù lớn đến đâu cũng chỉ là thứ được trao gửi tạm thời, quan trọng là dùng nó đúng lúc khi đất nước cần và biết buông bỏ khi thái bình lập lại. Mỗi lần ngắm hồ Gươm xanh biếc giữa lòng Hà Nội, ta lại nhớ về bài học của lòng biết ơn và tinh thần yêu chuộng hòa bình của dân tộc Việt Nam.",
+    ],
+    "image_prompts": [
+        # 1 — Hook movie poster Excalibur split
+        f"Movie-poster composition: {LE_LOI} on LEFT half holding the glowing {GUOM_TT} raised heroically, {LAKE_TA_VONG} with {RUA_VANG} emerging on RIGHT half, dramatic split lighting epic legendary, fairy-tale poster framing.",
+        # 2 — Chương 1: giặc Minh đô hộ
+        f"Oppression scene: {GIAC_MINH} marching through a ransacked Vietnamese village, frightened peasants bowing low, smoke rising and red banners, dark oppressive mood, 15th century setting.",
+        # 3 — Chương 1: Lê Lợi khởi nghĩa Lam Sơn
+        f"Rebel camp scene: {LE_LOI} standing before a small gathering of {NGHIA_QUAN} raising a banner in {RUNG_LAM_SON}, modest campfire, determined underdog mood, misty forest.",
+        # 4 — Chương 2: Lê Thận vớt lưỡi gươm
+        f"Night fishing scene: {LE_THAN} in a small wooden boat on a moonlit river, pulling up his fishing net to find a mysterious heavy glowing sword blade, lantern light, astonished expression, mystical atmosphere.",
+        # 5 — Chương 2: Lê Thận soi đuốc + gươm sáng khi Lê Lợi đến
+        f"Humble hut interior: {LE_THAN} holding a sword blade near a flaming torch revealing it gleaming, {LE_LOI} entering the doorway, the {GUOM_TT} blade glowing brightly cyan-gold as if greeting him, dramatic warm light.",
+        # 6 — Chương 3: Lê Lợi chạy rừng thấy ánh sáng
+        f"Forest chase scene: {LE_LOI} running alone through dense {RUNG_LAM_SON} glancing back warily, ahead a mysterious golden light glowing from the top of an ancient banyan tree, dramatic dappled moonlight, suspense.",
+        # 7 — Chương 3: ráp gươm vừa khít
+        f"Pivotal scene: {LE_LOI} fitting a jewel-studded sword hilt onto a blade, the two halves of {GUOM_TT} joining together with a burst of golden cyan magical light, {LE_THAN} and {NGHIA_QUAN} kneeling around in awe, epic mystical moment.",
+        # 8 — Chương 4: có gươm thần sức mạnh tăng vọt
+        f"Empowered rebel scene: {LE_LOI} holding the radiant {GUOM_TT} aloft before a large crowd of {NGHIA_QUAN} cheering, banners raised high, sunrise golden light, triumphant rising-power mood.",
+        # 9 — Chương 4: combat thắng trận
+        f"Epic battle scene: {LE_LOI} charging with the glowing {GUOM_TT} leading {NGHIA_QUAN} against {GIAC_MINH}, dynamic combat, dust and banners, low-angle hero shot, decisive victory mood.",
+        # 10 — Chương 5: Lê Lợi lên ngôi
+        f"Coronation scene: {LE_LOI_VUA} seated on a golden throne, veteran {NGHIA_QUAN} fighters and courtiers celebrating around, warm golden palace lighting, triumphant peaceful mood.",
+        # 11 — Chương 6: dạo hồ Tả Vọng
+        f"Serene scene: {LE_LOI_VUA} standing on an ornate dragon boat gliding across {LAKE_TA_VONG}, calm green water, willow trees, the sheathed {GUOM_TT} at his side, peaceful misty morning, golden light.",
+        # 12 — Final: Rùa Vàng đòi gươm
+        f"Iconic legendary scene: {RUA_VANG} emerging majestically from the lake water beside the dragon boat, {LE_LOI_VUA} standing and lifting the glowing {GUOM_TT} with both hands to return it, attendants stunned, {LAKE_TA_VONG}, dramatic mystical golden light.",
+        # 13 — Moral: Rùa Vàng lặn + hồ Hoàn Kiếm
+        f"Closing peaceful scene: {RUA_VANG} diving back into {LAKE_TA_VONG} holding the {GUOM_TT}, ripples and a last golden glow on the calm green water, the iconic turtle tower islet, willow trees, contemplative oil-painting feel, hopeful timeless mood, no other characters.",
+    ],
+    "motions": ["static","static","pan_right","static","static","static","static","static","zoom_out","pan_right","static","pan_right","static","zoom_out"],
+    "caption_hook": "Anh em đã nghe Sự Tích Hồ Gươm kiểu phim Excalibur chưa? ⚔️🐢 Gươm thần Thuận Thiên ráp từ 2 mảnh, đánh tan giặc Minh rồi trả lại cho Rùa Vàng!",
+    "caption_bullets": [
+        "Giặc Minh đô hộ, dân ta sống cảnh lầm than",
+        "Lê Lợi dựng cờ khởi nghĩa Lam Sơn từ con số không",
+        "Lê Thận vớt được lưỡi gươm khắc chữ Thuận Thiên 3 lần",
+        "Lê Lợi tìm thấy chuôi gươm nạm ngọc trên cây đa",
+        "Ráp 2 mảnh vừa khít — gươm thần Thuận Thiên hoàn chỉnh",
+        "Nghĩa quân đại thắng, đuổi sạch giặc Minh, Lê Lợi lên ngôi vua",
+        "Rùa Vàng đòi gươm — hồ Tả Vọng đổi tên thành Hồ Hoàn Kiếm"
+    ],
+    "caption_moral": "Câu chuyện dạy ta: sức mạnh chỉ là thứ được trao gửi tạm thời — dùng đúng lúc khi đất nước cần, và biết buông bỏ khi thái bình lập lại."
+}
+
 # ================ EXPORT ================
 BOOKS = {
     "thach-sanh": THACH_SANH_BOOK,
@@ -813,4 +898,5 @@ BOOKS = {
     "mai-an-tiem": MAI_AN_TIEM_BOOK,
     "chu-cuoi-cung-trang": CHU_CUOI_BOOK,
     "banh-chung-banh-day": BANH_CHUNG_BOOK,
+    "su-tich-ho-guom": HO_GUOM_BOOK,
 }
