@@ -56,9 +56,14 @@ def transcribe(audio: Path, model_name: str, src_lang: str):
     return out
 
 
-def _translate_chunk(texts: list, tgt_lang: str) -> list:
-    """Translate one chunk of lines via Claude. Returns list of same length."""
+def _translate_chunk(texts: list, tgt_lang: str, extra_rules: str = "") -> list:
+    """Translate one chunk of lines via Claude. Returns list of same length.
+
+    extra_rules: optional extra bullet lines appended to the prompt (e.g. a
+    domain glossary). Each line should already start with '- '.
+    """
     numbered = "\n".join(f"{i+1}. {t}" for i, t in enumerate(texts))
+    extra = ("\n" + extra_rules.strip()) if extra_rules.strip() else ""
     prompt = f"""Translate the following Chinese movie/animation dialogue lines into natural {tgt_lang}.
 
 Rules:
@@ -66,7 +71,7 @@ Rules:
 - Keep the SAME number of lines ({len(texts)}), in order
 - Each translation should be roughly the same length as the original
 - Use casual spoken Vietnamese — match the tone of the original (rude/funny/casual etc.)
-- If a line is unclear/garbled (ASR noise), make a best-guess short translation
+- If a line is unclear/garbled (ASR noise), make a best-guess short translation{extra}
 - Do NOT add commentary, explanations, markdown, or code fences
 - Output ONLY a raw JSON array of strings, nothing else
 - Example: ["dòng 1", "dòng 2"]
@@ -124,8 +129,12 @@ Input lines:
     return [""] * len(texts)
 
 
-def translate_batch(segments: list, tgt_lang: str, chunk_size: int = 30) -> list:
-    """Translate segments in chunks to fit Claude output limits."""
+def translate_batch(segments: list, tgt_lang: str, chunk_size: int = 30,
+                    extra_rules: str = "") -> list:
+    """Translate segments in chunks to fit Claude output limits.
+
+    extra_rules: optional domain glossary passed through to each chunk.
+    """
     if not segments:
         return []
     texts = [s["text"] for s in segments]
@@ -134,7 +143,7 @@ def translate_batch(segments: list, tgt_lang: str, chunk_size: int = 30) -> list
         chunk = texts[i:i + chunk_size]
         print(f"[translate] chunk {i//chunk_size + 1}: lines {i+1}-{i+len(chunk)}",
               file=sys.stderr)
-        out = _translate_chunk(chunk, tgt_lang)
+        out = _translate_chunk(chunk, tgt_lang, extra_rules)
         all_out.extend(out)
     miss = sum(1 for x in all_out if not x)
     print(f"[translate] done: {len(all_out)} lines, {miss} empty",
@@ -152,8 +161,12 @@ def ts(seconds: float) -> str:
 
 
 def write_ass(segments: list, translations: list, out_ass: Path,
-              video_w: int, video_h: int):
-    """Write ASS with VN bottom (large) + CN top (small)."""
+              video_w: int, video_h: int, vn_only: bool = False):
+    """Write ASS with VN bottom (large) + CN top (small).
+
+    vn_only: when True, emit only the Vietnamese line (skip the CN top line) —
+    used for dubbed videos where the CN text is redundant.
+    """
     fs_vn = max(24, int(video_h * 0.06))
     fs_cn = max(16, int(video_h * 0.038))
     margin_v_vn = max(20, int(video_h * 0.04))
@@ -184,7 +197,7 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
         end = ts(seg["end"])
         cn_text = escape(seg["text"])
         vn_text = escape(vn) if vn else ""
-        if cn_text:
+        if cn_text and not vn_only:
             lines.append(f"Dialogue: 0,{start},{end},CN,,0,0,0,,{cn_text}")
         if vn_text:
             lines.append(f"Dialogue: 1,{start},{end},VN,,0,0,0,,{vn_text}")
