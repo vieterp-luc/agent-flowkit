@@ -266,6 +266,30 @@
   has_scripts: false
   name: google-adk-python
   path: google-adk-python/SKILL.md
+- category: other
+  description: Skill chuyên dụng để tạo **prompt tạo ảnh tiếng Anh** cho video YouTube
+    Bible Explainer theo phong cách **"Watercolor Bible Illustration"** — modern Bible
+    storybook watercolor style.
+  has_references: false
+  has_scripts: false
+  name: image-bible-explainer
+  path: image-bible-explainer/SKILL.md
+- category: other
+  description: Skill chuyên dụng để tạo **prompt tạo ảnh tiếng Anh** cho video YouTube
+    Greek Mythology Explainer theo phong cách **"Neoclassical Academic Oil Painting"**
+    — dramatic chiaroscuro academic painting styl
+  has_references: false
+  has_scripts: false
+  name: image-greek-myth-explainer
+  path: image-greek-myth-explainer/SKILL.md
+- category: other
+  description: Skill chuyên dụng để tạo **prompt tạo ảnh tiếng Anh** cho video YouTube
+    Medieval History Explainer theo phong cách **"Illuminated Manuscript Cinematic
+    Painting"** — medieval illuminated manuscript fus
+  has_references: false
+  has_scripts: false
+  name: image-medieval-explainer
+  path: image-medieval-explainer/SKILL.md
 - argument_hint: '[topic or reflection]'
   category: utilities
   description: Write journal entries analyzing recent changes and session reflections.
@@ -444,6 +468,30 @@
   has_scripts: false
   name: scout
   path: scout/SKILL.md
+- category: other
+  description: 'Skill chuyên dụng tạo kịch bản YouTube Bible Explainer tiếng Anh dài
+    25 phút theo công thức "Every X Explained" — copy phong cách của 3 kênh đối thủ
+    viral nhất ngách này: **Deep Made Simple** (144K su'
+  has_references: false
+  has_scripts: false
+  name: script-bible-explainer
+  path: script-bible-explainer/SKILL.md
+- category: other
+  description: 'Skill chuyên dụng tạo kịch bản YouTube Greek Mythology Explainer tiếng
+    Anh dài 25 phút theo công thức "Every X Explained" — copy phong cách của 4 kênh
+    đối thủ viral nhất ngách này: **Mythology Explain'
+  has_references: false
+  has_scripts: false
+  name: script-greek-myth-explainer
+  path: script-greek-myth-explainer/SKILL.md
+- category: other
+  description: 'Skill chuyên dụng tạo kịch bản YouTube Medieval History Explainer
+    tiếng Anh dài 25 phút theo công thức "Every X Explained" — copy phong cách của
+    4 kênh đối thủ viral nhất ngách này: **Kings and Genera'
+  has_references: false
+  has_scripts: false
+  name: script-medieval-explainer
+  path: script-medieval-explainer/SKILL.md
 - argument_hint: '[problem to analyze step-by-step]'
   category: utilities
   description: Apply step-by-step analysis for complex problems with revision capability.
@@ -518,6 +566,30 @@
   has_scripts: true
   name: threejs
   path: threejs/SKILL.md
+- category: other
+  description: Skill chuyên dụng tạo **prompt cho YouTube thumbnail** Bible Explainer
+    theo phong cách **WATERCOLOR ILLUSTRATION** — match với phong cách video images
+    (Skill 2) và đối thủ viral Deep Made Simple (144K
+  has_references: false
+  has_scripts: false
+  name: thumbnail-bible-explainer
+  path: thumbnail-bible-explainer/SKILL.md
+- category: other
+  description: Skill chuyên dụng tạo **prompt cho YouTube thumbnail** Greek Mythology
+    Explainer theo phong cách **NEOCLASSICAL OIL PAINTING** — match với phong cách
+    video images (image-greek-myth-explainer) và đối t
+  has_references: false
+  has_scripts: false
+  name: thumbnail-greek-myth-explainer
+  path: thumbnail-greek-myth-explainer/SKILL.md
+- category: other
+  description: 'Skill chuyên dụng tạo **prompt cho YouTube thumbnail** Medieval History
+    Explainer theo phong cách **CINEMATIC MEDIEVAL OIL PAINTING** — match với phong
+    cách video images (image-medieval-explainer) và '
+  has_references: false
+  has_scripts: false
+  name: thumbnail-medieval-explainer
+  path: thumbnail-medieval-explainer/SKILL.md
 - argument_hint: '[component or layout]'
   category: frontend
   description: Style UIs with shadcn/ui components (Radix UI + Tailwind CSS). Use
