@@ -363,15 +363,33 @@ async def delete_voice_template(name: str):
     return {"ok": True}
 
 
+# Template file paths are persisted as basenames so templates.json stays
+# portable across machines/clones; resolved against TEMPLATES_DIR at load time.
+_TEMPLATE_PATH_FIELDS = ("audio_path", "ref_audio")
+
+
 def _load_templates_meta() -> dict:
-    if TEMPLATES_META.exists():
-        return json.loads(TEMPLATES_META.read_text(encoding="utf-8"))
-    return {}
+    if not TEMPLATES_META.exists():
+        return {}
+    meta = json.loads(TEMPLATES_META.read_text(encoding="utf-8"))
+    for tmpl in meta.values():
+        for field in _TEMPLATE_PATH_FIELDS:
+            value = tmpl.get(field)
+            if value:
+                tmpl[field] = str(TEMPLATES_DIR / Path(value).name)
+    return meta
 
 
 def _save_templates_meta(meta: dict):
     TEMPLATES_META.parent.mkdir(parents=True, exist_ok=True)
-    TEMPLATES_META.write_text(json.dumps(meta, indent=2, ensure_ascii=False), encoding="utf-8")
+    portable = {
+        name: {
+            **tmpl,
+            **{f: Path(tmpl[f]).name for f in _TEMPLATE_PATH_FIELDS if tmpl.get(f)},
+        }
+        for name, tmpl in meta.items()
+    }
+    TEMPLATES_META.write_text(json.dumps(portable, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
 def _wav_duration(path: str) -> float | None:

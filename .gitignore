@@ -5,7 +5,11 @@ __pycache__/
 *.db-wal
 *.db-journal
 .env
-output/
+output/*
+# TTS voice templates are versioned so they sync across machines
+!output/_shared/
+output/_shared/*
+!output/_shared/tts_templates/
 youtube
 agent/active_project.json
 

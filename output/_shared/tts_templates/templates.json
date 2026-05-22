@@ -1,0 +1,136 @@
+{
+  "narrator_male_en": {
+    "name": "narrator_male_en",
+    "audio_path": "narrator_male_en.wav",
+    "text": "In the year twenty twenty-four, the world changed forever. Nations rose and fell, heroes emerged from the shadows, and ordinary people faced extraordinary challenges.",
+    "instruct": "male, low pitch, american accent",
+    "duration": 10.44
+  },
+  "narrator_male_vn": {
+    "name": "narrator_male_vn",
+    "audio_path": "narrator_male_vn.wav",
+    "text": "Năm hai nghìn không trăm hai mươi tư, thế giới thay đổi mãi mãi. Các quốc gia hưng thịnh và sụp đổ, anh hùng xuất hiện từ bóng tối, và những người bình thường đối mặt với thử thách phi thường.",
+    "instruct": "male, low pitch, young adult",
+    "duration": 11.36
+  },
+  "Manh_Dung_TTS": {
+    "name": "Manh_Dung_TTS",
+    "audio_path": "Manh_Dung_TTS.wav",
+    "text": "Năm hai nghìn không trăm hai mươi tư, thế giới thay đổi mãi mãi. Các quốc gia hưng thịnh và sụp đổ, anh hùng xuất hiện từ bóng tối, và những người bình thường đối mặt với thử thách phi thường.",
+    "instruct": null,
+    "ref_audio": "Manh_Dung_TTS_ref.mp3",
+    "duration": 3.17
+  },
+  "Ngoc_Huyen_TTS": {
+    "name": "Ngoc_Huyen_TTS",
+    "audio_path": "Ngoc_Huyen_TTS.wav",
+    "text": "Năm hai nghìn không trăm hai mươi tư, thế giới thay đổi mãi mãi. Các quốc gia hưng thịnh và sụp đổ, anh hùng xuất hiện từ bóng tối, và những người bình thường đối mặt với thử thách phi thường.",
+    "instruct": null,
+    "ref_audio": "Ngoc_Huyen_TTS_ref.mp3",
+    "duration": 13.19
+  },
+  "Anh_Khoi_TTS": {
+    "name": "Anh_Khoi_TTS",
+    "audio_path": "Anh_Khoi_TTS.wav",
+    "text": "Năm hai nghìn không trăm hai mươi tư, thế giới thay đổi mãi mãi. Các quốc gia hưng thịnh và sụp đổ, anh hùng xuất hiện từ bóng tối, và những người bình thường đối mặt với thử thách phi thường.",
+    "instruct": null,
+    "ref_audio": "Anh_Khoi_TTS_ref.mp3",
+    "duration": 10.64
+  },
+  "Minh_Quan_TTS": {
+    "name": "Minh_Quan_TTS",
+    "audio_path": "Minh_Quan_TTS.wav",
+    "text": "Năm hai nghìn không trăm hai mươi tư, thế giới thay đổi mãi mãi. Các quốc gia hưng thịnh và sụp đổ, anh hùng xuất hiện từ bóng tối, và những người bình thường đối mặt với thử thách phi thường.",
+    "instruct": null,
+    "ref_audio": "Minh_Quan_TTS_ref.mp3",
+    "duration": 8.19
+  },
+  "Nguyen_Ngoc_Ngan_TTS": {
+    "name": "Nguyen_Ngoc_Ngan_TTS",
+    "audio_path": "Nguyen_Ngoc_Ngan_TTS.wav",
+    "text": "Năm hai nghìn không trăm hai mươi tư, thế giới thay đổi mãi mãi. Các quốc gia hưng thịnh và sụp đổ, anh hùng xuất hiện từ bóng tối, và những người bình thường đối mặt với thử thách phi thường.",
+    "instruct": null,
+    "ref_audio": "Nguyen_Ngoc_Ngan_TTS_ref.mp3",
+    "duration": 10.56
+  },
+  "Hai_KC_TTS": {
+    "name": "Hai_KC_TTS",
+    "audio_path": "Hai_KC_TTS.wav",
+    "text": "Năm hai nghìn không trăm hai mươi tư, thế giới thay đổi mãi mãi. Các quốc gia hưng thịnh và sụp đổ, anh hùng xuất hiện từ bóng tối, và những người bình thường đối mặt với thử thách phi thường.",
+    "instruct": null,
+    "ref_audio": "Hai_KC_TTS_ref.mp3",
+    "duration": 10.32
+  },
+  "Bao_Trung_Review_TTS": {
+    "name": "Bao_Trung_Review_TTS",
+    "audio_path": "Bao_Trung_Review_TTS.wav",
+    "text": "Năm hai nghìn không trăm hai mươi tư, thế giới thay đổi mãi mãi. Các quốc gia hưng thịnh và sụp đổ, anh hùng xuất hiện từ bóng tối, và những người bình thường đối mặt với thử thách phi thường.",
+    "instruct": null,
+    "ref_audio": "Bao_Trung_Review_TTS_ref.mp3",
+    "duration": 9.44
+  },
+  "Hong_Hanh_podcast_TTS": {
+    "name": "Hong_Hanh_podcast_TTS",
+    "audio_path": "Hong_Hanh_podcast_TTS.wav",
+    "text": "Năm hai nghìn không trăm hai mươi tư, thế giới thay đổi mãi mãi. Các quốc gia hưng thịnh và sụp đổ, anh hùng xuất hiện từ bóng tối, và những người bình thường đối mặt với thử thách phi thường.",
+    "instruct": null,
+    "ref_audio": "Hong_Hanh_podcast_TTS_ref.mp3",
+    "duration": 11.25
+  },
+  "Phap_Van_podcast_TTS": {
+    "name": "Phap_Van_podcast_TTS",
+    "audio_path": "Phap_Van_podcast_TTS.wav",
+    "text": "Năm hai nghìn không trăm hai mươi tư, thế giới thay đổi mãi mãi. Các quốc gia hưng thịnh và sụp đổ, anh hùng xuất hiện từ bóng tối, và những người bình thường đối mặt với thử thách phi thường.",
+    "instruct": null,
+    "ref_audio": "Phap_Van_podcast_TTS_ref.mp3",
+    "duration": 12.17
+  },
+  "podcast_male_TTS": {
+    "name": "podcast_male_TTS",
+    "audio_path": "podcast_male_TTS.wav",
+    "text": "Năm hai nghìn không trăm hai mươi tư, thế giới thay đổi mãi mãi. Các quốc gia hưng thịnh và sụp đổ, anh hùng xuất hiện từ bóng tối, và những người bình thường đối mặt với thử thách phi thường.",
+    "instruct": null,
+    "ref_audio": "podcast_male_TTS_ref.mp3",
+    "duration": 11.98
+  },
+  "Andrew_TTS": {
+    "name": "Andrew_TTS",
+    "audio_path": "Andrew_TTS.wav",
+    "text": "Welcome back, dear listener. Today, we open a book that has lived for over a hundred years — a story of dreams reaching across dark water, of green lights and golden parties, of voices that whisper across time.",
+    "instruct": "male, warm low-mid pitch, american accent, contemplative podcast narrator, classic literature",
+    "ref_audio": "Andrew_TTS_ref.mp3",
+    "duration": 13.5
+  },
+  "Thien_Tam_TTS": {
+    "name": "Thien_Tam_TTS",
+    "audio_path": "Thien_Tam_TTS.wav",
+    "text": "Năm hai nghìn không trăm hai mươi tư, thế giới thay đổi mãi mãi. Các quốc gia hưng thịnh và sụp đổ, anh hùng xuất hiện từ bóng tối, và những người bình thường đối mặt với thử thách phi thường.",
+    "instruct": null,
+    "ref_audio": "Thien_Tam_TTS_ref.mp3",
+    "duration": 11.92
+  },
+  "Bao_Trung_TTS": {
+    "name": "Bao_Trung_TTS",
+    "audio_path": "Bao_Trung_TTS.wav",
+    "text": "Năm hai nghìn không trăm hai mươi tư, thế giới thay đổi mãi mãi. Các quốc gia hưng thịnh và sụp đổ, anh hùng xuất hiện từ bóng tối, và những người bình thường đối mặt với thử thách phi thường.",
+    "instruct": null,
+    "ref_audio": "Bao_Trung_TTS_ref.mp3",
+    "duration": 10.04
+  },
+  "Thang_QC_TTS": {
+    "name": "Thang_QC_TTS",
+    "audio_path": "Thang_QC_TTS.wav",
+    "text": "Năm hai nghìn không trăm hai mươi tư, thế giới thay đổi mãi mãi. Các quốc gia hưng thịnh và sụp đổ, anh hùng xuất hiện từ bóng tối, và những người bình thường đối mặt với thử thách phi thường.",
+    "instruct": null,
+    "ref_audio": "Thang_QC_TTS_ref.mp3",
+    "duration": 9.53
+  },
+  "Nguyet_Nga_TTS": {
+    "name": "Nguyet_Nga_TTS",
+    "audio_path": "Nguyet_Nga_TTS.wav",
+    "text": "Năm hai nghìn không trăm hai mươi tư, thế giới thay đổi mãi mãi. Các quốc gia hưng thịnh và sụp đổ, anh hùng xuất hiện từ bóng tối, và những người bình thường đối mặt với thử thách phi thường.",
+    "instruct": null,
+    "ref_audio": "Nguyet_Nga_TTS_ref.mp3",
+    "duration": 10.23
+  }
+}

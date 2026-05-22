@@ -1,22 +1,15 @@
 """FastAPI router for Reup Video feature."""
-import json, uuid, logging
+import uuid, logging
 from fastapi import APIRouter, HTTPException, BackgroundTasks
 from pathlib import Path
 
 from agent.models.reup import ReupJobRequest, ReupJobStatus
 from agent.services.reup import JOBS, run_reup_job
-from agent.config import BASE_DIR
+# Shared loader resolves portable basename paths against TEMPLATES_DIR.
+from agent.api.tts import _load_templates_meta as _load_templates
 
 logger = logging.getLogger(__name__)
 router = APIRouter(tags=["reup"])
-
-TEMPLATES_META = Path(BASE_DIR) / "output" / "_shared" / "tts_templates" / "templates.json"
-
-
-def _load_templates():
-    if TEMPLATES_META.exists():
-        return json.loads(TEMPLATES_META.read_text(encoding="utf-8"))
-    return {}
 
 
 @router.post("/reup/jobs", response_model=ReupJobStatus)
