@@ -1,0 +1,47 @@
+{
+  "channel": "quiet-scripture",
+  "active_ep": 1,
+  "episodes": [
+    {
+      "ep": 1,
+      "slug": "ep01_every_fear_not",
+      "title": "Every Time God Said \"Fear Not\"",
+      "vi": "Mọi Lần Chúa Phán \"Đừng Sợ\"",
+      "topic": "Every Time God Said \"Fear Not\"",
+      "tone": "dramatic",
+      "status": "scripted",
+      "local_dir": "output/quiet_scripture/ep01_every_fear_not",
+      "flow_project_id": "",
+      "video_id": "",
+      "notes": "Script produced via script-bible-explainer in session 2026-05-22. 3,702 words, 25 min."
+    }
+  ],
+  "topic_backlog": [
+    {
+      "topic": "Every Word Jesus Spoke From the Cross",
+      "vi": "Mọi Lời Chúa Giê-su Nói Trên Thập Giá",
+      "desc": "Bảy lời cuối cùng của Chúa Giê-su khi bị đóng đinh, kể theo đúng thứ tự — từ \"Lạy Cha, xin tha cho họ\" đến \"Mọi sự đã hoàn tất\". Có sẵn cấu trúc 3 hồi, kịch tính và xúc động mạnh nhất trong các chủ đề."
+    },
+    {
+      "topic": "Every Person Who Saw God Face to Face and Lived",
+      "vi": "Những Người Từng Thấy Chúa Mặt Đối Mặt Mà Vẫn Sống",
+      "desc": "Tổng hợp các lần con người gặp Chúa trực tiếp — Môi-se trong khe đá, Gia-cốp vật lộn suốt đêm, Ê-sai run rẩy trong đền thờ. Vừa kỳ diệu vừa nguy hiểm, hợp để cài \"vòng lặp mở\"."
+    },
+    {
+      "topic": "Every Dream God Used to Rewrite History",
+      "vi": "Những Giấc Mơ Chúa Dùng Để Đổi Hướng Lịch Sử",
+      "desc": "Giô-sép người nằm mơ, chiếc thang của Gia-cốp, bảy con bò của Pha-ra-ôn, các nhà thông thái được báo mộng, vợ Phi-lát. Một khuôn mẫu ẩn mà hầu hết người xem chưa từng để ý."
+    },
+    {
+      "topic": "Every Time the Dead Came Back to Life in the Bible",
+      "vi": "Mọi Lần Người Chết Sống Lại Trong Kinh Thánh",
+      "desc": "Tổng hợp các phép lạ phục sinh — con trai bà góa, con gái Giai-ru, La-xa-rơ chết bốn ngày — leo thang dần đến ngôi mộ trống. Khoảng trống tò mò cực lớn, mức cược tăng từ cá nhân đến vĩnh cửu."
+    }
+  ],
+  "status_legend": {
+    "planned": "in roadmap, no script yet",
+    "scripted": "script.txt exists, not rendered",
+    "built": "final mp4 rendered locally",
+    "uploaded": "uploaded to YouTube"
+  }
+}

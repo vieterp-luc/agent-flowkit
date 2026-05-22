@@ -1,0 +1,73 @@
+{
+  "channel_name": "quiet-scripture",
+  "display_name": "Quiet Scripture",
+  "handle": "@quietscripture",
+  "youtube_channel_id": "",
+  "owner_email": "",
+  "timezone": "Asia/Ho_Chi_Minh",
+  "content_focus": "long_form_bible_explainer",
+  "cadence": "2_per_week",
+  "rules": {
+    "long": {
+      "max_per_day": 1,
+      "optimal_times": ["08:00"],
+      "publish_at_utc": "01:00",
+      "min_gap_hours": 23,
+      "preferred_days": ["Wednesday", "Sunday"],
+      "avoid_hours": [0, 1, 2, 3, 4, 5, 6]
+    },
+    "short": {
+      "max_per_day": 0,
+      "optimal_times": [],
+      "min_gap_hours": 4,
+      "avoid_hours": [0, 1, 2, 3, 4, 5]
+    }
+  },
+  "seo": {
+    "title_max_chars": 80,
+    "title_pattern": "{title} — Bible Explained | Quiet Scripture",
+    "default_category": "27",
+    "default_tags": [
+      "bible",
+      "bible explained",
+      "bible study",
+      "bible stories",
+      "christianity",
+      "scripture",
+      "faith",
+      "christian youtube",
+      "bible explainer",
+      "every x explained",
+      "god",
+      "jesus"
+    ],
+    "description_footer": "\n\n📖 A quiet walk through Scripture, one theme at a time.\n🎙️ Narrated by AI for devotional and educational reflection.\n🔔 Subscribe — two new episodes every week.\n\nQuiet Scripture.\n\n#Bible #BibleExplained #Faith #QuietScripture"
+  },
+  "branding": {
+    "watermark_logo": "youtube/channels/quiet-scripture/quiet-scripture_circle.png",
+    "watermark_size_px": 130,
+    "watermark_padding_px": 30,
+    "watermark_opacity": 0.7,
+    "watermark_position": "top-left"
+  },
+  "default_language": "en",
+  "default_voice_template": "Andrew_TTS",
+  "default_tts_speed": 0.88,
+  "narrator_volume": 1.6,
+  "bgm_volume": 0.06,
+  "default_privacy": "private",
+  "made_for_kids": false,
+  "render": {
+    "method": "ken_burns_montage",
+    "resolution": "1920x1080",
+    "fps": 30,
+    "images_per_episode": 60,
+    "target_minutes": 25
+  },
+  "notes": [
+    "Long-form English Bible Explainer. 'Every X Explained' formula.",
+    "Watercolor Bible-storybook image style — no text on body video.",
+    "First upload: privacy=private until channel handle is verified (needed for custom thumbnails).",
+    "Set youtube_channel_id + owner_email after the channel is created."
+  ]
+}
