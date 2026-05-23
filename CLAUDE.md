@@ -40,6 +40,7 @@ curl -s http://127.0.0.1:8100/health
 | `/fk-pipeline` | Full pipeline orchestration |
 | `/fk-podcast-book` | Series podcast Shorts từ sách (calendar + render + retry) |
 | `/fk-video-lamplit-library` | Lamplit Library channel status dashboard + next-action recommender (multi-book) |
+| `/fk-build` | 1 image → vertical timelapse Short (auto-classify house/garden/room/building/object → Gemini chained stage images + Veo transitions + BGM) |
 | `/fk-video-bible-explainer` | Quiet Scripture — Bible Explainer channel operator + 25-min episode producer (combines script/image/thumbnail Bible skills) |
 | `/fk-tom-tac-sach` | Tóm tắt sách bằng giọng Việt — hybrid format (chapter/summary), local-only, voice phap_van default |
 | `/fk-van-vo` | Tóm tắt văn học phong cách "Văn Vở" — Gen Z slang + movie-titled chapters + ad hài + đắc nhân tâm, long-form 10-15min, local-only |
