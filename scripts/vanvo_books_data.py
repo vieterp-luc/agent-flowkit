@@ -1120,6 +1120,63 @@ TRI_KHON_BOOK = {
     "caption_moral": "Câu chuyện dạy ta: trí thông minh mạnh hơn sức mạnh cơ bắp — biết cách dẫn dụ đối thủ vào bẫy mới là người thắng cuộc cuối cùng."
 }
 
+# ================ BOOK 15: EM BÉ THÔNG MINH ================
+EM_BE = _char("em bé thông minh", "young Vietnamese boy around 10 years old: simple cream solid tunic + brown shorts, sandals, undercut black hair, bright clever eyes, confident playful smile")
+CHA_EM_BE = _char("cha em bé", "middle-aged Vietnamese farmer father: brown solid áo nâu + cargo trousers, conical hat, weathered honest face, gentle protective expression")
+SU_GIA_EBT = _char("sứ giả Vua", "Vietnamese royal messenger: red official robe with gold trim, official conical hat, holding scroll, dignified surprised face")
+VUA_EBT = _char("Vua nước Việt", "elderly Vietnamese king: dark red royal robe with gold trim, aviator sunglasses, Apple Watch, long white beard, amused intrigued expression on golden throne")
+SU_THAN_NGOAI = _char("sứ thần ngoại quốc", "foreign envoy: ornate Chinese-style ambassador robe in green and gold, distinct foreign hat, smug arrogant face, holding ornate gift box")
+LANG_EBT = "Vietnamese rural village: bamboo huts with thatched roofs, rice paddies, banana trees, dirt paths, peaceful countryside"
+TRIEU_DINH_EBT = "ancient Vietnamese royal court: red lacquered columns, hanging red oil lanterns, jade floor tiles, courtiers in áo tứ thân, gold opulent decor"
+
+EM_BE_BOOK = {
+    "slug": "em-be-thong-minh",
+    "title": "Em Bé Thông Minh",
+    "story_summary": "Văn Vở Gen Z. Vua tìm người tài, sứ giả đi rao gặp em bé 10 tuổi cùng cha cày ruộng. Em đáp lại câu đố ngược, giải 4 thử thách liên tiếp: trâu cày mấy đường, trâu đực đẻ con, một con chim sẻ làm 3 mâm cỗ, xâu chỉ qua ốc xoắn. Vua phong Trạng Nguyên. Phiên bản kiểu phim Slumdog Millionaire (2008).",
+    "scripts": [
+        "Hôm nay chúng ta sẽ nói về một câu chuyện cổ tích thú vị về trí thông minh dân gian Việt Nam, đó là Em Bé Thông Minh. Nếu phải so với một bộ phim để dễ hình dung thì tôi xếp nó vào hạng Slumdog Millionaire, câu chuyện về một cậu bé nhà nghèo nhưng có trí tuệ hơn hẳn cả triều đình quan lại. Câu chuyện có vua tìm người tài giúp nước, có em bé giải bốn câu đố cực hóc búa một cách ngon ơ. Và có cả màn đối đáp với sứ thần nước ngoài làm rạng danh trí tuệ Việt Nam được vua phong Trạng Nguyên trẻ nhất lịch sử.",
+        "Câu chuyện bắt đầu vào một thời nọ, vua nước Việt muốn tìm người tài thực sự để giúp việc triều chính. Vua không tin vào bằng cấp hay xuất thân, chỉ muốn xem trí thông minh thật sự nên sai sứ giả đi khắp nơi ra câu đố thử thách. Sứ giả vâng lệnh lên đường cưỡi ngựa rong ruổi qua hết làng này đến làng khác, ra câu đố hóc búa cho dân chúng. Nhưng đi mãi mà chẳng tìm được ai trả lời được trọn vẹn, ai cũng lắc đầu chịu thua không dám lên tiếng.",
+        "Một hôm sứ giả đi ngang qua một thửa ruộng, thấy hai cha con đang cày bừa giữa cánh đồng buổi sáng. Sứ giả dừng ngựa lại hỏi vọng xuống: này ông kia, trâu của ông cày một ngày được mấy đường vậy. Cha em bé bối rối không biết trả lời sao, lú một phen vì câu hỏi trên trời rơi xuống quá lạ. Chưa kịp suy nghĩ ra thì em bé nhỏ đứng bên đã nhanh nhảu chạy ra hỏi ngược lại sứ giả: thưa ông, ngựa của ông một ngày đi được mấy bước thì tôi sẽ nói trâu cha tôi cày được mấy đường.",
+        "Sứ giả đứng hình tại chỗ vì cú phản đòn quá thông minh từ một thằng bé tẻo teo, không có câu trả lời. Trong lòng vô cùng kinh ngạc và phục lăn, sứ giả về tâu vua tận tường mọi chuyện ngay lập tức không chậm trễ. Vua nghe xong cười khoái chí, biết rằng đã tìm thấy đúng người tài trong dân gian Việt Nam. Nhưng vua cẩn thận muốn thử thêm để chắc chắn không nhầm lẫn, liền nghĩ ra một câu đố hóc búa hơn nữa thử lại em bé một lần nữa.",
+        "Vua ban cho làng nơi em bé ở ba con trâu đực và ba thúng gạo nếp, kèm theo lời tuyên cáo lạ lùng. Vua hẹn một năm sau cả làng phải nộp lại đủ chín con trâu đực, nếu thiếu cả làng sẽ bị tội nặng. Cả làng nhận lệnh xong thì hoang mang cực độ vì trâu đực thì làm sao đẻ ra được con, lệnh vua đúng kiểu scam đỉnh không cách nào hoàn thành. Mọi người tụ tập bàn bạc khắp nơi nhưng không ai nghĩ ra cách giải, ai cũng sợ rủi ro vạ lây tội chết.",
+        "Em bé thấy cả làng lo lắng thì cười khúc khích rồi bảo cha một câu cực kỳ tỉnh táo. Em nói: cha cứ giết hết ba con trâu đực, đem ba thúng gạo nếp đồ xôi mời cả làng ăn uống cho thoải mái. Phần em sẽ cùng cha lên kinh kêu oan với vua, đảm bảo cả làng không sao đâu cha đừng lo. Cha em bé thấy con tự tin thì cũng tin tưởng, làm theo lời con không hỏi thêm câu nào nữa.",
+        "Hai cha con lặn lội lên kinh thành vào tận sân rồng kêu oan trước mặt vua. Em bé khóc lóc ầm ĩ ngay giữa triều đình, làm vua ngạc nhiên ra hỏi: ngươi khóc gì vậy hả nhóc kia. Em bé khóc tiếp rồi nói rõ ràng: cha em không đẻ em ra thì ai đẻ em ra hả vua ơi. Vua bật cười phá lên: cha mày làm sao đẻ được, ngươi nói gì kỳ vậy. Em bé liền hỏi ngược lại: vậy sao vua bắt cả làng phải có trâu đực đẻ con để nộp.",
+        "Vua đứng hình một phen rồi bật cười sảng khoái, nhận thua câu đối đáp tuyệt vời của em bé. Vua công khai khen ngợi em bé thông minh trước mặt cả triều đình, ban thưởng hậu hĩnh cho cả làng vì đã sinh ra một thiên tài. Nhưng vua vẫn chưa muốn dừng lại, tò mò muốn thử trí tuệ của em bé thêm lần nữa cho thật rõ ràng. Vua ban cho em bé một con chim sẻ nhỏ bé, ra lệnh em phải làm thành ba mâm cỗ đầy đặn dâng vua nếm thử.",
+        "Em bé nghe xong không hề bối rối, cười tủm tỉm rồi đưa lại vua một cái kim khâu bé tí. Em nói cực kỳ điềm tĩnh: thưa vua, vua đem cái kim này về rèn thành con dao thật to thật sắc rồi mang trả lại em, em sẽ làm thịt con chim sẻ này thành ba mâm cỗ ngon lành cho vua ngay. Vua nghe xong lại đứng hình lần nữa, biết rõ con kim sao rèn thành dao được, đành phải nhận thua thêm một lần. Vua càng yêu mến và nể phục em bé, ban cho em bé danh hiệu và bổng lộc lớn ngay tại triều đình.",
+        "Đúng lúc đó có sứ thần một nước láng giềng đến triều đình nước Việt với mục đích dò tài quan lại. Sứ thần ngoại quốc kiêu căng mang theo một câu đố mà tin chắc không ai nước Việt giải được, để có cớ chê dân ta yếu kém. Câu đố là làm sao xâu một sợi chỉ mảnh qua được lòng một con ốc xoắn nhiều vòng phức tạp. Cả triều đình quan lại ngồi đăm chiêu mãi không nghĩ ra cách nào, ai cũng lú lắc đầu nhìn nhau ngơ ngác trước câu đố hóc hiểm.",
+        "Vua nhớ đến em bé thông minh năm xưa, liền sai người mời em vào triều giải giúp câu đố này. Em bé đến nơi, nhìn con ốc và sợi chỉ một lát rồi cười nhẹ, đề xuất cách giải cực kỳ đơn giản mà tinh quái. Em nói: chỉ cần bôi mật ong vào lỗ trên của ốc, buộc đầu sợi chỉ vào một con kiến nhỏ, kiến ngửi thấy mùi mật sẽ chui vào ốc kéo theo sợi chỉ xuyên qua hết các vòng xoắn. Triều đình thử ngay tại chỗ, quả nhiên kiến chui qua kéo theo sợi chỉ thành công ngon ơ trước mặt mọi người.",
+        "Sứ thần ngoại quốc chứng kiến cảnh đó thì cười xỉu nhận thua hoàn toàn, cúi đầu phục lăn trước trí tuệ Việt Nam. Sứ thần về nước báo cáo lại, từ đó các nước láng giềng đều e dè không dám coi thường nước Việt nữa. Vua mừng rỡ phong em bé làm Trạng Nguyên trẻ nhất trong lịch sử nước Việt, ban cho em một dinh thự lớn để học hành và phục vụ triều đình. Em bé từ cậu nhóc nông dân nghèo bỗng trở thành nhân vật nức tiếng cả nước, được muôn dân kính mến.",
+        "Câu chuyện em bé thông minh dạy ta rằng trí tuệ không phân biệt tuổi tác giàu nghèo hay xuất thân, mà chỉ cần có cái đầu biết suy nghĩ và phản xạ nhanh nhạy. Một cậu bé mười tuổi nhà nông dân nghèo có thể giải bốn câu đố hóc búa mà cả triều đình quan lại đầy bằng cấp không giải được. Bài học còn nằm ở chỗ phản xạ thông minh nhất là đặt ngược câu hỏi để đối phương tự thấy phi lý, kỹ năng đàm phán cực kỳ giá trị trong cuộc sống hiện đại. Mỗi lần đối mặt với vấn đề khó, hãy nhớ em bé thông minh và bài học về cách tư duy ngược để thoát ra một cách thanh thoát.",
+    ],
+    "image_prompts": [
+        f"Movie-poster composition: {EM_BE} on LEFT half with confident clever smile holding a scroll, {VUA_EBT} on RIGHT half nodding in admiration, scrolls and puzzles floating between them, dramatic intelligence-vs-power split lighting, fairy-tale poster framing.",
+        f"Royal scene: {VUA_EBT} on golden throne dispatching {SU_GIA_EBT} who holds a scroll, courtiers watching, {TRIEU_DINH_EBT}, warm golden palace light.",
+        f"Rural scene: {SU_GIA_EBT} on horseback pausing beside a rice paddy, {CHA_EM_BE} guiding a buffalo plow with {EM_BE} standing beside, the boy looking up confidently at the messenger, {LANG_EBT}, sunlit morning, dialogue moment.",
+        f"Comedic reversal scene: {SU_GIA_EBT} standing in stunned silence with mouth open beside the rice paddy, {EM_BE} smiling cheekily pointing at the messenger's horse, {CHA_EM_BE} watching amazed, sunlit rice field, humorous triumph mood.",
+        f"Royal delivery scene: royal attendants delivering three black buffalo bulls and three baskets of glutinous rice to the village square of {LANG_EBT}, villagers crowding around in confusion, dramatic afternoon light, comedic puzzlement mood.",
+        f"Village feast scene: villagers of {LANG_EBT} gathered around a communal feast with steamed sticky rice and meat on banana leaves, {EM_BE} and {CHA_EM_BE} sitting at the center eating happily, warm sunset glow, communal celebration mood.",
+        f"Court appeal scene: {EM_BE} crying theatrically before {VUA_EBT} on the golden throne, {CHA_EM_BE} standing beside in respectful posture, courtiers watching in surprise, {TRIEU_DINH_EBT}, dramatic spotlight on the boy.",
+        f"Royal challenge scene: {VUA_EBT} on golden throne presenting a small sparrow in cupped hands to {EM_BE}, who tilts head curiously yet confidently, courtiers watching, {TRIEU_DINH_EBT}, warm intrigued light.",
+        f"Clever counter scene: {EM_BE} kneeling holding up a tiny sewing needle to {VUA_EBT}, the king laughing in defeat, courtiers stunned around, {TRIEU_DINH_EBT}, dramatic spotlight on the needle in the boy's hand.",
+        f"Foreign envoy scene: {SU_THAN_NGOAI} standing arrogantly before {VUA_EBT}, presenting a small spiral seashell and a piece of thread on an ornate tray, the entire court staring in puzzlement, {TRIEU_DINH_EBT}, tense light.",
+        f"Ingenious solution scene: {EM_BE} kneeling on the floor holding the spiral shell with one finger, a small ant carrying a thread climbing into the shell's opening with honey smeared at the top, {VUA_EBT} and courtiers leaning in to watch, {TRIEU_DINH_EBT}, dramatic golden discovery light.",
+        f"Defeat scene: {SU_THAN_NGOAI} bowing deeply in defeat, {EM_BE} standing confidently beside {VUA_EBT} who looks proud, courtiers cheering around, {TRIEU_DINH_EBT}, triumphant golden light.",
+        f"Closing peaceful scene: {EM_BE} now slightly older in scholar robes walking through {LANG_EBT} at golden sunset, villagers waving in admiration as he passes, warm amber palette, contemplative oil-painting feel, hopeful timeless wisdom mood.",
+    ],
+    "motions": ["static","static","static","static","static","pan_right","static","static","static","static","zoom_out","static","static","zoom_out"],
+    "caption_hook": "Anh em đã nghe Em Bé Thông Minh kiểu phim Slumdog Millionaire chưa? 🧠👶 Cậu bé 10 tuổi nông dân nghèo giải 4 câu đố hóc búa làm vua quan đứng hình, phong Trạng Nguyên!",
+    "caption_bullets": [
+        "Vua sai sứ giả tìm người tài, ra câu đố hóc búa khắp nước",
+        "Em bé đáp ngược câu đố trâu cày mấy đường",
+        "Vua thử trâu đực đẻ con — em bé phản đòn cha em không đẻ em ra ai đẻ",
+        "Vua thử chim sẻ làm 3 mâm cỗ — em đưa kim đòi rèn thành dao",
+        "Sứ thần ngoại quốc đố xâu chỉ qua ốc xoắn — cả triều lú",
+        "Em bé bôi mật buộc chỉ vào kiến — kiến chui qua kéo chỉ",
+        "Vua phong Trạng Nguyên trẻ nhất lịch sử nước Việt"
+    ],
+    "caption_moral": "Câu chuyện dạy ta: trí thông minh không phân biệt tuổi tác giàu nghèo — phản xạ ngược câu hỏi và tư duy sáng tạo là vũ khí mạnh nhất."
+}
+
 # ================ EXPORT ================
 BOOKS = {
     "thach-sanh": THACH_SANH_BOOK,
@@ -1136,4 +1193,5 @@ BOOKS = {
     "su-tich-trau-cau": TRAU_CAU_BOOK,
     "con-rong-chau-tien": CON_RONG_BOOK,
     "tri-khon-cua-ta-day": TRI_KHON_BOOK,
+    "em-be-thong-minh": EM_BE_BOOK,
 }
