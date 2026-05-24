@@ -83,7 +83,7 @@ MUSIC_COLORS = {
     "object/other":        "satisfying, warm, transformational",
 }
 
-# Per-subject Veo phase-action snippets (compact)
+# Per-subject Veo phase-action snippets (compact, fallback when no milestone-keyed entry)
 VEO_PHASE_ACTIONS = {
     "house":               "Workers hauling materials, scaffolding rising, walls forming brick-by-brick, windows snapping in, roof tiles sliding into place",
     "building":            "Cranes swinging, foundation poured, structural frame rising floor-by-floor, curtain wall panels clicking into place",
@@ -98,6 +98,26 @@ VEO_PHASE_ACTIONS = {
     "object/instrument":   "Body glued + clamped, neck joined, fretboard pressed on, tuning pegs installed, strings wound, polish coat",
     "object/other":        "Components assembling, structure taking shape, finishing details applied",
 }
+
+# Per-subject, per-milestone Veo action (Fix B: phase-specific instead of full sequence)
+# Picked by build_veo_prompt using milestone_to_name. Falls back to VEO_PHASE_ACTIONS.
+VEO_PHASE_ACTIONS_BY_MILESTONE = {
+    "room": {
+        "Walls painted + flooring": "Workers stripping debris off the walls, then rolling cream-beige paint onto every wall, then wide-plank oak flooring rolling out and locking into place across the bare concrete subfloor",
+        "Major furniture in place": "Cream-beige sectional sofa carried in and positioned in the FOREGROUND-LEFT corner, walnut coffee table set in front of the sofa, walnut TV console floating onto the RIGHT wall, 65-inch TV mounted on the RIGHT wall above the console — NO decor, NO plants, NO candles yet",
+        "Decor + soft furnishings + lighting": "Tall cypress plant placed in a terracotta pot beside the TV console, amber pillar candles arranged on the coffee table and LIT (visible warm flame), wall sconces installed and turned on, cream wool rug rolled out under the coffee table, sheer + opaque beige curtains drawn on the LEFT wall flanking the balcony glass, warm cove LED perimeter flicking on along the ceiling — evening warmth settling in",
+        "Final": "Last ambient adjustments — full evening twilight outside, warm interior LED at full glow, decor settled into place, no movement",
+        # Special key used by build_veo_prompt when n_stages==1 (one-shot full build with workers)
+        "__FULL__": "A small crew of workers visible in frame: hammering and screwing, hands carrying buckets of cream-beige paint and rollers, then rolling out wide-plank oak flooring, then sliding the cream sectional sofa into the foreground-LEFT corner, sliding the walnut coffee table and walnut TV console into place, mounting the TV on the RIGHT wall, then placing a tall cypress plant in a terracotta pot, lighting amber pillar candles with a visible warm flame, switching on wall sconces, rolling out the cream wool rug, drawing beige curtains on the LEFT wall, and finally the warm cove LED perimeter flicking on as twilight settles — continuous build with visible workers, hands, and tools throughout",
+    },
+}
+
+def get_veo_phase_action(subject_key: str, milestone_to_name: str) -> str:
+    """Fix B: pick milestone-specific action; fallback to subject's full sequence."""
+    by_milestone = VEO_PHASE_ACTIONS_BY_MILESTONE.get(subject_key, {})
+    if milestone_to_name in by_milestone:
+        return by_milestone[milestone_to_name]
+    return VEO_PHASE_ACTIONS.get(subject_key, VEO_PHASE_ACTIONS["object/other"])
 
 
 # ---------- helpers ----------
@@ -198,13 +218,34 @@ def get_milestones(subject_key: str, n_stages: int) -> list[tuple[str, int]]:
 
 
 def build_lock_block(analysis: dict) -> str:
+    """Build LOCK BLOCK preamble + LAYOUT MAP + INVENTORY + camera/wall + time-of-day lock.
+
+    Fix A: time_of_day from scene_context is pulled into a dedicated lock line so every
+    stage prompt anchors the same lighting (prevents day↔night drift between stages).
+    """
     lb = analysis.get("lock_blocks", {})
     layout = lb.get("layout_map", "")
     inventory = lb.get("inventory", "")
-    preamble = "VERTICAL PORTRAIT 9:16 (1080x1920) framing. STRICTLY NO TEXT, NO TYPOGRAPHY, NO WATERMARKS, NO LOGOS in the image."
+    sc = analysis.get("scene_context", {})
+    camera_angle = sc.get("camera_angle", "")
+    time_of_day = sc.get("time_of_day", "")
+    preamble = (
+        "VERTICAL PORTRAIT 9:16 (1080x1920) framing. "
+        "STRICTLY NO TEXT, NO TYPOGRAPHY, NO WATERMARKS, NO LOGOS in the image."
+    )
     parts = [preamble]
+    if time_of_day:
+        parts.append(
+            f"TIME-OF-DAY LOCK (NEVER drift between stages): {time_of_day}\n"
+            "Keep exterior light tone + interior color temperature IDENTICAL across all stages."
+        )
+    if camera_angle:
+        parts.append(
+            f"CAMERA LOCK (NEVER deviate from this exact framing across all stages):\n{camera_angle}\n"
+            "Do not switch to head-on / centered / symmetric framing — keep the exact angle and depth perspective from the input."
+        )
     if layout:
-        parts.append(f"LAYOUT MAP:\n{layout}")
+        parts.append(f"LAYOUT MAP (positional lock — every wall/zone fixed):\n{layout}")
     if inventory:
         parts.append(f"INVENTORY:\n{inventory}")
     return "\n\n".join(parts)
@@ -257,8 +298,22 @@ def build_stage_k_prompt(analysis: dict, k: int, n_stages: int, milestones: list
     future_milestones = [m[0] for m in milestones[k + 1:-1]]  # exclude Stage N (Final)
 
     inherited_block = f"Everything already built/installed at Stage {k-1} ({prev_milestone}, {prev_pct}%). Same camera angle, lighting, surroundings."
-    new_block = f"Progress to {milestone_name} milestone — approximately {pct}% complete. Add the elements characteristic of this phase."
-    missing_block = (", ".join(future_milestones) + " (do not add yet)") if future_milestones else "Nothing — this is the final construction stage."
+    new_block = f"Progress to {milestone_name} milestone — approximately {pct}% complete. Add ONLY the structural elements characteristic of this phase."
+
+    # Strong negative discipline: enforce that mid-stage shots are BARE structurally — no ambient decor.
+    is_final_stage = (k == n_stages - 1)  # last GENERATED stage before Stage N (source)
+    if not is_final_stage:
+        decor_ban = (
+            "ABSOLUTELY NO ambient decor at this stage: no candles (lit or unlit), no lit lamps, "
+            "no glowing wall sconces, no LED cove/strip glow, no potted plants, no decorative pillows, "
+            "no books, no framed photos, no dried decor, no rugs, no sheer curtain layer. "
+            "These ALL arrive only at the final stage. The room/scene must look STRUCTURALLY done but "
+            "BARE — like a model home before staging."
+        )
+        missing_list = (", ".join(future_milestones) + " (do not add yet)") if future_milestones else "Final staging/decor pass."
+        missing_block = f"{missing_list}\n  {decor_ban}"
+    else:
+        missing_block = (", ".join(future_milestones) + " (do not add yet)") if future_milestones else "Nothing — this is the final construction stage."
 
     return f"""[VERTICAL PORTRAIT 9:16, 1080x1920]
 Starting from this image (Stage {k-1} of {subject_display} build — showing {prev_milestone} at {prev_pct}% completion), advance it to Stage {k} — approximately {pct}% complete at the "{milestone_name}" milestone.
@@ -577,62 +632,52 @@ def phase_b_generate_stages(slug_dir: Path, analysis: dict, n_stages: int, subje
 # ---------- Stage C: Veo transition videos ----------
 
 def upload_stage_image(stage_path: Path) -> str:
-    """Upload a stage image to Flow. Returns media_id (UUID)."""
-    import mimetypes
-    import urllib.request
-    mime = mimetypes.guess_type(str(stage_path))[0] or "image/jpeg"
-    boundary = "fkbuild" + hashlib.md5(str(stage_path).encode()).hexdigest()[:8]
-    with open(stage_path, "rb") as f:
-        img_data = f.read()
-    body = (
-        f"--{boundary}\r\n"
-        f'Content-Disposition: form-data; name="file"; filename="{stage_path.name}"\r\n'
-        f"Content-Type: {mime}\r\n\r\n"
-    ).encode("utf-8") + img_data + f"\r\n--{boundary}--\r\n".encode("utf-8")
-    req = urllib.request.Request(
-        f"{API}/api/upload-image",
-        data=body,
-        headers={"Content-Type": f"multipart/form-data; boundary={boundary}"},
-        method="POST",
-    )
-    try:
-        with urllib.request.urlopen(req, timeout=60) as resp:
-            result = json.loads(resp.read())
-    except urllib.error.HTTPError as e:
-        err_body = e.read().decode("utf-8", errors="replace")
-        raise RuntimeError(f"upload-image HTTP {e.code}: {err_body[:200]}") from e
-    media_id = result.get("media_id") or result.get("id")
-    if not media_id or len(media_id) < 32:
-        raise RuntimeError(f"upload-image returned unexpected media_id: {result}")
-    return media_id
+    """Upload a stage image via /api/flow/upload-image. Returns media_id (UUID).
+
+    Mirrors upload_source_image (vetranh Step 0 pattern) — JSON body, not multipart.
+    """
+    return upload_source_image(stage_path)
 
 
 def build_veo_prompt(analysis: dict, k: int, n_stages: int, milestones: list, subject_key: str) -> str:
-    lock_block = build_lock_block(analysis)
+    """Build a SHORT Veo i2v_fl prompt (target < 1100 chars).
+
+    Veo gets layout + identity from the start+end frame images — text should only describe
+    MOTION between them. Long prompts (>3KB) cause Veo workflow polling timeouts.
+    Fix B: phase-specific action (not full sequence).
+    Fix D: style anchor pulled from analysis.json to block Veo's default inventions.
+    """
     subject_display = analysis.get("subject", "subject")
     milestone_from, pct_from = milestones[k]
     milestone_to, pct_to = milestones[k + 1]
-    milestone_name = milestone_to
-    phase_actions = VEO_PHASE_ACTIONS.get(subject_key, VEO_PHASE_ACTIONS["object/other"])
 
-    return f"""8-second hyper-fast timelapse of {subject_display} build, phase {k+1} of {n_stages} — progressing from {milestone_from} ({pct_from}%) to {milestone_to} ({pct_to}% completion). Camera locked-off, IDENTICAL framing throughout.
+    # When N==1, whole build happens in one clip — use __FULL__ key (workers + full sequence).
+    if n_stages == 1:
+        by_milestone = VEO_PHASE_ACTIONS_BY_MILESTONE.get(subject_key, {})
+        phase_actions = by_milestone.get("__FULL__", VEO_PHASE_ACTIONS.get(subject_key, VEO_PHASE_ACTIONS["object/other"]))
+    else:
+        phase_actions = get_veo_phase_action(subject_key, milestone_to)
 
-{lock_block}
+    # Fix D — style anchor from analysis (palette + descriptor) blocks Veo invention
+    palette = analysis.get("scene_context", {}).get("palette", [])
+    style_desc = analysis.get("style_descriptor", "")
+    time_of_day = analysis.get("scene_context", {}).get("time_of_day", "")
+    palette_str = ", ".join(palette[:5]) if palette else "neutral"
+    tod_line = f" Time-of-day: {time_of_day}." if time_of_day else ""
 
-CRITICAL during this 8s timelapse:
-- Camera does NOT move (locked tripod, identical to first-frame & last-frame images).
-- All zones stay at EXACT positions from LAYOUT MAP.
-- All components/plants/materials stay SAME identity per INVENTORY — only build-progress changes.
-- Final frame matches the provided end-frame image EXACTLY (Flow first+last frame mode).
+    return f"""8-second hyper-fast timelapse of {subject_display} build, phase {k+1}/{n_stages}: {milestone_from} ({pct_from}%) → {milestone_to} ({pct_to}%).
 
-Action progression ({milestone_name} phase):
-{phase_actions}
-Time-passing cue: subtle sun-arc / shadow shift (outdoor) OR window light shift (interior) OR slight ambient shift (object close-up).
+Camera LOCKED on a tripod — never moves; identical to first-frame and last-frame images.
+Last frame must match the provided end-frame image EXACTLY.
 
-Style: realistic high-end timelapse, fast-motion stable LOCKED camera, cinematic color grade, sharp focus, saturation increasing toward final phase. Vertical 9:16 portrait.
-STRICTLY NO TEXT, NO TYPOGRAPHY, NO LOGOS.
+STYLE ANCHOR ({style_desc}): palette = {palette_str}. ABSOLUTELY DO NOT introduce: modern starburst/sputnik chandeliers, grey scandinavian furniture, abstract modern art, anything not present in the start+end frames.{tod_line}
 
-Negative: subtitles, watermark, text overlay, camera movement, multiple shots, dialogue."""
+HUMAN ELEMENT: workers ARE visible and welcome in frame — hands, tools, bodies doing the construction work. Show the crew transforming the space. The build feels human, not magic.
+
+Action during these 8 seconds: {phase_actions}.
+
+Style: realistic high-end timelapse, cinematic color grade, sharp focus, vertical 9:16.
+Negative: text, typography, watermark, logos, camera movement, multiple shots, dialogue, modern chandelier, sputnik light, grey scandi style, abstract art."""
 
 
 def poll_batch_until_done(vid: str, poll_every: int = 30, max_wait: int = 900) -> bool:
@@ -1033,11 +1078,11 @@ def main():
     )
     parser.add_argument("--image", help="Path to source image (required for first run)")
     parser.add_argument("--slug", required=True, help="Output slug (e.g. house_modern_villa_001)")
-    parser.add_argument("--stages", type=int, default=3, choices=range(2, 9), metavar="N",
-                        help="Number of build stages (2-8, default 3 → 3 Veo clips)")
-    parser.add_argument("--speed", type=float, default=0.8, metavar="X",
-                        help="Final concat playback speed (default 0.8 = ~25%% longer than raw Veo; "
-                             "1.0 = original Veo speed; 0.5 = half-speed)")
+    parser.add_argument("--stages", type=int, default=1, choices=range(1, 9), metavar="N",
+                        help="Number of build stages (1-8, default 1 = single one-shot Veo clip with workers visible, full build compressed in ~16s @ speed 0.5). Bump N for richer multi-stage timelapse.")
+    parser.add_argument("--speed", type=float, default=0.5, metavar="X",
+                        help="Final concat playback speed (default 0.5 = half-speed, twice as long; "
+                             "0.8 = ~25%% longer than raw Veo; 1.0 = original Veo speed)")
     parser.add_argument("--subject", default="house",
                         choices=["house", "garden", "room", "building",
                                  "object/food", "object/furniture", "object/electronics",

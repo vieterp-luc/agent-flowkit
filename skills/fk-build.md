@@ -11,8 +11,8 @@ Usage:
 
 | Flag | Default | Description |
 |------|---------|-------------|
-| `--stages N` | 3 | Number of build stages (2–8). Produces N Veo clips. |
-| `--speed X` | 0.8 | Final concat playback speed (1.0 = raw Veo, 0.8 = ~25% longer, calmer pacing; 0.5 = half-speed). |
+| `--stages N` | **1** | Number of build stages (1–8). N=1 = single one-shot Veo clip with workers visible, full build compressed. Bump N (3-5) for richer multi-stage timelapse with discrete milestones. |
+| `--speed X` | **0.5** | Final concat playback speed (1.0 = raw Veo, 0.8 = ~25% longer, **0.5 = half-speed (default)** for calm watchable pacing). |
 | `--subject {auto,house,garden,room,building,object}` | auto | Override auto-classify |
 | `--object-subtype {auto,food,furniture,electronics,sculpture,model,instrument,painting}` | auto | Force when subject=object |
 | `--start-state NAME` | auto | Override Stage 0 archetype (e.g. "abandoned fish pond") |
@@ -31,7 +31,7 @@ Usage:
 | Skill ID | `fk-build` |
 | Skill file | `skills/fk-build.md` |
 | Orientation | VERTICAL 1080×1920 |
-| Default N | **3** stages → 3 Veo clips × ~8s ≈ 24s raw, ≈ **29s** sau slowdown 0.8× |
+| Default N | **1** stage (one-shot) → 1 Veo clip 8s raw, **≈ 16s** sau slowdown 0.5× (workers visible) |
 | Output root | `output/fk_build/<slug>/` |
 | Image generator | Flow `/fk-gen-images` (GENERATE_IMAGE + chained EDIT_IMAGE waves) — modeled on `fk-video-vetranh` |
 | Video generator | Flow + Veo (start+end frame, via `/fk-gen-chain-videos` pattern) |
@@ -89,7 +89,9 @@ Print classification + 1-line reasoning. **No confirmation prompt — proceed im
 
 **ROOM:** room type, design style, color palette, materials/textures, key furniture, decor/lighting, architectural features (window/door/ceiling), camera angle.
 - LAYOUT MAP zones: floor / each visible wall / ceiling / window / door / each furniture piece.
-- INVENTORY name: **FURNITURE INVENTORY** — every furniture piece + decor with position, material, color.
+- **CRITICAL — wall orientation lock:** explicitly name which wall (LEFT / RIGHT / FAR / BACK) holds each fixed feature (windows, balcony doors, TV, fireplace, kitchen counter). Add the line: "balcony / windows are on the X wall — NEVER move it" so Gemini can't redesign the room shape between stages.
+- **CRITICAL — camera angle lock:** in `scene_context.camera_angle`, write a HARD CAMERA LOCK in caps: which corner the camera sits in, which direction it points, whether it's head-on / angled / diagonal. Add: "NEVER head-on / centered / symmetric — always this exact angle." This pulls into every stage prompt via the LOCK BLOCK preamble.
+- INVENTORY name: **FURNITURE INVENTORY** — every furniture piece + decor with position, material, color. For each decor item (candles, plants, sconces, sheer curtains, rug, framed art, pillows) add `[final stage only]` so non-final stages render BARE.
 
 **GARDEN:** garden type, plant species, hardscape, water features, lighting fixtures, furniture/decor, surroundings, sky, camera angle, mood.
 - LAYOUT MAP zones: ground areas (lawn/path/pond/beds) / perimeter (fence/wall) / overhead (trees/sky) / decor clusters.
@@ -561,12 +563,12 @@ After all clips downloaded: print PID + VID so user can run `/fk-status` if need
 
 ### D1 — Concat clips with tail trim + slow-down
 
-Veo clips are fast-forward by nature. Default `--speed 0.8` slows the final concat by 25% (calmer pacing, video lasts ~25% longer — better fits 30-60s Short range). Pass `--speed 1.0` to keep raw Veo speed.
+Veo clips are fast-forward by nature. Default `--speed 0.5` halves the speed so the final concat is twice as long (calm watchable pacing). Pass `--speed 1.0` to keep raw Veo speed, or `--speed 0.8` for a milder 25% slowdown.
 
 ```bash
 SRC=output/fk_build/<slug>
 N=<num_clips>
-SPEED=<--speed value, default 0.8>
+SPEED=<--speed value, default 0.5>
 
 # 1) Tail-trim 0.5s on all-but-last to mitigate chain-boundary static
 > $SRC/clips/concat.txt
@@ -597,9 +599,9 @@ else
 fi
 ```
 
-**Duration math** (default N=3, raw clip 8s, trim 0.5s, speed 0.8):  
-post-trim concat ≈ 2×7.5 + 1×8.0 = 23s → after 0.8× slowdown ≈ **29s**. With raw 1.0× = 23s.  
-Tăng N=4 → 38s @ 0.8×; N=5 → 47s @ 0.8×.
+**Duration math** (default N=1 + speed 0.5):  
+1 clip × 8s raw, no trim (last clip) → 8s × 1/0.5 = **16s** final.  
+Other configs: N=3 + 0.8× ≈ 29s · N=4 + 0.8× ≈ 38s · N=5 + 0.8× ≈ 47s.
 
 ### D2 — Music generation (skip if `--no-music`)
 
@@ -764,7 +766,7 @@ output/fk_build/<slug>/
 | Audio codec | aac, 192k |
 | Stage image model | Flow GENERATE_IMAGE + EDIT_IMAGE (chained waves, per `/fk-gen-images`) |
 | Clip duration | ~8s per Veo clip |
-| Total duration | `(N×8 − (N−1)×0.5) / speed` — default N=3 + speed 0.8 ≈ **29s**; N=4 ≈ 38s; N=5 ≈ 47s |
+| Total duration | `(N×8 − (N−1)×0.5) / speed` — default N=1 + speed 0.5 = **16s**; N=3 + 0.8 ≈ 29s; N=4 ≈ 38s; N=5 ≈ 47s |
 | BGM volume | 0.18× |
 | Clip SFX volume | 1.0× |
 | Brand logo size | 140px, PAD 28px, bottom-right |
@@ -840,7 +842,7 @@ Re-run with same slug + `--resume`:
 ## Examples
 
 ```bash
-# House (defaults: N=3, no brand, with music, slow 0.8×)
+# House (defaults: N=1 one-shot, no brand, with music, slow 0.5× → ~16s)
 /fk-build photos/villa.jpg
 
 # Garden, 5 stages
