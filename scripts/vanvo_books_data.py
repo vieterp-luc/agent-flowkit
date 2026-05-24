@@ -946,6 +946,66 @@ THANH_GIONG_BOOK = {
     "caption_moral": "Câu chuyện dạy ta: sức mạnh đến từ lòng yêu nước và sự đoàn kết của cả cộng đồng — một đứa trẻ được cả làng nuôi cũng có thể làm nên kỳ tích cứu nước."
 }
 
+# ================ BOOK 12: SỰ TÍCH TRẦU CAU ================
+TAN = _char("anh Tân", "young Vietnamese man, elder identical twin: solid cream tunic + brown trousers, leather sandals, gold chain, undercut black hair, gentle kind face (identical to Lang)")
+LANG = _char("em Lang", "young Vietnamese man, younger identical twin: solid cream tunic + brown trousers, leather sandals, gold chain, undercut black hair, gentle kind face (identical to Tân)")
+CO_GAI = _char("cô gái nhà thầy đồ", "young Vietnamese woman: pink pastel solid áo dài + white sneakers, long black hair tied simple, gentle delicate face, romantic expression")
+THAY_DO_LUU = _char("thầy đồ Lưu", "elderly Vietnamese scholar: white scholar robe with simple sash, scholar cap, long white beard, kind wise face, holding brush or scroll")
+VUA_HUNG_TC = _char("Vua Hùng nghe chuyện trầu cau", "elderly Vietnamese king: dark red royal robe with gold trim, aviator sunglasses, Apple Watch, long white beard, compassionate face")
+CAY_CAU = "tall slender areca palm tree cây cau: smooth ringed trunk reaching skyward straight without branches, fronds at the top, mystical eternal vigil presence"
+DAY_TRAU = "trailing betel vine dây trầu: lush green heart-shaped leaves climbing around the base and trunk of an areca palm, intimate intertwined eternal embrace"
+TANG_DA = "white limestone rock tảng đá vôi: smooth ancient pale stone resting beside a stream, half-buried in earth, mossy with quiet sorrow"
+LANG_QUE_TC = "ancient rural Vietnamese village: bamboo huts with thatched roofs, rice paddies, dirt paths, banana trees, peaceful old-world atmosphere"
+BO_SUOI = "secluded forest stream: clear water flowing over smooth stones, mossy banks, tall ancient trees overhead, dappled forest light, sorrowful peaceful mood"
+
+TRAU_CAU_BOOK = {
+    "slug": "su-tich-trau-cau",
+    "title": "Sự Tích Trầu Cau",
+    "story_summary": "Văn Vở Gen Z. Hai anh em song sinh họ Cao Tân và Lang giống nhau như đúc. Cô gái nhà thầy đồ Lưu yêu một trong hai, bữa cơm thử đũa nhận ra anh Tân, kết duyên. Lang cảm thấy thừa thãi bỏ đi, chết bên bờ suối hóa tảng đá. Tân đi tìm, ôm đá khóc chết hóa cây cau. Vợ đi tìm chồng, hóa dây trầu quấn cây cau. Vua Hùng nghe chuyện cảm động truyền tục ăn trầu. Phiên bản kiểu phim The Notebook (2004).",
+    "scripts": [
+        "Hôm nay chúng ta sẽ nói về một truyền thuyết bi thương nhất trong kho tàng cổ tích Việt Nam, đó là sự tích trầu cau. Nếu phải so với một bộ phim để dễ hình dung thì tôi xếp nó vào hạng The Notebook hay A Walk to Remember, câu chuyện về tình yêu sâu đậm đến mức cái chết cũng không chia cắt được. Câu chuyện có hai anh em song sinh giống nhau như đúc, có cô gái không phân biệt được ai là ai, có cuộc hôn nhân đầy hiểu lầm dẫn đến bi kịch ba mạng người. Và có cả ba phép biến hình kỳ diệu thành cây cau, tảng đá và dây trầu quấn vào nhau muôn đời không rời.",
+        "Ngày xửa ngày xưa ở một làng nhỏ, có hai anh em song sinh nhà họ Cao, anh tên là Tân còn em tên là Lang. Hai người giống nhau như đúc, từ khuôn mặt đến vóc dáng đến giọng nói, đến mức ngay cả bố mẹ ruột có lúc cũng không phân biệt được ai là ai. Hai anh em thương yêu nhau hết mực từ nhỏ, đi đâu cũng có nhau, ăn cùng mâm ngủ cùng giường, không bao giờ rời nhau một bước. Anh em cứ hình dung kiểu hai best friend ruột rà từ thuở lọt lòng, gắn bó hơn cả keo dán siêu dính.",
+        "Nhưng đời không cho ai trọn vẹn, cha mẹ hai anh em qua đời sớm để lại Tân và Lang mồ côi giữa cõi đời. Hai anh em được thầy đồ Lưu, một người bạn cũ của cha, nhận về nuôi dạy cho ăn học đàng hoàng. Thầy đồ Lưu coi Tân và Lang như con đẻ của mình, dạy chữ dạy lễ nghĩa chu đáo từng ngày. Profile của thầy Lưu thì đúng kiểu một ông thầy đầy đức độ và phúc hậu, sống đơn sơ nhưng tâm hồn rộng mở vô bờ bến.",
+        "Thầy đồ Lưu có một cô con gái duy nhất, xinh đẹp dịu dàng nức tiếng cả vùng. Cô gái lớn lên cùng hai anh em, lâu ngày phát sinh tình cảm với một trong hai chàng trai. Nhưng oái oăm thay, hai anh em giống nhau như đúc khiến cô không thể phân biệt được ai là anh Tân và ai là em Lang. Mỗi lần gặp hai người cùng lúc, cô gái đứng hình một phen vì không biết phải xưng hô và đáp lại tình cảm với ai cho đúng.",
+        "Một hôm cô gái nghĩ ra một cách thử khôn ngoan để phân biệt hai người. Cô bày một bữa cơm chỉ có duy nhất một đôi đũa và một bát canh, mời hai anh em cùng ngồi vào ăn. Theo lễ nghĩa, người anh sẽ nhường em ăn trước, còn người em sẽ kính trọng để anh ăn trước. Quả nhiên anh Tân ngần ngại không cầm đũa, để em Lang ăn trước, từ đó cô gái biết được Tân là anh và lập tức quyết định kết duyên cùng anh.",
+        "Đám cưới của Tân và cô gái diễn ra ấm cúng, hai vợ chồng sống quấn quýt nhau như đôi chim non. Nhưng từ ngày anh có vợ, em Lang cảm thấy mình như bị thừa thãi trong căn nhà mà bao năm hai anh em chung sống. Tân vì bận chăm vợ nên dần dần ít gần gũi em hơn trước, không còn cùng đi cùng về như xưa nữa. Lang ngồi một mình trong góc nhà, lòng buồn rười rượi, drama tâm trạng dày đặc nhưng không nói được với ai một lời.",
+        "Không chịu nổi cảm giác cô đơn lạc lõng, một sáng nọ Lang lặng lẽ bỏ nhà ra đi không một lời từ biệt. Em đi mãi đi mãi qua nhiều cánh rừng, đến một bờ suối hoang vu thì kiệt sức không còn đi nổi nữa. Lang ngồi bệt xuống bên bờ suối, vừa khóc thương phận mình vừa thương người anh đã xa cách. Nước mắt rơi không ngừng cho đến khi Lang gục xuống, kiệt sức mà chết, hóa thành một tảng đá vôi trắng ngần nằm im bên bờ suối.",
+        "Ở nhà Tân chờ mãi không thấy em về, lòng nóng như lửa đốt liền bỏ vợ ở lại đi tìm em. Anh đi qua từng cánh rừng từng con suối, hỏi thăm khắp nơi mà không một ai biết tin tức gì của Lang. Cuối cùng Tân lần theo dấu vết tới đúng bờ suối nơi em mình ngã xuống, thì chỉ thấy một tảng đá lạ nằm im lìm bên dòng nước. Linh cảm điều chẳng lành ập đến, Tân ôm chầm lấy tảng đá khóc nức nở gọi tên em mình không ngừng nghỉ.",
+        "Tân ôm tảng đá khóc cả ngày lẫn đêm không ăn không uống, lòng đau như dao cắt vì biết em mình đã chết oan. Đến khi kiệt sức rồi anh cũng gục xuống bên cạnh tảng đá, hơi thở yếu dần rồi tắt hẳn. Lạ thay từ chỗ Tân ngã xuống mọc lên một cái cây cao thẳng đứng, thân nhẵn không cành, ngọn vươn cao chĩa lên trời như đang ngóng trông ai đó. Đó chính là cây cau đầu tiên trên đời, đứng cạnh tảng đá Lang như hai anh em không rời nhau dù đã thành hai dạng vật khác nhau.",
+        "Ở nhà cô vợ đợi mãi cũng không thấy chồng về, sốt ruột khôn nguôi cô cũng bỏ nhà đi tìm Tân khắp nơi. Cô lần theo những con đường chồng đã đi qua, cuối cùng cũng tới đúng bờ suối định mệnh nơi hai anh em đã ngã xuống. Cô chỉ thấy một tảng đá và một cây cau đứng sát bên nhau giữa rừng vắng, linh cảm trong lòng vỡ òa biết chuyện chẳng lành. Cô ôm chầm lấy cây cau khóc thương chồng cho đến khi kiệt sức, hóa thành một dây trầu xanh mướt quấn quanh thân cây cau.",
+        "Một ngày kia có người đi đường ngang qua bờ suối, thấy cảnh tượng kỳ lạ tảng đá cây cau và dây trầu kết bộ với nhau, lấy làm tò mò vô cùng. Người đó hái thử một lá trầu nhai với miếng cau, ngậm thêm chút vôi mài từ tảng đá bên cạnh, thì miệng tiết ra một thứ nước đỏ thắm như máu. Hương vị cay nồng nhưng ấm áp lạ thường, nhai xong lại thấy tinh thần phấn chấn và môi miệng đỏ tươi đẹp lạ. Câu chuyện ba người hóa thành ba thứ quấn quýt nhau lan ra khắp vùng, ai nghe cũng xúc động đến rơi nước mắt.",
+        "Tin về ba người hóa thành ba thứ ở bờ suối truyền tới tận triều đình, vua Hùng nghe xong cũng cảm động không cầm được nước mắt. Vua truyền lệnh cho dân chúng khắp nơi trồng cau và trầu để giữ gìn câu chuyện đẹp này, đồng thời lấy việc ăn trầu làm tục lệ trong mọi dịp lễ tết hỏi cưới. Từ đó người Việt có câu nói nổi tiếng: miếng trầu là đầu câu chuyện, mỗi lần gặp gỡ hay làm quen đều mời nhau một miếng trầu thay lời chào hỏi thân tình. Tục ăn trầu trở thành nét văn hóa độc đáo của dân tộc, gắn liền với hôn nhân, lễ tết và ngoại giao suốt hàng nghìn năm.",
+        "Câu chuyện sự tích trầu cau dạy ta một bài học sâu sắc về tình yêu thương giữa con người với nhau trong cuộc đời. Tình anh em ruột thịt, tình vợ chồng thủy chung và tình bạn chân thành đều quý giá ngang nhau, không nên vì cái này mà bỏ quên cái kia. Ba người ở bờ suối đã chọn cách sống chết bên nhau thay vì xa cách, để rồi hóa thành ba thứ mãi mãi quấn quýt không rời. Mỗi miếng trầu đỏ thắm trên môi cô dâu ngày cưới hay trong bàn tiệc lễ hội, chính là lời nhắc nhở dịu dàng về giá trị của tình thân và lòng chung thủy trong văn hóa Việt Nam.",
+    ],
+    "image_prompts": [
+        f"Movie-poster composition: {TAN} on LEFT half with longing wistful face, {CO_GAI} center embracing him tenderly, {LANG} on RIGHT half alone with sorrowful face, behind them {BO_SUOI} with {TANG_DA}, {CAY_CAU} and {DAY_TRAU} intertwined, dramatic tragic-romance split lighting, fairy-tale poster framing.",
+        f"Childhood scene: {TAN} and {LANG} as identical twin brothers sitting side by side at a small table eating from one bowl, simple ancestral altar with parents' photos behind, simple thatched home, soft melancholy warm light, brotherly bond mood.",
+        f"Classroom scene: {THAY_DO_LUU} teaching {TAN} and {LANG} sitting before bamboo desks reading scrolls, traditional Vietnamese study room with calligraphy on walls, warm afternoon light, scholarly atmosphere.",
+        f"Garden scene: {CO_GAI} standing between {TAN} and {LANG} who look identical, her looking back and forth confused with hand on chin, blossoming garden background, soft pastel light, romantic confused mood.",
+        f"Domestic dinner scene: {CO_GAI} sitting watching at a low wooden table set with a single pair of chopsticks and one bowl of soup, {TAN} on one side gesturing for {LANG} to eat first, {LANG} on the other side reaching for the chopsticks, traditional Vietnamese house interior, warm intimate light.",
+        f"Traditional wedding scene: {TAN} and {CO_GAI} in red áo dài standing together bowing before an ancestral altar, {LANG} watching from the side of the room with a wistful lonely expression, lanterns and red banners, warm gold light, bittersweet mood.",
+        f"Departure scene: {LANG} walking alone down a dirt path away from his home village at dawn, head bowed in sadness with a small bundle on his shoulder, {LANG_QUE_TC} fading behind him, soft cool morning mist, melancholy departure mood.",
+        f"Tragic transformation scene: {LANG} collapsed beside {BO_SUOI} crying, his body gradually fading and turning into the {TANG_DA} resting against the bank, dappled forest light, dramatic mystical sorrowful glow, autumn leaves falling.",
+        f"Heartbreak scene: {TAN} kneeling and embracing the {TANG_DA} beside {BO_SUOI} crying with face buried, forest twilight, dramatic warm sorrowful light, intimate grief moment.",
+        f"Second transformation scene: {TAN}'s body gradually fading at the base of {TANG_DA}, transforming into the slender {CAY_CAU} reaching skyward beside the rock, magical golden cyan glow, mystical sad-beautiful atmosphere, {BO_SUOI} backdrop.",
+        f"Third transformation scene: {CO_GAI} embracing the {CAY_CAU} beside the {TANG_DA}, her body gradually fading and turning into the {DAY_TRAU} climbing around the base of the palm, sunset golden light, mystical eternal-love mood, intertwined for eternity.",
+        f"Discovery scene: a kind elderly Vietnamese traveler beside {BO_SUOI} examining the entwined {CAY_CAU} with {DAY_TRAU} and {TANG_DA}, holding a betel leaf wrapped around a piece of areca nut, his lips stained vivid red, surprised wonder expression, golden discovery light.",
+        f"Closing wedding scene: a traditional Vietnamese bride in red áo dài holding a small ceremonial tray of betel leaves and areca nuts, family elders smiling warmly around her, lanterns and ancestral altar, warm golden gratitude atmosphere, contemplative oil-painting feel, hopeful timeless tradition mood.",
+    ],
+    "motions": ["static","static","static","static","static","static","static","pan_right","static","static","zoom_out","zoom_out","static","zoom_out"],
+    "caption_hook": "Anh em đã nghe Sự Tích Trầu Cau kiểu phim The Notebook chưa? 🌿🥥 Tình anh em + tình vợ chồng đến chết cũng không chia cắt — hóa thành cây cau dây trầu tảng đá quấn quýt nhau muôn đời!",
+    "caption_bullets": [
+        "Hai anh em họ Cao sinh đôi giống nhau như đúc",
+        "Cha mẹ mất sớm, được thầy đồ Lưu nuôi dạy",
+        "Cô gái yêu một trong hai nhưng không phân biệt được",
+        "Bữa cơm thử đũa — cô nhận ra anh Tân, cưới làm vợ",
+        "Lang cảm thấy bị bỏ rơi, lặng lẽ bỏ đi",
+        "Lang hóa tảng đá; Tân tới khóc hóa cây cau; vợ tới hóa dây trầu",
+        "Vua Hùng truyền tục ăn trầu — 'miếng trầu là đầu câu chuyện'"
+    ],
+    "caption_moral": "Câu chuyện dạy ta: tình anh em ruột thịt và tình vợ chồng đều quý giá ngang nhau, đừng để hiểu lầm chia cắt — mỗi miếng trầu đỏ thắm là lời nhắc về lòng chung thủy."
+}
+
 # ================ EXPORT ================
 BOOKS = {
     "thach-sanh": THACH_SANH_BOOK,
@@ -959,4 +1019,5 @@ BOOKS = {
     "banh-chung-banh-day": BANH_CHUNG_BOOK,
     "su-tich-ho-guom": HO_GUOM_BOOK,
     "thanh-giong": THANH_GIONG_BOOK,
+    "su-tich-trau-cau": TRAU_CAU_BOOK,
 }
