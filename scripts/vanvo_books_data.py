@@ -1232,6 +1232,62 @@ NANG_TIEN_OC_BOOK = {
     "caption_moral": "Câu chuyện dạy ta: tấm lòng tốt bụng không bao giờ bị bỏ quên — sự tử tế gieo trồng sẽ ra trái ngọt vào thời điểm bất ngờ nhất."
 }
 
+# ================ BOOK 17: THẠCH SÙNG ================
+TS_NGHEO = _char("Thạch Sùng nghèo", "young Vietnamese man, sickly poor beggar: ragged dirty brown tunic over thin frame, dirty bare feet, unkempt black hair, weathered hungry face with hidden cunning eyes")
+TS_GIAU = _char("Thạch Sùng đại gia giàu có", "same Vietnamese man transformed into wealthy merchant: luxurious silk royal robe with gold trim, aviator sunglasses, gold chains and rings, slicked black hair, smug arrogant face — same person as Thạch Sùng nghèo")
+VUONG_KHAI = _char("Vương Khải đại gia đối thủ", "rival wealthy Vietnamese merchant: elaborate jade-green silk robe with gold trim, ornate hat, gold chain, sly cunning face with knowing smirk, calculating expression")
+NHA_GIAU_TS = "opulent ancient Vietnamese mansion interior: red lacquered wooden columns, gold-trimmed furniture, displays of jade and antique pottery, hanging silk banners, lavish wealthy decor"
+LUT = "ancient Vietnamese village in catastrophic flood: bamboo huts partially submerged in muddy water, broken bridges, scattered debris, overcast dark sky, desperate atmosphere"
+THANG_LAN = "small Vietnamese house lizard con thằn lằn (con thạch sùng): tiny pale gray-brown gecko with translucent skin, big black eyes, clinging to a wall, suction-cup feet, gentle pitiful figure"
+
+THACH_SUNG_BOOK = {
+    "slug": "thach-sung",
+    "title": "Thạch Sùng",
+    "story_summary": "Văn Vở Gen Z. Thạch Sùng vốn ăn xin nghèo, năm lũ lụt đầu cơ tích trữ gạo bán giá cắt cổ giàu nhanh chóng. Tiếp tục đầu cơ thành đại gia khét tiếng. Cuộc thi của hiếm với Vương Khải — thua cay đắng vì thiếu cái mẻ kho. Phát điên đập đồ chết uất ức, hóa con thằn lằn tặc lưỡi tiếc rẻ. Phiên bản kiểu phim Citizen Kane (1941).",
+    "scripts": [
+        "Hôm nay chúng ta sẽ nói về một câu chuyện cổ tích về lòng tham không đáy, đó là Thạch Sùng. Nếu phải so với một bộ phim để dễ hình dung thì tôi xếp nó vào hạng Citizen Kane, câu chuyện về một anh đại gia khét tiếng nhưng chết uất ức chỉ vì một món đồ vặt vãnh thiếu mất. Câu chuyện có anh ăn xin nghèo nhờ đầu cơ lũ lụt mà trở nên giàu nứt đố đổ vách, có cuộc thi của hiếm giữa hai đại gia. Và có cả màn thua cuộc cay cú vì thiếu một cái mẻ kho, biến thành con thằn lằn tặc lưỡi nuối tiếc đến tận ngày nay.",
+        "Câu chuyện bắt đầu vào một thời nọ, ở một vùng quê có một anh tên Thạch Sùng nhà nghèo cực kỳ, sống bằng nghề đi xin ăn ngoài chợ. Profile của Thạch Sùng thì đúng kiểu dân chơi nhưng nghèo rớt mồng tơi, ngày kiếm được một bát cơm là mừng lắm rồi. Anh ốm yếu bệnh tật vặt, ai gặp cũng tránh xa không muốn dính đến vì sợ xui xẻo lây. Cuộc sống cứ thế trôi qua trong cảnh đói khổ, không một ai nghĩ rằng anh ăn xin tội nghiệp này sẽ có ngày trở thành đại gia.",
+        "Một năm nọ trời mưa bão liên miên, gây ra trận lũ lụt khủng khiếp khắp vùng đồng bằng Bắc Bộ. Nhà cửa ruộng vườn ngập trắng băng, dân làng đói khát phải bán tống bán tháo mọi thứ tài sản còn giữ được. Ai cũng đem gạo ra chợ bán giá rẻ như cho, chỉ mong đổi lấy chút tiền mua thuốc cứu mạng thoát qua cơn lũ. Giữa cảnh hỗn loạn đó, Thạch Sùng ngồi quan sát thị trường và lập tức nảy số ra một kế đầu cơ tích trữ kinh điển.",
+        "Anh vét sạch số tiền dành dụm bao năm cộng với mọi thứ vay được, đem mua gạo giá rẻ chất đầy kho. Trong khi mọi người chỉ lo cứu mình qua cơn lũ trước mắt, Thạch Sùng đã nghĩ xa hơn nhiều bước về sau. Khi nước lũ rút đi và mùa màng thất bát, dân chúng cạn sạch gạo ăn không còn lương thực để qua mùa khô hạn tiếp theo. Lúc đó Thạch Sùng mở kho bán gạo với giá cắt cổ gấp mười lần lúc mua, kiếm được một khoản tiền khổng lồ chỉ trong vài tháng.",
+        "Có vốn lớn rồi, Thạch Sùng tiếp tục áp dụng chiến thuật đầu cơ tích trữ với mọi mặt hàng có nhu cầu cao. Anh tích trữ vải vóc, muối, dầu, kim loại, bất cứ thứ gì khan hiếm là anh ôm hết bán giá cao gấp bội lần. Từ một anh ăn xin tội nghiệp, Thạch Sùng nhanh chóng leo lên hàng đại gia nhất nhì cả vùng chỉ trong vài năm. Anh xây dinh thự nguy nga, thuê người hầu kẻ hạ, sống cuộc đời ông trùm thực sự giữa thời buổi loạn lạc khó khăn.",
+        "Càng giàu Thạch Sùng càng tự mãn khoe khoang, suốt ngày bày tiệc đãi quan khách phô trương đủ thứ của hiếm trên đời. Trong nhà chứa toàn vàng bạc châu báu, ngọc trai san hô, đồ cổ quý hiếm từ khắp các nước lân bang về. Khách khứa ai đến cũng phải trầm trồ ngưỡng mộ, không biết thằng cha này lấy đâu ra mà nhiều của cải đến vậy. Thạch Sùng flex tài sản không giới hạn, càng được khen càng kiêu, dần dần lú vào ảo tưởng mình là người giàu nhất thiên hạ không ai bằng được.",
+        "Trong vùng có một đại gia khác cũng giàu nức tiếng tên là Vương Khải, không kém phần kiêu căng giống Thạch Sùng một chút nào. Một hôm hai người gặp nhau tại một bữa tiệc lớn, lập tức nảy sinh mâu thuẫn ngầm về chuyện ai giàu hơn ai. Vương Khải đề nghị thẳng một cuộc thi: chúng ta đem hết của hiếm ra so xem ai nhiều hơn, ai thua phải nhận thua công khai. Thạch Sùng tự tin gật đầu ngay không suy nghĩ, cười khẩy nghĩ rằng mình đã giàu thế này thì không ai địch lại được.",
+        "Hai đại gia hẹn nhau tại nhà Thạch Sùng vào ngày đẹp trời, mời cả quan khách đến chứng kiến cuộc đấu của thế kỷ. Vương Khải đem ra một mâm vàng nặng cả tấn, Thạch Sùng lập tức đem ra mâm vàng to gấp đôi. Vương Khải tiếp tục ra ngọc bích quý hiếm, Thạch Sùng cũng có loại tương đương không kém. Cứ thế hai bên thi nhau ra hết thứ của hiếm này đến thứ khác, mâm bạc, chum ngọc, kiếm cổ, tranh thư, cái gì Vương Khải có thì Thạch Sùng cũng có y chang.",
+        "Cuộc thi kéo dài cả ngày, hai bên ngang ngửa không phân được thắng thua. Vương Khải đang lúc bí thì chợt nghĩ ra một câu hỏi tinh quái cuối cùng: thưa anh Thạch Sùng, anh có cái mẻ kho không. Thạch Sùng đứng hình một phen, ngơ ngác không hiểu mẻ kho là gì mà sao đối thủ lại hỏi. Mẻ kho là mảnh nồi đất sứt mẻ, đồ vô giá trị mà chỉ nhà nghèo mới phải dùng đến tận khi vỡ hết, người giàu nào lưu trữ đồ vứt đi đó làm gì.",
+        "Thạch Sùng sai gia nhân lục tung cả dinh thự đi tìm cho ra một cái mẻ kho duy nhất. Nhưng anh đã giàu sang quá lâu, mọi đồ đạc trong nhà đều sang trọng tinh xảo, làm gì còn một mảnh nồi đất sứt mẻ nào sót lại. Tất cả người nhà tìm khắp các xó xỉnh từ kho đến bếp đến chuồng gà, không ra một cái mẻ kho nào hết. Cuối cùng Thạch Sùng đành cay đắng nhận thua, mất hết danh dự trước mặt cả quan khách giữa bữa tiệc lớn.",
+        "Thua trận một cách oan ức chỉ vì thiếu một cái mẻ kho vớ vẩn, Thạch Sùng cay cú đến phát điên không ăn được không ngủ được. Anh ngày đêm đập vỡ hết đồ đạc trong nhà với hy vọng tạo ra một cái mẻ kho thật giống, nhưng đồ sứ đồ sành đập ra không phải mẻ kho thật của nồi đất. Càng đập càng cay, càng cay càng đập, cuộc sống đại gia của Thạch Sùng tan tành theo từng món đồ vỡ. Cuối cùng anh kiệt sức rồi gục xuống chết uất ức trong căn dinh thự đầy mảnh vỡ tan tành.",
+        "Hồn Thạch Sùng không siêu thoát được vì lòng vẫn còn nuối tiếc cái mẻ kho năm xưa. Hồn hóa thành con thằn lằn nhỏ bé, từ đó cứ bò trên tường nhà người ta mà sống. Đặc biệt con thằn lằn này có một thói quen kỳ lạ là tặc lưỡi liên tục, người ta bảo đó là Thạch Sùng đang tiếc rẻ cái mẻ kho. Người Việt từ đó gọi con thằn lằn nhà này là con thạch sùng, mỗi lần nghe tiếng tặc lưỡi trên tường lại nhớ đến bài học về lòng tham không đáy.",
+        "Câu chuyện Thạch Sùng dạy ta rằng lòng tham và sự kiêu căng có thể hủy hoại cả một con người dù họ giàu sang đến đâu. Thạch Sùng đã có tất cả mọi thứ trên đời, nhưng vẫn không biết đủ và không biết khiêm tốn, dẫn đến cái kết cay đắng vì một thứ vớ vẩn. Bài học còn nằm ở chỗ khi ta sống quá xa rời cuộc sống bình thường, ta sẽ mất kết nối với những giá trị giản dị nhất của con người. Mỗi lần nghe tiếng thằn lằn tặc lưỡi trên tường, ta lại nhớ đến Thạch Sùng và bài học về sự khiêm tốn cùng lòng biết đủ trong cuộc đời.",
+    ],
+    "image_prompts": [
+        f"Movie-poster composition: {TS_GIAU} on LEFT half in opulent silk robe surrounded by gold treasures with arrogant smug face, broken pottery shards and a tiny {THANG_LAN} silhouette on RIGHT half, dramatic rise-and-fall split lighting, fairy-tale poster framing.",
+        f"Humble scene: {TS_NGHEO} sitting on a market street in tattered rags begging with a small wooden bowl, passersby ignoring him, ancient Vietnamese marketplace background, soft melancholy gray light, lonely poverty mood.",
+        f"Flood scene: chaotic ancient Vietnamese village partially submerged in {LUT}, villagers wading through water desperately selling baskets of rice to anyone for any price, {TS_NGHEO} standing on dry ground watching calculating, overcast dramatic sky, opportunist mood.",
+        f"Strategic scene: {TS_NGHEO} directing workers loading huge sacks of rice into a large wooden warehouse, his expression shifting from desperation to cunning ambition, ancient Vietnamese village background, dramatic afternoon light, calculated greed mood.",
+        f"Profit scene: {TS_GIAU} now in nicer clothing sitting at a wooden counter taking heavy coin bags from desperate villagers in exchange for small bags of rice, his warehouse behind, dramatic golden light, ascending wealth mood.",
+        f"Opulent feast scene: {TS_GIAU} at the head of a long banquet table covered with rare treasures (gold, jade, coral, antique pottery), guests gawking around, {NHA_GIAU_TS}, warm gold light, lavish boastful mood.",
+        f"Confrontation scene: {TS_GIAU} and {VUONG_KHAI} facing each other in the center of a grand hall, both in luxurious silk robes with mutual challenging smug expressions, guests gathered around watching tense, {NHA_GIAU_TS}, dramatic spotlight, rivalry mood.",
+        f"Display competition scene: {TS_GIAU} and {VUONG_KHAI} on opposite sides of a long table, each presenting trays of identical luxurious treasures (gold ingots, jade ornaments, rare scrolls), guests watching in amazement, {NHA_GIAU_TS}, dramatic dueling display light.",
+        f"Iconic challenge scene: {VUONG_KHAI} holding up a small broken clay pot shard with a triumphant sly smile, {TS_GIAU} standing in stunned silence frozen with disbelief, guests gasping around, {NHA_GIAU_TS}, dramatic spotlight on the broken shard.",
+        f"Frantic search scene: {TS_GIAU} directing servants frantically rummaging through every room of the {NHA_GIAU_TS}, opening chests and kitchen pots and storage rooms, desperate looks on everyone, chaotic interior, dramatic urgent light.",
+        f"Madness scene: {TS_GIAU} alone in a once-grand room of {NHA_GIAU_TS} now strewn with smashed pottery and broken treasures, his face twisted in rage and despair, holding a hammer, harsh red dramatic light, descent into madness mood.",
+        f"Transformation scene: {TS_GIAU} collapsed dying on the floor among broken pottery, gradually fading and transforming into a small {THANG_LAN} crawling up onto the wall, magical cyan-gold fading glow, sorrowful mystical mood, broken {NHA_GIAU_TS} interior.",
+        f"Closing peaceful scene: a modern Vietnamese house wall at twilight, a small {THANG_LAN} silhouetted clinging to the wall making clicking sounds, warm cozy ambient light from inside the home, contemplative oil-painting feel, hopeful timeless moral mood.",
+    ],
+    "motions": ["static","static","static","pan_right","static","static","static","static","pan_right","static","pan_right","static","zoom_out","zoom_in"],
+    "caption_hook": "Anh em đã nghe Thạch Sùng kiểu phim Citizen Kane chưa? 🦎💰 Đại gia khét tiếng giàu nứt đố đổ vách, chết uất ức vì thua cuộc thi của hiếm chỉ thiếu mỗi cái mẻ kho!",
+    "caption_bullets": [
+        "Thạch Sùng vốn là anh ăn xin nghèo rớt mồng tơi",
+        "Năm lũ lụt — đầu cơ tích trữ gạo bán giá cắt cổ, giàu nhanh",
+        "Tiếp tục đầu cơ vải muối dầu — trở thành đại gia số 1",
+        "Khoe khoang vô độ — gặp Vương Khải đối thủ cùng cấp",
+        "Cuộc thi của hiếm — Vương Khải hỏi 'có mẻ kho không?'",
+        "Thạch Sùng thua cuộc cay đắng — đập đồ phát điên rồi chết uất",
+        "Hóa thành con thằn lằn tặc lưỡi tiếc rẻ trên tường"
+    ],
+    "caption_moral": "Câu chuyện dạy ta: lòng tham + kiêu căng sẽ hủy hoại con người dù giàu sang đến đâu — biết đủ và biết khiêm tốn mới là giá trị thật sự."
+}
+
 # ================ EXPORT ================
 BOOKS = {
     "thach-sanh": THACH_SANH_BOOK,
@@ -1250,4 +1306,5 @@ BOOKS = {
     "tri-khon-cua-ta-day": TRI_KHON_BOOK,
     "em-be-thong-minh": EM_BE_BOOK,
     "nang-tien-oc": NANG_TIEN_OC_BOOK,
+    "thach-sung": THACH_SUNG_BOOK,
 }
