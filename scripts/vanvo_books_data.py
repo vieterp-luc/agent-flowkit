@@ -887,6 +887,65 @@ HO_GUOM_BOOK = {
     "caption_moral": "Câu chuyện dạy ta: sức mạnh chỉ là thứ được trao gửi tạm thời — dùng đúng lúc khi đất nước cần, và biết buông bỏ khi thái bình lập lại."
 }
 
+# ================ BOOK 11: THÁNH GIÓNG ================
+GIONG_BE = _char("Gióng cậu bé 3 tuổi", "young Vietnamese boy around 3 years old, mute and silent: simple cream tunic, short black hair, soft pale face, lying silently with open eyes")
+GIONG_TS = _char("Thánh Gióng tráng sĩ", "giant heroic Vietnamese warrior: massive muscular figure in gleaming iron armor over solid dark tunic, iron helmet, undercut black hair with topknot, fierce determined face, towering 3 meters tall")
+ME_GIONG = _char("mẹ Gióng", "elderly Vietnamese mother: simple brown áo bà ba, gray hair tied in bun, kind weathered face, gentle protective expression")
+SU_GIA = _char("sứ giả Vua Hùng", "Vietnamese royal messenger: red official robe with gold trim, conical official hat, holding a royal scroll, dignified formal face")
+VUA_HUNG_TG = _char("Vua Hùng Vương đời 6", "elderly Vietnamese king: dark red royal robe with gold trim, aviator sunglasses, Apple Watch, long white beard, sitting on golden throne, worried patriarchal expression")
+GIAC_AN = "Shang/Ân dynasty invader soldiers giặc Ân: bronze-armored ancient Chinese warriors with dark banners and bronze spears, menacing horde"
+NGUA_SAT = "the legendary iron horse ngựa sắt: enormous mechanical iron horse with glowing red eyes, mouth breathing real fire, ornate iron plates, mystical war steed"
+LANG_PHU_DONG = "ancient Vietnamese rural village làng Phù Đổng: bamboo huts with thatched roofs, rice paddies, banana trees, dirt paths, distant green mountains, peaceful countryside"
+NUI_SOC = "Sóc Sơn mountain peak: tall rugged mountain rising above misty clouds, ancient temple at the summit, sweeping panoramic view of countryside below, mystical sacred atmosphere"
+
+THANH_GIONG_BOOK = {
+    "slug": "thanh-giong",
+    "title": "Thánh Gióng",
+    "story_summary": "Văn Vở Gen Z. Giặc Ân xâm lược đời Vua Hùng 6. Cậu bé Gióng 3 tuổi câm lặng ở làng Phù Đổng cất tiếng nói đầu tiên đòi ngựa sắt gậy sắt áo giáp sắt đánh giặc. Vươn vai thành tráng sĩ khổng lồ cưỡi ngựa sắt phun lửa, gậy sắt gãy nhổ tre đánh tan giặc Ân, bay về trời ở Sóc Sơn — Phù Đổng Thiên Vương. Phiên bản kiểu phim Shazam (2019).",
+    "scripts": [
+        "Hôm nay chúng ta sẽ nói về truyền thuyết về vị anh hùng đầu tiên của dân tộc Việt Nam, đó là Thánh Gióng. Nếu phải so với một bộ phim Hollywood để dễ hình dung thì tôi xếp nó ngang hàng Shazam, câu chuyện về một đứa bé bình thường bỗng hóa thành siêu anh hùng khổng lồ sau một câu nói thần kỳ. Câu chuyện có giặc Ân xâm lược nước ta, có cậu bé ba tuổi câm lặng bỗng cất tiếng đòi đánh giặc, có ngựa sắt phun lửa và gậy sắt gãy phải nhổ tre đánh tiếp, và cả màn bay về trời ở núi Sóc Sơn nhận danh hiệu Phù Đổng Thiên Vương.",
+        "Câu chuyện bắt đầu vào đời vua Hùng Vương thứ sáu, khi giặc Ân từ phương Bắc tràn sang xâm lược nước Văn Lang. Quân Ân hùng mạnh đông như kiến cỏ, đi tới đâu đốt phá làng mạc tới đó, dân ta khắp nơi sống cảnh lầm than không biết bám víu vào đâu. Vua Hùng lo lắng khôn nguôi, triệu tập triều thần bàn cách cứu nước nhưng ai cũng lắc đầu chịu thua. Vua bèn sai sứ giả đi rao khắp các làng trong cả nước, ai có tài đánh đuổi giặc Ân thì hãy ra giúp nước.",
+        "Lúc bấy giờ ở làng Phù Đổng có hai vợ chồng già hiền lành chăm chỉ, sống cảnh khá đơn sơ nhưng phúc hậu nức tiếng. Hai ông bà tuổi đã cao mà vẫn chưa có một mụn con nào, lòng lúc nào cũng buồn rười rượi vì chuyện này. Một hôm bà lão ra đồng làm việc, bỗng thấy giữa ruộng có một vết chân khổng lồ in sâu xuống đất một cách kỳ lạ. Bà tò mò đặt thử bàn chân mình vào ướm xem, vừa rút chân ra thì trong người bỗng thấy khác lạ vô cùng.",
+        "Từ ngày đó, bà lão về nhà thì mang thai, và lạ thay phải đến mười hai tháng sau bà mới hạ sinh được một cậu bé kháu khỉnh đặt tên là Gióng. Cứ tưởng trời ban quà muộn cho hai vợ chồng già, ai ngờ nuôi mãi mà cậu bé này cứ kỳ lạ khác thường người ta. Gióng lên ba tuổi rồi mà vẫn không biết nói, không biết cười, đặt đâu nằm đấy không bao giờ ngồi dậy hay chạy chơi. Hai ông bà thương con đứt ruột nhưng không biết làm sao, hàng xóm ai cũng nhìn vào lắc đầu thương cảm.",
+        "Một hôm sứ giả của vua đi qua làng Phù Đổng, rao lớn tin tìm người tài đánh đuổi giặc Ân cứu nước. Tiếng loa của sứ giả vang vọng vào tận trong nhà nơi Gióng đang nằm im trên giường. Bỗng nhiên cậu bé ba tuổi câm lặng bao năm bật ngồi dậy, mở miệng cất tiếng nói đầu tiên rõ ràng từng chữ một: mẹ ra mời sứ giả vào đây. Bà mẹ giật mình kinh ngạc đứng hình tại chỗ, nửa mừng nửa run vì lần đầu tiên trong đời được nghe con trai mình nói chuyện.",
+        "Sứ giả ngơ ngác đi vào nhà, đứng trước cậu bé ba tuổi mà chưa hiểu chuyện gì đang xảy ra. Gióng ngồi thẳng dậy nói chậm rãi nhưng đầy uy lực: về tâu vua đúc cho ta một con ngựa sắt, một bộ áo giáp sắt và một cây gậy sắt, ta sẽ đi đánh tan giặc Ân. Sứ giả vâng dạ lia lịa rồi vội về tâu vua, vua cha mừng rỡ liền truyền lệnh đem cả nước thợ rèn cùng làm ngay lập tức. Từ ngày gặp sứ giả, Gióng bỗng lớn nhanh như thổi, ăn bao nhiêu cũng không no, mặc bao nhiêu cũng không vừa.",
+        "Hai ông bà già không đủ sức nuôi cậu con khổng lồ, cả làng Phù Đổng nghe chuyện liền cùng nhau góp gạo nuôi Gióng. Mỗi nhà một thúng gạo, một con gà, một tấm vải, ai cũng vui vẻ đóng góp không tiếc của vì biết Gióng sẽ ra trận cứu nước. Trong khi đó giặc Ân tiến quân ngày càng gần kinh thành, tin tức truyền về khiến lòng dân khắp nơi nóng như lửa đốt. Đúng lúc nguy cấp nhất, ngựa sắt, áo giáp sắt và gậy sắt được vua sai người mang đến tận làng Phù Đổng.",
+        "Gióng bước ra sân, vươn vai một cái thì bỗng nhiên cao lớn vượt bậc thành một tráng sĩ khổng lồ vai u thịt bắp. Anh em cứ hình dung như cậu bé Shazam vừa hô câu thần chú, lập tức biến thành siêu anh hùng đẳng cấp khác hoàn toàn. Gióng mặc áo giáp sắt vừa khít cơ thể, cầm gậy sắt nặng ngàn cân nhẹ tựa lông hồng, nhảy lên lưng ngựa sắt sẵn sàng xuất trận. Ngựa sắt hí vang trời, miệng phun ra lửa nóng rực, vó sắt giẫm xuống đất rung chuyển cả vùng quê yên bình.",
+        "Gióng cưỡi ngựa sắt phi như bão tới chiến trường, lao thẳng vào đội hình giặc Ân chém giết tả tơi không gì cản nổi. Ngựa sắt phun lửa thiêu rụi cả từng đoàn quân địch, gậy sắt trong tay Gióng quật một cái là cả mảng lớn quân giặc đổ rạp xuống đất. Đánh đến hồi cao trào, gậy sắt gãy đôi giữa chiến trường, nhưng Gióng không hề chùn tay một giây. Anh nhổ ngay cả khóm tre bên đường làm vũ khí, tiếp tục lao vào combat quật cho tàn quân Ân tan tác chạy thục mạng.",
+        "Sau trận đánh long trời lở đất, giặc Ân hoàn toàn bị quét sạch khỏi bờ cõi nước Văn Lang. Tàn quân tháo chạy về phương Bắc, từ đó không dám bén mảng sang xâm lược nữa. Gióng phi ngựa sắt lên đỉnh núi Sóc Sơn, dừng lại nhìn về quê hương dưới chân núi một lần cuối thật lâu. Rồi cả người và ngựa từ từ bay lên trời cao trong làn mây trắng, biến mất giữa bầu trời xanh thẳm mà không một ai níu kéo kịp.",
+        "Vua Hùng nghe tin chiến thắng và Gióng bay về trời, vừa mừng vừa cảm động không nói nên lời. Vua phong Gióng làm Phù Đổng Thiên Vương, lập đền thờ ngay tại làng quê nơi anh sinh ra để hương khói muôn đời. Nhân dân khắp nơi đều biết ơn vị anh hùng nhỏ tuổi đã cứu nước, kể chuyện Gióng cho con cháu nghe đời này qua đời khác. Những vết chân ngựa sắt in trên đất, những bụi tre bị nhổ trơ gốc còn lại đến tận ngày nay vẫn được coi là chứng tích linh thiêng của truyền thuyết.",
+        "Vùng đất nơi Gióng từng đi qua ngày nay vẫn còn nhiều địa danh mang tên anh, như làng Phù Đổng, núi Sóc Sơn, ao Gióng, làng Cháy bị lửa ngựa thiêu cháy. Mỗi năm vào mùng chín tháng tư âm lịch, hội Gióng được tổ chức tưng bừng tại đền Sóc Sơn, trở thành một trong những lễ hội lớn nhất của miền Bắc. Lễ hội này đã được UNESCO công nhận là di sản văn hóa phi vật thể của nhân loại. Hình ảnh Thánh Gióng bay về trời mãi mãi là biểu tượng cho tinh thần đánh giặc giữ nước bất diệt của dân tộc Việt Nam.",
+        "Câu chuyện Thánh Gióng dạy ta rằng khi đất nước lâm nguy, mỗi con người dù nhỏ bé đến đâu cũng có thể đứng lên làm nên điều phi thường. Sức mạnh không chỉ đến từ cơ bắp hay vũ khí, mà còn đến từ lòng yêu nước và sự đùm bọc của cả cộng đồng dân tộc. Cả làng Phù Đổng cùng góp gạo nuôi một đứa trẻ thành tráng sĩ, đó là minh chứng đẹp nhất cho sức mạnh tập thể của dân tộc Việt Nam. Mỗi lần nhắc đến Thánh Gióng, ta lại nhớ về tinh thần bất khuất ngàn đời và lòng đoàn kết của tổ tiên trong những ngày khói lửa giữ nước.",
+    ],
+    "image_prompts": [
+        f"Movie-poster composition: {GIONG_TS} on LEFT half as a massive heroic warrior with glowing iron staff raised, {GIONG_BE} small silent child on RIGHT half lying motionless in a wooden cradle, dramatic transformation split lighting, fairy-tale poster framing.",
+        f"Royal court tension: {VUA_HUNG_TG} on golden throne with worried face surrounded by anxious courtiers, {SU_GIA} kneeling holding a royal scroll being dispatched, distant smoke from {GIAC_AN} invasion visible through palace windows, ancient Văn Lang palace interior with red lacquered columns, dramatic warm light.",
+        f"Rural daylight scene: {ME_GIONG} bending in a rice field examining a massive mysterious giant footprint imprinted in the muddy earth, surprised expression, {LANG_PHU_DONG}, soft golden afternoon light, mystical hint of glow around the footprint.",
+        f"Domestic interior scene: {GIONG_BE} lying motionless in a simple wooden cradle with eyes open but silent face, {ME_GIONG} sitting beside with worried tender expression, simple thatched hut, soft melancholy warm afternoon light.",
+        f"Iconic moment: {SU_GIA} standing in {LANG_PHU_DONG} blowing a horn and unrolling a royal scroll, in the background {GIONG_BE} suddenly sitting up in his cradle through an open hut door speaking his first words, {ME_GIONG} beside him in shock with hand over mouth, dramatic golden light beaming on Gióng.",
+        f"Workshop montage scene: {SU_GIA} kneeling before {GIONG_BE} who now appears slightly bigger sitting upright with commanding posture, in the background royal blacksmiths furiously forging a massive {NGUA_SAT} and gleaming iron armor and iron staff at red-hot forges, sparks flying, dramatic fire-lit scene.",
+        f"Village communal scene: villagers of {LANG_PHU_DONG} lining up to deliver baskets of rice and chickens and cloth into a humble hut, inside an enormously growing young Gióng eating from a massive bowl, in the distant sky dark clouds and smoke from advancing {GIAC_AN} visible, hopeful determined mood.",
+        f"Transformation scene: {GIONG_TS} mid-transformation stretching arms wide and growing into a massive heroic warrior in gleaming iron armor with massive iron staff, with smaller awestruck silhouettes of villagers around, brilliant golden cyan magical light bursting outward, epic Shazam-style transformation moment.",
+        f"Epic battle scene: {GIONG_TS} on the back of fire-breathing {NGUA_SAT} smashing into {GIAC_AN} formations with a clump of bamboo trees raised as a weapon while his broken iron staff lies on the ground, dynamic motion blur, dust and fire, low-angle hero shot, decisive battle mood.",
+        f"Ascension scene: {GIONG_TS} on the back of {NGUA_SAT} rising up into white clouds from the peak of {NUI_SOC}, looking back down at the peaceful liberated Vietnamese countryside below, dramatic golden cyan ascending light, mystical epic mood.",
+        f"Royal ceremony scene: {VUA_HUNG_TG} standing before a newly built golden-roofed temple in {LANG_PHU_DONG}, an ornate plaque above without legible text, villagers bowing in reverence, warm golden gratitude atmosphere.",
+        f"Festive scene: vibrant modern hội Gióng festival at the temple at {NUI_SOC}, costumed parade participants carrying banners and ceremonial horses and drums, joyful crowds in traditional Vietnamese pageantry, warm golden festival atmosphere.",
+        f"Closing peaceful scene: silhouette of {GIONG_TS} and {NGUA_SAT} faintly outlined in the clouds above {LANG_PHU_DONG} at golden sunset, rice paddies and traditional thatched homes below, elders and children gazing up in wonder, contemplative oil-painting feel, hopeful timeless mood.",
+    ],
+    "motions": ["static","static","static","static","static","static","pan_right","pan_right","zoom_out","pan_right","zoom_out","static","pan_right","zoom_out"],
+    "caption_hook": "Anh em đã nghe Thánh Gióng kiểu phim Shazam chưa? ⚡🐎 Cậu bé 3 tuổi câm lặng vươn vai thành tráng sĩ khổng lồ đánh tan giặc Ân, rồi bay về trời ở Sóc Sơn!",
+    "caption_bullets": [
+        "Vua Hùng đời 6 cầu tìm người tài đánh giặc Ân",
+        "Bà lão làng Phù Đổng ướm vết chân lạ, mang thai 12 tháng sinh Gióng",
+        "Gióng 3 tuổi không nói không cười, đặt đâu nằm đấy",
+        "Sứ giả đến — Gióng cất tiếng nói đầu đòi ngựa sắt gậy sắt áo giáp sắt",
+        "Cả làng góp gạo nuôi Gióng lớn nhanh như thổi",
+        "Vươn vai thành tráng sĩ — combat giặc Ân, gậy gãy nhổ tre đánh tiếp",
+        "Đánh tan giặc, bay về trời ở núi Sóc Sơn — Phù Đổng Thiên Vương"
+    ],
+    "caption_moral": "Câu chuyện dạy ta: sức mạnh đến từ lòng yêu nước và sự đoàn kết của cả cộng đồng — một đứa trẻ được cả làng nuôi cũng có thể làm nên kỳ tích cứu nước."
+}
+
 # ================ EXPORT ================
 BOOKS = {
     "thach-sanh": THACH_SANH_BOOK,
@@ -899,4 +958,5 @@ BOOKS = {
     "chu-cuoi-cung-trang": CHU_CUOI_BOOK,
     "banh-chung-banh-day": BANH_CHUNG_BOOK,
     "su-tich-ho-guom": HO_GUOM_BOOK,
+    "thanh-giong": THANH_GIONG_BOOK,
 }
