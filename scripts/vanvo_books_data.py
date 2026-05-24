@@ -1177,6 +1177,61 @@ EM_BE_BOOK = {
     "caption_moral": "Câu chuyện dạy ta: trí thông minh không phân biệt tuổi tác giàu nghèo — phản xạ ngược câu hỏi và tư duy sáng tạo là vũ khí mạnh nhất."
 }
 
+# ================ BOOK 16: NÀNG TIÊN ỐC ================
+BA_LAO_OC = _char("bà lão nghèo", "elderly Vietnamese grandmother: simple worn brown áo bà ba + dark trousers, gray hair tied in bun, conical hat sometimes, weathered kind face, gentle lonely expression")
+NANG_TIEN_OC = _char("nàng tiên ốc", "young Vietnamese fairy maiden: flowing pale-blue celestial áo dài + soft white inner robe, long flowing black hair, gentle ethereal face with luminous halo, graceful goddess presence")
+VO_OC = "magical blue spiral seashell vỏ ốc xanh biếc: iridescent jade-blue swirling shell glowing softly with mystical cyan light, polished pearl-like surface"
+CHUM_NUOC = "traditional Vietnamese clay water jar chum nước: large brown earthenware jar with smooth rim filled with clear water, sitting in a humble hut corner, sometimes glowing faintly"
+LANG_NGHEO = "poor rural Vietnamese village: small worn bamboo huts with thatched roofs, dirt paths, sparse vegetation, modest rural landscape, peaceful but humble"
+
+NANG_TIEN_OC_BOOK = {
+    "slug": "nang-tien-oc",
+    "title": "Nàng Tiên Ốc",
+    "story_summary": "Văn Vở Gen Z. Bà lão nghèo cô đơn bắt được con ốc lạ vỏ xanh biếc, không nỡ ăn nuôi trong chum nước. Hằng ngày về nhà thấy cơm canh nóng hổi nhà cửa sạch sẽ. Bà rình thấy nàng tiên bước ra từ chum, đập vỡ vỏ ốc giữ nàng ở lại làm con báo hiếu suốt đời. Phiên bản kiểu phim The Shape of Water (2017).",
+    "scripts": [
+        "Hôm nay chúng ta sẽ nói về một câu chuyện cổ tích ấm áp nhất Việt Nam, đó là Nàng Tiên Ốc. Nếu phải so với một bộ phim để dễ hình dung thì tôi xếp nó vào hạng The Shape of Water, câu chuyện về một sinh vật kỳ diệu dưới nước mang đến tình yêu cho người cô đơn. Câu chuyện có bà lão nghèo cô độc mò cua bắt ốc kiếm sống, có con ốc xanh biếc lạ kỳ giấu một bí mật tuyệt diệu. Và có cả màn cô tiên ốc xinh đẹp bước ra từ chum nước nấu cơm dọn nhà cho bà lão, mang đến hạnh phúc gia đình cuối đời.",
+        "Câu chuyện bắt đầu vào một thời nọ, ở một làng quê nghèo có một bà lão hiền lành sống một mình trong túp lều rách nát. Profile của bà lão thì khá là tội nghiệp, chồng mất sớm, con cái không có, sống cô độc bao năm dài đằng đẵng. Hằng ngày bà lão phải ra đồng mò cua bắt ốc đem ra chợ bán lấy tiền mua gạo qua bữa. Cuộc sống tuy vất vả nhưng bà luôn giữ tấm lòng tốt bụng, gặp ai khó khăn cũng sẵn sàng giúp đỡ trong khả năng của mình.",
+        "Một hôm bà lão đi mò ốc dưới ao như thường lệ, bỗng tay bà chạm phải một con ốc to lạ lùng. Bà nhấc lên xem thì thấy đó là một con ốc với vỏ xanh biếc lấp lánh như ngọc bích, đẹp đến mức bà chưa từng thấy bao giờ. Bà lão tần ngần một lát, không nỡ mang ra chợ bán cũng không nỡ luộc ăn như mọi khi. Bà quyết định mang con ốc lạ về nhà nuôi trong chum nước sạch ở góc nhà, vừa làm bạn vừa làm cảnh cho đỡ cô đơn quạnh vắng.",
+        "Từ ngày có con ốc lạ trong chum nước, cuộc sống bà lão bỗng thay đổi một cách kỳ lạ vô cùng. Sáng nào bà đi mò cua về, mở cửa vào nhà cũng thấy cảnh tượng làm bà đứng hình ngơ ngác. Nhà cửa sạch sẽ tinh tươm như có bàn tay người dọn dẹp, sân vườn được quét bóng loáng không một chiếc lá rụng. Trên mâm có cơm nóng canh nóng dọn sẵn thơm phức, đợi bà về là ăn được luôn không cần làm gì cả.",
+        "Bà lão tò mò vô cùng, không biết ai đã giúp bà dọn dẹp nấu nướng tận tình như vậy hằng ngày. Bà nghĩ chắc có người tốt bụng nào đó thương tình giúp đỡ, nhưng cả làng ai cũng nghèo như bà cả nên không thể nào có chuyện đó. Một hôm bà giả vờ đi mò cua như thường lệ, nhưng đi được nửa đường thì lén quay lại nhà nấp sau bụi cây quan sát. Bà nín thở chờ đợi xem ai sẽ vào nhà mình làm việc giúp như mấy ngày qua.",
+        "Đúng lúc đó, từ trong chum nước nơi nuôi con ốc xanh biếc bỗng có ánh sáng vàng rực phát ra. Một cô gái trẻ tuổi xinh đẹp tuyệt trần từ từ bước ra khỏi chum nước, dáng người mảnh mai duyên dáng như tiên giáng trần. Cô gái lập tức quét nhà nấu cơm thoăn thoắt như một bà nội trợ chuyên nghiệp đã làm việc bao năm. Bà lão nhìn cảnh tượng kỳ diệu này thì cười xỉu sung sướng, không tin vào mắt mình rằng người giúp việc bí mật bao ngày qua là một nàng tiên thật sự.",
+        "Bà lão không thể đợi thêm được nữa, lập tức chạy ra khỏi bụi cây ôm chầm lấy cô gái đầy xúc động. Bà nói trong nước mắt: con ơi sao con tốt với bà thế này, bà có phúc lắm mới gặp được con đấy con ạ. Cô gái giật mình định chạy về chum nước nhưng bà lão đã nhanh tay hơn, chạy đến chum đập vỡ tan tành cái vỏ ốc xanh biếc kia. Cô gái không thể trở về dạng ốc được nữa, đành ở lại trần gian sống cùng bà lão như mẹ con ruột thịt.",
+        "Cô gái ngồi xuống bên bà lão, kể lại cho bà nghe câu chuyện thật về thân phận của mình một cách nhẹ nhàng. Cô vốn là một nàng tiên trên thiên đình, vì cảm động trước tấm lòng tốt bụng của bà lão nên mượn xác con ốc xuống trần gian giúp đỡ. Cô đã quan sát bà lão từ lâu, biết bà sống cô đơn không con cháu nên muốn ở bên làm con nuôi báo đáp tấm lòng. Bà lão nghe xong khóc òa lên vì xúc động, từ đó coi nàng như con đẻ ruột thịt của mình.",
+        "Hai mẹ con sống bên nhau hạnh phúc trong căn nhà nhỏ giờ đã sạch sẽ tinh tươm hằng ngày. Nàng tiên ốc làm việc đảm đang, ngày ngày phụ bà mò cua bắt ốc, tối về nấu cơm dọn dẹp chu đáo mọi việc trong nhà. Bà lão không còn phải cô đơn lẻ loi nữa, có người con gái xinh đẹp chăm sóc tận tình mỗi ngày. Tuổi già của bà lão từ đó được an vui đầm ấm, bà cười nhiều hơn khóc, sức khỏe cũng khá hẳn lên trông thấy.",
+        "Dân làng xung quanh thấy nhà bà lão bỗng có một cô con gái xinh đẹp đảm đang thì ai cũng ngạc nhiên hỏi thăm. Bà lão chỉ cười không kể chuyện thật, sợ làm phiền cô con gái tiên giáng trần của mình. Nàng tiên ốc đối xử với hàng xóm rất tử tế, ai cũng quý mến gọi nàng là cô tiên của làng nghèo. Cuộc sống bà lão và nàng tiên ốc ngày càng sung túc, có thêm rau xanh trong vườn và cá tôm trong chum đầy đủ.",
+        "Câu chuyện về bà lão nghèo được nàng tiên ốc nuôi báo hiếu lan ra khắp các làng lân cận, ai nghe cũng cảm động rơi nước mắt. Người ta truyền tai nhau rằng người tốt thì trời sẽ thương, ngay cả những lúc nghèo khổ nhất cũng sẽ có người đến giúp đỡ. Câu chuyện trở thành niềm động viên lớn cho những người sống cô đơn yếu thế, mang lại hy vọng về một thế giới còn có lòng tốt và phép màu. Nàng tiên ốc và bà lão sống bình yên hạnh phúc đến cuối đời, làng quê thì thêm một câu chuyện đẹp truyền đời.",
+        "Khác với nhiều câu chuyện cổ tích khác mà nàng tiên cuối cùng phải trở về trời, nàng tiên ốc đã chọn ở lại trần gian vĩnh viễn bên bà lão. Cô không hề tiếc nuối cuộc sống tiên thiên đường rực rỡ, vì với cô tình thương con người mới là thứ quý giá nhất trên đời này. Hai mẹ con cùng nhau trải qua những năm tháng cuối đời ấm áp đầy yêu thương, không cần giàu sang chỉ cần có nhau. Câu chuyện kết thúc bằng một cái kết viên mãn hiếm có trong cổ tích Việt Nam, mang lại cảm giác bình yên ngọt ngào cho mọi người.",
+        "Câu chuyện Nàng Tiên Ốc dạy ta rằng tấm lòng tốt bụng không bao giờ bị bỏ quên, dù người sống cô đơn nghèo khó đến đâu cũng sẽ được đền đáp xứng đáng. Sự tử tế gieo trồng trong cuộc đời sẽ ra trái ngọt vào thời điểm bất ngờ nhất, đôi khi từ những nơi không thể tưởng tượng được. Bà lão chỉ vì không nỡ luộc một con ốc lạ mà có được một người con gái yêu thương suốt đời, đó là quy luật nhân quả tốt đẹp của vũ trụ. Mỗi khi cô đơn hay tuyệt vọng, hãy nhớ câu chuyện này và tin rằng lòng tốt của mình sẽ được trời đất ghi nhận và đền đáp đúng lúc.",
+    ],
+    "image_prompts": [
+        f"Movie-poster composition: {BA_LAO_OC} on LEFT half with kind weathered face, {NANG_TIEN_OC} on RIGHT half emerging from a {CHUM_NUOC} with ethereal glow, the {VO_OC} floating between them, dramatic warm-magical split lighting, fairy-tale poster framing.",
+        f"Humble rural scene: {BA_LAO_OC} alone in a worn thatched hut at sunset, simple meager belongings around her, {LANG_NGHEO} backdrop, soft melancholy warm light, lonely peaceful mood.",
+        f"Discovery scene: {BA_LAO_OC} kneeling at the edge of a small pond, holding up the {VO_OC} that glows softly, wide-eyed in surprise, sunlit afternoon, mystical hint of cyan glow.",
+        f"Wholesome scene: {BA_LAO_OC} returning home and finding her humble hut spotlessly clean with a steaming bowl of rice and soup on the table, the {CHUM_NUOC} sitting in the corner glowing faintly, soft golden afternoon light, sweet wonder mood.",
+        f"Suspense scene: {BA_LAO_OC} hiding behind a bush peeking through a window at her own hut interior, holding her breath, mystical hint of glow from inside the home, dappled morning light, anticipation mood.",
+        f"Magical transformation scene: {NANG_TIEN_OC} emerging gracefully from the {CHUM_NUOC} bathed in cyan-gold magical light, her flowing áo dài shimmering ethereally, the humble hut interior glowing around her, iconic mystical moment.",
+        f"Emotional scene: {BA_LAO_OC} embracing {NANG_TIEN_OC} from behind while one hand smashes the {VO_OC} on the floor near the {CHUM_NUOC}, tears in both their eyes, warm intimate light, bittersweet moment of binding fate.",
+        f"Heartfelt scene: {NANG_TIEN_OC} sitting beside {BA_LAO_OC} on a simple wooden bench inside the hut, holding hands and looking lovingly at each other, soft warm interior light, intimate mother-daughter bond moment.",
+        f"Domestic happy scene: {BA_LAO_OC} and {NANG_TIEN_OC} together cooking at a clay stove and tending the garden outside the now-tidy hut, baskets of fresh vegetables and rice, golden afternoon light, peaceful family mood.",
+        f"Village scene: {NANG_TIEN_OC} greeting villagers in {LANG_NGHEO} kindly, {BA_LAO_OC} beaming proudly behind, neighbors smiling and chatting warmly, sunlit village square, communal happiness mood.",
+        f"Storytelling scene: village elders sitting around a fire telling the story of the snail fairy to children gathered with wide eyes, simple village background, warm firelight, heartwarming oral tradition mood.",
+        f"Tender twilight scene: {BA_LAO_OC} and {NANG_TIEN_OC} sitting on a wooden porch watching a beautiful sunset together, the empty {CHUM_NUOC} visible nearby, golden sunset light, peaceful eternal-bond mood.",
+        f"Closing peaceful scene: silhouettes of {BA_LAO_OC} and {NANG_TIEN_OC} hand in hand walking through {LANG_NGHEO} at golden sunset, contemplative oil-painting feel, hopeful timeless mood of kindness rewarded.",
+    ],
+    "motions": ["static","static","static","static","static","static","zoom_out","static","static","pan_right","static","static","static","zoom_out"],
+    "caption_hook": "Anh em đã nghe Nàng Tiên Ốc kiểu phim The Shape of Water chưa? 🐚✨ Bà lão nghèo cô đơn bắt được ốc lạ — nàng tiên bước ra từ chum nước, ở lại làm con báo hiếu suốt đời!",
+    "caption_bullets": [
+        "Bà lão nghèo sống cô đơn bằng nghề mò cua bắt ốc",
+        "Bắt được con ốc lạ vỏ xanh biếc — không nỡ ăn, mang về nuôi",
+        "Nhà cửa bỗng sạch sẽ, cơm canh nóng hổi dọn sẵn mỗi ngày",
+        "Bà lão rình thấy nàng tiên bước ra từ chum nước",
+        "Đập vỡ vỏ ốc — nàng tiên ở lại làm con báo hiếu",
+        "Hai mẹ con sống hạnh phúc, dân làng cảm động",
+        "Cái kết viên mãn hiếm có — lòng tốt được đền đáp xứng đáng"
+    ],
+    "caption_moral": "Câu chuyện dạy ta: tấm lòng tốt bụng không bao giờ bị bỏ quên — sự tử tế gieo trồng sẽ ra trái ngọt vào thời điểm bất ngờ nhất."
+}
+
 # ================ EXPORT ================
 BOOKS = {
     "thach-sanh": THACH_SANH_BOOK,
@@ -1194,4 +1249,5 @@ BOOKS = {
     "con-rong-chau-tien": CON_RONG_BOOK,
     "tri-khon-cua-ta-day": TRI_KHON_BOOK,
     "em-be-thong-minh": EM_BE_BOOK,
+    "nang-tien-oc": NANG_TIEN_OC_BOOK,
 }
