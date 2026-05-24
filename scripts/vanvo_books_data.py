@@ -1288,6 +1288,62 @@ THACH_SUNG_BOOK = {
     "caption_moral": "Câu chuyện dạy ta: lòng tham + kiêu căng sẽ hủy hoại con người dù giàu sang đến đâu — biết đủ và biết khiêm tốn mới là giá trị thật sự."
 }
 
+# ================ BOOK 18: SỰ TÍCH HỒ BA BỂ ================
+BA_LAO_AN_XIN = _char("bà lão ăn xin ghẻ lở", "elderly Vietnamese beggar woman: ragged tattered brown rags, dirty disheveled gray hair, weathered scabbed face with hidden divine eyes, frail thin figure leaning on a staff")
+ME_NGHEO = _char("mẹ góa nghèo Bắc Kạn", "middle-aged Vietnamese poor widow mother: simple worn brown áo bà ba + dark trousers, conical hat, kind weathered face, gentle compassionate expression")
+CON_NGHEO = _char("con trai mẹ góa", "young Vietnamese boy around 10 years old: simple brown solid shirt + dark shorts, sandals, short black hair, innocent kind face, attentive expression")
+DAN_LANG_BB = "ancient Vietnamese village crowd dân làng Bắc Kạn: villagers in colorful traditional festival clothing — áo dài / áo bà ba in red, yellow, green, conical hats, carrying offerings"
+LANG_BAC_KAN = "ancient Vietnamese highland village in Bắc Kạn region: bamboo huts with thatched roofs, surrounded by misty limestone karst mountains, terraced fields, mystical northern highlands atmosphere"
+HO_BA_BE = "majestic Vietnamese highland lake Ba Bể: three interconnected emerald-green lake basins (Pé Lèng, Pé Lù, Pé Lầm) surrounded by towering limestone karst mountains, misty serene water, primeval mountain lake atmosphere"
+
+HO_BA_BE_BOOK = {
+    "slug": "su-tich-ho-ba-be",
+    "title": "Sự Tích Hồ Ba Bể",
+    "story_summary": "Văn Vở Gen Z. Hội cúng Phật ở Bắc Kạn — bà lão ăn xin ghẻ lở đến xin ăn bị cả làng xua đuổi. Chỉ 2 mẹ con bà góa nghèo thương tình mời về nhà ngủ. Đêm bà lão hiện nguyên hình rồng, sáng tặng gói tro + 2 mảnh trấu. Đêm rằm động đất sụt cả làng thành biển nước, 2 mẹ con thả trấu thành thuyền cứu dân. Vùng đất sụt thành hồ Ba Bể. Phiên bản kiểu phim Noah (2014).",
+    "scripts": [
+        "Hôm nay chúng ta sẽ nói về một truyền thuyết về nguồn gốc một thắng cảnh nổi tiếng nhất Bắc Kạn, đó là sự tích hồ Ba Bể. Nếu phải so với một bộ phim để dễ hình dung thì tôi xếp nó vào hạng Noah, câu chuyện về một trận lụt thần thánh quét sạch cả làng nhưng chừa lại một gia đình tốt bụng được trời cảnh báo trước. Câu chuyện có bà lão ăn xin ghẻ lở hôi hám bị cả làng xua đuổi, có hai mẹ con nghèo duy nhất tử tế mời bà về nhà ngủ. Và có cả màn cả làng sụt xuống biến thành hồ chỉ trong một đêm, hai mẹ con thoát chết nhờ gói tro và hai mảnh trấu thần kỳ.",
+        "Câu chuyện bắt đầu vào một thời nọ, ở một làng quê vùng Bắc Kạn có tổ chức hội cúng Phật lớn nhất trong năm. Dân chúng khắp các vùng lân cận đều kéo về dự lễ, đem theo cỗ bàn linh đình hoa quả đầy đặn để cầu phước cho gia đình. Cả làng treo đèn kết hoa rộn ràng, tiếng trống chiêng vang vọng cả vùng từ sáng sớm. Profile của cái hội thì đúng kiểu một festival cấp tỉnh thời cổ, ai cũng háo hức tham gia mong được phước lành quanh năm.",
+        "Đang lúc lễ hội tưng bừng nhất, bỗng xuất hiện một bà lão ăn xin rách rưới đến xin chút cơm hoa quả từ thiện. Bà lão trông cực kỳ tội nghiệp, người ghẻ lở chảy mủ, áo quần rách te tua, mùi hôi tỏa ra cả đoạn đường khiến ai đi qua cũng phải bịt mũi. Dân làng nhìn thấy bà thì đứng hình rồi lập tức xua đuổi bà ra xa, không một ai dám lại gần vì sợ bệnh lây sang. Bà lão thất thểu đi từ mâm cỗ này sang mâm cỗ khác xin ăn, nhưng đều bị xua đuổi không thương tiếc.",
+        "Trong cảnh ai cũng xa lánh, có một bà góa nghèo cùng đứa con trai nhỏ đang dự lễ thấy cảnh ấy thì không cầm lòng được. Hai mẹ con dù gia cảnh cực kỳ khó khăn vẫn quyết định mời bà lão về nhà mình ngủ qua đêm. Người mẹ dìu bà lão về căn lều tranh nhỏ ven sông, đứa con vội vàng nấu một nồi cơm nóng mời bà ăn cho ấm bụng. Bà lão được ăn no liền nằm xuống chiếu cói nghỉ ngơi, hai mẹ con cũng đi ngủ sớm vì cả ngày đã quá mệt mỏi.",
+        "Đến tận nửa đêm, bà mẹ chợt giật mình tỉnh giấc vì thấy có ánh sáng vàng rực phát ra từ chỗ bà lão nằm. Bà mẹ rón rén nhìn sang thì cười xỉu kinh ngạc, suýt nữa thì hét toáng lên vì cảnh tượng kỳ lạ trước mắt. Bà lão ăn xin ghẻ lở năm xưa không còn nằm ở đó nữa, thay vào là một con giao long khổng lồ vàng óng đang ngồi tụng kinh. Hai mẹ con run rẩy ôm chặt nhau núp sau tấm phên, không dám động đậy một ngón tay vì sợ làm phiền vị thần linh thiêng.",
+        "Sáng hôm sau khi mặt trời lên, bà lão đã trở lại hình dạng cũ và đang ngồi điềm tĩnh trước cửa nhà. Bà gọi hai mẹ con đến gần, đưa cho một gói tro và hai mảnh trấu nhỏ kèm theo lời dặn dò bí ẩn. Bà nói rõ ràng: vào đêm rằm tháng sau, các con hãy rắc gói tro này quanh nhà mình một vòng kín. Khi nào thấy có biến lớn, hãy thả hai mảnh trấu xuống nước, chúng sẽ biến thành thuyền cứu mạng cả nhà ngay lập tức.",
+        "Nói xong những lời dặn dò bí ẩn, bà lão chào hai mẹ con rồi bước ra cửa, vừa rời khỏi cổng nhà thì biến mất trong làn khói trắng. Hai mẹ con đứng lặng người không dám tin vào mắt mình, biết rằng đêm qua mình đã được tiếp đón một vị thần linh thật sự. Người mẹ cẩn thận cất gói tro và hai mảnh trấu vào trong rương khóa lại kín đáo. Hai mẹ con nửa tin nửa ngờ những lời dặn dò ấy, nhưng vẫn quyết định làm theo y nguyên không sai chữ nào.",
+        "Đúng đến đêm rằm tháng sau, người mẹ nhớ lời dặn bèn lấy gói tro ra rắc một vòng kín quanh túp lều tranh của mình. Cả làng vẫn đang chìm trong giấc ngủ say sau một ngày làm việc vất vả, không ai biết có chuyện gì sắp xảy ra. Bầu trời đêm đó bỗng nhiên kéo mây đen u ám, gió thổi mạnh không khí ngột ngạt khác thường. Hai mẹ con thấy điềm lạ liền không dám ngủ, ngồi co ro trong nhà chờ đợi tai họa sắp ập đến.",
+        "Đến giờ Tý nửa đêm, bỗng nhiên mặt đất rung chuyển dữ dội, kèm theo tiếng nổ ầm ầm vang động cả vùng. Cả ngôi làng cùng những ngôi nhà mâm cỗ và dân chúng bỗng sụt sâu xuống lòng đất một cách kinh hoàng. Nước từ lòng đất phun lên cuồn cuộn dữ dội, lan tràn nhấn chìm tất cả mọi thứ trên đường đi. Chỉ trong vòng vài phút ngắn ngủi, cả ngôi làng đã biến mất dưới một biển nước mênh mông mới hình thành.",
+        "Lạ thay căn nhà nhỏ của hai mẹ con bà góa lại nguyên vẹn nổi lên trên mặt nước như một hòn đảo nhỏ. Vòng tro rắc quanh nhà tối qua đã trở thành một vùng đất linh thiêng không bị nhấn chìm. Hai mẹ con nhìn ra xung quanh thấy biển nước mênh mông và tiếng dân làng kêu cứu khắp nơi, đứng hình kinh hoàng. Người mẹ nhớ ngay đến hai mảnh trấu trong rương, vội chạy vào lấy ra thả xuống mặt nước theo lời dặn.",
+        "Hai mảnh trấu vừa chạm xuống mặt nước thì lập tức biến thành hai chiếc thuyền lớn vững chắc tuyệt đẹp. Hai mẹ con không chần chừ một giây liền nhảy lên thuyền, cầm chèo chèo đi khắp mặt hồ cứu vớt những người còn sống sót. Họ kéo từng người đuối nước lên thuyền, đưa vào căn nhà nổi của mình làm nơi trú ẩn tạm thời. Nhờ lòng tốt và sự nhanh nhẹn, hai mẹ con đã cứu được không ít người khỏi tay tử thần đêm hôm đó.",
+        "Sau cơn đại hồng thủy thần thánh đêm hôm đó, vùng đất sụt xuống đã biến thành một hồ nước mênh mông gọi là hồ Ba Bể. Hồ này có ba hồ liên thông với nhau tên là Pé Lèng, Pé Lù và Pé Lầm, đẹp nhất nhì vùng Bắc Kạn cho đến tận ngày nay. Nhà hai mẹ con bà góa nổi lên trên mặt hồ trở thành một hòn đảo nhỏ gọi là gò Bà Góa, vẫn còn lưu giữ đến tận bây giờ. Hồ Ba Bể trở thành một thắng cảnh thiên nhiên du lịch nổi tiếng, mang trong mình câu chuyện cổ tích về lòng tốt được đền đáp.",
+        "Câu chuyện sự tích hồ Ba Bể dạy ta rằng lòng tốt và sự cảm thông với người yếu thế là phẩm chất quý giá nhất trong cuộc đời con người. Cả làng giàu có nhưng vô cảm xua đuổi bà lão ăn xin thì phải chịu thiên tai, chỉ hai mẹ con nghèo nhưng tử tế lại được trời cứu thoát. Bài học còn nằm ở chỗ đôi khi vị khách mà ta xua đuổi lại chính là vị thần linh đến thử lòng ta một cách bất ngờ. Mỗi lần đi du lịch ngắm hồ Ba Bể xanh biếc giữa núi rừng Bắc Kạn, ta lại nhớ về truyền thuyết cảm động này và tự nhủ phải sống tử tế hơn với mọi người xung quanh.",
+    ],
+    "image_prompts": [
+        f"Movie-poster composition: a flood-engulfed ancient Vietnamese village on LEFT half with desperate villagers, {ME_NGHEO} and {CON_NGHEO} on a small boat with the {HO_BA_BE} on RIGHT half, the {BA_LAO_AN_XIN} silhouette as a dragon spirit in the center sky, dramatic divine-flood split lighting, fairy-tale poster framing.",
+        f"Festive scene: a vibrant ancient Vietnamese Buddhist temple festival in {LANG_BAC_KAN}, {DAN_LANG_BB} dressed in colorful traditional clothes carrying offerings of fruit and rice cakes, lanterns and prayer flags, drums and gongs, golden afternoon light, communal celebration mood.",
+        f"Rejection scene: {BA_LAO_AN_XIN} shambling between festival mats, {DAN_LANG_BB} covering noses and waving her away with disgusted faces, festival background in {LANG_BAC_KAN}, harsh dramatic light, social-cruelty mood.",
+        f"Kind contrast scene: {ME_NGHEO} gently helping {BA_LAO_AN_XIN} stand up by the festival ground, {CON_NGHEO} holding the beggar's other hand with sympathetic eyes, other villagers in background looking shocked or disapproving, soft warm afternoon light, kindness moment.",
+        f"Magical revelation scene: a humble thatched hut interior at midnight, a luminous golden dragon spirit (true form of {BA_LAO_AN_XIN}) coiled in meditation glowing with cyan-gold light, {ME_NGHEO} and {CON_NGHEO} hiding behind a bamboo screen with wide-eyed terror, mystical sacred atmosphere.",
+        f"Daybreak scene: {BA_LAO_AN_XIN} restored to her elderly form sitting calmly in front of the hut handing a small bundle of ash and two small rice husks to {ME_NGHEO} and {CON_NGHEO} kneeling reverently before her, soft golden morning light, sacred bestowal moment.",
+        f"Farewell scene: {BA_LAO_AN_XIN} silhouetted at the doorway of the hut fading into a swirl of white mist, {ME_NGHEO} and {CON_NGHEO} watching in stunned silence holding the gift, golden dawn light streaming through the doorway, mystical departure mood.",
+        f"Preparation scene: {ME_NGHEO} carefully sprinkling ashes in a protective circle around her humble thatched hut at moonlit night, {CON_NGHEO} standing in the doorway holding the two rice husks, full moon overhead, ominous calm mood, dark stormy clouds gathering.",
+        f"Cataclysm scene: a violent earthquake splitting the ground of {LANG_BAC_KAN}, the village collapsing into a chasm with houses tipping over and {DAN_LANG_BB} fleeing in terror, water gushing up from underground, dramatic apocalyptic dark stormy light.",
+        f"Survival scene: the humble hut of {ME_NGHEO} and {CON_NGHEO} miraculously floating as a small island on a vast new flood lake, the protective ash circle still visible as a halo around the hut, debris and submerged ruins around, dramatic divine spotlight from the sky.",
+        f"Rescue scene: {ME_NGHEO} and {CON_NGHEO} rowing two newly formed large wooden boats across the flood lake reaching out to pull drowning survivors aboard, the moon overhead, dramatic heroic light, brave compassion mood.",
+        f"Aftermath scene: the magnificent new {HO_BA_BE} stretching out at sunrise, three interconnected lake basins with mountains in the distance, the small island home of the widow visible at the center, peaceful majestic atmosphere.",
+        f"Closing peaceful scene: modern day {HO_BA_BE} in serene daylight with tourists rowing small boats peacefully across the calm green water, towering limestone karst mountains around, the small island Gò Bà Góa visible, warm amber sunset light, contemplative oil-painting feel, hopeful timeless moral mood.",
+    ],
+    "motions": ["static","static","pan_right","static","static","zoom_out","static","static","static","pan_right","zoom_out","pan_right","zoom_out","zoom_out"],
+    "caption_hook": "Anh em đã nghe Sự Tích Hồ Ba Bể kiểu phim Noah chưa? 🌊🐉 Bà lão ăn xin hóa rồng thử lòng dân — chỉ 2 mẹ con tử tế thoát chết, cả làng sụt xuống thành hồ Ba Bể!",
+    "caption_bullets": [
+        "Hội cúng Phật lớn ở Bắc Kạn — bà lão ăn xin ghẻ lở đến xin ăn",
+        "Cả làng xua đuổi bà — chỉ 2 mẹ con bà góa nghèo mời về nhà ngủ",
+        "Đêm khuya bà lão hiện nguyên hình con giao long vàng óng",
+        "Bà tặng gói tro + 2 mảnh trấu, dặn rằm tháng sau rắc quanh nhà",
+        "Đêm rằm — động đất sụt cả làng thành biển nước",
+        "Nhà 2 mẹ con nổi lên — thả trấu thành thuyền cứu dân",
+        "Vùng đất sụt nay là hồ Ba Bể (Pé Lèng/Pé Lù/Pé Lầm) thắng cảnh Bắc Kạn"
+    ],
+    "caption_moral": "Câu chuyện dạy ta: lòng tốt với người yếu thế không bao giờ vô ích — đôi khi vị khách bị xua đuổi lại chính là vị thần đến thử lòng ta."
+}
+
 # ================ EXPORT ================
 BOOKS = {
     "thach-sanh": THACH_SANH_BOOK,
@@ -1307,4 +1363,5 @@ BOOKS = {
     "em-be-thong-minh": EM_BE_BOOK,
     "nang-tien-oc": NANG_TIEN_OC_BOOK,
     "thach-sung": THACH_SUNG_BOOK,
+    "su-tich-ho-ba-be": HO_BA_BE_BOOK,
 }
