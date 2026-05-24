@@ -1064,6 +1064,62 @@ CON_RONG_BOOK = {
     "caption_moral": "Câu chuyện dạy ta: người Việt dù khác biệt vùng miền đến đâu vẫn cùng chung một cội nguồn — anh em một bọc, đoàn kết là sức mạnh bất diệt."
 }
 
+# ================ BOOK 14: TRÍ KHÔN CỦA TA ĐÂY ================
+ANH_NONG_DAN_TK = _char("anh nông dân thông minh", "young Vietnamese farmer: simple brown solid áo nâu + dirty rolled-up trousers, conical hat, leather sandals, weathered tanned face with sly clever smile, carrying a bamboo rod or rope")
+CON_HO = "anthropomorphic Vietnamese tiger con hổ: large powerful orange-gold tiger with curious expressive eyes (not yet striped), naive cartoonish facial expression, sitting upright like a person"
+CON_TRAU = "anthropomorphic Vietnamese water buffalo con trâu: large gentle dark-gray buffalo with long curved horns, kind weary expressive eyes, often standing in rice fields"
+RUNG = "dense Vietnamese rural forest: tall ancient trees, ferns, dappled sunlight through canopy, hidden bushes, mystical natural atmosphere"
+DONG_RUONG = "Vietnamese rice paddy field countryside: terraced rice paddies, water buffalo trails, distant huts and palms, sunlit golden afternoon"
+GOC_CAY_HO = "massive ancient tree trunk: thick gnarled bark, sprawling roots, standing alone at the edge of a rice field, perfect for tying a large animal"
+
+TRI_KHON_BOOK = {
+    "slug": "tri-khon-cua-ta-day",
+    "title": "Trí Khôn Của Ta Đây",
+    "story_summary": "Văn Vở Gen Z. Truyện ngụ ngôn hài hước: con hổ tò mò trí khôn người là gì, anh nông dân lừa trói hổ vào gốc cây rồi đốt rơm hô 'trí khôn của ta đây'. Hổ thoát chạy có vằn đen, trâu cười rụng hàm răng trên — lý giải đặc điểm sinh học. Phiên bản kiểu phim Home Alone (1990).",
+    "scripts": [
+        "Hôm nay chúng ta sẽ nói về một câu chuyện cổ tích hài hước nhất Việt Nam, đó là Trí Khôn Của Ta Đây. Nếu phải so với một bộ phim để dễ hình dung thì tôi xếp nó vào hạng Home Alone, câu chuyện về kẻ nhỏ bé dùng trí khôn lừa kẻ to xác mạnh khỏe gấp chục lần mình. Câu chuyện có con hổ to lớn ngu ngơ, có con trâu chăm chỉ lành tính, có anh nông dân nghèo nhưng mưu mẹo bậc thầy. Và có cả màn lừa đảo kinh điển trói hổ đốt lửa giải thích vì sao hổ có vằn đen và trâu không có hàm răng trên.",
+        "Câu chuyện bắt đầu vào một buổi sáng đẹp trời, có một con hổ to lớn vừa từ rừng sâu ra ngoài kiếm ăn. Hổ là chúa tể sơn lâm, sức mạnh hơn mọi loài, đi tới đâu cũng làm muôn loài khiếp vía không dám lên tiếng. Hôm ấy hổ đi ngang qua một thửa ruộng, thấy cảnh tượng kỳ lạ chưa từng gặp trong đời. Một anh nông dân bé nhỏ đang cầm roi đánh con trâu to gấp năm lần mình, mà con trâu lại ngoan ngoãn cúi đầu kéo cày không hề phản kháng.",
+        "Hổ ngạc nhiên không hiểu chuyện gì đang xảy ra, đứng hình một phen rồi lén lén lút lút trốn trong bụi cây quan sát. Đến trưa nông dân tháo cày cho trâu nghỉ ngơi, hổ liền len lén tới gần con trâu hỏi nhỏ. Hổ hỏi rất chân thành: anh trâu ơi, anh to khỏe gấp mấy lần người, sao lại chịu để cái thằng người bé tí kia sai khiến đánh đập như vậy. Trâu thở dài chậm rãi trả lời: vì con người có trí khôn, mà loài vật chúng ta không có nên đành phải nghe lời họ thôi.",
+        "Hổ nghe hai chữ trí khôn thì tò mò vô cùng, cả đời chúa tể sơn lâm chưa nghe ai nói đến khái niệm này. Hổ hỏi đi hỏi lại: trí khôn là cái gì vậy hả anh trâu, nó to bằng nào, nó tròn hay vuông, ăn được không vậy. Trâu cười trừ không biết giải thích thế nào, đành bảo hổ: anh muốn biết thì cứ ra hỏi thẳng anh nông dân, anh ấy có trí khôn đó. Hổ gật đầu lia lịa rồi nhảy phóc ra khỏi bụi cây, đi thẳng tới chỗ anh nông dân đang ngồi nghỉ dưới gốc cây.",
+        "Anh nông dân thấy con hổ to lớn lù lù xuất hiện thì giật thót cả mình, suýt nữa thì bỏ chạy thục mạng. Nhưng nhìn ánh mắt hổ tò mò chứ không hung tợn, anh trấn tĩnh lại đứng đối diện với chúa tể sơn lâm. Hổ vào đề thẳng luôn: nghe nói anh có cái thứ gọi là trí khôn, cho tôi xem một chút được không. Anh nông dân giật mình một giây rồi trong đầu lập tức nảy số một kế cực kỳ tinh quái, đúng kiểu Home Alone level max đối phó với kẻ địch to xác.",
+        "Anh nông dân điềm tĩnh trả lời với vẻ tiếc nuối: ồ tiếc thật, trí khôn của tôi tôi để quên ở nhà mất rồi không mang theo. Hổ ngơ ngác hỏi tiếp: vậy anh về nhà lấy ra cho tôi xem nhé, tôi đợi ở đây cũng được. Anh nông dân giả vờ ngần ngại: tôi sợ tôi đi rồi anh lại ăn mất con trâu nhà tôi, vậy thì tôi mất công về làm gì. Hổ vội vàng cam đoan: không không tôi không ăn đâu, anh cứ về đi tôi chờ ngoan ngoãn ở đây không động vào trâu đâu.",
+        "Nhưng anh nông dân vẫn không yên tâm, mặt vẫn lộ vẻ băn khoăn lo lắng nhìn con hổ. Anh đề nghị một câu khiến hổ ngu ngơ gật đầu cái rụp: hay là tôi trói anh vào gốc cây kia một lát, để tôi yên tâm về lấy trí khôn cho anh xem được không. Hổ trong lòng háo hức muốn biết trí khôn nên đồng ý ngay không suy nghĩ một giây, đúng kiểu bị scam đỉnh cao mà không hề hay biết. Anh nông dân vác dây thừng to ra, trói hổ chặt cứng vào gốc cây cổ thụ, vòng đi vòng lại đến mấy chục vòng cho chắc ăn.",
+        "Trói xong hổ chặt cứng, anh nông dân không về nhà lấy trí khôn như đã hứa, mà đi gom rơm khô chất xung quanh gốc cây nơi hổ bị trói. Anh châm lửa đốt cháy đùng đùng, vừa cầm roi đánh hổ vừa hô to vang vọng cả cánh đồng: trí khôn của ta đây, trí khôn của ta đây. Hổ đau quá vùng vẫy gào thét nhưng dây trói chặt cứng không sao thoát ra được. Lửa bốc cháy ngùn ngụt làm cháy xém cả bộ lông vàng óng của hổ, in những vệt đen dài dọc khắp thân mình.",
+        "Cuối cùng nhờ sức mạnh vùng vẫy điên cuồng, hổ cũng giật đứt được dây thừng chạy thục mạng vào rừng sâu. Nhưng bộ lông vàng đẹp đẽ ngày xưa của hổ giờ đã bị cháy xém in những vệt đen dài chằng chịt khắp thân mình. Từ ngày đó tất cả con cháu của hổ sinh ra đều có vằn đen trên mình, không bao giờ có thể tẩy đi được nữa. Hổ ôm hận anh nông dân suốt đời, nhưng vẫn không dám bén mảng đến gần khu vực có con người nữa, vì sợ lại bị scam một phen nhớ đời.",
+        "Trong khi đó con trâu ở bên cạnh chứng kiến cảnh hổ bị nông dân lừa đảo trói đốt thì cười xỉu không nhịn được. Trâu cười đến mức nghiêng cả thân, đập đầu xuống tảng đá cứng làm gãy luôn cả hàm răng trên. Từ đó con trâu cũng có một đặc điểm kỳ lạ là không bao giờ có hàm răng trên nữa, chỉ có hàm răng dưới và lợi cứng phía trên. Cả con cháu nhà trâu sau này cũng đều giống tổ tiên, ai cũng không có hàm răng trên dù vẫn ăn cỏ ngon lành bình thường.",
+        "Anh nông dân nhờ một phen mưu mẹo đó mà nổi tiếng khắp vùng, ai cũng phục tài trí thông minh tuyệt vời của anh. Câu chuyện anh nông dân nhỏ bé dùng trí khôn lừa con hổ to xác lan truyền khắp các làng, trở thành một bài học sống động cho con cháu. Người ta kể cho nhau nghe để chứng minh rằng trí thông minh con người mạnh hơn cả sức mạnh cơ bắp của muôn loài. Anh nông dân tiếp tục cuộc sống bình thường, ngày ngày cùng trâu ra đồng cày ruộng nhưng giờ không còn lo bị hổ làm phiền nữa.",
+        "Câu chuyện trí khôn của ta đây trở thành một trong những truyện ngụ ngôn quen thuộc nhất với mọi thế hệ trẻ em Việt Nam. Mỗi lần thấy con hổ trong sở thú với những vệt đen vằn vện trên lưng, người ta lại nhớ ngay đến câu chuyện ngày xưa. Mỗi lần thấy con trâu nhai cỏ với hàm dưới đầy răng và hàm trên trống không, người ta lại bật cười nhớ đến cảnh trâu cười đến gãy răng. Đây là một cách lý giải dân gian thú vị về hai đặc điểm sinh học có thật của hổ và trâu, vừa hài hước vừa thấm thía bài học cuộc đời.",
+        "Câu chuyện trí khôn của ta đây dạy ta rằng sức mạnh không phải là yếu tố quyết định cuối cùng trong cuộc đời. Trí thông minh, sự nhanh nhạy và khả năng đánh giá tình huống mới là vũ khí lợi hại nhất giúp con người vượt qua mọi thử thách. Anh nông dân nhỏ bé yếu hơn hổ gấp chục lần, nhưng nhờ tinh tế biết cách dẫn dụ đối thủ vào bẫy mà thắng cuộc một cách ngoạn mục. Bài học áp dụng được cho cả cuộc sống hiện đại, từ học tập đến công việc đến đàm phán, người có cái đầu lạnh và biết suy nghĩ trước hai bước luôn là người thắng cuộc cuối cùng.",
+    ],
+    "image_prompts": [
+        f"Movie-poster composition: {ANH_NONG_DAN_TK} on LEFT half holding rope and torch with sly clever smile, {CON_HO} on RIGHT half wide-eyed tied to a tree with smoke rising, {CON_TRAU} laughing in background, dramatic comedic split lighting, fairy-tale poster framing.",
+        f"Rural scene: {ANH_NONG_DAN_TK} guiding {CON_TRAU} pulling a plow through a rice paddy, {CON_HO} hidden behind tall bushes at the edge of the field with curious puzzled face, sunlit morning {DONG_RUONG}, peaceful pastoral mood with hidden suspense.",
+        f"Conversation scene: {CON_HO} approaching {CON_TRAU} resting under a tree at midday, both animals facing each other in a quiet rural clearing, {DONG_RUONG} backdrop with rice paddies, warm noon light, intimate dialogue mood.",
+        f"Comedic curiosity scene: {CON_HO} sitting in front of {CON_TRAU} with head tilted in confusion and ears perked up, asking earnest questions, expressive cartoonish animal eyes, sunlit field background, humorous dialogue moment.",
+        f"Confrontation scene: {ANH_NONG_DAN_TK} sitting under a tree eating rice, {CON_HO} approaching cautiously curious not threatening, both surprised to meet face to face, {DONG_RUONG} backdrop, dramatic afternoon light, tense but comedic mood.",
+        f"Cunning dialogue scene: {ANH_NONG_DAN_TK} standing with one finger raised theatrically explaining to {CON_HO}, who tilts head listening earnestly, anh nông dân gives a sly knowing look toward viewers, sunlit field, humorous trickster mood.",
+        f"Setup scene: {ANH_NONG_DAN_TK} wrapping thick rope around {CON_HO} tied tightly to {GOC_CAY_HO}, {CON_HO} cooperating eagerly with anticipation, {DONG_RUONG} backdrop, golden afternoon light, comedic but ominous mood.",
+        f"Iconic moment: {ANH_NONG_DAN_TK} dancing victorious around {CON_HO} tied to {GOC_CAY_HO}, piles of dry straw on fire crackling around the trunk, anh nông dân waving a stick yelling triumphantly, {CON_HO} struggling in shock, dramatic firelight, slapstick climax mood.",
+        f"Escape scene: {CON_HO} breaking free from charred ropes and running into the forest, dark stripes burned into its golden fur, smoke trailing behind, {RUNG} dense forest backdrop, dramatic motion blur, comedic chase mood.",
+        f"Comedic transformation scene: {CON_TRAU} doubled over laughing uncontrollably in the rice field nearby, falling forward and bonking its head on a large rock, upper teeth flying out comically, exaggerated cartoonish expression, sunlit pastoral background.",
+        f"Village admiration scene: {ANH_NONG_DAN_TK} sitting on a bench surrounded by other Vietnamese villagers listening intently as he recounts the story, villagers laughing and patting his back in admiration, traditional village square background, warm sunset golden light.",
+        f"Educational illustration scene: side-by-side modern depiction of a tiger with iconic black stripes on the LEFT, and a water buffalo with only lower teeth grinning on the RIGHT, both labeled with subtle origin marks, neutral white background, charming children's-book style.",
+        f"Closing peaceful scene: {ANH_NONG_DAN_TK} walking peacefully home with {CON_TRAU} at golden sunset, {DONG_RUONG} stretching to the horizon, warm amber palette, contemplative oil-painting feel, hopeful pastoral wisdom mood.",
+    ],
+    "motions": ["static","static","pan_right","static","static","static","static","static","zoom_out","pan_right","static","static","static","zoom_out"],
+    "caption_hook": "Anh em đã nghe Trí Khôn Của Ta Đây kiểu phim Home Alone chưa? 🐯🐃 Anh nông dân bé nhỏ lừa scam con hổ to xác, giải thích vì sao hổ có vằn đen và trâu không có răng cửa trên!",
+    "caption_bullets": [
+        "Hổ tò mò vì sao trâu to khỏe lại chịu để người sai khiến",
+        "Trâu nói: vì con người có trí khôn",
+        "Hổ hỏi nông dân xin xem trí khôn",
+        "Nông dân nói trí khôn để ở nhà, đề nghị trói hổ vào cây yên tâm",
+        "Hổ ngu ngơ đồng ý — nông dân đốt rơm hô 'trí khôn của ta đây'",
+        "Hổ cháy xém có vằn đen — trâu cười rụng răng hàm trên",
+        "Lý giải dân gian vui về đặc điểm sinh học của hổ và trâu"
+    ],
+    "caption_moral": "Câu chuyện dạy ta: trí thông minh mạnh hơn sức mạnh cơ bắp — biết cách dẫn dụ đối thủ vào bẫy mới là người thắng cuộc cuối cùng."
+}
+
 # ================ EXPORT ================
 BOOKS = {
     "thach-sanh": THACH_SANH_BOOK,
@@ -1079,4 +1135,5 @@ BOOKS = {
     "thanh-giong": THANH_GIONG_BOOK,
     "su-tich-trau-cau": TRAU_CAU_BOOK,
     "con-rong-chau-tien": CON_RONG_BOOK,
+    "tri-khon-cua-ta-day": TRI_KHON_BOOK,
 }
