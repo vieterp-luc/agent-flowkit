@@ -1,0 +1,81 @@
+{
+  "slug": "glyptapanteles_vn",
+  "project": {
+    "name": "KHKD - Glyptapanteles",
+    "description": "Vietnamese science-horror Reel — sau buom bodyguard cho ke an thit minh",
+    "story": "Glyptapanteles wasps inject eggs into geometrid caterpillars. The larvae feed inside, then chew their way out through the skin, leaving the caterpillar partially eaten but still alive and conscious. The caterpillar then spins silk over the wasp pupae, stops eating, and aggressively defends the cocoons from predators with violent head-swings until it starves.",
+    "material": "realistic",
+    "language": "vi",
+    "characters": [
+      {
+        "name": "Geometrid Caterpillar",
+        "entity_type": "character",
+        "description": "Bright green geometrid caterpillar, smooth body with thin white side stripes, looped inchworm posture, small head with tiny eyes, six true legs and prolegs, full visible side profile."
+      },
+      {
+        "name": "Glyptapanteles Wasp",
+        "entity_type": "character",
+        "description": "Tiny black braconid wasp Glyptapanteles, glossy slender body 4mm long, transparent veined wings, very long thin ovipositor extending from abdomen, fine antennae."
+      },
+      {
+        "name": "Wasp Pupae Cluster",
+        "entity_type": "visual_asset",
+        "description": "Cluster of small white silk cocoons of wasp pupae, oval shape 5mm each, clustered on a green leaf surface, glossy silk strands connecting them."
+      },
+      {
+        "name": "Sunlit Garden Leaf",
+        "entity_type": "location",
+        "description": "Sunlit fresh green garden plant leaf with morning dew droplets, soft natural backdrop of more leaves bokeh, dappled warm morning light filtering through canopy above."
+      }
+    ]
+  },
+  "video": {
+    "title": "Glyptapanteles - Sau Buom Bodyguard Cho Ke An Thit Minh",
+    "video_story": "Hook caterpillar defending cocoons, wasp egg injection science, larvae chewing out, behavioral hijack into bodyguard, dying guard closer.",
+    "display_order": 0,
+    "orientation": "VERTICAL"
+  },
+  "scenes": [
+    {
+      "display_order": 0,
+      "chain_type": "ROOT",
+      "character_names": ["Geometrid Caterpillar", "Wasp Pupae Cluster", "Sunlit Garden Leaf"],
+      "prompt": "Macro close-up of green geometrid caterpillar curled over a cluster of white wasp cocoons on a sunlit leaf, head jerking sideways at an unseen approaching threat, defending the cocoons aggressively. Camera at low angle close to leaf surface. Vertical macro framing.",
+      "video_prompt": "Macro close-up of green geometrid caterpillar curled over a cluster of white wasp cocoons on a sunlit leaf, head jerking sideways aggressively at an unseen approaching threat. The caterpillar swings its head left and right defensively, body coiled protectively over the cocoons. The camera holds low at leaf surface, slight push forward. Warm dappled morning sunlight filtering through canopy.\n\nAudio: garden morning ambience, soft breeze in leaves.\nSFX: caterpillar head-swing whoosh, faint leaf rustle.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Con sâu bướm này đang bảo vệ kẻ vừa ăn thịt mình. Nó sẽ canh gác đến khi không còn sức nữa."
+    },
+    {
+      "display_order": 1,
+      "chain_type": "ROOT",
+      "character_names": ["Geometrid Caterpillar", "Glyptapanteles Wasp", "Sunlit Garden Leaf"],
+      "prompt": "Macro close-up of tiny black wasp Glyptapanteles landing on the back of a green caterpillar on a leaf, abdomen curling under to insert a long thin ovipositor into the caterpillar's skin. Camera at extreme macro side angle. Soft golden morning light. Vertical framing.",
+      "video_prompt": "Macro close-up of tiny black wasp Glyptapanteles landing precisely on the back of a green caterpillar on a leaf, abdomen curling under to insert a long thin ovipositor into the caterpillar's skin. The wasp holds still as it injects, then withdraws and flies off quickly. The camera holds extreme macro side angle, tracking the wasp's brief landing and departure. Soft golden morning light.\n\nAudio: garden morning ambience, soft warm breeze.\nSFX: faint wing buzz, soft skin pierce, wing takeoff.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Ong Glyptapanteles chích vào lưng nhện sâu, đẻ một quả trứng. Trứng nở thành ấu trùng, sống bên trong sâu."
+    },
+    {
+      "display_order": 2,
+      "chain_type": "CONTINUATION",
+      "parent_index": 1,
+      "character_names": ["Geometrid Caterpillar"],
+      "prompt": "Extreme macro close-up of caterpillar body skin with dozens of tiny pale wasp larvae chewing their way out through small holes in the skin, emerging onto the leaf surface. Caterpillar still alive but very weak, lying flat. Camera angle from above looking straight down. Vertical macro framing.",
+      "video_prompt": "Extreme macro close-up of caterpillar body skin with dozens of tiny pale wasp larvae chewing their way out through small holes in the skin, emerging onto the leaf surface one by one. The caterpillar lies flat, weakened but still slightly twitching. The camera slowly pushes in from above, capturing the emergence in fine detail. Soft natural light from above.\n\nAudio: garden morning ambience.\nSFX: soft skin breaking, larval wriggling, tiny chewing.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Sau hai tuần, hàng chục ấu trùng cắn xuyên da sâu, chui ra ngoài, để lại sâu yếu sức."
+    },
+    {
+      "display_order": 3,
+      "chain_type": "ROOT",
+      "character_names": ["Geometrid Caterpillar", "Wasp Pupae Cluster", "Sunlit Garden Leaf"],
+      "prompt": "Macro close-up of weakened green caterpillar with visible holes in its skin, slowly spinning silk strands over a cluster of white wasp pupae on a sunlit leaf. The caterpillar weaves protective silk webbing methodically. Camera at low angle. Vertical macro framing.",
+      "video_prompt": "Macro close-up of weakened green caterpillar with visible small holes in its skin, slowly spinning silk strands over a cluster of white wasp pupae on a sunlit leaf, weaving protective silk webbing methodically. The camera slowly orbits sideways around the cluster, revealing the protective silk dome forming. Warm dappled morning sunlight.\n\nAudio: garden morning ambience, soft warm breeze.\nSFX: gentle silk weaving rustle, faint caterpillar movement.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Sâu vẫn sống. Nhưng não nó đã đổi mục đích. Giờ đây nó dệt tơ phủ lên kén của kẻ ăn thịt mình."
+    },
+    {
+      "display_order": 4,
+      "chain_type": "ROOT",
+      "character_names": ["Geometrid Caterpillar", "Wasp Pupae Cluster", "Sunlit Garden Leaf"],
+      "prompt": "Wide macro shot of caterpillar standing motionless guard over cluster of wasp cocoons on a leaf, swinging its head aggressively at a small approaching beetle, refusing to leave. Camera slowly pulls back to reveal the full scene. Vertical wide-macro framing.",
+      "video_prompt": "Wide macro shot of caterpillar standing motionless guard over cluster of wasp cocoons on a leaf, swinging its head aggressively at a small approaching beetle predator, refusing to leave its post. The camera slowly pulls back, revealing the caterpillar's lonely silent guardianship of its killers' cocoons on the leaf. Warm dappled morning sunlight.\n\nAudio: garden morning ambience, soft warm breeze.\nSFX: caterpillar head-swing whoosh, small beetle retreating.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Đến khi không còn ăn, không còn ngủ, sâu vẫn đứng đó canh gác cho ổ kén đến hơi thở cuối."
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "slug": "bombardier_vn",
+  "project": {
+    "name": "KHKD - Bombardier Beetle",
+    "description": "Vietnamese science-horror Reel — bo phun hoa chat 100 do C",
+    "story": "The bombardier beetle keeps two chemical reservoirs in its abdomen — hydroquinones and hydrogen peroxide. When attacked, it mixes them in a reaction chamber with enzymes, producing a boiling 100°C caustic spray. It aims with a swiveling abdomen tip and fires 500 micro-pulses per second.",
+    "material": "realistic",
+    "language": "vi",
+    "characters": [
+      {
+        "name": "Bombardier Beetle",
+        "entity_type": "character",
+        "description": "Adult bombardier beetle Brachinus, glossy black abdomen with bright orange thorax and head, large dark compound eyes, six jointed legs, abdomen tip slightly raised, photorealistic macro insect portrait."
+      },
+      {
+        "name": "Common Toad",
+        "entity_type": "character",
+        "description": "Adult common toad, warty olive-brown skin, large dark eyes with golden iris, broad mouth, squat body posture, sitting still in defensive stance."
+      },
+      {
+        "name": "Damp Forest Floor",
+        "entity_type": "location",
+        "description": "Damp forest floor at dawn, leaf litter of brown oak leaves, scattered twigs, mossy stones, soft morning haze, shallow puddles reflecting overcast sky."
+      },
+      {
+        "name": "Chemical Spray Diagram",
+        "entity_type": "visual_asset",
+        "description": "Anatomical scientific cross-section of beetle abdomen with two colored chemical reservoirs (blue and red) feeding into a central reaction chamber, glowing yellow steam at outlet, biology textbook illustration style."
+      }
+    ]
+  },
+  "video": {
+    "title": "Bombardier Beetle - Phun Hoa Chat 100 Do C",
+    "video_story": "Hook beetle firing steam jet at toad, science of two-chemical system, anatomical view, slow-mo pulse sequence, calm beetle walking away closer.",
+    "display_order": 0,
+    "orientation": "VERTICAL"
+  },
+  "scenes": [
+    {
+      "display_order": 0,
+      "chain_type": "ROOT",
+      "character_names": ["Bombardier Beetle", "Common Toad", "Damp Forest Floor"],
+      "prompt": "Macro close-up of bombardier beetle on forest floor leaf litter, abdomen tip glowing yellow as it fires a visible steamy hot chemical jet upward toward a recoiling toad. Toad jerks its head back in shock. Cool morning forest light with warm glow from spray. Vertical macro framing, beetle in foreground.",
+      "video_prompt": "Macro close-up of bombardier beetle on forest floor leaf litter, abdomen tip glowing yellow as it fires a visible steamy hot chemical jet upward toward a recoiling toad. The toad jerks its head back as the steam hits, and the beetle holds its firing posture. The camera holds steady at low angle, slight push toward the spray plume. Cool morning forest light with warm glow from the chemical jet.\n\nAudio: damp forest dawn ambience, soft wind in leaves.\nSFX: sharp chemical hiss, toad startle croak, steam release pulse.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Một con bọ nhỏ phun hóa chất 100 độ C vào mặt kẻ săn. Mỗi giây, 500 phát liên tiếp."
+    },
+    {
+      "display_order": 1,
+      "chain_type": "ROOT",
+      "character_names": ["Bombardier Beetle", "Chemical Spray Diagram"],
+      "prompt": "Anatomical scientific cross-section X-ray view of bombardier beetle abdomen showing two colored chemical reservoirs (blue and red liquid) feeding into a central reaction chamber where they meet and turn glowing yellow with rising steam. Camera holds the diagram center frame. Vertical scientific illustration composition.",
+      "video_prompt": "Anatomical scientific cross-section X-ray view of bombardier beetle abdomen showing two colored chemical reservoirs (blue and red liquid) feeding into a central reaction chamber. The two liquids slowly flow inward, meet in the chamber, and react with a bright glowing yellow flash and rising steam. The camera slowly pushes in toward the reaction chamber as the reaction occurs. Clean scientific illustration lighting.\n\nAudio: low scientific drone, biology lab ambience.\nSFX: liquid flowing, bright chemical reaction whoosh, steam release.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Bọ giữ hai loại hóa chất riêng biệt trong bụng. Chỉ khi nguy hiểm mới trộn vào buồng phản ứng."
+    },
+    {
+      "display_order": 2,
+      "chain_type": "CONTINUATION",
+      "parent_index": 1,
+      "character_names": ["Bombardier Beetle"],
+      "prompt": "Macro slow-motion side view of bombardier beetle abdomen tip swiveling left and right to aim, then firing a series of rapid micro-pulses of steaming yellow chemical spray. Each pulse leaves a small puff of steam. Camera at extreme macro focused on tail tip. Vertical framing.",
+      "video_prompt": "Macro slow-motion side view of bombardier beetle abdomen tip swiveling left and right to aim, then firing a series of rapid micro-pulses of steaming yellow chemical spray. Each pulse releases a small puff of steam in rapid succession. The camera holds extreme macro on the tail tip, slight rack focus between body and spray. Warm rim light highlighting the steam puffs.\n\nAudio: low macro recording hum, slow biological breath.\nSFX: rapid micro chemical pulses like a tiny machine gun, steam bursts.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Đuôi bọ xoay 360 độ. Mỗi cú phun là 500 xung nhỏ, mạnh hơn cả vòi rồng cứu hỏa thu nhỏ."
+    },
+    {
+      "display_order": 3,
+      "chain_type": "ROOT",
+      "character_names": ["Bombardier Beetle", "Common Toad"],
+      "prompt": "Macro close-up of toad recoiling backward with steam still rising from its face, eyes squeezed shut from chemical burn, spitting the bombardier beetle back out of its mouth. The beetle tumbles to the leaf litter, then stands up unharmed. Vertical macro framing.",
+      "video_prompt": "Macro close-up of toad recoiling backward with steam still rising from its irritated face, eyes squeezed shut from chemical burn, spitting the bombardier beetle back out of its mouth. The beetle tumbles to the leaf litter, then immediately rights itself and stands unharmed. The camera follows the falling beetle in a small arc. Cool morning forest light with hint of warm steam.\n\nAudio: damp forest dawn ambience.\nSFX: toad spitting and croaking, beetle landing in leaves, faint chemical hiss fading.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Ếch không nuốt nổi. Da bị bỏng acid, mặt nóng rát, phải nhổ con mồi ra ngay."
+    },
+    {
+      "display_order": 4,
+      "chain_type": "ROOT",
+      "character_names": ["Bombardier Beetle", "Damp Forest Floor"],
+      "prompt": "Wide cinematic low-angle shot of bombardier beetle walking calmly across damp forest floor at sunrise, golden first light catching its glossy back, defeated predators visible blurred in background. Camera slowly tracks alongside. Vertical wide-angle composition with depth.",
+      "video_prompt": "Wide cinematic low-angle shot of bombardier beetle walking calmly across damp forest floor at sunrise, golden first light catching its glossy black back. Blurred shapes of retreating predators visible in soft background bokeh. The camera tracks alongside the beetle at ground level, slow steady movement. Warm golden hour rim light contrasting with cool forest shadows.\n\nAudio: forest dawn ambience, bird wake-up song.\nSFX: soft leg taps on damp leaves, distant predator retreat.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Tự nhiên đã thiết kế một khẩu pháo hóa học. Trong cơ thể bé bằng đầu ngón tay."
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "slug": "hymenoepimecis_vn",
+  "project": {
+    "name": "KHKD - Hymenoepimecis",
+    "description": "Vietnamese science-horror Reel — ong ep nhen det mang cho con ong",
+    "story": "Hymenoepimecis argyraphaga is a parasitoid wasp. The female stings a Plesiometa argyra spider and lays an egg on its abdomen. The larva feeds externally for two weeks. On the night the larva will pupate, it injects a chemical that hijacks the spider's web-building program, making it weave a special reinforced cocoon web optimized for protecting the wasp pupa. Then the larva finishes the spider and pupates inside the web.",
+    "material": "realistic",
+    "language": "vi",
+    "characters": [
+      {
+        "name": "Orb Weaver Spider",
+        "entity_type": "character",
+        "description": "Plesiometa argyra orb weaver spider, silver-yellow segmented body, eight slender black legs, small head, sitting on intricate web, photorealistic macro arachnid portrait."
+      },
+      {
+        "name": "Hymenoepimecis Wasp",
+        "entity_type": "character",
+        "description": "Small dark parasitoid wasp Hymenoepimecis, glossy black body 1cm long, iridescent transparent wings, long thin abdomen, fine antennae, six jointed legs."
+      },
+      {
+        "name": "Wasp Larva",
+        "entity_type": "visual_asset",
+        "description": "Pale cream caterpillar-like wasp larva 5mm long, soft translucent body with faint segments, clinging to spider abdomen with tiny mouth hooks."
+      },
+      {
+        "name": "Special Cocoon Web",
+        "entity_type": "visual_asset",
+        "description": "Reinforced spider web with unusual Y-shape structural design, thick silk anchor strands forming triangular support, an oval white wasp cocoon suspended in the center, dew droplets on strands."
+      }
+    ]
+  },
+  "video": {
+    "title": "Hymenoepimecis - Ong Ep Nhen Det Mang Cho Con Ong",
+    "video_story": "Hook spider weaving alien web with larva on back, wasp injection science, larva feeding, behavior hijack into special web, mass-architect closer.",
+    "display_order": 0,
+    "orientation": "VERTICAL"
+  },
+  "scenes": [
+    {
+      "display_order": 0,
+      "chain_type": "ROOT",
+      "character_names": ["Orb Weaver Spider", "Wasp Larva", "Special Cocoon Web"],
+      "prompt": "Macro close-up of an orb weaver spider on a reinforced Y-shaped web, weaving unusual silk patterns, a pale wasp larva clinging to its abdomen. The web has thick anchor strands different from normal orb webs. Camera at low side angle. Vertical macro framing.",
+      "video_prompt": "Macro close-up of an orb weaver spider on a reinforced Y-shaped web, slowly weaving unusual silk patterns with its hind legs, a pale wasp larva clinging to its abdomen. The spider moves methodically, depositing thick silk anchor strands. The camera holds low side angle, slight push forward toward the spider. Soft warm rainforest morning light, dew droplets on web.\n\nAudio: tropical forest dawn ambience, soft breeze.\nSFX: faint silk weaving rustle, spider leg movement on strands.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Con nhện này không dệt mạng bắt mồi. Nó đang dệt nhà cho ấu trùng ong vừa ăn thịt mình."
+    },
+    {
+      "display_order": 1,
+      "chain_type": "ROOT",
+      "character_names": ["Orb Weaver Spider", "Hymenoepimecis Wasp"],
+      "prompt": "Macro close-up of dark Hymenoepimecis wasp landing on the back of an orb weaver spider sitting on its normal web, curling abdomen under to inject an egg onto the spider's abdomen. Camera at extreme macro side angle. Soft natural light. Vertical framing.",
+      "video_prompt": "Macro close-up of dark Hymenoepimecis wasp landing precisely on the back of an orb weaver spider sitting on its normal web, curling abdomen under to deposit a single egg onto the spider's abdomen. The spider tries to swipe but the wasp holds firm, completes the egg deposit, then flies off. The camera holds extreme macro side angle. Soft natural light, hint of warm sunshine on wings.\n\nAudio: tropical forest morning ambience, soft warm breeze.\nSFX: wasp wing buzz, spider startle, egg deposit, takeoff.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Ong Hymenoepimecis chích vào lưng nhện, đẻ một quả trứng. Trứng nở thành ấu trùng, sống bám trên bụng nhện."
+    },
+    {
+      "display_order": 2,
+      "chain_type": "CONTINUATION",
+      "parent_index": 1,
+      "character_names": ["Orb Weaver Spider", "Wasp Larva"],
+      "prompt": "Extreme macro close-up of pale wasp larva clinging to the spider's abdomen, slowly growing larger over time, drinking spider hemolymph through small mouth hooks. The spider continues normal web weaving in the background. Camera at low angle focusing on larva. Vertical macro framing.",
+      "video_prompt": "Extreme macro close-up of pale wasp larva clinging to the spider's abdomen, slowly growing larger over time as it drinks spider hemolymph through small mouth hooks. The spider continues normal web weaving in the soft background, unaware of its growing passenger. The camera slowly pulls back to reveal the size difference. Soft natural light filtering through leaves.\n\nAudio: tropical forest morning ambience.\nSFX: faint larva feeding sucking, spider leg movement, distant insect calls.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Suốt hai tuần, ấu trùng hút máu nhện, lớn dần. Con nhện vẫn dệt mạng bình thường, không hay biết."
+    },
+    {
+      "display_order": 3,
+      "chain_type": "ROOT",
+      "character_names": ["Orb Weaver Spider", "Wasp Larva", "Special Cocoon Web"],
+      "prompt": "Wide macro time-lapse shot of the spider weaving a strange new Y-shaped reinforced web pattern at night, completely different from the normal orb web. The wasp larva is fully grown on its back. Moonlight illuminates the web architecture. Vertical wide-macro composition.",
+      "video_prompt": "Wide macro time-lapse shot of the spider weaving a strange new Y-shaped reinforced web pattern at night, completely different from a normal orb web. The wasp larva is fully grown on its back. Moonlight illuminates the unusual web architecture taking shape. The camera slowly orbits sideways around the web as it forms, revealing the structural design. Cool blue moonlight palette with hint of warm web fiber.\n\nAudio: tropical forest night ambience, distant cicadas.\nSFX: rapid silk strand laying, spider leg movement, soft night insects.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Đêm trước khi ấu trùng hóa nhộng, nó tiêm chất điều khiển. Nhện đột nhiên dệt một loại mạng chưa từng có."
+    },
+    {
+      "display_order": 4,
+      "chain_type": "ROOT",
+      "character_names": ["Orb Weaver Spider", "Special Cocoon Web"],
+      "prompt": "Wide cinematic shot of multiple orb weaver spiders in a tropical forest at dawn, all weaving the same strange Y-shaped reinforced web pattern in perfect synchronization, wasp pupae safely hanging in each. Camera slowly drifts past the synchronized colony. Vertical wide-angle composition.",
+      "video_prompt": "Wide cinematic shot of multiple orb weaver spiders in a tropical forest at dawn, all weaving the same strange Y-shaped reinforced web pattern in perfect synchronization across many leaves, wasp pupae safely hanging in each cocoon web. The camera slowly drifts past the synchronized colony, revealing how widespread the parasite control is. Soft golden dawn light through canopy.\n\nAudio: tropical forest dawn ambience, gentle wind.\nSFX: many silk strands being woven, faint synchronized spider movement.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Không phải nhện chọn dệt thế này. Bộ não nó đã bị ép viết lại, thành kiến trúc sư cho kẻ thù."
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "slug": "cymothoa_vn",
+  "project": {
+    "name": "KHKD - Cymothoa Exigua",
+    "description": "Vietnamese science-horror Reel — bo thay the luoi ca",
+    "story": "Cymothoa exigua is the only known parasite that completely replaces a host organ. The juvenile bug enters a fish through the gills, climbs to the tongue, grips it with claws, drinks blood until the tongue atrophies and falls off, then sits in the tongue's exact position. The fish then uses the bug as a functioning tongue for the rest of its life.",
+    "material": "realistic",
+    "language": "vi",
+    "characters": [
+      {
+        "name": "Snapper Fish",
+        "entity_type": "character",
+        "description": "Adult red snapper fish, rose-pink scales with silver underbelly, large round black eye, prominent dorsal fin, slightly open mouth showing dark interior, photorealistic underwater marine wildlife look."
+      },
+      {
+        "name": "Cymothoa Isopod",
+        "entity_type": "visual_asset",
+        "description": "Pale cream-white isopod parasite, 3cm long, seven pairs of jointed legs, segmented oval body like a tongue-shaped roach, two small dark eyes at front, claw-like grasping front legs, glossy wet exoskeleton."
+      },
+      {
+        "name": "Coral Reef Underwater",
+        "entity_type": "location",
+        "description": "Shallow tropical coral reef with sand bottom, turquoise water, scattered orange and purple coral heads, schools of small reef fish in background, sun rays piercing down from surface as visible light shafts."
+      },
+      {
+        "name": "Restaurant Plate",
+        "entity_type": "visual_asset",
+        "description": "White round ceramic plate on dark wooden restaurant table, garnish of lemon slices and herbs, soft warm overhead pendant lighting, slight bokeh of distant kitchen lights in background."
+      }
+    ]
+  },
+  "video": {
+    "title": "Cymothoa Exigua - Bo Thay The Luoi Ca",
+    "video_story": "Hook with bug visible in fish mouth, explain how juvenile enters and replaces tongue, scientific detail of attachment, restaurant reveal, ominous wide ocean closer.",
+    "display_order": 0,
+    "orientation": "VERTICAL"
+  },
+  "scenes": [
+    {
+      "display_order": 0,
+      "chain_type": "ROOT",
+      "character_names": ["Snapper Fish", "Cymothoa Isopod"],
+      "prompt": "Extreme macro close-up of a red snapper's face floating still underwater, mouth slowly opening to reveal the dark interior. Where the tongue should be, a pale segmented isopod sits motionless, its two small dark eyes facing the camera. Sunlight from above filters through water creating soft caustic patterns on scales. Vertical macro composition, shallow depth of field, centered framing.",
+      "video_prompt": "Extreme macro close-up of a red snapper's face suspended in water, mouth slowly opening to reveal the dark interior. Where the tongue should be, a pale cream isopod sits motionless, its small dark eyes facing the camera. The camera holds steady, drifting slightly forward into the open mouth as it widens. Sunlight from above filters through water in soft caustic patterns on the fish scales. Cool underwater blue palette with warm light pools.\n\nAudio: muffled underwater ambience, distant ocean swell.\nSFX: soft bubble pops, faint water current.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Một con cá sống bình thường. Lưỡi nó đã biến mất từ lâu, và một con bọ đã chiếm chỗ."
+    },
+    {
+      "display_order": 1,
+      "chain_type": "ROOT",
+      "character_names": ["Snapper Fish", "Cymothoa Isopod", "Coral Reef Underwater"],
+      "prompt": "Underwater medium shot inside a snapper fish's gill chamber. A small translucent juvenile isopod propels forward through the gill arches, swimming toward the mouth interior. The gill tissue is wet and red. Cool blue underwater lighting from outside the fish, ambient red glow from inside tissue. Macro detail on the bug's tiny legs in motion. Vertical framing, side angle into the gill cavity.",
+      "video_prompt": "Underwater medium shot inside a snapper fish's gill chamber. A small translucent juvenile isopod propels itself forward through the gill arches, swimming toward the mouth interior. The gill tissue is wet, soft red and pink. The camera tracks alongside the bug as it advances deeper. Cool blue underwater light from outside the fish blends with ambient warm red glow inside the tissue. Macro detail on tiny legs paddling.\n\nAudio: muffled underwater interior ambience, soft heartbeat-like pulse.\nSFX: faint wet movement, tiny leg-paddling clicks.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Khi còn nhỏ, Cymothoa bơi vào mang cá, bò lên đến lưỡi, kẹp chặt và bắt đầu hút máu."
+    },
+    {
+      "display_order": 2,
+      "chain_type": "CONTINUATION",
+      "parent_index": 1,
+      "character_names": ["Snapper Fish", "Cymothoa Isopod"],
+      "prompt": "Extreme macro close-up inside the fish's mouth from a low side angle. The isopod's clawed front legs grip the base of the fish tongue. The tongue is now shriveled, pale and shrunken, slowly detaching from the mouth floor. Camera positioned low inside the mouth cavity. Soft red biological light filtering through fish tissue with ambient blue water glow around the edges. Vertical framing, shallow depth of field on the bug's grip.",
+      "video_prompt": "Extreme macro close-up inside the fish's mouth from a low side angle. The isopod's clawed front legs grip the base of the fish tongue. The shriveled pale tongue slowly detaches from the mouth floor and drifts free. The camera slowly pushes in toward the bug's grip as the tongue separates. Soft red biological light filters through fish tissue, ambient cool blue water glow around mouth opening edges.\n\nAudio: faint internal liquid sounds, slow heartbeat.\nSFX: soft tissue separation, light wet detachment, faint suction.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Sau nhiều tháng, cuống lưỡi cá teo lại và rụng ra. Con bọ ngồi đúng vị trí cũ của lưỡi."
+    },
+    {
+      "display_order": 3,
+      "chain_type": "ROOT",
+      "character_names": ["Snapper Fish", "Cymothoa Isopod", "Restaurant Plate"],
+      "prompt": "Close-up of a cooked red snapper on a white ceramic plate at a seafood restaurant. A chef's gloved hand carefully opens the fish mouth with metal tongs. Inside, a pale isopod is still attached where the tongue should be, its small dark eyes facing the camera. Warm restaurant pendant lighting from above, blurred kitchen bokeh in background. Vertical close-up framing on the fish mouth.",
+      "video_prompt": "Close-up of a cooked red snapper on a white ceramic plate at a seafood restaurant. A chef's gloved hand carefully opens the fish mouth with metal tongs to reveal the interior. Inside, a pale isopod is still attached where the tongue should be, its small dark eyes facing the camera. The camera slowly pushes forward into the open mouth as the tongs hold it apart. Warm overhead pendant lighting, soft kitchen bokeh in background.\n\nAudio: muffled restaurant ambience, distant kitchen clinking.\nSFX: metal tongs tapping plate, soft tissue squelch, faint sizzling.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Nhiều người không hề biết. Họ ăn cả con cá, không nhận ra cái lưỡi mình đang nhai chính là con bọ."
+    },
+    {
+      "display_order": 4,
+      "chain_type": "ROOT",
+      "character_names": ["Snapper Fish", "Coral Reef Underwater"],
+      "prompt": "Wide underwater shot of a school of dozens of red snapper fish swimming slowly across a tropical reef. Each fish mouth is slightly open, and pale isopod silhouettes are faintly visible inside several of them. Sunlight pierces the water from above in dramatic visible rays. Cinematic vertical wide-angle, slow camera drift sideways past the school.",
+      "video_prompt": "Wide underwater shot of a school of dozens of red snapper fish swimming slowly across a tropical reef. Each fish mouth is slightly open, and pale isopod silhouettes are faintly visible inside several of them. Sunlight pierces the water from above in dramatic visible rays. The camera drifts slowly sideways past the school in a steady tracking motion. Cinematic underwater color palette, turquoise water, warm light shafts.\n\nAudio: open ocean ambient drone, distant whale song.\nSFX: school of fish swishing, deep water resonance.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Hàng triệu con cá đang bơi ngoài kia. Bao nhiêu con đã không còn lưỡi thật sự nữa?"
+    }
+  ]
+}

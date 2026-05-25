@@ -1,0 +1,81 @@
+{
+  "slug": "tardigrade_vn",
+  "project": {
+    "name": "KHKD - Tardigrade",
+    "description": "Vietnamese science-horror Reel — gau nuoc song duoc ngoai vu tru",
+    "story": "The tardigrade or water bear is the most extreme survivor on Earth. It survives temperatures from -272°C to +150°C, pressures six times the deepest ocean, radiation 1000x lethal dose to humans, and the direct vacuum of space. In 2007 tardigrades became the first known animals to survive direct exposure to outer space.",
+    "material": "realistic",
+    "language": "vi",
+    "characters": [
+      {
+        "name": "Tardigrade Water Bear",
+        "entity_type": "character",
+        "description": "Microscopic 8-legged tardigrade water bear, 0.5mm body, translucent segmented body with visible internal organs, four pairs of clawed stubby legs, small mouth tube extended at front, electron microscope detail aesthetic."
+      },
+      {
+        "name": "Outer Space",
+        "entity_type": "location",
+        "description": "Black void of outer space, dense starfield in background, distant blue Earth visible at edge of frame, no atmosphere, cosmic silence, dramatic high-contrast lighting from invisible sun source."
+      },
+      {
+        "name": "Moss Microhabitat",
+        "entity_type": "location",
+        "description": "Extreme macro view of moss-covered stone surface, vivid green moss strands like miniature forest, tiny water droplets nestled between strands, dewdrops catching morning light."
+      },
+      {
+        "name": "Radiation Test Chamber",
+        "entity_type": "visual_asset",
+        "description": "Scientific apparatus: sealed cylindrical glass chamber with bright purple ionizing radiation glow inside, surrounding lab equipment, dark laboratory background, dramatic clinical lighting."
+      }
+    ]
+  },
+  "video": {
+    "title": "Tardigrade - Gau Nuoc Song Ngoai Vu Tru",
+    "video_story": "Hook tardigrade in space, temperature extremes, radiation resistance, cryptobiosis dehydration, cosmic survival closer.",
+    "display_order": 0,
+    "orientation": "VERTICAL"
+  },
+  "scenes": [
+    {
+      "display_order": 0,
+      "chain_type": "ROOT",
+      "character_names": ["Tardigrade Water Bear", "Outer Space"],
+      "prompt": "Extreme macro electron-microscope-style close-up of a tardigrade water bear floating in the vacuum of outer space against a dense starfield. Distant blue Earth visible at frame edge. Tardigrade is fully visible, eight clawed legs splayed. High contrast cosmic lighting. Vertical cosmic composition.",
+      "video_prompt": "Extreme macro electron-microscope-style close-up of a tardigrade water bear floating in the vacuum of outer space against a dense starfield. Distant blue Earth visible at frame edge. The tardigrade rotates slowly in zero gravity, legs splayed. The camera slowly pushes in toward the water bear as it drifts. High contrast cosmic lighting, deep black space and warm Earth glow.\n\nAudio: deep cosmic silence drone, faint stellar shimmer.\nSFX: very subtle creature movement, vacuum hum.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Có một sinh vật nhỏ hơn dấu chấm câu này. Nó sống được giữa không gian vũ trụ, không cần oxy."
+    },
+    {
+      "display_order": 1,
+      "chain_type": "ROOT",
+      "character_names": ["Tardigrade Water Bear", "Moss Microhabitat"],
+      "prompt": "Split macro shot showing a tardigrade in two extreme environments: left half frozen inside crystal-clear ice block at -272 degrees, right half in red-hot glowing volcanic conditions at 150 degrees. The tardigrade is alive and intact in both halves. Vertical split-screen composition.",
+      "video_prompt": "Split macro shot showing a tardigrade in two extreme environments: left half frozen inside crystal-clear ice block at extreme cold with frost crystals forming, right half in red-hot glowing thermal conditions at extreme heat with shimmering air. The tardigrade is alive and intact in both halves, slowly moving its legs. The camera holds the split frame steady, slight push toward center. Dramatic dual lighting cold-blue and red-hot.\n\nAudio: low cosmic drone, thermal hiss on right, frozen silence on left.\nSFX: ice crystal forming crackle, thermal shimmer hum.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Nó chịu được âm 272 độ C, lạnh hơn bề mặt Mặt Trăng. Và 150 độ C cũng không sao."
+    },
+    {
+      "display_order": 2,
+      "chain_type": "CONTINUATION",
+      "parent_index": 1,
+      "character_names": ["Tardigrade Water Bear", "Radiation Test Chamber"],
+      "prompt": "Macro view of a tardigrade inside a sealed glass radiation chamber filled with intense purple ionizing radiation glow. The tardigrade walks calmly across the chamber floor unaffected. Surrounding scientific lab equipment in dark background. Vertical macro composition.",
+      "video_prompt": "Macro view of a tardigrade inside a sealed glass radiation chamber filled with intense purple ionizing radiation glow. The tardigrade walks calmly across the chamber floor unaffected, claws gripping the surface. The camera slowly orbits around the chamber, revealing the surrounding lab equipment in dark background. Dramatic clinical lighting with purple glow casting on the water bear.\n\nAudio: deep lab drone, faint Geiger counter ticks.\nSFX: ionizing radiation hum, soft tardigrade movement.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Liều bức xạ giới hạn cho người là 5 đơn vị. Tardigrade chịu được 5,000, gấp 1,000 lần."
+    },
+    {
+      "display_order": 3,
+      "chain_type": "ROOT",
+      "character_names": ["Tardigrade Water Bear", "Moss Microhabitat"],
+      "prompt": "Macro time-lapse close-up of a tardigrade shriveling into a tiny dehydrated tun ball, body curling and shrinking to half size, then rehydrating with a single droplet of water and walking again. Camera holds steady extreme macro. Vertical framing.",
+      "video_prompt": "Macro time-lapse close-up of a tardigrade shriveling into a tiny dehydrated tun ball, body curling and shrinking to half size over the first half of the shot. Then a single droplet of water touches it and the tardigrade rapidly rehydrates, extending its legs and walking again. The camera holds steady extreme macro, slight focus pull as it rehydrates. Soft natural backlighting on the moss surface.\n\nAudio: gentle moss garden ambience, soft droplet impact.\nSFX: dry shriveling sound, water touch, body rehydration unfurling.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Khi gặp nguy hiểm, nó tự rút nước, biến thành quả banh khô. Có thể nằm yên 30 năm rồi sống lại."
+    },
+    {
+      "display_order": 4,
+      "chain_type": "ROOT",
+      "character_names": ["Tardigrade Water Bear", "Outer Space"],
+      "prompt": "Wide cinematic cosmic shot of a tardigrade drifting silently through the vast expanse of outer space, infinite starfield, distant Earth in the corner glowing softly blue. Camera slowly pulls back to reveal the cosmic scale. Vertical cosmic wide composition.",
+      "video_prompt": "Wide cinematic cosmic shot of a tardigrade drifting silently through the vast expanse of outer space, infinite starfield surrounding it, distant Earth in the corner glowing softly blue. The camera slowly pulls back to reveal the cosmic scale, the tardigrade becoming a tiny speck against the universe. Dramatic cosmic lighting, deep black space, warm Earth glow.\n\nAudio: deep cosmic silence drone, distant stellar resonance.\nSFX: very faint creature drift, cosmic background hum.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Nếu Trái Đất bị diệt vong, một sinh vật nhỏ vẫn còn đó. Sự sống không bao giờ thực sự mất đi."
+    }
+  ]
+}

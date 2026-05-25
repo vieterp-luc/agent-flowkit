@@ -1,0 +1,81 @@
+{
+  "slug": "sacculina_vn",
+  "project": {
+    "name": "KHKD - Sacculina",
+    "description": "Vietnamese science-horror Reel — ky sinh bien cua duc thanh cua me",
+    "story": "Sacculina is a parasitic barnacle. The microscopic female injects herself into a crab's body, grows root-like tendrils through every organ, sterilizes the host, and emerges as an egg sac under the crab's belly. The crab — even if male — treats the sac as its own eggs and protects it for the rest of its life.",
+    "material": "realistic",
+    "language": "vi",
+    "characters": [
+      {
+        "name": "Mud Crab",
+        "entity_type": "character",
+        "description": "Adult mud crab, dark olive-green carapace, two large claws partially raised, side eye stalks visible, wet glossy shell, photorealistic marine wildlife portrait."
+      },
+      {
+        "name": "Sacculina Externa Sac",
+        "entity_type": "visual_asset",
+        "description": "Walnut-sized yellowish-cream egg sac under crab abdomen, smooth glossy soft surface, slightly translucent showing faint embryo speckles, organic alien appearance."
+      },
+      {
+        "name": "Sacculina Root System",
+        "entity_type": "visual_asset",
+        "description": "Anatomical scientific cross-section illustration of crab body interior showing yellow tendril-like roots spreading through every organ and limb, biology textbook style with clean labeling-free look."
+      },
+      {
+        "name": "Tidal Mudflat",
+        "entity_type": "location",
+        "description": "Muddy beach at low tide, dark wet mud with small puddles, scattered crab burrow holes, distant ocean horizon, overcast morning grey sky."
+      }
+    ]
+  },
+  "video": {
+    "title": "Sacculina - Ky Sinh Bien Cua Duc Thanh Cua Me",
+    "video_story": "Hook with crab carrying alien sac, larva injection science, root system inside body, mudflat sterilized colony, release of new larvae closer.",
+    "display_order": 0,
+    "orientation": "VERTICAL"
+  },
+  "scenes": [
+    {
+      "display_order": 0,
+      "chain_type": "ROOT",
+      "character_names": ["Mud Crab", "Sacculina Externa Sac", "Tidal Mudflat"],
+      "prompt": "Macro low-angle close-up of a mud crab standing on wet mudflat, abdomen flap lifted to reveal a yellowish-cream egg sac swaying gently underneath. The crab gently rocks its body protectively. Overcast soft morning light, shallow depth of field on the sac. Vertical macro framing.",
+      "video_prompt": "Macro low-angle close-up of a mud crab on wet mudflat, abdomen flap lifted to reveal a yellowish-cream egg sac swaying underneath. The crab gently rocks its body protectively, claws held high. The camera slowly orbits sideways around the crab, keeping the alien sac in focus. Overcast morning grey light, shallow depth of field on the sac. Wet mud reflects soft sky.\n\nAudio: distant waves, soft sea breeze.\nSFX: faint claw clicking on mud, gentle wet movement.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Con cua đực này đang chăm trứng dưới bụng. Nhưng nó không phải cua mẹ, và đó không phải trứng cua."
+    },
+    {
+      "display_order": 1,
+      "chain_type": "ROOT",
+      "character_names": ["Mud Crab", "Sacculina Externa Sac"],
+      "prompt": "Microscopic side view of a tiny translucent Sacculina larva swimming through ocean water toward a crab leg joint. The larva is barely visible, surrounded by soft particulate matter in cool blue water. Camera positioned at extreme macro, shallow depth tracking the larva. Vertical framing.",
+      "video_prompt": "Microscopic side view of a tiny translucent Sacculina larva swimming through ocean water toward a crab leg joint. The larva propels with cilia, body almost glass-clear. The camera tracks alongside the larva as it approaches the soft joint membrane of the crab leg, then pushes forward into the joint. Cool blue underwater microscopic lighting, soft particulate matter drifting.\n\nAudio: muffled underwater drone, faint biological pulse.\nSFX: micro-cilia paddling, soft membrane piercing.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Sacculina là loài ký sinh hà. Ấu trùng nhỏ xíu, chỉ chích vào khớp chân cua là chui vào trong."
+    },
+    {
+      "display_order": 2,
+      "chain_type": "CONTINUATION",
+      "parent_index": 1,
+      "character_names": ["Mud Crab", "Sacculina Root System"],
+      "prompt": "Anatomical scientific cross-section view of a crab body interior, showing yellow Sacculina root tendrils spreading throughout every organ, claw, leg, and even into the eye stalks. The roots glow faintly bioluminescent yellow against the dark internal cavity. Camera slowly rotates around the cross-section. Vertical biology textbook composition.",
+      "video_prompt": "Anatomical scientific cross-section view of a crab body interior, showing yellow Sacculina root tendrils spreading throughout every organ, claw, leg, and into the eye stalks. The roots faintly pulse with bioluminescent yellow against the dark internal cavity. The camera slowly orbits around the cross-section, revealing how completely the parasite has colonized the host. Clean scientific illustration lighting with soft glow on the tendrils.\n\nAudio: low scientific drone, faint biological pulse.\nSFX: subtle tendril growth crackling, organic pulse.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Bên trong cơ thể cua, rễ ký sinh ăn sâu vào mọi cơ quan, đến tận đầu càng và mắt."
+    },
+    {
+      "display_order": 3,
+      "chain_type": "ROOT",
+      "character_names": ["Mud Crab", "Sacculina Externa Sac", "Tidal Mudflat"],
+      "prompt": "Wide overhead shot of a mudflat at low tide with dozens of mud crabs visible, each carrying a yellowish egg sac under its abdomen, swaying in unison like a synchronized colony of host-mothers. Overcast grey morning light. Vertical wide-angle composition.",
+      "video_prompt": "Wide overhead shot of a mudflat at low tide with dozens of mud crabs scattered across the wet mud, each carrying a yellowish egg sac under its abdomen, swaying in unison like a synchronized colony of host-mothers. The camera slowly pulls upward, revealing more and more parasitized crabs. Overcast grey morning light, distant horizon visible.\n\nAudio: distant waves, soft wind across mudflat.\nSFX: many faint claw clicks on mud, synchronized rocking.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Cua đực bị ép thay đổi hình dạng, bụng rộng ra như cua cái, để có chỗ ôm trứng của ký sinh."
+    },
+    {
+      "display_order": 4,
+      "chain_type": "ROOT",
+      "character_names": ["Mud Crab", "Sacculina Externa Sac"],
+      "prompt": "Underwater macro shot of a mud crab releasing a cloud of microscopic Sacculina larvae from its egg sac, larvae dispersing like sparkling fireworks drifting outward to find new hosts. Cool blue underwater light with shafts from above. Vertical macro framing.",
+      "video_prompt": "Underwater macro shot of a mud crab releasing a cloud of microscopic Sacculina larvae from its egg sac, larvae dispersing like sparkling fireworks drifting outward into the open ocean to find new hosts. The camera pulls back slowly as the larva cloud expands. Cool blue underwater light with bright shafts from above illuminating the drifting cloud.\n\nAudio: open ocean ambient drone, soft current.\nSFX: faint larva release pulse, dispersing particles.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Một con cua bị nhiễm sẽ phát tán hàng triệu ấu trùng. Sang con khác. Mãi mãi không thể sinh con thật."
+    }
+  ]
+}

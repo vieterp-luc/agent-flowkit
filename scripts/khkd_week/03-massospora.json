@@ -1,0 +1,81 @@
+{
+  "slug": "massospora_vn",
+  "project": {
+    "name": "KHKD - Massospora",
+    "description": "Vietnamese science-horror Reel — nam thay nua than ve sau",
+    "story": "Massospora cicadae is a fungal parasite of periodical cicadas. When a cicada nymph emerges from underground, the fungus is already inside. As the cicada matures, the fungus replaces the rear half of the abdomen with a chalky yellow plug of spores. The cicada flies normally, oblivious, dispersing spores like a flying salt shaker across the entire forest.",
+    "material": "realistic",
+    "language": "vi",
+    "characters": [
+      {
+        "name": "Periodical Cicada",
+        "entity_type": "character",
+        "description": "Adult periodical cicada Magicicada, large body 5cm long, transparent veined wings folded over back, bright red eyes, dark glossy black body, six jointed legs, full visible side profile."
+      },
+      {
+        "name": "Massospora Fungal Plug",
+        "entity_type": "visual_asset",
+        "description": "Chalky yellow-ochre dry fungal mass replacing the cicada's rear abdomen, granular crumbly texture, dusty surface releasing fine spore particles, organic alien growth replacing insect anatomy."
+      },
+      {
+        "name": "Spore Cloud",
+        "entity_type": "visual_asset",
+        "description": "Fine yellow powder dispersing through warm sunbeams, golden glittering particles drifting in air, visible against dark forest background."
+      },
+      {
+        "name": "Deciduous Forest Canopy",
+        "entity_type": "location",
+        "description": "Sunlit deciduous summer forest at dawn, dappled golden light through green leaves, tall oak and maple trees, mossy bark, atmospheric haze in distance."
+      }
+    ]
+  },
+  "video": {
+    "title": "Massospora - Nam Thay Nua Than Ve Sau",
+    "video_story": "Hook reveals rear-half fungal mass, science of nymph infection, fungal plug detail, cicada flying dispersing spores, wide forest closer with golden spore clouds.",
+    "display_order": 0,
+    "orientation": "VERTICAL"
+  },
+  "scenes": [
+    {
+      "display_order": 0,
+      "chain_type": "ROOT",
+      "character_names": ["Periodical Cicada", "Massospora Fungal Plug"],
+      "prompt": "Macro close-up of a periodical cicada perched on tree bark, seen from the side. The front half of its body looks normal, but the rear abdomen has been completely replaced by a chalky yellow fungal mass. Soft dappled sunlight catches the wings. Vertical macro framing, shallow depth of field on the boundary between insect and fungus.",
+      "video_prompt": "Macro close-up of a periodical cicada perched on tree bark, seen from the side. The front half of its body looks normal, but the rear abdomen has been completely replaced by a chalky yellow fungal mass. The camera slowly orbits sideways, revealing the full extent of the fungal replacement. Soft dappled sunlight catches the wings and the fungal surface releases tiny spore particles.\n\nAudio: warm forest ambience, distant cicada chorus.\nSFX: faint wing rustle, soft dry spore release.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Con ve sầu này nhìn bình thường. Nhưng nửa thân sau của nó đã bị một loài nấm thay thế hoàn toàn."
+    },
+    {
+      "display_order": 1,
+      "chain_type": "ROOT",
+      "character_names": ["Periodical Cicada"],
+      "prompt": "Underground microscopic time-lapse view of a cicada nymph inside dark soil, glowing white fungal threads of Massospora spreading slowly through the nymph's body interior. Camera pushes in slowly on the nymph. Warm orange root-system glow contrasted with dark soil. Vertical scientific microscope composition.",
+      "video_prompt": "Underground microscopic time-lapse view of a cicada nymph inside dark soil, glowing white fungal threads of Massospora spreading slowly through the nymph's body interior over years. The camera slowly pushes forward into the soil chamber, revealing the spreading fungus. Warm orange root-system glow against dark earth, hint of root tendrils above.\n\nAudio: deep earth resonance, slow biological pulse.\nSFX: soft fungal growth crackle, subterranean drip.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Nấm Massospora xâm nhập từ ấu trùng. Sống bên trong cơ thể ve sầu hàng năm dưới lòng đất."
+    },
+    {
+      "display_order": 2,
+      "chain_type": "CONTINUATION",
+      "parent_index": 1,
+      "character_names": ["Periodical Cicada", "Massospora Fungal Plug"],
+      "prompt": "Macro extreme close-up of an adult cicada viewed from below, the rear abdomen broken open and replaced by a thick yellow fungal plug. Dust of yellow spores drifts down from the plug. Camera angle from beneath looking up at the cicada belly. Soft golden underside light. Vertical macro framing.",
+      "video_prompt": "Macro extreme close-up of an adult cicada viewed from below, the rear abdomen broken open and replaced by a thick yellow fungal plug. Dust of yellow spores drifts down from the plug as the cicada moves its legs. The camera slowly pulls back to reveal the full scale of the fungal replacement. Soft golden underside light, dust motes visible.\n\nAudio: warm forest understory ambience.\nSFX: dry spore powder falling, faint leg movement on bark.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Khi ve trưởng thành, nấm phá vỡ vỏ bụng, thay vào đó một khối bào tử khô vàng."
+    },
+    {
+      "display_order": 3,
+      "chain_type": "ROOT",
+      "character_names": ["Periodical Cicada", "Spore Cloud", "Deciduous Forest Canopy"],
+      "prompt": "Side-tracking shot of a cicada flying through sunlit forest, trailing a long visible cloud of yellow spore powder behind it through golden sunbeams. Slow motion capture. Vertical wide-angle framing with cicada centered.",
+      "video_prompt": "Side-tracking shot of a cicada flying through sunlit forest, trailing a long visible cloud of yellow spore powder behind it through golden sunbeams. The camera moves alongside the cicada in slow motion, parallel to its flight path. Warm dappled golden hour light, atmospheric haze making the spore trail glow.\n\nAudio: forest summer ambience, soft wind in leaves.\nSFX: cicada wing buzzing, fine powder dispersal hiss.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Nhưng con ve không biết. Nó vẫn bay, vẫn kêu, rải bào tử như rắc muối khắp khu rừng."
+    },
+    {
+      "display_order": 4,
+      "chain_type": "ROOT",
+      "character_names": ["Periodical Cicada", "Spore Cloud", "Deciduous Forest Canopy"],
+      "prompt": "Wide cinematic shot of dozens of cicadas in a forest canopy at golden hour, golden spore clouds drifting through air everywhere, dappled sunbeams cutting through. Camera slowly drifts upward through the canopy. Vertical wide-angle composition with multiple cicadas in frame.",
+      "video_prompt": "Wide cinematic shot of dozens of cicadas in a forest canopy at golden hour, golden spore clouds drifting through air everywhere, dappled sunbeams cutting through the trees. The camera slowly drifts upward through the canopy, revealing more and more cicadas and spore trails. Warm golden hour light, atmospheric haze.\n\nAudio: deafening cicada chorus, warm summer wind.\nSFX: many wings buzzing, spore clouds dispersing.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Mỗi 17 năm, hàng tỷ con ve sầu trồi lên. Bao nhiêu trong số đó chỉ là vỏ rỗng?"
+    }
+  ]
+}
