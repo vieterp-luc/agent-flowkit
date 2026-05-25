@@ -175,9 +175,14 @@ Sau đó diagnose → fix prompt/config → reset 1 scene → submit lại như 
 
 **Voice template chuẩn:** `Anh_Khoi_TTS` · Speed `0.95`
 
+> ⚠️ **CRITICAL — full ref_text bắt buộc.** `ref_text` PHẢI bằng chính xác transcript trong `output/_shared/tts_templates/templates.json` (3 câu, không cắt). Truncated ref_text → voice cloning sai prosody → TTS chậm gấp 2x (10-17s thay vì 5-7s) → narrator bị cắt giữa câu trong scene 7s. Đọc transcript bằng:
+> ```bash
+> jq -r '.Anh_Khoi_TTS.text' output/_shared/tts_templates/templates.json
+> ```
+
 ```
 REF_AUDIO: output/_shared/tts_templates/Anh_Khoi_TTS.wav
-REF_TEXT: "Năm hai nghìn không trăm hai mươi tư, thế giới thay đổi mãi mãi..."
+REF_TEXT:  "Năm hai nghìn không trăm hai mươi tư, thế giới thay đổi mãi mãi. Các quốc gia hưng thịnh và sụp đổ, anh hùng xuất hiện từ bóng tối, và những người bình thường đối mặt với thử thách phi thường."
 ```
 
 **Output path chuẩn:**
@@ -185,7 +190,20 @@ REF_TEXT: "Năm hai nghìn không trăm hai mươi tư, thế giới thay đổi
 output/{slug}/tts/scene_{IDX3}_{scene_id}.wav
 ```
 
-**TTS duration thực tế (speed 0.95, Vietnamese 22 từ):** ~5.7-6.9s — nằm trong usable window 7s. Giữ narrator text ≤22 từ thật để tránh bị cap.
+**Kiểm tra TTS duration ngay sau gen** (BẮT BUỘC):
+```bash
+for f in output/{slug}/tts/scene_*.wav; do
+  ffprobe -v quiet -show_entries format=duration -of csv=p=0 "$f"
+done
+```
+
+**TTS duration đúng (speed 0.95, full ref_text, VN 18-22 từ):** **5-7s** — nằm trong usable window 7s.
+
+| Symptom | Likely cause | Fix |
+|---|---|---|
+| TTS > 8s | `ref_text` bị truncate (chỉ 1 câu) | Reload full 3-câu transcript từ `templates.json`, regen TTS |
+| TTS > 7s nhưng < 8s | Narrator > 22 từ thật | Rewrite narrator ngắn lại |
+| TTS < 4s | Narrator < 18 từ → dead air | Bổ sung câu kết |
 
 ---
 

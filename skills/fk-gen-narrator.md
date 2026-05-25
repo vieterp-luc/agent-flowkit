@@ -183,17 +183,30 @@ for scene in scenes:
 
 ### Where does `ref_text` come from?
 
-The `ref_text` is the **exact transcript** of what's spoken in `ref_audio`.
+The `ref_text` is the **exact FULL transcript** of what's spoken in `ref_audio`.
 
-- If template was created via `/fk-gen-tts-template`: `ref_text` = the standard base transcript used during creation (stored in `templates.json`)
+- If template was created via `/fk-gen-tts-template`: load full text from `output/_shared/tts_templates/templates.json` — never type a partial sentence
+  ```bash
+  jq -r '."<template_name>".text' output/_shared/tts_templates/templates.json
+  ```
 - If template is a user-provided WAV: transcribe it first using whisper, then use that transcript as `ref_text` for all scenes
+
+> ⚠️ **CRITICAL — full ref_text or TTS breaks.** Pass the entire transcript (all sentences) exactly as in `templates.json`. A truncated `ref_text` (e.g. only the first sentence ending in `…`) silently corrupts voice cloning — the model still produces speech, but prosody is wrong and output runs **~2x slower** (10-17s instead of 5-7s for a 20-word VN line). Symptom: narrator gets cut off mid-sentence in the 7-second usable window. Always verify TTS duration with `ffprobe` after generation:
+> ```bash
+> for f in {OUTDIR}/tts/scene_*.wav; do
+>   ffprobe -v quiet -show_entries format=duration -of csv=p=0 "$f"
+> done
+> # Expected: 5-7s per file for 18-22 VN words at speed 0.95-1.1
+> # If > 8s → ref_text is wrong/truncated → reload from templates.json and regen
+> ```
 
 ### Key rules:
 - `ref_audio` = the voice template WAV file (voice timbre source)
-- `ref_text` = exact transcript of `ref_audio` (phoneme alignment)
+- `ref_text` = **full multi-sentence transcript** of `ref_audio` (phoneme alignment)
 - Both MUST be provided together — never just `ref_audio` alone
 - Same `ref_audio` + `ref_text` for ALL scenes = consistent voice
-- `speed: 1.1` recommended for documentary pacing
+- `speed: 1.1` recommended for documentary pacing (KHKD channel uses 0.95)
+- After generation, **always probe at least one TTS file's duration** — if much longer than expected, ref_text is the first suspect
 
 **mix: false** — we don't mix here. Mixing happens in `/fk-concat-fit-narrator`.
 
