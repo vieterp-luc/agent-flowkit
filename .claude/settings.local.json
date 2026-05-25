@@ -74,7 +74,8 @@
       "Bash(git pull *)",
       "Bash(git push *)",
       "Bash(sed -n '715,740p' scripts/fk-build-render-stages.py)",
-      "Bash(sed -n '570,600p' scripts/fk-build-render-stages.py)"
+      "Bash(sed -n '570,600p' scripts/fk-build-render-stages.py)",
+      "WebFetch(domain:developers.tiktok.com)"
     ]
   },
   "statusLine": {
