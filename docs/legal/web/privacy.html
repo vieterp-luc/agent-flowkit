@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Privacy Policy — Sách Thì Thầm Uploader</title>
+<style>
+  :root { --fg:#1a1a1a; --muted:#6b6b6b; --accent:#1d4ed8; --bg:#fafafa; }
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: var(--fg); background: var(--bg); margin: 0; padding: 0; line-height: 1.65; }
+  main { max-width: 720px; margin: 0 auto; padding: 3rem 1.5rem; }
+  h1 { font-size: 2rem; margin: 0 0 .25rem; }
+  h2 { font-size: 1.25rem; margin: 2rem 0 .75rem; border-bottom: 1px solid #e5e7eb; padding-bottom: .25rem; }
+  .meta { color: var(--muted); font-size: .9rem; margin: 0 0 2rem; }
+  p { margin: .75rem 0; }
+  ul { padding-left: 1.25rem; }
+  li { margin: .5rem 0; }
+  a { color: var(--accent); }
+  nav a { display: inline-block; color: var(--muted); margin-right: 1rem; text-decoration: none; font-size: .9rem; }
+  nav a:hover { color: var(--accent); }
+  footer { color: var(--muted); font-size: .875rem; margin-top: 3rem; border-top: 1px solid #e5e7eb; padding-top: 1rem; }
+</style>
+</head>
+<body>
+<main>
+  <nav><a href="/">&larr; Home</a><a href="/terms.html">Terms of Service</a></nav>
+  <h1>Privacy Policy</h1>
+  <p class="meta">Sách Thì Thầm Uploader &middot; Last updated: 2026-05-25 &middot; Contact: <a href="mailto:sang@konek.vn">sang@konek.vn</a></p>
+
+  <h2>Overview</h2>
+  <p>Sách Thì Thầm Uploader ("the App") is a personal command-line automation tool used by a single creator to upload pre-produced Vietnamese audiobook video episodes to the TikTok account of the "Sách Thì Thầm" channel via TikTok's Content Posting API. This Privacy Policy explains what limited data the App handles and how.</p>
+
+  <h2>Data the App handles</h2>
+  <p>The App handles only the minimum data required to authenticate with TikTok and post videos:</p>
+  <ul>
+    <li><strong>TikTok OAuth tokens</strong> (access token and refresh token) — issued by TikTok after the creator consents to authorize the App. These tokens are stored exclusively in a local JSON file on the creator's own personal computer. They are never transmitted to any server other than TikTok's official API endpoints.</li>
+    <li><strong>The creator's <code>open_id</code></strong> — a non-personally-identifying TikTok user identifier returned by TikTok at authorization time. Used only to verify that the App is acting on the intended creator account. Stored locally in the same JSON file.</li>
+    <li><strong>Video files</strong> prepared by the creator for upload — read from the creator's local disk and transmitted directly to TikTok via the Content Posting API. The App does not retain, copy, share, or analyze these files beyond what is required to perform the upload.</li>
+  </ul>
+
+  <h2>Data the App does NOT collect</h2>
+  <ul>
+    <li>The App does not collect any data about TikTok end-users, followers, viewers, or third parties.</li>
+    <li>The App does not collect, store, or transmit analytics, telemetry, behavioural data, or device fingerprints.</li>
+    <li>The App does not request any social-graph scopes (<code>user.info.profile</code>, <code>user.info.stats</code>, follower lists, etc.).</li>
+    <li>The App does not use third-party advertising, tracking pixels, or marketing services.</li>
+  </ul>
+
+  <h2>Data sharing</h2>
+  <p>The App does not share any data with any third party. The only network destinations the App contacts are TikTok's own official API endpoints (<code>open.tiktokapis.com</code>, <code>www.tiktok.com</code>) for authentication and content posting.</p>
+
+  <h2>Data retention</h2>
+  <p>OAuth tokens are retained on the creator's local computer until the creator revokes them (by deleting the local token file or revoking the App's access in TikTok's app-management settings). No copies are retained elsewhere.</p>
+
+  <h2>Security</h2>
+  <p>OAuth tokens are stored in a local JSON file inside the App's working directory. The file is marked as ignored by version control. Access is protected by the security of the creator's local operating system account.</p>
+
+  <h2>Children's privacy</h2>
+  <p>The App is intended for use by a single adult creator. The App does not knowingly collect data from anyone under 18.</p>
+
+  <h2>Changes to this policy</h2>
+  <p>Any changes to this policy will be reflected on this page with an updated "Last updated" date.</p>
+
+  <h2>Contact</h2>
+  <p>For any questions about this policy, contact <a href="mailto:sang@konek.vn">sang@konek.vn</a>.</p>
+
+  <footer>&copy; 2026 Sách Thì Thầm</footer>
+</main>
+</body>
+</html>
