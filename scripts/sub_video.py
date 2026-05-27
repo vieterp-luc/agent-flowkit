@@ -21,11 +21,19 @@ Args:
 """
 import argparse
 import json
+import os
 import shutil
 import subprocess
 import sys
 import tempfile
+import time
 from pathlib import Path
+
+import requests
+from dotenv import load_dotenv
+
+# Load .env to get GEMINI_API_KEY
+load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
 
 def extract_audio(video: Path, out_wav: Path):
@@ -57,11 +65,17 @@ def transcribe(audio: Path, model_name: str, src_lang: str):
 
 
 def _translate_chunk(texts: list, tgt_lang: str, extra_rules: str = "") -> list:
-    """Translate one chunk of lines via Claude. Returns list of same length.
+    """Translate one chunk of lines via Gemini REST API with key rotation and infinite retry."""
+    raw_keys = os.environ.get("GEMINI_API_KEYS", "").split(",")
+    keys = [k.strip() for k in raw_keys if k.strip()]
+    if not keys:
+        single = os.environ.get("GEMINI_API_KEY")
+        if single: keys = [single]
+    
+    if not keys:
+        print("[translate] ERROR: No Gemini keys found in .env", file=sys.stderr)
+        return [""] * len(texts)
 
-    extra_rules: optional extra bullet lines appended to the prompt (e.g. a
-    domain glossary). Each line should already start with '- '.
-    """
     numbered = "\n".join(f"{i+1}. {t}" for i, t in enumerate(texts))
     extra = ("\n" + extra_rules.strip()) if extra_rules.strip() else ""
     prompt = f"""Translate the following Chinese movie/animation dialogue lines into natural {tgt_lang}.
@@ -79,72 +93,80 @@ Rules:
 Input lines:
 {numbered}"""
 
-    stream_msg = json.dumps({
-        "type": "user",
-        "message": {"role": "user", "content": [{"type": "text", "text": prompt}]}
-    })
-    claude_bin = shutil.which("claude") or "claude"
-    r = subprocess.run(
-        [claude_bin, "-p", "--input-format", "stream-json",
-         "--output-format", "stream-json", "--verbose",
-         "--model", "claude-haiku-4-5-20251001"],
-        input=stream_msg, capture_output=True, text=True, timeout=180
-    )
-    raw = ""
-    for line in r.stdout.splitlines():
-        line = line.strip()
-        if not line:
+    payload = {
+        "contents": [{"parts": [{"text": prompt}]}],
+        "generationConfig": {"response_mime_type": "application/json"}
+    }
+
+    bad_keys = set()
+    while True:
+        available_keys = [k for k in keys if k not in bad_keys]
+        if not available_keys:
+            print("[translate] All keys marked bad or busy. Resetting bad keys and waiting 120s...", file=sys.stderr)
+            bad_keys.clear()
+            time.sleep(120)
             continue
-        try:
-            obj = json.loads(line)
-            if obj.get("type") == "assistant":
-                for block in obj.get("message", {}).get("content", []):
-                    if block.get("type") == "text":
-                        raw += block["text"]
-        except (json.JSONDecodeError, KeyError):
-            pass
 
-    # Strip markdown code fences if present
-    cleaned = raw.strip()
-    if "```" in cleaned:
-        import re
-        m = re.search(r"```(?:json)?\s*(.*?)\s*```", cleaned, re.DOTALL)
-        if m:
-            cleaned = m.group(1)
-
-    s = cleaned.find("[")
-    e = cleaned.rfind("]") + 1
-    if s >= 0 and e > s:
-        try:
-            arr = json.loads(cleaned[s:e])
-            if len(arr) < len(texts):
-                arr += [""] * (len(texts) - len(arr))
-            return arr[:len(texts)]
-        except json.JSONDecodeError as ex:
-            print(f"[translate] parse error: {ex}", file=sys.stderr)
-            print(f"[translate] raw head: {raw[:300]!r}", file=sys.stderr)
-    else:
-        print(f"[translate] no array brackets found", file=sys.stderr)
-        print(f"[translate] raw head: {raw[:300]!r}", file=sys.stderr)
-    return [""] * len(texts)
+        for key_idx, key in enumerate(available_keys):
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={key}"
+            try:
+                r = requests.post(url, json=payload, timeout=120)
+                if r.status_code == 200:
+                    data = r.json()
+                    raw = data["candidates"][0]["content"]["parts"][0]["text"]
+                    arr = json.loads(raw)
+                    if isinstance(arr, list):
+                        if len(arr) < len(texts):
+                            arr += [""] * (len(texts) - len(arr))
+                        return [str(x) for x in arr[:len(texts)]]
+                elif r.status_code == 403:
+                    print(f"[translate] Key {key[:8]}... failed with 403 (Forbidden). Skipping.", file=sys.stderr)
+                    bad_keys.add(key)
+                    continue
+                elif r.status_code in (429, 503):
+                    # print(f"[translate] Key {key[:8]}... busy ({r.status_code}).", file=sys.stderr)
+                    continue
+                else:
+                    print(f"[translate] Key {key[:8]}... error {r.status_code}: {r.text[:100]}", file=sys.stderr)
+                    continue
+            except Exception as e:
+                print(f"[translate] Key {key[:8]}... exception: {e}", file=sys.stderr)
+                continue
+        
+        # If we reached here, all available keys were busy
+        time.sleep(30)
 
 
-def translate_batch(segments: list, tgt_lang: str, chunk_size: int = 30,
-                    extra_rules: str = "") -> list:
-    """Translate segments in chunks to fit Claude output limits.
-
-    extra_rules: optional domain glossary passed through to each chunk.
-    """
+def translate_batch(segments: list, tgt_lang: str, chunk_size: int = 15,
+                    extra_rules: str = "", existing: list = None) -> list:
+    """Translate segments in chunks. Can resume using 'existing' list."""
     if not segments:
         return []
     texts = [s["text"] for s in segments]
-    all_out = []
+    
+    # Initialize all_out with existing or empty strings
+    if existing and len(existing) == len(texts):
+        all_out = list(existing)
+    else:
+        all_out = [""] * len(texts)
+
     for i in range(0, len(texts), chunk_size):
-        chunk = texts[i:i + chunk_size]
-        print(f"[translate] chunk {i//chunk_size + 1}: lines {i+1}-{i+len(chunk)}",
-              file=sys.stderr)
-        out = _translate_chunk(chunk, tgt_lang, extra_rules)
-        all_out.extend(out)
+        chunk_texts = texts[i:i + chunk_size]
+        chunk_existing = all_out[i:i + chunk_size]
+        
+        # Only translate if there are empty lines in this chunk
+        if any(not t.strip() for t in chunk_existing):
+            print(f"[translate] chunk {i//chunk_size + 1}: lines {i+1}-{i+len(chunk_texts)}",
+                  file=sys.stderr)
+            out = _translate_chunk(chunk_texts, tgt_lang, extra_rules)
+            # Update all_out with new translations
+            for j, val in enumerate(out):
+                if val.strip():
+                    all_out[i + j] = val
+        else:
+            # Skip chunk
+            pass
+
     miss = sum(1 for x in all_out if not x)
     print(f"[translate] done: {len(all_out)} lines, {miss} empty",
           file=sys.stderr)

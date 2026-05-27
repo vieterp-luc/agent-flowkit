@@ -41,13 +41,38 @@ def main():
 
     from omnivoice import OmniVoice
 
+    device = "cpu"
+    dtype = torch.float32
+    if torch.backends.mps.is_available():
+        device = "mps"
+        # dtype = torch.float16 # OmniVoice might prefer float32 for stability
+    
+    print(f"[tts] using device={device}", file=sys.stderr)
+
     model = OmniVoice.from_pretrained(
-        args["model"], device_map="cpu", dtype=torch.float32
+        args["model"], device_map=device, dtype=dtype
     )
     sample_rate = args["sample_rate"]
 
     results = []
-    for item in args["items"]:
+    for i, item in enumerate(args["items"]):
+        out = Path(item["output"])
+        if out.exists() and out.stat().st_size > 0:
+            # Skip generation, just read duration
+            try:
+                wav, sr = sf.read(str(out))
+                results.append({
+                    "index": item["index"],
+                    "ok": True,
+                    "path": str(out),
+                    "duration": round(len(wav) / sr, 3),
+                })
+                # print(f"[tts] {i+1}/{len(args['items'])}: (skipped) {item['text'][:30]}...", file=sys.stderr)
+                continue
+            except Exception:
+                pass
+
+        print(f"[tts] {i+1}/{len(args['items'])}: {item['text'][:30]}...", file=sys.stderr)
         try:
             kwargs = {"text": item["text"]}
             if item.get("ref_audio") and item.get("ref_text"):

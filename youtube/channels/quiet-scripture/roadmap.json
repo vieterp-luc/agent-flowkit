@@ -1,6 +1,6 @@
 {
   "channel": "quiet-scripture",
-  "active_ep": 1,
+  "active_ep": 2,
   "episodes": [
     {
       "ep": 1,
@@ -14,6 +14,19 @@
       "flow_project_id": "",
       "video_id": "",
       "notes": "Script produced via script-bible-explainer in session 2026-05-22. 3,702 words, 25 min."
+    },
+    {
+      "ep": 2,
+      "slug": "ep02_words_from_the_cross",
+      "title": "Every Word Jesus Spoke From the Cross",
+      "vi": "Mọi Lời Chúa Giê-su Nói Trên Thập Giá",
+      "topic": "Every Word Jesus Spoke From the Cross",
+      "tone": "reverent-dramatic",
+      "status": "scripted",
+      "local_dir": "output/quiet_scripture/ep02_words_from_the_cross",
+      "flow_project_id": "",
+      "video_id": "",
+      "notes": "Script produced via script-bible-explainer. 3,005 words, ~20 min."
     }
   ],
   "topic_backlog": [

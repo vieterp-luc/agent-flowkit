@@ -40,9 +40,10 @@ from sub_video import (  # noqa: E402  reuse the proven transcribe/translate/sub
 )
 
 TEMPLATES_JSON = BASE_DIR / "output" / "_shared" / "tts_templates" / "templates.json"
+TTS_TEMPLATES_DIR = TEMPLATES_JSON.parent
 TTS_MODEL = os.environ.get("TTS_MODEL", "k2-fsa/OmniVoice")
 TTS_SR = int(os.environ.get("TTS_SAMPLE_RATE", "24000"))
-PY310 = os.environ.get("TTS_PYTHON_BIN", "python3.10")
+PY310 = os.environ.get("TTS_PYTHON_BIN", sys.executable)
 
 # Best-guess gender pools — voicemap.json is editable so a wrong guess is cheap to fix.
 MALE_POOL = ["Bao_Trung_TTS", "Anh_Khoi_TTS", "Minh_Quan_TTS", "Manh_Dung_TTS",
@@ -152,7 +153,12 @@ def resolve_voice(voice: str, templates: dict, fallback: str):
     tmpl = templates.get(voice) or templates.get(fallback)
     if not tmpl:
         sys.exit(f"Voice template '{voice}' (and fallback '{fallback}') not found")
-    return tmpl["audio_path"], tmpl.get("text", "")
+    
+    path = tmpl["audio_path"]
+    if not os.path.isabs(path):
+        path = str(TTS_TEMPLATES_DIR / path)
+        
+    return path, tmpl.get("text", "")
 
 
 def load_voicemap(path: Path) -> dict:
@@ -208,24 +214,54 @@ def write_voicemap(path: Path, vmap: dict, speakers: list, segments: list):
 # --------------------------------------------------------------------------- #
 # TTS + dub-track assembly
 # --------------------------------------------------------------------------- #
-def run_tts_batch(items: list, work: Path) -> dict:
-    """Generate every dialogue clip via the python3.10 OmniVoice batch script."""
+def run_tts_batch_api(items: list, work: Path) -> dict:
+    """Generate every dialogue clip via the FastAPI server's persistent workers."""
     if not items:
         return {}
-    items_json = work / "tts_items.json"
-    items_json.write_text(json.dumps({
-        "model": TTS_MODEL, "sample_rate": TTS_SR, "items": items,
-    }, ensure_ascii=False), encoding="utf-8")
-    timeout = 600 + len(items) * 45
-    r = subprocess.run([PY310, str(SCRIPT_DIR / "dub_tts_batch.py"), str(items_json)],
-                       capture_output=True, text=True, timeout=timeout)
-    lines = (r.stdout or "").strip().splitlines()
-    if not lines:
-        sys.exit(f"[tts] no output:\n{(r.stderr or '')[-800:]}")
-    try:
-        results = json.loads(lines[-1])
-    except json.JSONDecodeError:
-        sys.exit(f"[tts] bad output:\n{(r.stderr or r.stdout)[-800:]}")
+    
+    import requests
+    from concurrent.futures import ThreadPoolExecutor
+    
+    results = []
+    
+    def process_item(item):
+        idx = item["index"]
+        out_path = Path(item["output"])
+        
+        # Skip if already exists
+        if out_path.exists() and out_path.stat().st_size > 1024:
+            try:
+                import soundfile as sf
+                info = sf.info(str(out_path))
+                return {"index": idx, "ok": True, "path": str(out_path), "duration": info.duration}
+            except: pass
+
+        payload = {
+            "text": item["text"],
+            "ref_audio": item.get("ref_audio"),
+            "ref_text": item.get("ref_text"),
+            "speed": item.get("speed", 1.0),
+            "output_path": str(out_path)
+        }
+        
+        try:
+            r = requests.post("http://127.0.0.1:8100/api/tts/generate", json=payload, timeout=120)
+            if r.status_code == 200:
+                data = r.json()
+                print(f"[tts] {idx+1}/{len(items)}: OK ({data.get('duration', 0):.1f}s)", file=sys.stderr)
+                return {"index": idx, "ok": True, "path": data["audio_path"], "duration": data["duration"]}
+            else:
+                print(f"[tts] {idx+1}/{len(items)}: FAILED (code {r.status_code})", file=sys.stderr)
+                return {"index": idx, "ok": False, "error": r.text}
+        except Exception as e:
+            print(f"[tts] {idx+1}/{len(items)}: ERROR ({e})", file=sys.stderr)
+            return {"index": idx, "ok": False, "error": str(e)}
+
+    # Use 4 threads to keep the server's 2 workers busy (plus some overhead buffer)
+    print(f"[tts] generating {len(items)} dialogue clips via API...", file=sys.stderr)
+    with ThreadPoolExecutor(max_workers=4) as executor:
+        results = list(executor.map(process_item, items))
+        
     return {res["index"]: res for res in results}
 
 
@@ -332,8 +368,11 @@ def main():
         segments = cache["segments"]
         translations = cache["translations"]
         speakers = cache.get("speakers", [])
-        print(f"[cache] reused {len(segments)} segments ({cache_path.name})")
+        print(f"[cache] loaded {len(segments)} segments ({cache_path.name})")
     else:
+        segments, translations, speakers = (None, None, [])
+
+    if segments is None:
         with tempfile.TemporaryDirectory() as td:
             wav = Path(td) / "audio.wav"
             extract_audio(video, wav)
@@ -344,12 +383,14 @@ def main():
             if args.voices == "multi":
                 turns, speakers = run_diarize(wav, hf_token)
         assign_speakers(segments, turns)
-        translations = translate_batch(segments, "Vietnamese",
-                                       extra_rules=CULTIVATION_GLOSSARY)
-        cache_path.write_text(json.dumps({
-            "segments": segments, "translations": translations, "speakers": speakers,
-        }, ensure_ascii=False), encoding="utf-8")
-        print(f"[cache] wrote {cache_path.name}")
+    
+    translations = translate_batch(segments, "Vietnamese",
+                                   extra_rules=CULTIVATION_GLOSSARY,
+                                   existing=translations)
+    cache_path.write_text(json.dumps({
+        "segments": segments, "translations": translations, "speakers": speakers,
+    }, ensure_ascii=False), encoding="utf-8")
+    print(f"[cache] updated {cache_path.name}")
 
     if not speakers:  # single voice or diarization unavailable
         speakers = [{"speaker": "SPEAKER_00", "total": round(total_dur, 1),
@@ -381,7 +422,7 @@ def main():
             "output": str(tts_dir / f"clip_{i:04d}.wav"),
         })
     print(f"[tts] generating {len(items)} dialogue clips...")
-    results = run_tts_batch(items, work)
+    results = run_tts_batch_api(items, work)
 
     # --- fit + assemble dub track ------------------------------------------
     fit_dir = work / "tts_fit"

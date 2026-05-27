@@ -32,6 +32,8 @@ curl -s http://127.0.0.1:8100/health
 | `/fk-concat-fit-narrator` | Concat trimmed to narrator duration |
 | `/fk-reup-url` | Download URL (YT/TikTok/Bilibili) → reup với narrator + TTS (1-shot) |
 | `/fk-sub-url` | Download URL → transcribe + translate + burn dual sub (CN+VN), giữ audio/length gốc |
+| `/fk-dub-url` | Download URL → dịch thoại + lồng tiếng đa giọng AI + burn sub VN, giữ hình/độ dài gốc |
+| `/fk-remove-sub` | Xoá hardsub bằng AI (hỗ trợ file/folder, toạ độ pixel/tỉ lệ) |
 | `/fk-gen-narrator` | Generate narrator text + TTS |
 | `/fk-gen-text-overlays` | Generate text overlays from narrator text |
 | `/fk-gen-tts-template` | Create voice template for narration |

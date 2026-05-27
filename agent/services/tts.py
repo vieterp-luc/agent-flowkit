@@ -1,102 +1,174 @@
-"""OmniVoice TTS service — subprocess-based for compatibility."""
+"""OmniVoice TTS service — persistent parallel workers for maximum performance."""
 import asyncio
 import json
 import logging
 import os
 import subprocess
 from pathlib import Path
-from typing import Optional
+from typing import Optional, List
 
-from agent.config import TTS_MODEL, TTS_SAMPLE_RATE
+from agent.config import TTS_MODEL, TTS_SAMPLE_RATE, TTS_DEVICE
 
 logger = logging.getLogger(__name__)
 
 # Default to python3.10 (has torch/torchaudio/omnivoice); override with TTS_PYTHON_BIN if needed
 PYTHON_BIN = os.environ.get("TTS_PYTHON_BIN", "python3.10")
 
-# Inline script template for TTS generation via subprocess
-_TTS_SCRIPT = """
-import sys, json, torch, numpy as np, random
-import soundfile as sf
-
-args = json.loads(sys.argv[1])
-# Deterministic generation: fix seed for consistent voice prosody across calls
-seed = args.get("seed", 42)
-torch.manual_seed(seed)
-np.random.seed(seed)
-random.seed(seed)
-
-from omnivoice import OmniVoice
-
-model = OmniVoice.from_pretrained(args["model"], device_map="cpu", dtype=torch.float32)
-
-kwargs = {"text": args["text"]}
-if args.get("ref_audio") and args.get("ref_text"):
-    kwargs["ref_audio"] = args["ref_audio"]
-    kwargs["ref_text"] = args["ref_text"]
-elif args.get("instruct"):
-    kwargs["instruct"] = args["instruct"]
-if args.get("speed") and args["speed"] != 1.0:
-    kwargs["speed"] = args["speed"]
-
-audio = model.generate(**kwargs)
-wav = audio[0]
-if isinstance(wav, torch.Tensor):
-    wav = wav.cpu().numpy()
-if wav.ndim > 1:
-    wav = wav[0]
-wav = wav.astype(np.float32)
-sf.write(args["output"], wav, args["sample_rate"])
-print(json.dumps({"ok": True, "path": args["output"]}))
-"""
-
-# Batch script — loads model once, generates for multiple texts
-_TTS_BATCH_SCRIPT = """
-import sys, json, torch, numpy as np, random
+# Persistent script template for TTS generation
+_TTS_PERSISTENT_SCRIPT = """
+import sys, json, torch, numpy as np, random, logging, time
 import soundfile as sf
 from pathlib import Path
 
-args = json.loads(sys.argv[1])
-seed = args.get("seed", 42)
-torch.manual_seed(seed)
-np.random.seed(seed)
-random.seed(seed)
+# Silence basic logs
+logging.getLogger('torch').setLevel(logging.ERROR)
 
-from omnivoice import OmniVoice
+args_init = json.loads(sys.argv[1])
+model_name = args_init["model"]
+device = args_init.get("device", "cpu")
 
-model = OmniVoice.from_pretrained(args["model"], device_map="cpu", dtype=torch.float32)
+try:
+    from omnivoice import OmniVoice
+    # Force float32 to avoid noise on MPS
+    model = OmniVoice.from_pretrained(model_name, device_map=device, dtype=torch.float32)
+    print("READY", flush=True)
+except Exception as e:
+    print(json.dumps({"ok": False, "error": f"INIT_FAILED: {str(e)}"}), flush=True)
+    sys.exit(1)
 
-results = []
-for item in args["items"]:
+for line in sys.stdin:
+    line = line.strip()
+    if not line: continue
     try:
+        item = json.loads(line)
+        if item.get("type") == "EXIT":
+            break
+            
+        seed = item.get("seed", 42)
+        torch.manual_seed(seed)
+        np.random.seed(seed)
+        random.seed(seed)
+
         kwargs = {"text": item["text"]}
-        if args.get("ref_audio") and args.get("ref_text"):
-            kwargs["ref_audio"] = args["ref_audio"]
-            kwargs["ref_text"] = args["ref_text"]
-        elif args.get("instruct"):
-            kwargs["instruct"] = args["instruct"]
-        if args.get("speed") and args["speed"] != 1.0:
-            kwargs["speed"] = args["speed"]
+        if item.get("ref_audio") and item.get("ref_text"):
+            kwargs["ref_audio"] = item["ref_audio"]
+            kwargs["ref_text"] = item["ref_text"]
+        elif item.get("instruct"):
+            kwargs["instruct"] = item["instruct"]
+        if item.get("speed") and item["speed"] != 1.0:
+            kwargs["speed"] = item["speed"]
 
         audio = model.generate(**kwargs)
-        Path(item["output"]).parent.mkdir(parents=True, exist_ok=True)
+        output_path = item["output"]
+        Path(output_path).parent.mkdir(parents=True, exist_ok=True)
+        
         wav = audio[0]
         if isinstance(wav, torch.Tensor):
             wav = wav.cpu().numpy()
         if wav.ndim > 1:
             wav = wav[0]
         wav = wav.astype(np.float32)
-        sf.write(item["output"], wav, args["sample_rate"])
+        sf.write(output_path, wav, item.get("sample_rate", 24000))
 
-        info = sf.info(item["output"])
-        duration = info.duration
-        results.append({"id": item["id"], "ok": True, "path": item["output"], "duration": duration})
+        info = sf.info(output_path)
+        print(json.dumps({"ok": True, "path": output_path, "duration": info.duration}), flush=True)
     except Exception as e:
-        results.append({"id": item["id"], "ok": False, "error": str(e)})
-
-print(json.dumps(results))
+        print(json.dumps({"ok": False, "error": str(e)}), flush=True)
 """
 
+class TTSWorker:
+    """A single persistent TTS worker process."""
+    def __init__(self, worker_id: int):
+        self.worker_id = worker_id
+        self._proc: Optional[subprocess.Popen] = None
+        self._ready = False
+        self._lock = asyncio.Lock()
+
+    async def ensure_started(self):
+        if self._proc and self._proc.poll() is None and self._ready:
+            return
+
+        async with self._lock:
+            if self._proc and self._proc.poll() is None and self._ready:
+                return
+
+            if self._proc:
+                try: self._proc.terminate()
+                except: pass
+
+            logger.info("Starting TTS Worker #%d (model: %s, device: %s)...", self.worker_id, TTS_MODEL, TTS_DEVICE)
+            args_init = {"model": TTS_MODEL, "device": TTS_DEVICE}
+            
+            self._proc = subprocess.Popen(
+                [PYTHON_BIN, "-c", _TTS_PERSISTENT_SCRIPT, json.dumps(args_init)],
+                stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+                bufsize=1
+            )
+            
+            def wait_ready():
+                line = self._proc.stdout.readline().strip()
+                return line == "READY"
+
+            loop = asyncio.get_event_loop()
+            self._ready = await loop.run_in_executor(None, wait_ready)
+            if self._ready:
+                logger.info("TTS Worker #%d ready.", self.worker_id)
+            else:
+                logger.error("TTS Worker #%d failed to start.", self.worker_id)
+                self._proc = None
+
+    async def run_task(self, task: dict) -> dict:
+        await self.ensure_started()
+        if not self._proc:
+            return {"ok": False, "error": "Worker failed to start"}
+
+        # Note: Worker-level lock ensures only one task per process
+        async with self._lock:
+            try:
+                self._proc.stdin.write(json.dumps(task) + "\n")
+                self._proc.stdin.flush()
+                
+                loop = asyncio.get_event_loop()
+                line = await loop.run_in_executor(None, self._proc.stdout.readline)
+                if not line:
+                    self._ready = False
+                    return {"ok": False, "error": "Worker died"}
+                
+                return json.loads(line.strip())
+            except Exception as e:
+                self._ready = False
+                return {"ok": False, "error": str(e)}
+
+class TTSManager:
+    """Manages a pool of persistent TTS workers."""
+    def __init__(self, num_workers: int = 2):
+        self.num_workers = num_workers
+        self.workers: List[TTSWorker] = [TTSWorker(i) for i in range(num_workers)]
+        self._worker_queue = asyncio.Queue()
+        self._initialized = False
+
+    async def _ensure_initialized(self):
+        if self._initialized:
+            return
+        for w in self.workers:
+            self._worker_queue.put_nowait(w)
+        self._initialized = True
+
+    async def run_task(self, task: dict) -> dict:
+        await self._ensure_initialized()
+        # Get next available worker from queue
+        worker = await self._worker_queue.get()
+        try:
+            return await worker.run_task(task)
+        finally:
+            # Put worker back into pool
+            self._worker_queue.put_nowait(worker)
+
+# Singleton manager with 2 workers (safe for 16GB RAM)
+_manager = TTSManager(num_workers=2)
 
 async def generate_speech(
     text: str,
@@ -106,46 +178,29 @@ async def generate_speech(
     ref_text: Optional[str] = None,
     speed: float = 1.0,
 ) -> str:
-    """Generate speech for text via subprocess. Returns path to WAV file."""
+    """Generate speech for text via a worker from the pool. Returns path to WAV file."""
     Path(output_path).parent.mkdir(parents=True, exist_ok=True)
 
-    args = {
-        "model": TTS_MODEL,
+    task = {
         "text": text,
         "output": output_path,
         "sample_rate": TTS_SAMPLE_RATE,
         "speed": speed,
     }
     if instruct:
-        args["instruct"] = instruct
+        task["instruct"] = instruct
     if ref_audio:
-        args["ref_audio"] = ref_audio
+        task["ref_audio"] = ref_audio
     if ref_text:
-        args["ref_text"] = ref_text
+        task["ref_text"] = ref_text
 
-    loop = asyncio.get_event_loop()
-    result = await loop.run_in_executor(None, _run_tts_subprocess, args)
+    result = await _manager.run_task(task)
 
     if not result.get("ok"):
         raise RuntimeError(f"TTS failed: {result.get('error', 'unknown')}")
 
-    logger.info("TTS saved to %s", output_path)
+    logger.info("TTS saved to %s (duration: %.2fs)", output_path, result.get("duration", 0))
     return output_path
-
-
-def _run_tts_subprocess(args: dict) -> dict:
-    """Run TTS subprocess."""
-    proc = subprocess.run(
-        [PYTHON_BIN, "-c", _TTS_SCRIPT, json.dumps(args)],
-        capture_output=True, text=True, timeout=600,
-    )
-    if proc.returncode != 0:
-        return {"ok": False, "error": proc.stderr[-500:] if proc.stderr else "unknown error"}
-    try:
-        return json.loads(proc.stdout.strip().split("\n")[-1])
-    except (json.JSONDecodeError, IndexError):
-        return {"ok": False, "error": proc.stdout[-200:] + proc.stderr[-200:]}
-
 
 async def generate_video_narration(
     scenes: list[dict],
@@ -155,64 +210,20 @@ async def generate_video_narration(
     ref_text: Optional[str] = None,
     speed: float = 1.0,
 ) -> list[dict]:
-    """Generate narration WAVs for scenes with narrator_text.
-
-    Uses batch subprocess — loads model once for all scenes.
+    """Generate narration WAVs for scenes in parallel using the worker pool.
+    
     Returns list of result dicts.
     """
     out_dir = Path(output_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    # Build batch items (only scenes with narrator_text)
-    items = []
-    scene_map = {}
-    for scene in scenes:
+    async def process_scene(scene: dict):
         scene_id = scene.get("id")
         display_order = scene.get("display_order", 0)
         narrator_text = scene.get("narrator_text")
 
         if not narrator_text:
-            continue
-
-        wav_path = str(out_dir / f"scene_{display_order:03d}_{scene_id}.wav")
-        # Skip if WAV already exists and is non-trivial (>1KB)
-        if Path(wav_path).exists() and Path(wav_path).stat().st_size > 1024:
-            logger.info("Skipping scene %03d (WAV exists: %s)", display_order, wav_path)
-            scene_map[scene_id] = {"display_order": display_order, "narrator_text": narrator_text, "skipped": True, "wav_path": wav_path}
-            continue
-        items.append({"id": scene_id, "text": narrator_text, "output": wav_path})
-        scene_map[scene_id] = {"display_order": display_order, "narrator_text": narrator_text}
-
-    # Run batch subprocess if there are items
-    batch_results = {}
-    if items:
-        args = {
-            "model": TTS_MODEL,
-            "sample_rate": TTS_SAMPLE_RATE,
-            "speed": speed,
-            "items": items,
-        }
-        if instruct:
-            args["instruct"] = instruct
-        if ref_audio:
-            args["ref_audio"] = ref_audio
-        if ref_text:
-            args["ref_text"] = ref_text
-
-        loop = asyncio.get_event_loop()
-        raw = await loop.run_in_executor(None, _run_batch_subprocess, args)
-        for r in raw:
-            batch_results[r["id"]] = r
-
-    # Build final results for all scenes
-    results = []
-    for scene in scenes:
-        scene_id = scene.get("id")
-        display_order = scene.get("display_order", 0)
-        narrator_text = scene.get("narrator_text")
-
-        if not narrator_text:
-            results.append({
+            return {
                 "scene_id": scene_id,
                 "display_order": display_order,
                 "narrator_text": None,
@@ -220,59 +231,65 @@ async def generate_video_narration(
                 "duration": None,
                 "status": "SKIPPED",
                 "error": None,
-            })
-            continue
+            }
 
-        sm = scene_map.get(scene_id, {})
-        if sm.get("skipped"):
-            results.append({
+        wav_path = str(out_dir / f"scene_{display_order:03d}_{scene_id}.wav")
+        # Skip if WAV already exists and is non-trivial (>1KB)
+        if Path(wav_path).exists() and Path(wav_path).stat().st_size > 1024:
+            return {
                 "scene_id": scene_id,
                 "display_order": display_order,
                 "narrator_text": narrator_text,
-                "audio_path": sm["wav_path"],
-                "duration": None,
+                "audio_path": wav_path,
+                "duration": _wav_duration(wav_path),
                 "status": "COMPLETED",
                 "error": None,
-            })
-            continue
+            }
 
-        br = batch_results.get(scene_id, {})
-        if br.get("ok"):
-            results.append({
+        task = {
+            "text": narrator_text,
+            "output": wav_path,
+            "sample_rate": TTS_SAMPLE_RATE,
+            "speed": speed,
+            "instruct": instruct,
+            "ref_audio": ref_audio,
+            "ref_text": ref_text,
+        }
+
+        r = await _manager.run_task(task)
+        
+        if r.get("ok"):
+            return {
                 "scene_id": scene_id,
                 "display_order": display_order,
                 "narrator_text": narrator_text,
-                "audio_path": br.get("path"),
-                "duration": br.get("duration"),
+                "audio_path": r.get("path"),
+                "duration": r.get("duration"),
                 "status": "COMPLETED",
                 "error": None,
-            })
+            }
         else:
-            results.append({
+            return {
                 "scene_id": scene_id,
                 "display_order": display_order,
                 "narrator_text": narrator_text,
                 "audio_path": None,
                 "duration": None,
                 "status": "FAILED",
-                "error": br.get("error", "not processed"),
-            })
+                "error": r.get("error", "worker error"),
+            }
 
-    return results
+    # Process all scenes in parallel (manager will throttle via worker queue)
+    results = await asyncio.gather(*(process_scene(s) for s in scenes))
+    return list(results)
 
-
-def _run_batch_subprocess(args: dict) -> list[dict]:
-    """Run batch TTS subprocess. Model loads once."""
-    timeout = 180 + len(args.get("items", [])) * 45  # ~180s model load + ~45s per scene
-    proc = subprocess.run(
-        [PYTHON_BIN, "-c", _TTS_BATCH_SCRIPT, json.dumps(args)],
-        capture_output=True, text=True, timeout=timeout,
-    )
-    if proc.returncode != 0:
-        error = proc.stderr[-500:] if proc.stderr else "unknown"
-        return [{"id": item["id"], "ok": False, "error": error} for item in args["items"]]
+def _wav_duration(path: str) -> float | None:
     try:
-        return json.loads(proc.stdout.strip().split("\n")[-1])
-    except (json.JSONDecodeError, IndexError):
-        error = proc.stdout[-200:] + proc.stderr[-200:]
-        return [{"id": item["id"], "ok": False, "error": error} for item in args["items"]]
+        import subprocess
+        result = subprocess.run(
+            ["ffprobe", "-v", "quiet", "-show_entries", "format=duration", "-of", "csv=p=0", path],
+            capture_output=True, text=True, timeout=30,
+        )
+        return float(result.stdout.strip())
+    except Exception:
+        return None
