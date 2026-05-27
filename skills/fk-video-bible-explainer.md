@@ -1,6 +1,6 @@
-# fk-video-bible-explainer — Quiet Scripture Channel Operator + Episode Producer
+# fk-video-bible-explainer — Lamplit Word Channel Operator + Episode Producer
 
-Long-form English Bible Explainer videos (**~25 minutes**) for the **Quiet Scripture** YouTube channel. Combines three creative skills — `script-bible-explainer`, `image-bible-explainer`, `thumbnail-bible-explainer` — into the full FlowKit render pipeline: watercolor image montage + Ken Burns motion + English narrator + reverent instrumental BGM.
+Long-form English Bible Explainer videos (**~25 minutes**) for the **Lamplit Word** YouTube channel. Combines three creative skills — `script-bible-explainer`, `image-bible-explainer`, `thumbnail-bible-explainer` — into the full FlowKit render pipeline: watercolor image montage + Ken Burns motion + English narrator + reverent instrumental BGM.
 
 This skill is both the **per-episode producer** and the **channel operator** (status dashboard + next-action recommender + batch + topic backlog), modeled on `fk-video-lamplit-library`.
 
@@ -33,15 +33,15 @@ These three are **Skill-tool skills** in `.claude/skills/`. This skill invokes t
 
 ---
 
-## Channel: Quiet Scripture
+## Channel: Lamplit Word
 
 | Item | Value |
 |------|-------|
-| Display name | Quiet Scripture |
-| Handle | `@quietscripture` |
-| Slug | `quiet-scripture` |
-| Channel dir | `youtube/channels/quiet-scripture/` |
-| Local output | `output/quiet_scripture/` |
+| Display name | Lamplit Word |
+| Handle | `@lamplitword` |
+| Slug | `lamplit-word` |
+| Channel dir | `youtube/channels/lamplit-word/` |
+| Local output | `output/lamplit_word/` |
 | Content focus | Long-form Bible "Every X Explained" videos (~25 min) |
 | Audience | English-speaking Christian (US / UK / AU / CA) |
 | Narrator voice | `Andrew_TTS` @ speed 0.88 (warm, reverent, contemplative male) |
@@ -64,11 +64,11 @@ Read channel state on every invocation:
 
 | File | Purpose |
 |------|---------|
-| `youtube/channels/quiet-scripture/roadmap.json` | One entry per topic/video + topic backlog + status |
-| `youtube/channels/quiet-scripture/channel_rules.json` | Schedule, SEO, branding, voice defaults |
-| `youtube/channels/quiet-scripture/upload_history.json` | Uploaded episodes (video_id, publish_at) |
-| `youtube/channels/quiet-scripture/playlists.json` | Playlist IDs |
-| `output/quiet_scripture/ep*/` | What is built locally |
+| `youtube/channels/lamplit-word/roadmap.json` | One entry per topic/video + topic backlog + status |
+| `youtube/channels/lamplit-word/channel_rules.json` | Schedule, SEO, branding, voice defaults |
+| `youtube/channels/lamplit-word/upload_history.json` | Uploaded episodes (video_id, publish_at) |
+| `youtube/channels/lamplit-word/playlists.json` | Playlist IDs |
+| `output/lamplit_word/ep*/` | What is built locally |
 
 If any channel file is missing → create it from the templates in "Quick Reference" and warn the user.
 
@@ -83,8 +83,8 @@ Read `roadmap.json` + `upload_history.json`.
 ### Step 2 — Compute per-episode state
 
 For each entry in `roadmap.episodes`:
-- `script_ready` = `output/quiet_scripture/<slug>/script.txt` exists
-- `built` = `output/quiet_scripture/<slug>/<slug>_final.mp4` exists
+- `script_ready` = `output/lamplit_word/<slug>/script.txt` exists
+- `built` = `output/lamplit_word/<slug>/<slug>_final.mp4` exists
 - `branded` = `..._final_branded.mp4` exists
 - `uploaded` = slug present in `upload_history.json`
 - `scheduled` = uploaded with `publish_at` in the future
@@ -94,7 +94,7 @@ For each entry in `roadmap.episodes`:
 ### Step 3 — Output 1-screen summary
 
 ```
-📖  QUIET SCRIPTURE  —  Status @ <today ICT>
+📖  LAMPLIT WORD  —  Status @ <today ICT>
 
 🎬 Episodes: <uploaded>/<total in roadmap> uploaded
    ├─ Published:   <count>   (latest: ep<N> — <title>)
@@ -102,7 +102,7 @@ For each entry in `roadmap.episodes`:
    ├─ Local-ready: <count>   (built, not uploaded)
    └─ Scripted:    <count>   (script done, not rendered)
 
-📺 Channel: @quietscripture | Cadence: 2/week | Voice: Andrew_TTS
+📺 Channel: @lamplitword | Cadence: 2/week | Voice: Andrew_TTS
 
 📋 Topic backlog: <count> ý tưởng đang chờ
    1. <topic — English, dùng cho production>
@@ -144,25 +144,25 @@ Triggered by a positional topic string OR `--ep N`. Runs end-to-end, autonomousl
 - Else invoke the **`script-bible-explainer`** skill with: `TOPIC = <positional topic>`, `LENGTH = 25`, `TONE = reverent-conversational` (default for the channel; pass `dramatic` only if the topic is a Passion/judgment theme).
 - Take its **Phase 6 final clean prose** (not the phase scaffolding).
 - Resolve the episode slug: `ep<NN>_<kebab-topic>` (e.g. `ep02_every_word_from_the_cross`).
-- Save to `output/quiet_scripture/<slug>/script.txt`.
+- Save to `output/lamplit_word/<slug>/script.txt`.
 - **Verify before continuing:** `grep -c '\[' script.txt` returns 0 (no brackets); word count 3,400–4,000.
 
 ### Step 1 — Scene image prompts
 
 Invoke the **`image-bible-explainer`** skill with this config (do not ask the user — these are channel defaults):
-- Total images: **60** (Standard density for ~25 min ≈ 1 image / 25s)
-- Distribution: **AUTO** (its 12/25/5/24/26/8 formula across the 6 script parts)
+- Total images: **40** (Bible-contemplative density for ~25 min ≈ 1 image / 37.5s — Ken Burns motion already adds visual variety, reverent pacing favors longer dwell time)
+- Distribution: **AUTO** (its 12/25/5/24/26/8 formula across the 6 script parts → 5 / 10 / 2 / 10 / 10 / 3)
 - Priority scene type: **balanced**
 - Text labels: **NO** (body video carries no text)
 
-Pass the `script.txt` as the source. Save the returned prompts to `output/quiet_scripture/<slug>/image_prompts.json` as an array of `{idx, part, prompt}` — `part` ∈ 1..6 so the renderer can time each image to its part.
+Pass the `script.txt` as the source. Save the returned prompts to `output/lamplit_word/<slug>/image_prompts.json` as an array of `{idx, part, prompt}` — `part` ∈ 1..6 so the renderer can time each image to its part.
 
 **Defensive prompt hygiene** (per `feedback-flow-image-orientation-text`): every prompt must force `16:9 HORIZONTAL landscape frame` and `STRICTLY NO TEXT, no letters, no captions, no watermark`. Append these if `image-bible-explainer` did not.
 
 ### Step 2 — Create the Flow project
 
 `POST /api/projects`:
-- `name`: `Quiet Scripture — <episode title>`
+- `name`: `Lamplit Word — <episode title>`
 - `story`: 2–3 sentences on the topic + watercolor Bible-storybook aesthetic
 - `material`: `watercolor` (or set via `/fk-add-material` to a watercolor-storybook profile)
 - `language`: `en`
@@ -172,12 +172,12 @@ Save `flow_project_id` into the roadmap entry.
 
 ### Step 3 — Render scene images (6 waves — one per script part)
 
-**Never mass-batch all 60** (per `feedback-flow-image-gen-per-chapter`: bulk gen triggers reCAPTCHA + burns quota).
+**Never mass-batch all 40** (per `feedback-flow-image-gen-per-chapter`: bulk gen triggers reCAPTCHA + burns quota regardless of total count).
 
 For each script part 1→6:
 1. **Probe**: gen the first image of the part alone. If it fails with QUOTA / CAPTCHA / no-operations → **HALT**, run `/fk-doctor`, surface to user.
 2. If the probe is clean → `POST /api/requests/batch` with `GENERATE_IMAGE` for the rest of that part's images.
-3. Poll `/api/requests/batch-status` (15s) until done. Download to `output/quiet_scripture/<slug>/images/scene_<idx>.png`.
+3. Poll `/api/requests/batch-status` (15s) until done. Download to `output/lamplit_word/<slug>/images/scene_<idx>.png`.
 
 Pre-flight Flow credits before Part 1 (per `feedback-flow-quota-safety`).
 
@@ -185,32 +185,47 @@ Pre-flight Flow credits before Part 1 (per `feedback-flow-quota-safety`).
 
 The script is one continuous 3,700-word prose. Split it at the natural part boundaries (`script-bible-explainer` parts: Opening / Act 1 / CTA / Act 2 / Climax / Outro) into 6 chunks.
 
+**Load full `ref_text`** before any call (per `feedback-tts-full-ref-text` — truncated ref_text silently makes TTS ~2× slower, 10-17s vs 5-7s):
+```bash
+REF_TEXT=$(python3 -c "import json; print(json.load(open('output/_shared/tts_templates/templates.json'))['Andrew_TTS']['text'])")
+```
+Never inline a shortened sample; always pass the full transcript from `templates.json.Andrew_TTS.text`.
+
 For each chunk → `POST /api/tts/generate`:
 ```json
 {
   "text": "<chunk prose>",
   "ref_audio": "output/_shared/tts_templates/Andrew_TTS.wav",
+  "ref_text": "<full REF_TEXT loaded above — NOT truncated>",
   "speed": 0.88,
   "language": "en",
-  "output_path": "output/quiet_scripture/<slug>/tts/part_<K>.wav"
+  "output_path": "output/lamplit_word/<slug>/tts/part_<K>.wav"
 }
 ```
 Concat the 6 parts → `tts/narrator_full.wav`. Record each part's duration `D_k` — used for Ken Burns timing.
 
-**Verify:** total duration 23–27 min; mean_volume −25…−10 dB; no chunk cut mid-sentence.
+**Verify:** total duration 23–27 min; mean_volume −25…−10 dB; no chunk cut mid-sentence; per-chunk render time ≤ 1.5× chunk audio length (if higher → ref_text was truncated, re-run).
 
 ### Step 5 — Ken Burns motion
 
-Each image belongs to a part `K`. For part `K` with duration `D_k` and `n_k` images: **each image clip = `D_k / n_k` seconds**.
+Each image belongs to a part `K`. For part `K` with duration `D_k` and `n_k` images:
+
+**Clip length must compensate for the 1s xfade overlap in Step 7a**, otherwise the concatenated video ends up ~`(N_total − 1) × 1s` shorter than the narrator and the last image stretches under silence. Formula:
+
+```
+clip_seconds = (D_k / n_k) + xfade_seconds        # xfade_seconds = 1.0
+```
+
+The first clip of the whole montage uses `D_k / n_k` only (no leading xfade); every subsequent clip absorbs one 1s overlap. Equivalently: total video = Σ(clip_i) − (N_total − 1) × 1s ≈ narrator duration. Round each `clip_seconds` to 2 decimals.
 
 `POST /api/ken-burns/clip` per image:
 ```json
 {
-  "image_path": "output/quiet_scripture/<slug>/images/scene_<idx>.png",
+  "image_path": "output/lamplit_word/<slug>/images/scene_<idx>.png",
   "duration_seconds": <D_k / n_k>,
   "motion": "<rotated>",
   "resolution": "1920x1080",
-  "output_path": "output/quiet_scripture/<slug>/ken-burns/scene_<idx>_<motion>.mp4"
+  "output_path": "output/lamplit_word/<slug>/ken-burns/scene_<idx>_<motion>.mp4"
 }
 ```
 Motion rotation: `pan_left → zoom_in → pan_right → zoom_out → static …`, never two consecutive the same. For close-up / single-figure images use `static` or `pan` only — avoid `zoom_in` (it crops faces). Hook (Part 1) leans `zoom_in`; Outro (Part 6) leans `zoom_out`.
@@ -219,12 +234,14 @@ Motion rotation: `pan_left → zoom_in → pan_right → zoom_out → static …
 
 Skip entirely if `--no-music`.
 
-Generate **3–4 instrumental tracks** (`POST /api/gemini/browser/generate-music`), each ~7–8 min, all prompts starting with `instrumental only, no vocals, no lyrics, no singing`:
+Generate **4 instrumental tracks** (`POST /api/gemini/browser/generate-music`), each ~7–8 min — a 4-track minimum guarantees ≥ 28 min raw, leaving headroom over a 25-min target after the 2s crossfades (~6s lost total). If any track returns < 6 min, re-gen that single track. All prompts start with `instrumental only, no vocals, no lyrics, no singing`:
 - Track 1 — opening: `soft piano + warm strings, sacred, reverent, contemplative, cinematic Bible-documentary opener, fade-friendly`
 - Track 2/3 — body: `calm ambient piano + low strings, prayerful, very low energy, no melody peaks, suitable under spoken narration`
 - Track 4 — close: `gentle uplifting strings + piano, hopeful resolution, restrained, reverent closer`
 
-Crossfade-concat to ≥ video duration, trim to length. **Always save MP3** (transcode Gemini Lyria MP4 → `-vn -c:a libmp3lame -b:a 192k`, per `feedback-music-as-mp3`).
+**Coverage check (mandatory before concat):** `sum(track_i) − 3 × xfade_2s ≥ narrator_duration + 5s`. If not satisfied → generate one extra body-style track and re-check; never proceed with a music bed shorter than the narrator.
+
+Crossfade-concat (xfade 2s) in order [1, 2, 3, 4], trim to narrator duration. **Always save MP3** (transcode Gemini Lyria MP4 → `-vn -c:a libmp3lame -b:a 192k`, per `feedback-music-as-mp3`).
 
 ### Step 7 — Concat + mix
 
@@ -242,11 +259,11 @@ Crossfade-concat to ≥ video duration, trim to length. **Always save MP3** (tra
 
 ### Step 8 — Thumbnail
 
-Invoke the **`thumbnail-bible-explainer`** skill with `Title = <episode title>` + the `script.txt`. It returns 3 variations. Default: render **Variation 1** via Flow `GENERATE_IMAGE` (16:9). Save text + no-text versions to `output/quiet_scripture/<slug>/thumbnail/`.
+Invoke the **`thumbnail-bible-explainer`** skill with `Title = <episode title>` + the `script.txt`. It returns 3 variations. Default: render **Variation 1** via Flow `GENERATE_IMAGE` (16:9). Save text + no-text versions to `output/lamplit_word/<slug>/thumbnail/`.
 
 ### Step 9 — Branding + SEO + caption
 
-- `/fk-brand-logo <video_id>` — Quiet Scripture watermark (see channel_rules `branding`) → `<slug>_final_branded.mp4`
+- `/fk-brand-logo <video_id>` — Lamplit Word watermark (see channel_rules `branding`) → `<slug>_final_branded.mp4`
 - `/fk-youtube-seo <video_id> --language en` — title/description/tags/chapter timestamps → `youtube_seo.json`
 - `/fk-gen-caption <video_id> --language en` — `.vtt` captions
 
@@ -287,11 +304,11 @@ The skill writes all three fields. Only `topic` is used downstream for productio
 ## Output Folder Structure
 
 ```
-output/quiet_scripture/
+output/lamplit_word/
 └── ep01_every_fear_not/
     ├── script.txt                 script-bible-explainer Phase 6 prose
     ├── image_prompts.json         [{idx, part, prompt}]
-    ├── images/                    scene_0.png … scene_59.png
+    ├── images/                    scene_0.png … scene_39.png
     ├── ken-burns/                 scene_0_zoom_in.mp4 …
     ├── tts/                       part_1.wav … part_6.wav + narrator_full.wav
     ├── music/                     01_open.mp3 … 04_close.mp3
@@ -313,7 +330,7 @@ output/quiet_scripture/
 | Video codec | h264, yuv420p, crf 18 |
 | Audio codec | aac, 192k, 48kHz, stereo |
 | Script length | ~3,700 words / ~25 min (`script-bible-explainer`) |
-| Scenes / images | ~60 (AUTO distribution across 6 parts) |
+| Scenes / images | ~40 (AUTO distribution: 5 / 10 / 2 / 10 / 10 / 3 across 6 parts, ≈ 1 image / 37.5s) |
 | Narrator voice / speed | `Andrew_TTS` / 0.88 |
 | Narrator volume | 1.6× |
 | BGM | instrumental ONLY, reverent, 0.06× (optional) |
@@ -322,7 +339,7 @@ output/quiet_scripture/
 | Text overlay | NONE on body video |
 | Target duration | 23:00 – 27:00 |
 | Default privacy | `private` (auto-scheduled via `publish_at`) |
-| YouTube title pattern | `{title} — Bible Explained \| Quiet Scripture` (≤ 80 chars) |
+| YouTube title pattern | `{title} — Bible Explained \| Lamplit Word` (≤ 80 chars) |
 | YouTube category | 27 (Education) |
 
 ---
@@ -332,12 +349,12 @@ output/quiet_scripture/
 ```
 [ ] Pre-flight: /health ok, Flow credits ok
 [ ] Step 0 Script — script-bible-explainer, 25min, 0 brackets, 3.4k–4k words → script.txt
-[ ] Step 1 Image prompts — image-bible-explainer, 60 / AUTO / no-text → image_prompts.json
+[ ] Step 1 Image prompts — image-bible-explainer, 40 / AUTO / no-text → image_prompts.json
 [ ] Step 2 Flow project — HORIZONTAL, watercolor material
 [ ] Step 3 Images — 6 waves (per part), probe-first each wave, no mass-batch
-[ ] Step 4 TTS — Andrew_TTS 0.88, 6 chunks → narrator_full.wav, 23–27 min
-[ ] Step 5 Ken Burns — clip = D_k / n_k, motion rotated, static for close-ups
-[ ] Step 6 BGM — instrumental only, MP3, crossfade to length (skip if --no-music)
+[ ] Step 4 TTS — Andrew_TTS 0.88, full ref_text from templates.json, 6 chunks → narrator_full.wav, 23–27 min
+[ ] Step 5 Ken Burns — clip = D_k / n_k + 1s xfade compensation, motion rotated, static for close-ups
+[ ] Step 6 BGM — instrumental only, 4 tracks, coverage ≥ narrator + 5s, MP3, xfade-2s concat (skip if --no-music)
 [ ] Step 7 Concat + mix — narrator 1.6×, BGM 0.06×, no text overlay
 [ ] Verify final — 23–27 min, 1080p30, mean_volume −20…−10 dB
 [ ] Step 8 Thumbnail — thumbnail-bible-explainer var1 rendered
@@ -357,6 +374,9 @@ output/quiet_scripture/
 | Text baked into watercolor image | Prompt missing the NO-TEXT guard | Add `STRICTLY NO TEXT` + negative list, regen |
 | Image is vertical | Orientation not forced | Add `16:9 HORIZONTAL landscape frame` to prompt |
 | TTS cuts mid-sentence | Chunk split mid-sentence | Split only at part boundaries / sentence ends |
+| TTS render ~2× slower than expected | `ref_text` truncated or missing | Load full `templates.json.Andrew_TTS.text`, pass as `ref_text` (see Step 4) |
+| Final video shorter than narrator (last image lingers under silence) | Step 5 ignored xfade overlap | Use `clip = D_k / n_k + 1` (xfade comp); see Step 5 formula |
+| Music bed runs out before narrator ends | Only 3 tracks generated or one < 6 min | Generate 4 tracks min; run coverage check before concat (Step 6) |
 | Final > 27 min | Script over length | Trim Act 2 in `script-bible-explainer`, regen TTS |
 | BGM has vocals | Music prompt vague | Prefix every prompt with `instrumental only, no vocals, no lyrics` |
 | Narration muddy under music | BGM too loud | Drop BGM volume to 0.04× |
@@ -379,8 +399,8 @@ output/quiet_scripture/
 
 ## Files Created / Edited
 
-- READ: `youtube/channels/quiet-scripture/*.json`, `output/quiet_scripture/ep*/`
-- WRITE (autonomous): episode artifacts under `output/quiet_scripture/<slug>/`; roadmap status updates
+- READ: `youtube/channels/lamplit-word/*.json`, `output/lamplit_word/ep*/`
+- WRITE (autonomous): episode artifacts under `output/lamplit_word/<slug>/`; roadmap status updates
 - WRITE (on explicit upload): `upload_history.json`
 - INVOKES: skills `script-bible-explainer`, `image-bible-explainer`, `thumbnail-bible-explainer`; commands `/fk-create-project`, `/fk-add-material`, `/fk-brand-logo`, `/fk-youtube-seo`, `/fk-gen-caption`, `/fk-youtube-upload`, `/fk-doctor`
 
