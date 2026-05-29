@@ -70,6 +70,7 @@ curl -s http://127.0.0.1:8100/api/gemini/browser/status
 
 ### Tips
 
+- **Force Instrumental:** Gemini Lyria may occasionally add humming or vocals if the prompt is ambiguous. To ensure 100% instrumental BGM (crucial for Lo-Fi), always start your prompt with: **"Instrumental only, no vocals, no lyrics, no singing. [Your mood/style...]"**
 - Pro mode files are ~6-12 MB MP4 (video container, audio-only); duration 2'40"-3'00"
 - First request takes ~3-5s extra for lazy browser init; subsequent requests reuse singleton
 - Lock per browser → only 1 concurrent gen; queue serialized automatically
@@ -304,6 +305,7 @@ Default: `V4` (set via `SUNO_MODEL` env var).
 
 ## Tips
 
+- **Instrumental Enforcement:** For background music (Lo-Fi, study, sleep), always explicitly state **"Instrumental only, no vocals, no lyrics, no singing"** at the start of your prompt. This is mandatory for Gemini Lyria and highly recommended for Suno (even with `instrumental: true`).
 - Each generation costs ~10 credits (5 per clip) and produces 2 variations
 - Use `instrumental: true` for background music (no vocals)
 - `poll: true` waits for completion (~30-120s) — use for scripted workflows

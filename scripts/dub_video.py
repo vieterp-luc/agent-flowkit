@@ -269,11 +269,28 @@ def mix_and_burn(video: Path, dub_wav: Path, ass: Path, output: Path,
     else:
         audio_fc = "[1:a]aformat=sample_rates=48000:channel_layouts=stereo[aout]"
 
+    # Check for filters
+    has_vt, has_ass = False, False
+    try:
+        filters = subprocess.run(["ffmpeg", "-filters"], capture_output=True, text=True).stdout
+        has_ass = " ass " in filters
+        encoders = subprocess.run(["ffmpeg", "-encoders"], capture_output=True, text=True).stdout
+        has_vt = "h264_videotoolbox" in encoders
+    except: pass
+
+    if not has_ass and burn_sub:
+        print("[render] Warning: 'ass' filter not found in ffmpeg. Skipping burned subtitles.")
+        burn_sub = False
+
     if burn_sub:
         ass_esc = str(ass).replace("\\", "\\\\").replace(":", "\\:").replace("'", "\\'")
-        video_fc = f"[0:v]ass={ass_esc}[vout];"
-        vmap, vcodec = "[vout]", ["-c:v", "libx264", "-preset", "medium",
-                                  "-crf", "20", "-pix_fmt", "yuv420p"]
+        video_fc = f"[0:v]ass='{ass_esc}'[vout];"
+        vmap = "[vout]"
+        if has_vt:
+            vcodec = ["-c:v", "h264_videotoolbox", "-b:v", "6000k", "-realtime", "1"]
+            print("[render] Using hardware acceleration: h264_videotoolbox")
+        else:
+            vcodec = ["-c:v", "libx264", "-preset", "veryfast", "-crf", "22", "-pix_fmt", "yuv420p"]
     else:
         video_fc, vmap, vcodec = "", "0:v", ["-c:v", "copy"]
 
@@ -301,7 +318,7 @@ def main():
                     help="Voice for single mode / fallback")
     ap.add_argument("--voicemap", default=None, help="Explicit speaker→voice JSON")
     ap.add_argument("--speed", type=float, default=1.0)
-    ap.add_argument("--duck", type=float, default=0.12,
+    ap.add_argument("--duck", type=float, default=0.05,
                     help="Original-audio volume kept under the dub (0=mute)")
     ap.add_argument("--max-atempo", type=float, default=1.7)
     ap.add_argument("--no-sub", action="store_true", help="Skip burning VN subtitle")
@@ -312,11 +329,25 @@ def main():
     video = Path(args.video).resolve()
     if not video.exists():
         sys.exit(f"Video not found: {video}")
-    output = Path(args.output).resolve()
-    work = output.parent
+
+    # Use video stem as ID for organization
+    vid_id = video.stem
+    
+    # Determine base output directory (e.g., output/_dub)
+    out_arg = Path(args.output).resolve()
+    base_out_dir = out_arg.parent if out_arg.suffix else out_arg
+    
+    # Dedicated workspace for this video ID
+    work = base_out_dir / vid_id
     work.mkdir(parents=True, exist_ok=True)
+
+    # Final output files are now inside the ID folder
+    output = work / f"{vid_id}_dubbed.mp4"
+    srt_path = output.with_suffix(".srt")
+    
     cache_path = work / "dub_cache.json"
     voicemap_path = Path(args.voicemap).resolve() if args.voicemap else work / "voicemap.json"
+
     hf_token = (args.hf_token or os.environ.get("HF_TOKEN")
                 or os.environ.get("HUGGINGFACE_TOKEN") or "").strip()
 
@@ -409,7 +440,7 @@ def main():
     ass_path = work / "dub_sub.ass"
     if not args.no_sub:
         write_ass(segments, translations, ass_path, w, h, vn_only=True)
-    write_srt(segments, translations, output.with_suffix(".srt"))
+    write_srt(segments, translations, srt_path)
     mix_and_burn(video, dub_wav, ass_path, output, args.duck, burn_sub=not args.no_sub)
 
     out_dur = ffprobe_duration(output)

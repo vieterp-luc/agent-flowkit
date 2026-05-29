@@ -31,8 +31,8 @@ router = APIRouter(tags=["tts"])
 TEMPLATES_DIR = TTS_TEMPLATES_DIR
 TEMPLATES_META = TEMPLATES_DIR / "templates.json"
 
-# Semaphore: max 2 concurrent TTS generations to prevent resource abuse
-_TTS_SEMAPHORE = asyncio.Semaphore(2)
+# Semaphore: max 4 concurrent TTS generations (up from 2)
+_TTS_SEMAPHORE = asyncio.Semaphore(4)
 
 # Allowed base directories for ref_audio paths
 _ALLOWED_REF_AUDIO_DIRS = [SHARED_OUTPUT_DIR, OUTPUT_DIR]
@@ -125,7 +125,7 @@ async def tts_generate(body: TTSGenerateRequest):
             )
         except Exception as e:
             logger.exception("TTS generation failed")
-            raise HTTPException(500, "TTS generation failed")
+            raise HTTPException(500, f"TTS generation failed: {str(e)}")
 
     duration = _wav_duration(audio_path)
     return TTSGenerateResponse(audio_path=audio_path, duration=duration)
