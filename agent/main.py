@@ -31,6 +31,7 @@ from agent.api.lofi import router as lofi_router
 from agent.api.reup import router as reup_router
 from agent.api.book import router as book_router
 from agent.api.ken_burns import router as ken_burns_router
+from agent.api.meta import router as meta_router
 from agent.worker.processor import get_worker_controller
 from agent.services.flow_client import get_flow_client
 from agent.services.event_bus import event_bus
@@ -163,6 +164,13 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         logger.warning("gemini_browser shutdown error: %s", e)
 
+    # Shutdown Meta AI Playwright browser if lazily initialized by /api/meta/browser/*
+    try:
+        from agent.services.meta_browser import shutdown_browser as shutdown_meta_browser
+        await shutdown_meta_browser()
+    except Exception as e:
+        logger.warning("meta_browser shutdown error: %s", e)
+
     await close_db()
     logger.info("Flow Kit stopped")
 
@@ -195,6 +203,7 @@ app.include_router(reup_router, prefix="/api")
 app.include_router(lofi_router, prefix="/api")
 app.include_router(book_router, prefix="/api")
 app.include_router(ken_burns_router, prefix="/api")
+app.include_router(meta_router, prefix="/api")
 
 
 import secrets as _secrets

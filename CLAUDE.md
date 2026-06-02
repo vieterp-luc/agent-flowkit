@@ -36,6 +36,8 @@ curl -s http://127.0.0.1:8100/health
 | `/fk-gen-text-overlays` | Generate text overlays from narrator text |
 | `/fk-gen-tts-template` | Create voice template for narration |
 | `/fk-gen-music` | Generate music via Suno |
+| `/fk-gen-meta-video` | Generate video via Meta AI web app (browser automation, no API) — image→video or text→video, experimental, non-commercial |
+| `/fk-video-khkd-meta` | Science-horror TikTok (như /fk-video-khkd) nhưng tạo clip bằng /fk-gen-meta-video thay vì Flow |
 | `/fk-creative-mix` | Creative video mixing techniques |
 | `/fk-pipeline` | Full pipeline orchestration |
 | `/fk-podcast-book` | Series podcast Shorts từ sách (calendar + render + retry) |
