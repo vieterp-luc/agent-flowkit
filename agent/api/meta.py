@@ -56,6 +56,30 @@ async def browser_generate_video(body: GenerateVideoRequest):
         return {"ok": False, "error": f"UNEXPECTED: {e}"}
 
 
+class HarvestRequest(BaseModel):
+    limit: int = 20
+
+
+@router.post("/meta/browser/harvest")
+async def browser_harvest(body: HarvestRequest):
+    """Reclaim already-generated videos: open recent /prompt/<id> pages and return
+    {url, prompt text, video src} for each. Match the text to a scene to download the
+    correct existing video (no re-generation)."""
+    try:
+        from agent.services.meta_browser import init_browser, MetaBrowserError
+    except ImportError as e:
+        return {"ok": False, "error": f"PLAYWRIGHT_NOT_INSTALLED: {e}"}
+    try:
+        browser = await init_browser(headless=True)
+        items = await browser.harvest(body.limit)
+        return {"ok": True, "count": len(items), "items": items}
+    except MetaBrowserError as e:
+        return {"ok": False, "error": str(e)}
+    except Exception as e:
+        logger.exception("harvest failed")
+        return {"ok": False, "error": f"UNEXPECTED: {e}"}
+
+
 @router.post("/meta/browser/shutdown")
 async def browser_shutdown():
     """Close the singleton Chromium so the persistent profile lock is released

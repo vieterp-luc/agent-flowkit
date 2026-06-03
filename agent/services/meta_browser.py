@@ -13,6 +13,7 @@ Selectors live in meta_selectors.py and likely need tuning on first run
 import asyncio
 import logging
 import re
+import uuid
 from pathlib import Path
 from typing import Optional
 
@@ -89,9 +90,13 @@ class MetaBrowser:
         """Drive meta.ai/create: (optionally attach an image) → describe → Create →
         wait for the freshly rendered result → save → return path.
 
-        Result is identified by DIFFING video srcs against a pre-submit baseline. Meta
-        renders results as fbcdn https <video> srcs (4 variations); we grab the first
-        new one. image_path = local image for image→video; omit for text→video.
+        Result is identified by anchoring on a **unique fingerprint token** appended
+        to the prompt. Meta's UI redisplays the submitted prompt next to each result;
+        searching the DOM for our specific fingerprint then walking up to the nearest
+        `<video>` reliably picks OUR generation (no false positives from gallery
+        history / other projects sharing the same account). Falls back to baseline
+        diff only as a last-resort if the fingerprint never materializes.
+        image_path = local image for image→video; omit for text→video.
         """
         if self._ctx is None:
             raise MetaBrowserError("MetaBrowser not started")
@@ -113,20 +118,71 @@ class MetaBrowser:
                 if image_path:
                     await self._attach_image(page, image_path)
 
-                # Baseline of existing video srcs (history/feed) so we can spot the new one.
+                # Unique fingerprint anchored to THIS gen — Meta echoes the prompt
+                # text back in the UI next to each result, so we can locate our
+                # specific video by DOM-walking from this token.
+                fingerprint = f"[fk-{uuid.uuid4().hex[:6]}]"
+                prompt_with_fp = f"{prompt} {fingerprint}"
+
+                # Baselines captured BEFORE submit. Primary anchor = the new
+                # /prompt/<id> link Meta mints per generation (unique, unambiguous);
+                # video-src / fingerprint kept only as fallbacks.
+                baseline_prompts = set(await self._prompt_hrefs(page))
                 baseline = set(await self._video_srcs(page))
 
                 await composer.scroll_into_view_if_needed()
                 await composer.click()
-                await page.keyboard.type(prompt, delay=10)  # real keys for Lexical editor
+                await page.keyboard.type(prompt_with_fp, delay=10)  # real keys for Lexical editor
                 await self._submit(page, composer)
 
-                src = await self._await_new_video_src(page, baseline, timeout_s)
+                src = await self._await_video_by_prompt(
+                    page, baseline_prompts, fingerprint, baseline, timeout_s
+                )
                 content = await self._download(page, src)
                 dest = self._unique_dest(self._filename_from_url(src))
                 dest.write_bytes(content)
-                logger.info("Video saved: %s (%d KB)", dest, dest.stat().st_size // 1024)
+                logger.info(
+                    "Video saved: %s (%d KB) [fp=%s]",
+                    dest, dest.stat().st_size // 1024, fingerprint,
+                )
                 return dest
+            finally:
+                try:
+                    await page.close()
+                except Exception:
+                    pass
+
+    async def harvest(self, limit: int = 20) -> list:
+        """Open recent /prompt/<id> pages and return {url, prompt text, video src} for
+        each — lets the caller reclaim ALREADY-generated videos by matching the prompt
+        text to a scene (no re-generation needed)."""
+        if self._ctx is None:
+            raise MetaBrowserError("MetaBrowser not started")
+        async with self._lock:
+            page = await self._ctx.new_page()
+            try:
+                await page.goto(sel.APP_URL, wait_until="domcontentloaded", timeout=45_000)
+                self._check_login(page)
+                await self._dismiss_overlays(page)
+                await asyncio.sleep(2)
+                hrefs = (await self._prompt_hrefs(page))[:limit]
+                out = []
+                for h in hrefs:
+                    item = {"url": h, "src": "", "text": ""}
+                    try:
+                        await page.goto(h, wait_until="domcontentloaded", timeout=30_000)
+                        for _ in range(3):
+                            await asyncio.sleep(2)
+                            srcs = await self._video_srcs(page)
+                            if srcs:
+                                item["src"] = srcs[0]
+                                break
+                            await page.reload(wait_until="domcontentloaded", timeout=30_000)
+                        item["text"] = ((await page.text_content("body")) or "")[:6000]
+                    except Exception as e:
+                        item["error"] = str(e)
+                    out.append(item)
+                return out
             finally:
                 try:
                     await page.close()
@@ -215,30 +271,212 @@ class MetaBrowser:
                 logger.warning("All submit methods failed: %s", e)
         await asyncio.sleep(1.0)
 
-    async def _await_new_video_src(self, page, baseline: set, timeout_s: float) -> str:
-        """Poll for a <video> src that was NOT in the pre-submit baseline (the feed).
+    @staticmethod
+    async def _prompt_hrefs(page) -> list:
+        """Ordered list (DOM order → newest first) of /prompt/<id> links on the page.
+        Each Meta generation gets a unique /prompt/<id> URL — the stable anchor."""
+        return await page.evaluate(
+            """() => {
+               const seen = new Set(); const out = [];
+               for (const a of document.querySelectorAll('a[href*="/prompt/"]')) {
+                 const h = a.href;
+                 if (h && !seen.has(h)) { seen.add(h); out.push(h); }
+               }
+               return out;
+            }"""
+        )
 
-        Tracks both blob: and https srcs. The result can take a few seconds to stabilize
-        once it first appears, so we confirm the same new src twice before returning it.
-        Raises on quota/safety block.
+    async def _await_video_by_prompt(
+        self, page, baseline_prompts: set, fingerprint: str, baseline_srcs: set, timeout_s: float
+    ) -> str:
+        """Capture OUR generation by its unique /prompt/<id> URL.
+
+        Phase A: poll (with reload) for a NEW /prompt/<id> link not in the pre-submit
+        baseline — the topmost new one is THIS generation. Phase B: open that prompt
+        page (shows only our generation) and poll-reload until its <video> has a real
+        src → that's unambiguously our video. Falls back to the fingerprint walker if
+        no new prompt link ever appears.
         """
-        # Meta's SPA does NOT live-update the grid when a generation finishes — the
-        # page stays on "Imagining" while the video is actually ready. So we RELOAD
-        # the page periodically; after a reload the completed result appears at the
-        # top of the grid with its fbcdn src, and the diff catches it. We return the
-        # topmost (newest) fresh src.
-        step = 5
-        reload_every = 45
-        elapsed = 0.0
+        step, reload_every = 5, 45
+        elapsed = since_reload = 0.0
+        prompt_url = None
+
+        # ── Phase A: find our new prompt link ──
+        while elapsed < timeout_s and not prompt_url:
+            fresh = [h for h in (await self._prompt_hrefs(page)) if h not in baseline_prompts]
+            if fresh:
+                prompt_url = fresh[0]  # topmost (newest) = our generation
+                logger.info("New prompt URL: %s", prompt_url)
+                break
+            body = (await page.text_content("body") or "").lower()
+            if any(m in body for m in sel.BLOCK_MESSAGES):
+                raise MetaBrowserError("BLOCKED — quota/safety message detected in page")
+            await asyncio.sleep(step)
+            elapsed += step
+            since_reload += step
+            if since_reload >= reload_every:
+                try:
+                    await page.reload(wait_until="domcontentloaded", timeout=30_000)
+                    await asyncio.sleep(4)
+                except Exception as e:
+                    logger.debug("reload (phase A) failed: %s", e)
+                since_reload = 0.0
+
+        if not prompt_url:
+            logger.warning("No new /prompt link — falling back to fingerprint walker")
+            return await self._await_video_by_fingerprint(
+                page, fingerprint, baseline_srcs, max(30.0, timeout_s - elapsed)
+            )
+
+        # ── Phase B: open the prompt page, wait for ITS video to render ──
+        try:
+            await page.goto(prompt_url, wait_until="domcontentloaded", timeout=30_000)
+            await asyncio.sleep(3)
+        except Exception as e:
+            logger.debug("goto prompt page failed: %s", e)
         since_reload = 0.0
         while elapsed < timeout_s:
-            current = await self._video_srcs(page)  # DOM order → newest first
-            fresh = [s for s in current if s not in baseline]
-            if fresh:
-                return fresh[0]
+            srcs = await self._video_srcs(page)  # this page = only our generation
+            if srcs:
+                logger.info("Prompt-page video → %s…", srcs[0][:64])
+                return srcs[0]
+            raw = (await page.text_content("body")) or ""
+            low = raw.lower()
+            # Meta chat error ("couldn't animate that scene…") → fail fast WITH the
+            # message so the caller knows to change the motion prompt / image.
+            hit = next((m for m in sel.CHAT_ERROR_MESSAGES if m in low), None)
+            if hit:
+                i = low.find(hit)
+                snip = " ".join(raw[max(0, i - 50): i + 170].split())
+                raise MetaBrowserError(f"META_CHAT_ERROR: {snip}")
+            if any(m in low for m in sel.BLOCK_MESSAGES):
+                raise MetaBrowserError("BLOCKED — quota/safety message detected in page")
+            await asyncio.sleep(step)
+            elapsed += step
+            since_reload += step
+            if since_reload >= reload_every:
+                try:
+                    await page.reload(wait_until="domcontentloaded", timeout=30_000)
+                    await asyncio.sleep(4)
+                except Exception as e:
+                    logger.debug("reload (phase B) failed: %s", e)
+                since_reload = 0.0
+        await self._dump_state(page)
+        raise MetaBrowserError(
+            f"VIDEO_TIMEOUT after {timeout_s}s — prompt page {prompt_url} had no video. "
+            "State → output/_shared/meta_timeout_state.log"
+        )
+
+    async def _await_video_by_fingerprint(
+        self, page, fingerprint: str, baseline: set, timeout_s: float
+    ) -> str:
+        """Poll for OUR result anchored by `fingerprint` text in the DOM.
+
+        Strategy:
+          1. PRIMARY — find the text node containing `fingerprint` (Meta echoes the
+             submitted prompt back beside each result), walk up to the nearest
+             ancestor that contains a <video>, return that src.
+          2. FALLBACK — if the fingerprint never appears after `fingerprint_grace`
+             seconds AND a new baseline-diff src exists, return that (legacy
+             behavior, only triggers when Meta did NOT echo the prompt).
+
+        Meta's SPA does NOT live-update the grid when a generation finishes — the
+        page stays on "Imagining" while the result is actually ready. So we reload
+        every `reload_every` seconds; the result then renders in the grid.
+        """
+        step = 5
+        reload_every = 45
+        # Fallback after this many seconds — short enough to recover quickly on
+        # accounts where Meta doesn't echo prompt text in the UI (so fingerprint
+        # anchor never appears), long enough to give the prompt a chance to
+        # render on accounts that do echo it.
+        fingerprint_grace = 30
+        elapsed = 0.0
+        since_reload = 0.0
+        baseline_list = list(baseline)
+        # Meta sometimes responds with a chat-style error instead of a video.
+        # When that happens our fingerprint is still found in DOM but no video
+        # lives in the result block; without explicit detection the walker would
+        # climb out of scope and grab an unrelated stale clip from history.
+        meta_error_patterns = [
+            r"oops!?\s*something went wrong",
+            r"would you like me to try",
+            r"unable to (?:animate|generate)",
+            r"i (?:had|ran into) trouble",
+            r"let me try again",
+            r"can'?t (?:animate|generate|create) that",
+            r"couldn'?t (?:animate|generate|create)",
+        ]
+        while elapsed < timeout_s:
+            # PRIMARY: locate by fingerprint anchor AND require the video be NEW
+            # (not in pre-submit baseline). Walker depth limited to 5 ancestors so
+            # we stay strictly inside the result block belonging to OUR prompt —
+            # any farther up and we'd reach a shared parent and could pick up a
+            # neighboring block's video by accident.
+            try:
+                result = await page.evaluate(
+                    """({fp, baseline, errPatterns}) => {
+                       const blSet = new Set(baseline);
+                       const reList = errPatterns.map(p => new RegExp(p, 'i'));
+                       const tw = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+                       let tn;
+                       while ((tn = tw.nextNode())) {
+                         if (!tn.textContent.includes(fp)) continue;
+                         let cur = tn.parentElement;
+                         for (let i = 0; i < 5 && cur; i++) {
+                           const txt = cur.textContent || '';
+                           if (reList.some(re => re.test(txt))) {
+                             return {error: 'meta_chat_error', text: txt.slice(0, 200)};
+                           }
+                           const vids = cur.querySelectorAll ? cur.querySelectorAll('video') : [];
+                           for (const vid of vids) {
+                             const s = vid.src
+                               || (vid.querySelector('source') && vid.querySelector('source').src)
+                               || '';
+                             if ((s.startsWith('blob:') || s.startsWith('http')) && !blSet.has(s)) {
+                               return {src: s};
+                             }
+                           }
+                           cur = cur.parentElement;
+                         }
+                       }
+                       return null;
+                    }""",
+                    {
+                        "fp": fingerprint,
+                        "baseline": baseline_list,
+                        "errPatterns": meta_error_patterns,
+                    },
+                )
+            except Exception as e:
+                logger.debug("fingerprint eval failed: %s", e)
+                result = None
+            if isinstance(result, dict):
+                if result.get("error") == "meta_chat_error":
+                    snippet = (result.get("text") or "").strip()
+                    raise MetaBrowserError(
+                        f"META_CHAT_ERROR: {snippet[:160]} [fp={fingerprint}]"
+                    )
+                src = result.get("src")
+                if src:
+                    logger.info("Fingerprint hit (%s) → %s…", fingerprint, src[:64])
+                    return src
+
+            # FALLBACK: only after grace period, if fingerprint never showed up
+            if elapsed >= fingerprint_grace:
+                fresh = [s for s in (await self._video_srcs(page)) if s not in baseline]
+                if fresh:
+                    logger.warning(
+                        "Fingerprint %s not echoed by Meta — falling back to "
+                        "baseline-diff (returning topmost new src)", fingerprint,
+                    )
+                    return fresh[0]
+
+            # Quota / safety block check
             body_text = (await page.text_content("body") or "").lower()
             if any(m in body_text for m in sel.BLOCK_MESSAGES):
                 raise MetaBrowserError("BLOCKED — quota/safety message detected in page")
+
             await asyncio.sleep(step)
             elapsed += step
             since_reload += step
@@ -251,8 +489,9 @@ class MetaBrowser:
                 since_reload = 0.0
         await self._dump_state(page)
         raise MetaBrowserError(
-            f"VIDEO_TIMEOUT after {timeout_s}s — no new video appeared (had "
-            f"{len(baseline)} pre-existing). State → output/_shared/meta_timeout_state.log"
+            f"VIDEO_TIMEOUT after {timeout_s}s — fingerprint {fingerprint} never "
+            f"resolved (had {len(baseline)} pre-existing). "
+            "State → output/_shared/meta_timeout_state.log"
         )
 
     @staticmethod

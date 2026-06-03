@@ -52,6 +52,19 @@ OVERLAY_DISMISS = (
     'button[aria-label*="Close" i]'
 )
 
+# Meta chat-style failure on a /prompt page ("Oops! ... couldn't animate that scene.
+# Want to try a different motion ... or create a new image?"). Detecting these lets us
+# fail FAST with the real reason instead of waiting out the full timeout.
+CHAT_ERROR_MESSAGES = (
+    "couldn't animate",
+    "could not animate",
+    "couldn't create that",
+    "unable to animate",
+    "unable to generate",
+    "try a different motion",
+    "create a new image instead",
+)
+
 # Quota / safety messages (substring match against page text, lowercase)
 BLOCK_MESSAGES = (
     "you've reached your limit",

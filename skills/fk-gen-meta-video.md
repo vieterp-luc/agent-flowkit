@@ -122,6 +122,7 @@ NOT Enter — composer re-renders once an image is attached), results = `fbcdn` 
 | `IMAGE_NOT_FOUND` / `IMAGE_UPLOAD_FAILED` | Bad `image_path` or rejected format | Check path + format (jpg/png/webp/mp4/mov) |
 | `COMPOSER_NOT_FOUND` | UI/selector drift | Run `meta_vibes_inspect.py`, patch `COMPOSER` in `meta_selectors.py` |
 | `VIDEO_TIMEOUT after Ns` | Timeout too short, or gen still running | Use `timeout: 600`+; the reload-capture needs the gen to finish |
+| `META_CHAT_ERROR: …couldn't animate…` | Motion prompt describes motion of something NOT in the image (e.g. "water draining away" on an already-drained scene) | Rewrite the motion to a **camera move + atmospheric motion** on what IS in the frame (push-in, drift, mist, dust) — not actions the still can't support |
 | `BLOCKED` | Quota / safety refusal | Wait for reset or rephrase prompt |
 | `PLAYWRIGHT_NOT_INSTALLED` | Missing dep | `venv/bin/pip install playwright && venv/bin/python -m playwright install chromium` |
 
