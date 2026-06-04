@@ -196,9 +196,10 @@ def call_gemini_sync(payload: dict, model: str = DEFAULT_MODEL,
 
 
 async def call_gemini_async(payload: dict, model: str = DEFAULT_MODEL,
-                            timeout: int = 120) -> dict:
-    """Async POST to Gemini with key rotation."""
-    pool = get_pool()
+                            timeout: int = 120, pool: "Optional[GeminiKeyPool]" = None) -> dict:
+    """Async POST to Gemini with key rotation. Pass a dedicated `pool` to keep per-model
+    quota tracking separate (e.g. image vs text have independent free-tier daily caps)."""
+    pool = pool or get_pool()
     max_attempts = len(pool.keys) * MAX_ATTEMPTS_FACTOR
     last_err: Optional[Exception] = None
 

@@ -10,9 +10,16 @@ import sys
 import time
 import urllib.request
 
+import add_logo
 import meta_assemble
 import meta_video_batch
 from whatif_days import DAYS, STYLE
+
+for _mod in ("whatif_days_week2", "whatif_days_week3", "whatif_days_week4"):
+    try:  # week 2–4 topics (day8–day28)
+        DAYS.update(__import__(_mod).DAYS)
+    except ImportError:
+        pass
 
 BASE = "http://127.0.0.1:8100"
 LOG = "output/_shared/whatif_run.log"
@@ -89,8 +96,10 @@ def gen_images(pid, vid, slug):
 def main(keys):
     for k in keys:
         d = DAYS[k]
-        slug = d["slug"]
-        log(f"\n===== {k}: {d['title']} ({slug}) =====")
+        # All What-if outputs live under output/whatif/<slug>/ for tidy management.
+        # The generic scripts use output/<slug>, so prefixing the slug routes them in.
+        slug = f"whatif/{d['slug']}"
+        log(f"\n===== {k}: {d['title']} (output/{slug}) =====")
         try:
             pid, vid = create_day(d)
             log(f"  project {pid} video {vid}")
@@ -98,6 +107,12 @@ def main(keys):
             log(f"  images: {n}/7")
             meta_video_batch.main(vid, slug)          # → clips/ (own log)
             meta_assemble.main(vid, slug)             # default Phong_Vien 0.9 + pause
+            # brand final with the What-if logo (top-left, 13%, 75% transparent)
+            name = slug.split("/")[-1]
+            final = f"output/{slug}/{name}_final_Phong_Vien_TTS_09.mp4"
+            if os.path.exists(final):
+                add_logo.brand(final)
+                log("  ✓ logo added")
             log(f"  ✓ {slug} DONE")
         except Exception as e:
             log(f"  ✗ {k} ERROR: {e}")

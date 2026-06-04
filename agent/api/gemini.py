@@ -251,3 +251,53 @@ async def browser_status():
         "profile_dir": str(PROFILE_DIR),
         "profile_exists": _P(PROFILE_DIR).exists(),
     }
+
+
+# ─── Image generation via Gemini API (Nano Banana, key-pool rotation) ───────
+
+
+class GenerateImageRequest(BaseModel):
+    prompt: str
+    aspect_ratio: Optional[str] = None   # e.g. "9:16"; steered via prompt (Nano Banana has no aspect param)
+    output_path: Optional[str] = None    # save here; default output/_shared/gemini_images/<uuid>.png
+    model: str = "gemini-2.5-flash-image"
+    timeout: int = 120
+
+
+@router.post("/gemini/generate-image")
+async def generate_image_endpoint(body: GenerateImageRequest):
+    """Generate an image via the Gemini API with multi-key rotation (dedicated image
+    pool). Imagen is paid-only; this uses free-tier-capable gemini-2.5-flash-image."""
+    try:
+        from agent.services.gemini_image import generate_image, GeminiImageError
+    except ImportError as e:
+        return {"ok": False, "error": f"IMPORT_ERROR: {e}"}
+    try:
+        path = await generate_image(
+            body.prompt, output_path=body.output_path,
+            aspect_ratio=body.aspect_ratio, model=body.model, timeout=body.timeout,
+        )
+        return {"ok": True, "path": str(path), "filename": path.name,
+                "size_kb": path.stat().st_size // 1024}
+    except GeminiImageError as e:
+        return {"ok": False, "error": str(e)}
+    except RuntimeError as e:  # all keys daily-exhausted / call failed after retries
+        return {"ok": False, "error": str(e)}
+    except Exception as e:
+        logger.exception("gemini generate-image failed")
+        return {"ok": False, "error": f"UNEXPECTED: {e}"}
+
+
+@router.get("/gemini/image-pool-status")
+async def image_pool_status():
+    """Dedicated image key-pool state: available / cooling (per-minute) / daily-exhausted."""
+    import time as _t
+    from agent.services.gemini_image import get_image_pool
+    p = get_image_pool()
+    now = _t.time()
+    return {
+        "keys": len(p.keys),
+        "available": sum(1 for k in p.keys if k not in p.daily_exhausted and p.cooldowns.get(k, 0) <= now),
+        "cooling": sum(1 for k in p.keys if p.cooldowns.get(k, 0) > now),
+        "daily_exhausted": len(p.daily_exhausted),
+    }

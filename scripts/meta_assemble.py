@@ -41,8 +41,9 @@ def dur(path):
 def main(vid, slug, voice="Phong_Vien_TTS", speed=0.9):
     out = f"output/{slug}"
     tag = f"{voice}_{str(speed).replace('.', '')}"  # e.g. Phong_Vien_TTS_085
+    name = os.path.basename(slug)  # slug may be "whatif/<x>" → use only "<x>" in filenames
     clips, tts, seg = f"{out}/clips", f"{out}/tts_{tag}", f"{out}/segments_{tag}"
-    final = f"{out}/{slug}_final_{tag}.mp4"
+    final = f"{out}/{name}_final_{tag}.mp4"
     for d in (tts, seg):
         os.makedirs(d, exist_ok=True)
     scenes = json.load(urllib.request.urlopen(f"{BASE}/api/scenes?video_id={vid}", timeout=30))

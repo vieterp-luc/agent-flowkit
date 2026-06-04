@@ -8,6 +8,10 @@ Usage: `/fk-reel-whatif "<chủ đề what-if>"`  (vd: "Nếu đại dương c�
 > ⚠️ Clip Meta có **watermark + không commercial license** → dùng build view/thử nghiệm.
 > Bản monetize nghiêm túc → dùng Veo (`/fk-video-khkd`). Xem [[reference-meta-video-skill]].
 
+> 📁 **Output convention:** MỌI video What-if vào `output/whatif/<slug>/` (gọn, dễ quản lý).
+> `whatif_produce.py` tự prefix `whatif/`; nếu chạy script lẻ thì truyền slug dạng
+> `whatif/<slug>` (vd `python3 scripts/meta_video_batch.py <vid> whatif/<slug>`).
+
 ## Default đã khoá (không hỏi lại)
 | Tham số | Giá trị |
 |---------|---------|
@@ -61,8 +65,12 @@ python3 scripts/meta_assemble.py <video_id> <slug>
 # (đổi giọng/tốc độ: thêm arg [voice] [speed]; đổi nghỉ: sửa BUFFER trong script)
 ```
 
-**6. Hậu kỳ thủ công + caption:**
-- CapCut/Canva: text hook *"Nếu X?"* + nhãn mốc thời gian (*"8 phút sau", "1 tuần sau"*); crop watermark nếu cần.
+**6. Logo (tự động):** `whatif_produce.py` tự gắn logo kênh sau khi ghép →
+`<final>_logo.mp4` (góc trên-trái, 13% rộng, 75% trong suốt, `assets/whatif_logo.png`).
+Gắn tay: `python3 scripts/add_logo.py <video>`. Đây là bản đăng.
+
+**7. Hậu kỳ thủ công + caption:**
+- CapCut/Canva: text hook *"Nếu X?"* + nhãn mốc thời gian (*"8 phút sau", "1 tuần sau"*).
 - `/fk-gen-caption <video_id>` → caption + hashtag.
 
 ## Checklist
