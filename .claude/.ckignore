@@ -25,3 +25,6 @@ coverage
 # Allow reading these files
 !.env
 !.env.*
+
+# Allow running venv interpreter (user-authorized 2026-06-04 so agent can run scripts itself)
+!venv
