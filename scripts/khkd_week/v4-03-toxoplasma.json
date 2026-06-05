@@ -1,0 +1,81 @@
+{
+  "slug": "toxoplasma_vn",
+  "project": {
+    "name": "KHKD - Toxoplasma Gondii",
+    "description": "Vietnamese science-horror Reel — ky sinh trung Toxoplasma dieu khien hanh vi nguoi nuoi meo",
+    "story": "Toxoplasma gondii is a parasitic protozoan that completes its life cycle only inside cats. It infects rats and mice by hijacking their brain — instead of fearing cat urine, infected rats become attracted to it, walking right into the cat's territory to be eaten. The parasite then breeds inside the cat. Roughly one third of all humans on Earth carry latent Toxoplasma, and emerging research suggests it may affect human risk-taking behavior and personality.",
+    "material": "realistic",
+    "language": "vi",
+    "characters": [
+      {
+        "name": "Cat",
+        "entity_type": "character",
+        "description": "Vietnamese domestic short-hair tabby cat with green-yellow eyes, sleek body sitting calmly, soft fur catching light, photorealistic feline portrait."
+      },
+      {
+        "name": "Mouse",
+        "entity_type": "character",
+        "description": "Small brown house mouse with pink ears and tail, alert standing on hind legs, whiskers twitching, photorealistic rodent detail."
+      },
+      {
+        "name": "Toxoplasma Cyst",
+        "entity_type": "visual_asset",
+        "description": "Microscopic round Toxoplasma gondii tissue cyst packed with banana-shaped bradyzoites, glowing pale lavender under microscope, scientific cell biology visualization."
+      },
+      {
+        "name": "Vietnamese Home Interior",
+        "entity_type": "location",
+        "description": "Cozy Vietnamese home living room interior, warm yellow lamp light, wooden floor, fabric couch, soft homey atmosphere, evening calm."
+      }
+    ]
+  },
+  "video": {
+    "title": "Toxoplasma - Ky Sinh Trong Nao Nguoi Nuoi Meo",
+    "video_story": "Hook person petting cat with brain overlay, mouse walking toward cat urine, microscopic cyst in brain, behavior research stats, Vietnamese home closer with cat watching.",
+    "display_order": 0,
+    "orientation": "VERTICAL"
+  },
+  "scenes": [
+    {
+      "display_order": 0,
+      "chain_type": "ROOT",
+      "character_names": ["Cat", "Vietnamese Home Interior"],
+      "prompt": "Macro close-up of a person's hand gently petting a Vietnamese tabby cat in a cozy home living room, the cat's green-yellow eyes staring directly at camera with knowing intensity, warm lamp light. Vertical macro framing.",
+      "video_prompt": "Macro close-up of a person's hand gently petting a Vietnamese tabby cat in a cozy home living room, the cat's green-yellow eyes locked directly on camera with quiet knowing intensity. The camera slowly pushes in toward the cat's gaze. Warm yellow lamp light, soft homey atmosphere with subtle unsettling undertone.\n\nAudio: quiet Vietnamese home evening ambience, soft cat purring.\nSFX: gentle fur stroking, subtle cat breath.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Nếu bạn nuôi mèo, có thể trong não bạn đang có một loài ký sinh đang điều khiển hành vi của bạn."
+    },
+    {
+      "display_order": 1,
+      "chain_type": "ROOT",
+      "character_names": ["Mouse", "Cat"],
+      "prompt": "Macro shot of a small brown mouse cautiously walking directly toward a small puddle of cat urine on a wooden floor, sniffing it with curiosity instead of fear, a tabby cat watching motionless from shadowed background. Warm dim lighting. Vertical macro framing.",
+      "video_prompt": "Macro shot of a small brown mouse cautiously walking directly toward a small puddle of cat urine on a wooden floor, sniffing it with curiosity instead of fear. A tabby cat watches motionless from the shadowed background, eyes glinting. The camera slowly orbits the mouse as it approaches the dangerous scent. Warm dim shadowy lighting, tense atmosphere.\n\nAudio: quiet indoor ambience, predator stillness.\nSFX: mouse tiny sniffing, faint cat tail twitch.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Chuột bị Toxoplasma nhiễm sẽ không sợ mùi mèo. Ngược lại, nó còn bị thu hút, đi thẳng đến chỗ mèo."
+    },
+    {
+      "display_order": 2,
+      "chain_type": "CONTINUATION",
+      "parent_index": 1,
+      "character_names": ["Mouse", "Toxoplasma Cyst"],
+      "prompt": "Microscopic anatomical view inside a rodent brain showing pale lavender round Toxoplasma cysts embedded among neural tissue, packed with banana-shaped parasites inside each cyst, glowing softly. Cool clinical biology illustration lighting. Vertical scientific composition.",
+      "video_prompt": "Microscopic anatomical view inside a rodent brain showing pale lavender round Toxoplasma cysts embedded among neural tissue. Each cyst is packed with banana-shaped parasites visible inside, glowing softly. The camera slowly pushes in toward one cyst as the parasites inside writhe and multiply. Cool clinical biology illustration lighting with toxin glow.\n\nAudio: low scientific drone, faint neural fire.\nSFX: subtle cyst pulse, parasitic shifting inside.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Trong não chuột, ký sinh tạo các nang chứa hàng trăm bản sao, tiết chất làm giảm cảm giác sợ hãi."
+    },
+    {
+      "display_order": 3,
+      "chain_type": "ROOT",
+      "character_names": ["Toxoplasma Cyst"],
+      "prompt": "Educational visualization composition: a stylized human brain silhouette filled with glowing lavender Toxoplasma cysts scattered throughout, big infographic number '1/3' floating beside it indicating one-third of all humans carry it. Clinical scientific lighting. Vertical infographic framing.",
+      "video_prompt": "Educational visualization composition: a stylized human brain silhouette filled with glowing lavender Toxoplasma cysts scattered throughout. A large infographic number '1/3' fades in beside it indicating one-third of all humans on Earth carry the parasite. The camera slowly pushes in toward one bright cyst pulsing inside the brain. Clinical scientific lighting with parasite glow.\n\nAudio: low scientific drone, subtle heartbeat.\nSFX: faint cyst pulse, soft data reveal tone.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Khoảng một phần ba dân số thế giới mang Toxoplasma. Nghiên cứu cho thấy nó có thể tăng tính liều lĩnh ở người."
+    },
+    {
+      "display_order": 4,
+      "chain_type": "ROOT",
+      "character_names": ["Cat", "Vietnamese Home Interior"],
+      "prompt": "Wide cinematic shot of a Vietnamese home living room at evening, a tabby cat sitting calmly on the couch staring at a person scrolling phone on the other side, the person unaware. Warm yellow lamp light, cozy yet unsettling mood. Vertical wide framing.",
+      "video_prompt": "Wide cinematic shot of a Vietnamese home living room at evening, a tabby cat sitting calmly on the couch staring fixedly at a person scrolling phone on the other side, the person unaware. The camera slowly pushes in on the cat's unblinking gaze. Warm yellow lamp light, cozy yet quietly unsettling atmosphere.\n\nAudio: quiet evening home ambience, distant TV murmur.\nSFX: phone scroll taps, soft cat tail tap on couch.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Con mèo của bạn có vẻ vô hại. Nhưng trong khoảnh khắc bạn vuốt nó, có thể nó đã chia sẻ thứ gì đó với bạn."
+    }
+  ]
+}

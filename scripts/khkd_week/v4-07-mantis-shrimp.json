@@ -1,0 +1,81 @@
+{
+  "slug": "mantis_shrimp_vn",
+  "project": {
+    "name": "KHKD - Mantis Shrimp Tom Tit Cu Dam Soi Nuoc",
+    "description": "Vietnamese science-horror Reel — tom tit mantis shrimp cu dam tao bong bong soi 4400 do C",
+    "story": "The peacock mantis shrimp (Odontodactylus scyllarus) has the fastest punch in the animal kingdom. Its club-shaped raptorial appendage accelerates at 80 km/h, faster than a 22-caliber bullet leaving its barrel. The strike happens so fast underwater that it creates a cavitation bubble that briefly reaches around 4400°C — hotter than the surface of the sun — and emits a flash of visible light called sonoluminescence. Its eyes have 16 different photoreceptors (humans have 3), seeing colors we cannot imagine.",
+    "material": "realistic",
+    "language": "vi",
+    "characters": [
+      {
+        "name": "Peacock Mantis Shrimp",
+        "entity_type": "character",
+        "description": "Brightly colored peacock mantis shrimp Odontodactylus scyllarus, vivid green-red exoskeleton with blue accents, large bulging compound eyes on stalks, club-like raptorial appendages folded under body, photorealistic underwater macro detail."
+      },
+      {
+        "name": "Crab Shell Prey",
+        "entity_type": "visual_asset",
+        "description": "Small reef crab with hard brown speckled shell about 5cm wide, eight legs, two raised claws defensive, photorealistic underwater macro detail."
+      },
+      {
+        "name": "Cavitation Bubble Flash",
+        "entity_type": "visual_asset",
+        "description": "Brilliant glowing white-hot cavitation bubble formed in water at the moment of mantis shrimp strike, surrounded by shockwave ripples, emitting visible sonoluminescent light flash."
+      },
+      {
+        "name": "Coral Reef Habitat",
+        "entity_type": "location",
+        "description": "Tropical shallow coral reef with sand bottom, vivid orange and purple coral, turquoise water, gentle sun rays piercing from surface above."
+      }
+    ]
+  },
+  "video": {
+    "title": "Tom Tit - Cu Dam Lam Nuoc Soi 4400 Do",
+    "video_story": "Hook mantis shrimp eye macro then explosive cavitation flash, anatomy of spring-loaded club, slow-mo strike with cavitation bubble, shattered crab shell, eye reveal of 16 photoreceptors closer.",
+    "display_order": 0,
+    "orientation": "VERTICAL"
+  },
+  "scenes": [
+    {
+      "display_order": 0,
+      "chain_type": "ROOT",
+      "character_names": ["Peacock Mantis Shrimp", "Cavitation Bubble Flash", "Coral Reef Habitat"],
+      "prompt": "Extreme macro underwater shot of a peacock mantis shrimp at the climax of striking, a brilliant white-hot cavitation bubble exploding in the water beside it emitting visible light flash. Vivid colors of the shrimp glow under cool blue water. Vertical macro framing, dramatic action moment.",
+      "video_prompt": "Extreme macro underwater shot of a peacock mantis shrimp at the climax of striking, a brilliant white-hot cavitation bubble exploding in the water beside it emitting visible light flash. The camera holds tight on the bright explosion moment. Vivid colors of the shrimp glow against cool blue water, dramatic underwater contrast.\n\nAudio: muffled underwater pressure, sudden silence before strike.\nSFX: thunderous underwater snap, bright sonoluminescent crackle.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Cú đấm của con tôm này làm NƯỚC SÔI lên 4400 độ — nóng hơn cả mặt trời. Và nó phát sáng."
+    },
+    {
+      "display_order": 1,
+      "chain_type": "ROOT",
+      "character_names": ["Peacock Mantis Shrimp"],
+      "prompt": "Anatomical scientific macro view of the mantis shrimp club appendage, showing the spring-loaded latch mechanism with energy stored in a saddle-shaped exoskeleton structure, ready to release. Clean clinical biology illustration aesthetic with subtle energy build-up glow. Vertical close-up framing.",
+      "video_prompt": "Anatomical scientific macro view of the mantis shrimp club appendage, showing the spring-loaded latch mechanism with energy stored in a saddle-shaped exoskeleton structure. The camera slowly orbits as the latch tension visibly builds. Clean clinical lighting with subtle energy glow building toward release point.\n\nAudio: low scientific drone, building energetic hum.\nSFX: mechanical tension creak, energetic charge whir.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Càng nó là một cái lò xo sinh học, tích năng lượng rồi bung ra ở tốc độ 80 km mỗi giờ — nhanh hơn cả viên đạn."
+    },
+    {
+      "display_order": 2,
+      "chain_type": "CONTINUATION",
+      "parent_index": 1,
+      "character_names": ["Peacock Mantis Shrimp", "Cavitation Bubble Flash"],
+      "prompt": "Extreme slow-motion underwater macro of the mantis shrimp club striking forward, the water beside it forming a brilliant cavitation bubble flash mid-strike, glowing white-hot with sonoluminescent light emission. Cool blue water with intense flash. Vertical action framing.",
+      "video_prompt": "Extreme slow-motion underwater macro of the mantis shrimp club striking forward, the water beside it forming a brilliant cavitation bubble that flashes white-hot with sonoluminescent light. The camera holds tight on the strike sequence. Cool blue water with the intense flash temporarily filling the frame.\n\nAudio: muffled underwater hush before strike.\nSFX: thunderous underwater snap, bright sonoluminescent crackle, shock wave ripple.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Cú đấm đi nhanh đến mức nước sôi lên thành bong bóng, vỡ ra phát sáng, gần bằng mặt trời trong tích tắc."
+    },
+    {
+      "display_order": 3,
+      "chain_type": "ROOT",
+      "character_names": ["Crab Shell Prey", "Peacock Mantis Shrimp"],
+      "prompt": "Underwater macro shot of a small crab's hard shell shattered into pieces on the reef sand right after the mantis shrimp strike, the mantis shrimp calmly picking through the broken shell to eat the meat inside. Cool blue underwater light. Vertical macro framing.",
+      "video_prompt": "Underwater macro shot of a small crab's hard shell shattered into pieces on the reef sand right after the mantis shrimp strike. The mantis shrimp calmly picks through the broken shell to eat the meat inside. The camera slowly pulls back revealing the full aftermath. Cool blue underwater light, scattered shell fragments drifting.\n\nAudio: muffled underwater ambience, gentle current.\nSFX: shell fragments clinking, mantis shrimp eating.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Vỏ cua dày bị vỡ nát chỉ sau 1 phát. Đây là vũ khí mạnh nhất trong toàn bộ thế giới sinh vật biển."
+    },
+    {
+      "display_order": 4,
+      "chain_type": "ROOT",
+      "character_names": ["Peacock Mantis Shrimp", "Coral Reef Habitat"],
+      "prompt": "Extreme macro close-up of the peacock mantis shrimp's large bulging compound eyes mounted on stalks, faceted surfaces gleaming with iridescent colors humans cannot see, gazing directly at the camera. Vibrant alien quality. Vertical macro framing.",
+      "video_prompt": "Extreme macro close-up of the peacock mantis shrimp's large bulging compound eyes mounted on stalks, the faceted surfaces gleaming with iridescent colors that humans cannot see. The camera slowly pushes in until the eyes fill the frame, then the shrimp moves the eye stalks independently. Soft underwater light catching the iridescent facets.\n\nAudio: muffled underwater ambience, mysterious depth drone.\nSFX: subtle eye stalk movement.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Con người chỉ có 3 loại tế bào màu trong mắt. Tôm tít có 16. Nó đang nhìn thấy thế giới mà ta không tưởng tượng nổi."
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "slug": "san_la_gan_vn",
+  "project": {
+    "name": "KHKD - San La Gan",
+    "description": "Vietnamese science-horror Reel — san la gan tu goi ca song",
+    "story": "The Vietnamese liver fluke (Clonorchis sinensis / Opisthorchis) infects people who eat raw or undercooked freshwater fish dishes like goi ca. Encysted larvae in the fish muscle survive, travel up the bile ducts into the liver, attach, and live there for 20-30 years, silently damaging the liver. Vietnam has one of the highest infection rates in the world.",
+    "material": "realistic",
+    "language": "vi",
+    "characters": [
+      {
+        "name": "Raw Fish Dish",
+        "entity_type": "visual_asset",
+        "description": "Appetizing Vietnamese goi ca raw fish salad on a white plate, thin slices of pale freshwater fish, fresh green herbs, sliced star fruit and banana, garnished beautifully, warm inviting food photography look."
+      },
+      {
+        "name": "Liver Fluke",
+        "entity_type": "visual_asset",
+        "description": "Small leaf-shaped flatworm parasite, translucent tan-brown, about 1-2cm long, flat oval body with subtle internal organs visible, wet glossy surface, scientific specimen look."
+      },
+      {
+        "name": "Human Liver Anatomy",
+        "entity_type": "visual_asset",
+        "description": "Anatomical cross-section of a human liver showing the branching bile duct network in cool clinical detail, deep red-brown tissue, medical illustration style, clean and non-gory."
+      },
+      {
+        "name": "Vietnamese Family Meal",
+        "entity_type": "location",
+        "description": "Warm Vietnamese family dinner table scene, several dishes shared, bamboo chopsticks, soft warm overhead light, blurred family members in background, cozy domestic atmosphere."
+      }
+    ]
+  },
+  "video": {
+    "title": "San La Gan - Tu Goi Ca Song Vao Gan Ban",
+    "video_story": "Hook with delicious goi ca hiding a parasite, science of encysted larvae, fluke traveling to liver, decades of infection, Vietnamese meal closer.",
+    "display_order": 0,
+    "orientation": "VERTICAL"
+  },
+  "scenes": [
+    {
+      "display_order": 0,
+      "chain_type": "ROOT",
+      "character_names": ["Raw Fish Dish", "Vietnamese Family Meal"],
+      "prompt": "Extreme close-up of a beautiful Vietnamese goi ca raw fish dish on a white plate, bamboo chopsticks lifting one glistening slice of pale fish toward the camera. Soft warm dinner light, shallow depth of field on the fish slice. Vertical food-photography framing.",
+      "video_prompt": "Extreme close-up of a beautiful Vietnamese goi ca raw fish dish on a white plate, bamboo chopsticks slowly lifting one glistening slice of pale fish toward the camera. The camera holds steady, slight push toward the raised slice as it catches the warm light. Soft warm dinner lighting, shallow depth of field, appetizing tones with a faint unsettling undertone.\n\nAudio: warm Vietnamese family dinner ambience, soft chatter.\nSFX: chopsticks lifting, gentle plate clink.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Món gỏi cá này trông ngon lành. Nhưng trong thớ thịt có thứ sẽ sống trong gan bạn 20 năm."
+    },
+    {
+      "display_order": 1,
+      "chain_type": "ROOT",
+      "character_names": ["Raw Fish Dish", "Liver Fluke"],
+      "prompt": "Microscopic macro view inside pale raw fish muscle fibers, revealing several small round translucent cysts embedded between the fibers, each containing a coiled larva. Cool clinical microscope lighting, soft focus on one cyst. Vertical scientific macro framing.",
+      "video_prompt": "Microscopic macro view inside pale raw fish muscle fibers, slowly pushing in to reveal several small round translucent cysts embedded between the fibers, each containing a faintly coiled larva. The camera drifts forward through the muscle tissue toward one cyst. Cool clinical microscope lighting, soft biological glow.\n\nAudio: low scientific microscope hum.\nSFX: subtle wet tissue ambience, faint biological pulse.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Cá nước ngọt sống chứa ấu trùng sán lá gan. Nấu chín thì diệt được, ăn sống thì chúng còn nguyên."
+    },
+    {
+      "display_order": 2,
+      "chain_type": "CONTINUATION",
+      "parent_index": 1,
+      "character_names": ["Liver Fluke", "Human Liver Anatomy"],
+      "prompt": "Anatomical cutaway showing a leaf-shaped liver fluke swimming up a branching bile duct into the liver, settling against the duct wall. Cool clinical medical-illustration lighting, deep red-brown liver tissue, the fluke pale and translucent. Vertical anatomical framing, non-gory.",
+      "video_prompt": "Anatomical cutaway showing a leaf-shaped liver fluke swimming up a branching bile duct into the liver. The camera tracks alongside the fluke as it propels deeper into the duct, then settles and clamps against the duct wall. Cool clinical medical-illustration lighting, deep red-brown liver tissue, the fluke pale and translucent against it.\n\nAudio: low internal biological drone, slow heartbeat.\nSFX: soft fluid movement, gentle attachment.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Vào cơ thể, sán bơi ngược ống mật, chui vào gan, bám chặt và bắt đầu sống ở đó."
+    },
+    {
+      "display_order": 3,
+      "chain_type": "ROOT",
+      "character_names": ["Human Liver Anatomy", "Liver Fluke"],
+      "prompt": "Anatomical cross-section of a human liver with dozens of pale leaf-shaped flukes nestled throughout the branching bile ducts, the surrounding tissue showing subtle thickening over time. Cool clinical lighting, medical-illustration style, non-gory. Vertical framing, slow reveal of scale.",
+      "video_prompt": "Anatomical cross-section of a human liver with dozens of pale leaf-shaped flukes nestled throughout the branching bile ducts. The camera slowly pulls back, revealing more and more flukes spread across the liver, surrounding tissue subtly thickening over the years. Cool clinical medical-illustration lighting, deep liver tones, non-gory.\n\nAudio: slow ominous biological drone.\nSFX: faint multiple soft movements, slow heartbeat.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Hàng trăm con sán có thể sống trong gan một người, suốt 20 đến 30 năm, âm thầm."
+    },
+    {
+      "display_order": 4,
+      "chain_type": "ROOT",
+      "character_names": ["Raw Fish Dish", "Vietnamese Family Meal"],
+      "prompt": "Wide warm shot of a Vietnamese family happily sharing a meal around a table, the goi ca raw fish dish in the center, everyone reaching in with chopsticks. Warm domestic lighting with a faint unsettling stillness. Vertical wide framing.",
+      "video_prompt": "Wide warm shot of a Vietnamese family happily sharing a meal around a table, the goi ca raw fish dish in the center, everyone reaching in with chopsticks. The camera slowly pushes in toward the central dish as the family enjoys the meal, the warmth tinged with quiet unease. Warm domestic overhead lighting, cozy yet faintly ominous atmosphere.\n\nAudio: warm family dinner ambience, laughter and chatter.\nSFX: chopsticks on bowls, gentle eating sounds.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Việt Nam là vùng có tỷ lệ nhiễm cao nhất thế giới. Bữa gỏi cá tới, bạn có chắc không?"
+    }
+  ]
+}

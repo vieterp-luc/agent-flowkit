@@ -1,0 +1,81 @@
+{
+  "slug": "anglerfish_vn",
+  "project": {
+    "name": "KHKD - Anglerfish Ca Cau Cau Bien Sau",
+    "description": "Vietnamese science-horror Reel — anglerfish con duc tan vao than con cai thanh tui tinh",
+    "story": "Deep-sea anglerfish have the most extreme sexual dimorphism in nature. The female is large with the iconic bioluminescent lure dangling above her head. The male is tiny, parasitic. When he finds a female in the deep dark ocean, he bites her body and fuses to her flesh permanently. His blood vessels merge with hers, his organs dissolve one by one — eyes, gills, intestines — until he becomes nothing but a permanent testicle attached to her, feeding off her blood, providing sperm on demand. A large female can carry up to 6 fused males on her body.",
+    "material": "realistic",
+    "language": "vi",
+    "characters": [
+      {
+        "name": "Female Anglerfish",
+        "entity_type": "character",
+        "description": "Deep-sea anglerfish female, large dark body with bioluminescent lure dangling on a stalk above her head glowing blue-green, sharp teeth visible, photorealistic deep-sea creature in pitch dark abyss."
+      },
+      {
+        "name": "Male Anglerfish Parasitic",
+        "entity_type": "visual_asset",
+        "description": "Tiny pale male anglerfish about 5cm long, no eyes, no fins to speak of, fused into the side of a female's body becoming a permanent flesh growth, scientific specimen detail."
+      },
+      {
+        "name": "Deep Sea Abyss",
+        "entity_type": "location",
+        "description": "Pitch black deep ocean abyss at 2000 meters depth, complete darkness with only faint bioluminescent particles drifting, cold pressure-crushing environment, eerie void."
+      },
+      {
+        "name": "Anatomical Fusion Diagram",
+        "entity_type": "visual_asset",
+        "description": "Anatomical cross-section illustration showing the male anglerfish fused into the female's body, blood vessels merged together, the male's internal organs visibly dissolved, scientific biology textbook style."
+      }
+    ]
+  },
+  "video": {
+    "title": "Anglerfish - Con Duc Tan Vao Than Con Cai",
+    "video_story": "Hook female with glowing lure, tiny male approaches in dark abyss, fusion bite, anatomical dissolve of male organs, female with 6 fused males closer.",
+    "display_order": 0,
+    "orientation": "VERTICAL"
+  },
+  "scenes": [
+    {
+      "display_order": 0,
+      "chain_type": "ROOT",
+      "character_names": ["Female Anglerfish", "Deep Sea Abyss"],
+      "prompt": "Cinematic deep-sea shot of a female anglerfish in pitch black abyss, only her glowing blue-green bioluminescent lure visible dangling above her dark body. Her sharp teeth glint faintly. Cold pressure-crushing environment. Vertical cinematic framing.",
+      "video_prompt": "Cinematic deep-sea shot of a female anglerfish in pitch black abyss, only her glowing blue-green bioluminescent lure visible dangling above her dark body, swaying hypnotically. Her sharp teeth glint faintly. The camera slowly drifts past her in the void. Pitch dark with subtle bioluminescent particles drifting.\n\nAudio: deep ocean pressure drone, distant whale resonance.\nSFX: faint water pressure creak, soft bioluminescent shimmer.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Con cá đực này không bao giờ ăn nữa. Sắp tới, nó sẽ tan vào cơ thể bạn tình của mình, mãi mãi."
+    },
+    {
+      "display_order": 1,
+      "chain_type": "ROOT",
+      "character_names": ["Male Anglerfish Parasitic", "Female Anglerfish", "Deep Sea Abyss"],
+      "prompt": "Macro deep-sea shot of a tiny pale male anglerfish about 5cm long, swimming desperately through pitch black abyss toward the distant glow of a female's lure, his entire purpose to find her. Vertical macro framing.",
+      "video_prompt": "Macro deep-sea shot of a tiny pale male anglerfish about 5cm long swimming desperately through pitch black abyss toward the distant glow of a female's lure, his entire purpose to find her. The camera tracks beside him as he propels weakly forward. Pitch dark void with the distant blue-green lure growing larger.\n\nAudio: deep ocean pressure drone, building tension.\nSFX: tiny fish fin movement, weak swim effort.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Trong bóng tối tuyệt đối ở đáy đại dương, con đực bé tí, không mắt, lao về phía ánh sáng của bạn tình."
+    },
+    {
+      "display_order": 2,
+      "chain_type": "CONTINUATION",
+      "parent_index": 1,
+      "character_names": ["Male Anglerfish Parasitic", "Female Anglerfish"],
+      "prompt": "Extreme macro close-up of the tiny male anglerfish biting into the side of the female's massive body, his jaws locking permanently, flesh visibly beginning to fuse where contact made. Eerie blue-green bioluminescent backlight. Vertical macro framing.",
+      "video_prompt": "Extreme macro close-up of the tiny male anglerfish biting into the side of the female's massive body, his jaws locking permanently in place. Flesh visibly begins to fuse at the contact point as biological glue takes hold. The camera holds tight on the moment of permanent attachment. Eerie blue-green bioluminescent backlight.\n\nAudio: deep underwater silence, sudden tension.\nSFX: sharp flesh bite, slow biological fusion sound.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Vừa chạm vào cô ấy, con đực cắn cứng và không bao giờ rời. Da hai bên dính lại, máu nối với máu."
+    },
+    {
+      "display_order": 3,
+      "chain_type": "ROOT",
+      "character_names": ["Anatomical Fusion Diagram", "Male Anglerfish Parasitic"],
+      "prompt": "Anatomical scientific cross-section illustration showing the male anglerfish fused into the female's body, blood vessels merged, the male's eyes dissolved, gills shrunk, intestines liquefied — only his testes remaining intact and active. Clean clinical biology-textbook lighting. Vertical scientific composition.",
+      "video_prompt": "Anatomical scientific cross-section illustration showing the male anglerfish fused into the female's body. The camera slowly pushes in revealing his blood vessels merged with hers, his eyes dissolved to empty sockets, gills shrunk to nothing, intestines liquefied — only his testes remaining intact and pulsing actively. Clean clinical biology lighting with grim reveal.\n\nAudio: low scientific drone, slow heartbeat.\nSFX: subtle organ dissolution, biological merger pulse.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Mắt nó tan ra. Mang biến mất. Ruột rỗng dần. Cuối cùng nó chỉ còn lại tinh hoàn, sống bằng máu của cô."
+    },
+    {
+      "display_order": 4,
+      "chain_type": "ROOT",
+      "character_names": ["Female Anglerfish", "Male Anglerfish Parasitic", "Deep Sea Abyss"],
+      "prompt": "Wide cinematic deep-sea shot of a large female anglerfish swimming through pitch black abyss with 6 small parasitic male anglerfish fused at different spots along her body like tumors, her lure glowing. Cold eerie void atmosphere. Vertical wide framing.",
+      "video_prompt": "Wide cinematic deep-sea shot of a large female anglerfish swimming through pitch black abyss with 6 small parasitic male anglerfish fused at different spots along her body like tumors, her lure glowing. The camera slowly orbits around her revealing all the fused males. Pitch dark void, faint bioluminescence catching the fused growths.\n\nAudio: deep ocean pressure ambient drone.\nSFX: slow underwater movement, faint bioluminescent shimmer.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Một con cái có thể mang 6 con đực dính trên người. Đó không còn là 2 con cá — chỉ còn một sinh vật duy nhất."
+    }
+  ]
+}

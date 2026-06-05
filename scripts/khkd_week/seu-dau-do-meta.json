@@ -1,0 +1,120 @@
+{
+  "slug": "seu_dau_do_vn",
+  "project": {
+    "name": "KHKD - Seu Dau Do Chim Lac",
+    "description": "Vietnamese science-horror Reel — seu dau do va gia thuyet Chim Lac tren trong dong",
+    "story": "The sarus crane (seu dau do, Antigone antigone sharpii) was once abundant across Vietnam's Mekong Delta wetlands. Over the past three decades, due to drought, acid sulfate soils, and the loss of melaleuca forests, its population has crashed by 99%, with fewer than a hundred cranes now visiting Tram Chim National Park. Some research suggests this crane is the legendary Chim Lac depicted on Dong Son bronze drums for two thousand years. If this hypothesis holds, then the sacred ancestral bird of the Vietnamese people may one day no longer fly over Vietnamese land.",
+    "material": "realistic",
+    "language": "vi",
+    "characters": [
+      {
+        "name": "Sarus Crane",
+        "entity_type": "character",
+        "description": "Adult sarus crane Antigone antigone, tall 1.8 meter bird, slate gray body feathers, bright bare red skin on head and upper neck, long thin red legs, long graceful neck, photorealistic wildlife portrait."
+      },
+      {
+        "name": "Dong Son Bronze Drum",
+        "entity_type": "visual_asset",
+        "description": "Ancient Vietnamese Dong Son bronze drum surface, warm golden-brown patina, intricate geometric concentric patterns radiating from a central sun-star motif, a ring of carved bird silhouettes flying around the star in counter-clockwise direction."
+      },
+      {
+        "name": "Tram Chim Wetlands",
+        "entity_type": "location",
+        "description": "Mekong Delta wetland landscape with shallow water reflecting sky, scattered melaleuca trees, tall reed grasses, golden hour atmospheric light, calm vast horizon."
+      },
+      {
+        "name": "Ancient Vietnamese Villager",
+        "entity_type": "character",
+        "description": "Ancient Van Lang era Vietnamese villager, simple brown handwoven tunic, dark hair tied back, dignified reverent expression, painted-illustration aesthetic blending photorealism."
+      }
+    ]
+  },
+  "video": {
+    "title": "Seu Dau Do - Co The La Chim Lac Tren Trong Dong",
+    "video_story": "Hook extinction tease, sarus crane grandeur, courtship dance, Dong Son drum reveal, hypothesis match, ancestor reverence, population crash, dry-season causes, lonely Tram Chim today, conditional closer with ghost-drum overlay.",
+    "display_order": 0,
+    "orientation": "VERTICAL"
+  },
+  "scenes": [
+    {
+      "display_order": 0,
+      "chain_type": "ROOT",
+      "character_names": ["Sarus Crane", "Tram Chim Wetlands"],
+      "prompt": "Wide cinematic shot of Tram Chim wetlands at golden sunset, a single sarus crane silhouette flying gracefully across the frame from left to right. Warm orange-pink sky, mirror-like water reflecting the silhouette. Vertical 9:16 cinematic framing.",
+      "video_prompt": "The sarus crane silhouette flies gracefully across the frame from left to right while the camera slowly pans horizontally, golden sunset light glowing, water reflections rippling gently below.",
+      "narrator_text": "Sếu đầu đỏ. Giờ chỉ còn vài chục, và có thể là biểu tượng Chim Lạc được khắc trên trống đồng."
+    },
+    {
+      "display_order": 1,
+      "chain_type": "ROOT",
+      "character_names": ["Sarus Crane", "Tram Chim Wetlands"],
+      "prompt": "Full body portrait of an adult sarus crane standing tall in shallow wetland water, bright red bare head and upper neck, slate gray body feathers, long thin red legs, long graceful neck, wings partially open. Soft natural morning light, mist around legs. Vertical 9:16 framing.",
+      "video_prompt": "The sarus crane slowly stretches its wings wide open showing its full wingspan, then folds them back as it turns its red head toward the camera with dignified poise. Soft morning light, gentle breeze rippling feathers.",
+      "narrator_text": "Sếu đầu đỏ là loài chim bay cao nhất hành tinh, với chiều cao 1.8 mét và sải cánh hơn 2 mét."
+    },
+    {
+      "display_order": 2,
+      "chain_type": "ROOT",
+      "character_names": ["Sarus Crane", "Tram Chim Wetlands"],
+      "prompt": "Wide cinematic shot of a pair of sarus cranes performing the famous courtship dance in a shallow wetland at sunrise, both birds with wings spread upward and jumping in unison facing each other. Warm golden hour light, mist rising softly. Vertical 9:16 framing.",
+      "video_prompt": "The pair of sarus cranes dance together in synchronized unison, jumping with wings spread high, bowing forward and calling at each other in a beautiful ritual. Warm golden sunrise light, gentle mist swirling around them.",
+      "narrator_text": "Chúng chung thủy cả đời, mỗi mùa lại múa giao duyên cùng nhau. Một nghi lễ đẹp kỳ lạ giữa tự nhiên."
+    },
+    {
+      "display_order": 3,
+      "chain_type": "ROOT",
+      "character_names": ["Dong Son Bronze Drum"],
+      "prompt": "Macro close-up of an ancient Vietnamese Dong Son bronze drum surface, warm golden patina, intricate concentric geometric patterns radiating from the central sun-star motif, a ring of carved bird silhouettes flying eternally around the star. Museum lighting. Vertical 9:16 framing.",
+      "video_prompt": "The camera slowly orbits around the ancient bronze drum surface, the warm museum light glinting across the golden patina and revealing the ring of carved birds flying around the central sun-star.",
+      "narrator_text": "Trên trống đồng Đông Sơn 2.000 năm trước, một loài chim bay quanh ngôi sao trung tâm. Tên gọi là Chim Lạc."
+    },
+    {
+      "display_order": 4,
+      "chain_type": "ROOT",
+      "character_names": ["Dong Son Bronze Drum", "Sarus Crane"],
+      "prompt": "Split-screen comparison composition: left half shows a zoomed-in carved Chim Lac bird from the Dong Son drum with long neck extended and long legs trailing and wide wingspan in bronze relief; right half shows a real sarus crane in flight against the natural sky in the exact same anatomical pose. Bronze tones on left, natural tones on right. Vertical 9:16 framing.",
+      "video_prompt": "Both halves of the split-screen slowly zoom in toward their respective birds, the matching silhouettes aligning perfectly. A subtle highlight glow connects the matching anatomical features between the two birds.",
+      "narrator_text": "Một số nghiên cứu cho rằng đây chính là sếu đầu đỏ, cùng dáng bay, sải cánh, và cổ duỗi dài."
+    },
+    {
+      "display_order": 5,
+      "chain_type": "ROOT",
+      "character_names": ["Ancient Vietnamese Villager", "Sarus Crane"],
+      "prompt": "Painted illustration style — an ancient Van Lang era Vietnamese villager in a simple brown handwoven tunic standing on a rice paddy looking up at the sky, where a flock of sarus cranes flies above in V-formation against a golden mythical light. Reverent atmospheric mood. Vertical 9:16 framing.",
+      "video_prompt": "The ancient villager slowly raises their head and gazes upward in reverence. The flock of sarus cranes above slowly flies forward in V-formation against the mythical golden sky.",
+      "narrator_text": "Người Việt cổ thấy sếu chung thủy, dáng bay thiêng liêng, có thể đã thờ nó như tổ tiên giống nòi."
+    },
+    {
+      "display_order": 6,
+      "chain_type": "ROOT",
+      "character_names": ["Tram Chim Wetlands", "Sarus Crane"],
+      "prompt": "Educational split-screen composition: left half shows an archival-style scene of Tram Chim wetlands in the 1990s with hundreds of sarus cranes filling the water and sky; right half shows the same wetland today with only two or three distant cranes barely visible. Large infographic numbers 'hơn nghìn' shrinking to 'dưới trăm'. Vertical 9:16 framing.",
+      "video_prompt": "The left side reveals the dense historical crane scene, then the right side slowly fades in showing the empty modern wetland. The infographic numbers visibly shrink as time accelerates across the comparison.",
+      "narrator_text": "Ba mươi năm trước, Tràm Chim có hàng nghìn cá thể. Hôm nay đếm hết được chưa tới một trăm."
+    },
+    {
+      "display_order": 7,
+      "chain_type": "ROOT",
+      "character_names": ["Tram Chim Wetlands"],
+      "prompt": "Wide drone-style aerial shot of Dong Thap Muoi wetlands during the harsh dry season, vast extent of cracked earth with white acid sulfate mineral deposits, sparse withered melaleuca trees, dried yellow grass, melancholic late afternoon light. Vertical 9:16 framing.",
+      "video_prompt": "The camera slowly pulls back from a single cracked earth section, revealing the vast extent of the dried-up wetland stretching to the horizon. Subtle heat shimmer rises from the cracked ground.",
+      "narrator_text": "Hạn hán dài, nước phèn chua, mất rừng tràm. Đàn sếu không còn chỗ ăn, không còn chỗ sinh sản."
+    },
+    {
+      "display_order": 8,
+      "chain_type": "ROOT",
+      "character_names": ["Sarus Crane", "Tram Chim Wetlands"],
+      "prompt": "Wide cinematic drone shot of a vast modern Tram Chim wetland at golden hour, a single solitary sarus crane standing alone in shallow water with its mirror reflection, vast empty expanse stretching to the horizon. Moody golden sunset, melancholic atmosphere. Vertical 9:16 framing.",
+      "video_prompt": "The camera slowly tilts up from the solitary sarus crane, revealing the vast empty wetland stretching to the horizon. The crane stands motionless, its reflection rippling gently in the water.",
+      "narrator_text": "Tràm Chim, vương quốc cuối cùng của sếu đầu đỏ, giờ chỉ còn vài cá thể đứng giữa đầm trống."
+    },
+    {
+      "display_order": 9,
+      "chain_type": "ROOT",
+      "character_names": ["Sarus Crane", "Dong Son Bronze Drum", "Tram Chim Wetlands"],
+      "prompt": "Wide cinematic shot of a pair of sarus cranes performing courtship dance in deep golden sunset, while in the sky above them a ghostly translucent overlay of the Dong Son drum bird-ring slowly appears as if etched into the heavens. Magical reverent mood blending nature and ancient bronze art. Vertical 9:16 framing.",
+      "video_prompt": "The pair of sarus cranes dance gracefully below as the ghostly Dong Son drum bird-ring slowly rotates in the golden sky above them. Both the dancers and the celestial drum bird-ring gradually fade out together into the sunset.",
+      "narrator_text": "Nếu đúng đó là Chim Lạc, một ngày loài chim trên trống đồng có thể không còn bay trên đất Việt."
+    }
+  ]
+}

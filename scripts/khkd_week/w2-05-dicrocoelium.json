@@ -1,0 +1,81 @@
+{
+  "slug": "dicrocoelium_vn",
+  "project": {
+    "name": "KHKD - Dicrocoelium",
+    "description": "Vietnamese science-horror Reel — san bien kien thanh zombie leo ngon co",
+    "story": "Dicrocoelium dendriticum is a lancet liver fluke. Adults live in livers of grazing animals like cows. Eggs come out in feces, snails eat them, snails cough up slime balls containing larvae, ants eat the slime. One larva migrates to the ant's sub-esophageal ganglion (brain) and hijacks behavior. Every night the infected ant leaves the colony, climbs to the tip of a grass blade, and clamps its jaws there, waiting motionless to be eaten by a grazing animal. If it survives the night, the parasite releases control by morning so the ant returns to safety. Every night the cycle repeats — until one day the ant is eaten, completing the parasite's life cycle.",
+    "material": "realistic",
+    "language": "vi",
+    "characters": [
+      {
+        "name": "Worker Ant",
+        "entity_type": "character",
+        "description": "Small brown-black worker ant, segmented body about 5mm, six legs, bent antennae, mandibles, photorealistic insect macro detail."
+      },
+      {
+        "name": "Grass Blade at Dusk",
+        "entity_type": "location",
+        "description": "Single tall green grass blade at dusk in a pasture, glistening with dew, soft fading orange-blue sky background, blurred meadow."
+      },
+      {
+        "name": "Grazing Cow",
+        "entity_type": "character",
+        "description": "Brown-and-white dairy cow grazing on grass, large gentle eyes, broad muzzle reaching down to clip grass, photorealistic farm animal detail."
+      },
+      {
+        "name": "Liver Fluke",
+        "entity_type": "visual_asset",
+        "description": "Small leaf-shaped flatworm Dicrocoelium, translucent pale tan, about 1cm long, thin lancet-shaped body, scientific specimen look."
+      }
+    ]
+  },
+  "video": {
+    "title": "Dicrocoelium - San Bien Kien Thanh Zombie",
+    "video_story": "Hook ant clamped on grass at dusk, brain-hijack science, nightly zombie cycle, cow eats ant, full lifecycle closer.",
+    "display_order": 0,
+    "orientation": "VERTICAL"
+  },
+  "scenes": [
+    {
+      "display_order": 0,
+      "chain_type": "ROOT",
+      "character_names": ["Worker Ant", "Grass Blade at Dusk"],
+      "prompt": "Macro close-up of a single worker ant clamped motionlessly to the very tip of a tall grass blade at dusk, jaws locked tight, body hanging still while other ants go about their day blurred in the meadow background below. Soft fading orange light, dewdrops glistening. Vertical macro framing.",
+      "video_prompt": "Macro close-up of a single worker ant clamped motionlessly to the very tip of a tall grass blade at dusk, jaws locked tight, body hanging still while other ants in the colony go about their day blurred in the background below. The camera slowly pulls back to reveal the lonely sentinel against the fading sky. Soft orange-blue dusk light, dewdrops glistening on grass.\n\nAudio: quiet pasture evening ambience, crickets starting.\nSFX: faint grass swaying, soft wind.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Mỗi đêm, con kiến này tự leo lên ngọn cỏ và ngậm chặt, chờ một con bò đi qua nuốt nó."
+    },
+    {
+      "display_order": 1,
+      "chain_type": "ROOT",
+      "character_names": ["Worker Ant", "Liver Fluke"],
+      "prompt": "Anatomical scientific illustration of the inside of an ant's head, showing one thin liver fluke thread of Dicrocoelium reaching from the abdomen up into the sub-esophageal ganglion (brain), glowing faintly. Clean clinical biology-illustration style. Vertical scientific composition.",
+      "video_prompt": "Anatomical scientific illustration of the inside of an ant's head, showing one thin liver fluke thread of Dicrocoelium reaching from the abdomen up into the sub-esophageal ganglion brain, glowing faintly. The camera slowly pushes in along the thread toward where it embeds in the brain, revealing the hijack. Clean clinical biology-illustration lighting with subtle parasite glow.\n\nAudio: low scientific drone, faint biological pulse.\nSFX: subtle tendril movement, soft neural fire.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Trong đầu nó có một con sán. Một sợi sán cài đúng vào não, biến nó thành con rối điều khiển."
+    },
+    {
+      "display_order": 2,
+      "chain_type": "CONTINUATION",
+      "parent_index": 1,
+      "character_names": ["Worker Ant", "Grass Blade at Dusk"],
+      "prompt": "Time-lapse macro shot of an ant leaving the colony at sunset, climbing up a tall grass blade, clamping its jaws at the tip, holding motionless all night under moonlight. Then at sunrise the jaws release and the ant climbs back down toward the colony. Vertical time-lapse macro framing.",
+      "video_prompt": "Time-lapse macro shot of an ant leaving the colony at sunset, climbing up a tall grass blade, clamping its jaws at the tip, holding motionless all night under moonlight, then at sunrise releasing and climbing back down toward the colony. The camera holds steady on the grass blade as the sky transitions dusk to night to dawn. Soft sky color shifts dramatic and beautiful.\n\nAudio: pasture day-to-night-to-dawn ambient transitions.\nSFX: subtle ant climbing, night insects, dawn birdsong.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Đêm đến nó leo lên, ngậm chặt cả đêm. Sáng hôm sau, sán nhả ra, kiến quay về tổ bình thường."
+    },
+    {
+      "display_order": 3,
+      "chain_type": "ROOT",
+      "character_names": ["Grazing Cow", "Worker Ant", "Grass Blade at Dusk"],
+      "prompt": "Macro close-up of a grazing cow's gentle muzzle clipping a clump of grass including the grass blade with the clamped ant on its tip, the ant being swept into the cow's mouth along with the grass. Warm morning pasture light. Vertical macro framing.",
+      "video_prompt": "Macro close-up of a grazing cow's gentle muzzle clipping a clump of grass including the grass blade with the clamped ant on its tip. The ant is swept into the cow's mouth along with the grass in slow motion. The camera tracks the moment from the side, the cow's tongue and lips folding around the grass. Warm soft morning pasture light.\n\nAudio: warm pasture morning ambience, gentle birdsong.\nSFX: soft grass tearing, cow chewing, lips brushing grass.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Cho đến một ngày, bò đến đúng lúc đó. Nuốt cả ngọn cỏ, cả con kiến, và cả con sán bên trong."
+    },
+    {
+      "display_order": 4,
+      "chain_type": "ROOT",
+      "character_names": ["Liver Fluke", "Grazing Cow"],
+      "prompt": "Wide diagram-style illustration of the complete Dicrocoelium life cycle in a pasture scene: cow with fluke in liver, eggs in droppings, snail eating eggs, snail slime balls, ant eating slime, ant on grass tip. All elements arranged in a circular loop. Vertical infographic-style composition.",
+      "video_prompt": "Wide diagram-style illustration of the complete Dicrocoelium life cycle in a pasture scene: cow with fluke in liver, eggs in droppings, snail eating eggs, snail slime balls, ant eating slime, ant clamped on grass tip — all elements arranged in a circular loop. The camera slowly rotates around the cycle diagram, revealing how the loop closes endlessly. Warm pasture lighting with clean infographic overlay.\n\nAudio: warm pasture ambience, cyclical musical undertone.\nSFX: subtle nature sounds connecting each stage of the cycle.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Sán vào gan bò đẻ trứng. Trứng theo phân ra cỏ, ốc sên ăn, kiến ăn — vòng tròn không bao giờ dừng."
+    }
+  ]
+}

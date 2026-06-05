@@ -1,0 +1,81 @@
+{
+  "slug": "bo_ngua_vn",
+  "project": {
+    "name": "KHKD - Bo Ngua",
+    "description": "Vietnamese science-horror Reel — bo ngua cai an dau con duc khi giao phoi",
+    "story": "Praying mantis sexual cannibalism: during mating the larger female often turns and bites off the smaller male's head. Remarkably, the decapitated male's body keeps mating with even greater vigor, because removing the head removes inhibitory brain control over the mating reflex. The male's body becomes nutrients that nourish the female's eggs. About a quarter of matings end this way.",
+    "material": "realistic",
+    "language": "vi",
+    "characters": [
+      {
+        "name": "Female Mantis",
+        "entity_type": "character",
+        "description": "Large green praying mantis female, robust body, powerful spiked raptorial forelegs folded, triangular head with large compound eyes, alert predatory posture, photorealistic macro insect detail."
+      },
+      {
+        "name": "Male Mantis",
+        "entity_type": "character",
+        "description": "Smaller slender brown praying mantis male, thin elongated body, long wings, delicate legs, cautious nervous posture, noticeably smaller than the female, photorealistic macro detail."
+      },
+      {
+        "name": "Garden Leaf Habitat",
+        "entity_type": "location",
+        "description": "Lush green garden plant with broad dewy leaves, soft morning sunlight, blurred green foliage bokeh background, gentle natural atmosphere."
+      },
+      {
+        "name": "Mantis Egg Case",
+        "entity_type": "visual_asset",
+        "description": "Foamy tan-brown praying mantis ootheca egg case attached to a twig, hardened spongy texture with ridged segments, holding hundreds of eggs inside."
+      }
+    ]
+  },
+  "video": {
+    "title": "Bo Ngua - An Dau Ban Tinh Khi Giao Phoi",
+    "video_story": "Hook female about to cannibalize mate, male's cautious approach, the decapitation moment, headless male mates harder, egg case nourished closer.",
+    "display_order": 0,
+    "orientation": "VERTICAL"
+  },
+  "scenes": [
+    {
+      "display_order": 0,
+      "chain_type": "ROOT",
+      "character_names": ["Female Mantis", "Male Mantis", "Garden Leaf Habitat"],
+      "prompt": "Macro close-up of a large green female praying mantis on a dewy leaf, her triangular head beginning to turn, while a smaller brown male mantis approaches cautiously from behind her. Soft morning garden light, shallow depth of field. Vertical macro framing.",
+      "video_prompt": "Macro close-up of a large green female praying mantis on a dewy leaf, her triangular head slowly beginning to turn, while a smaller brown male mantis approaches cautiously from behind her. The camera holds low and steady, slight push toward the tense gap between them. Soft morning garden light, dew sparkling, suspenseful stillness.\n\nAudio: quiet garden morning ambience, soft breeze.\nSFX: faint leaf rustle, delicate insect leg movement.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Con bọ ngựa cái này sắp giao phối. Và nó sắp ăn đầu bạn tình của mình ngay khi đang yêu."
+    },
+    {
+      "display_order": 1,
+      "chain_type": "ROOT",
+      "character_names": ["Female Mantis", "Male Mantis", "Garden Leaf Habitat"],
+      "prompt": "Macro shot of the smaller brown male mantis slowly and carefully climbing onto the back of the larger green female on a leaf, his movements tense and deliberate. Soft golden morning light, blurred green background. Vertical macro framing from the side.",
+      "video_prompt": "Macro shot of the smaller brown male mantis slowly and carefully climbing onto the back of the larger green female on a leaf, his movements tense and deliberate, freezing between each step. The camera tracks his slow ascent from a side angle. Soft golden morning light, blurred green background, palpable tension.\n\nAudio: quiet garden morning ambience.\nSFX: delicate leg taps, faint wing shuffle, tense stillness.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Con đực nhỏ hơn, phải tiếp cận thật chậm. Vì chỉ một sai lầm là nó thành bữa ăn."
+    },
+    {
+      "display_order": 2,
+      "chain_type": "CONTINUATION",
+      "parent_index": 1,
+      "character_names": ["Female Mantis", "Male Mantis"],
+      "prompt": "Macro close-up of the female mantis curling her triangular head back over her shoulder toward the male clasped on her back, her forelegs reaching. Dramatic side lighting, tight framing on the two heads. Vertical macro composition, tense but non-gory.",
+      "video_prompt": "Macro close-up of the female mantis curling her triangular head back over her shoulder toward the male clasped on her back, her spiked forelegs reaching up to grip him. The camera holds tight on the moment as she leans in, the male's body still clasping firmly. Dramatic side lighting, shallow focus, intense but restrained framing avoiding graphic detail.\n\nAudio: quiet garden ambience, sudden hush.\nSFX: sharp insect movement, delicate crunch, wings shuffling.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Đang giao phối, con cái quay đầu lại và cắn đứt đầu con đực. Nhưng thân nó vẫn tiếp tục."
+    },
+    {
+      "display_order": 3,
+      "chain_type": "ROOT",
+      "character_names": ["Male Mantis", "Female Mantis"],
+      "prompt": "Macro close-up of the headless male mantis body still clasped firmly onto the female's back, his legs gripping with even more intensity, the mating continuing. Soft natural light, shallow focus on the male's body. Vertical macro framing, clinical not gory.",
+      "video_prompt": "Macro close-up of the headless male mantis body still clasped firmly onto the female's back, his legs gripping with even more intensity as the mating continues. The camera slowly pulls back to reveal both mantises, the male's body driven purely by reflex. Soft natural light, restrained clinical framing without graphic detail.\n\nAudio: quiet garden ambience, low biological undertone.\nSFX: subtle insect leg movement, faint wing flutter.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Kỳ lạ thay, mất đầu khiến con đực giao phối mạnh hơn. Bản năng truyền giống không cần bộ não."
+    },
+    {
+      "display_order": 4,
+      "chain_type": "ROOT",
+      "character_names": ["Female Mantis", "Mantis Egg Case", "Garden Leaf Habitat"],
+      "prompt": "Macro shot of the well-fed female mantis perched on a twig beside a freshly formed foamy tan egg case, her body full, in soft golden evening light. Blurred green garden background. Vertical macro framing.",
+      "video_prompt": "Macro shot of the well-fed female mantis perched on a twig beside a freshly formed foamy tan egg case, her body full and heavy. The camera slowly orbits sideways, revealing the egg case holding hundreds of future eggs. Soft golden evening light, blurred green garden background, calm reflective mood.\n\nAudio: gentle evening garden ambience, soft wind.\nSFX: faint twig creak, delicate insect movement.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Cơ thể con đực trở thành dinh dưỡng nuôi trứng. Cái giá của tình yêu, trong thế giới bọ ngựa."
+    }
+  ]
+}

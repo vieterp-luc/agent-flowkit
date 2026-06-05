@@ -1,0 +1,81 @@
+{
+  "slug": "tom_tit_vn",
+  "project": {
+    "name": "KHKD - Tom Tit",
+    "description": "Vietnamese science-horror Reel — tom tit cu dam 4400 do C",
+    "story": "The mantis shrimp (tom tit in Vietnamese, eaten as seafood delicacy) has a club-like raptorial appendage that punches at 80 km/h via a spring-loaded mechanism. The strike is so fast it creates a cavitation bubble in water that briefly reaches 4400 degrees Celsius and emits visible light (sonoluminescence). It uses this to smash open crab and snail shells. Despite being smaller than a finger, it has one of the most powerful biological weapons in nature.",
+    "material": "realistic",
+    "language": "vi",
+    "characters": [
+      {
+        "name": "Peacock Mantis Shrimp",
+        "entity_type": "character",
+        "description": "Brightly colored peacock mantis shrimp Odontodactylus scyllarus, vivid green and red exoskeleton with blue accents, raised club-like raptorial appendages folded under body, large bulging compound eyes on stalks, photorealistic underwater macro detail."
+      },
+      {
+        "name": "Coral Reef Habitat",
+        "entity_type": "location",
+        "description": "Tropical shallow coral reef with sand bottom, turquoise water, scattered orange and purple coral, gentle sun rays from surface."
+      },
+      {
+        "name": "Crab Prey",
+        "entity_type": "visual_asset",
+        "description": "Small reef crab about 5cm wide, hard brown speckled shell, eight legs, two raised claws, photorealistic underwater macro detail."
+      },
+      {
+        "name": "Vietnamese Seafood Plate",
+        "entity_type": "visual_asset",
+        "description": "Vietnamese steamed mantis shrimp dish on a white ceramic plate, garnished with sliced lime, salt and pepper, served on a wooden restaurant table, warm overhead lighting."
+      }
+    ]
+  },
+  "video": {
+    "title": "Tom Tit - Cu Dam Lam Nuoc Soi 4400 Do",
+    "video_story": "Hook mantis shrimp poised to strike a crab, spring-loaded club science, cavitation bubble explosion, shell shattering, Vietnamese seafood reveal closer.",
+    "display_order": 0,
+    "orientation": "VERTICAL"
+  },
+  "scenes": [
+    {
+      "display_order": 0,
+      "chain_type": "ROOT",
+      "character_names": ["Peacock Mantis Shrimp", "Crab Prey", "Coral Reef Habitat"],
+      "prompt": "Underwater macro side shot of a vivid peacock mantis shrimp on a reef floor, club-like appendages cocked and raised, eyes locked on a small crab nearby. Cool blue underwater light, sand bottom, shallow depth of field. Vertical macro framing.",
+      "video_prompt": "Underwater macro side shot of a vivid peacock mantis shrimp on a reef floor, club-like appendages cocked and raised, eyes locked on a small crab nearby. The camera holds tight on the mantis shrimp, slight push toward the cocked clubs as tension builds. Cool blue underwater light, sand bottom, shallow depth of field, suspense before strike.\n\nAudio: muffled underwater ambience, deep ocean drone.\nSFX: faint water current, soft shell click of mantis shrimp settling.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Con tôm này nhỏ bằng ngón tay. Nhưng cú đấm của nó tạo ra ánh sáng và nhiệt độ 4400 độ C."
+    },
+    {
+      "display_order": 1,
+      "chain_type": "ROOT",
+      "character_names": ["Peacock Mantis Shrimp"],
+      "prompt": "Anatomical scientific macro view of the mantis shrimp club appendage, showing the spring-loaded latch mechanism with energy stored in a saddle-shaped exoskeleton structure, ready to release. Clean clinical lighting, biology illustration aesthetic. Vertical close-up framing.",
+      "video_prompt": "Anatomical scientific macro view of the mantis shrimp club appendage, showing the spring-loaded latch mechanism with energy stored in a saddle-shaped exoskeleton structure. The camera slowly orbits the cocked mechanism as the latch tension visibly builds. Clean clinical lighting with subtle energy glow, biology illustration aesthetic.\n\nAudio: low scientific drone, building energetic hum.\nSFX: subtle mechanical tension creak, energetic charge whir.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Càng nó hoạt động như cái lò xo, lưu trữ năng lượng rồi bung ra trong một phần nghìn giây."
+    },
+    {
+      "display_order": 2,
+      "chain_type": "CONTINUATION",
+      "parent_index": 1,
+      "character_names": ["Peacock Mantis Shrimp", "Crab Prey"],
+      "prompt": "Extreme slow-motion underwater macro of the mantis shrimp's club striking forward, a brilliant bright cavitation bubble forming in the water between the club and the crab shell, glowing white-hot with light emission. Vertical action framing, dramatic strike moment.",
+      "video_prompt": "Extreme slow-motion underwater macro of the mantis shrimp's club striking forward in a blur, a brilliant bright cavitation bubble forming in the water between the club and the crab shell, glowing white-hot with light emission. The camera holds the strike moment, slight push toward the glowing bubble. Cool blue water with intense white-hot bubble glow, dramatic contrast.\n\nAudio: muffled underwater hush before strike.\nSFX: thunderous underwater snap, bright sonoluminescent crackle, shock wave.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Cú đấm đi nhanh đến mức nước sôi lên thành bong bóng, phát sáng, và nhiệt độ gần bằng mặt trời."
+    },
+    {
+      "display_order": 3,
+      "chain_type": "ROOT",
+      "character_names": ["Crab Prey", "Peacock Mantis Shrimp"],
+      "prompt": "Underwater macro shot of a small crab's hard shell shattered into pieces on the reef sand, the mantis shrimp calmly picking through the broken shell to eat the meat inside. Cool blue underwater light, scattered shell fragments. Vertical macro framing.",
+      "video_prompt": "Underwater macro shot of a small crab's hard shell shattered into pieces on the reef sand, the mantis shrimp calmly picking through the broken shell to eat the meat inside. The camera slowly pulls back to reveal the full aftermath of the strike. Cool blue underwater light, scattered shell fragments drifting in the current.\n\nAudio: muffled underwater ambience, ocean current.\nSFX: small shell fragments clinking, mantis shrimp eating sounds.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Vỏ cua dày bị vỡ nát chỉ sau một phát. Đây là vũ khí mạnh nhất trong thế giới sinh vật biển."
+    },
+    {
+      "display_order": 4,
+      "chain_type": "ROOT",
+      "character_names": ["Vietnamese Seafood Plate", "Peacock Mantis Shrimp"],
+      "prompt": "Overhead shot of a Vietnamese steamed mantis shrimp dish on a white plate at a seafood restaurant, garnished with lime and salt, chopsticks reaching in. Warm overhead restaurant lighting. Vertical food-photography framing.",
+      "video_prompt": "Overhead shot of a Vietnamese steamed mantis shrimp dish on a white plate at a seafood restaurant, garnished with lime and salt, chopsticks reaching in to lift one. The camera slowly pushes down toward the dish, a faint translucent overlay of the live mantis shrimp ghosting in the steam. Warm overhead restaurant lighting, cozy yet unsettling reveal.\n\nAudio: warm restaurant ambience, gentle chatter.\nSFX: chopsticks on plate, soft sizzle, faint memory of the underwater snap.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Người Việt vẫn ăn tôm tít mỗi ngày. Trên đĩa, nó là sinh vật mạnh nhất bạn từng nuốt."
+    }
+  ]
+}

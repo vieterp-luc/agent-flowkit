@@ -1,0 +1,81 @@
+{
+  "slug": "cordyceps_vn",
+  "project": {
+    "name": "KHKD - Cordyceps Zombie Kien",
+    "description": "Vietnamese science-horror Reel — nam Ophiocordyceps dieu khien kien zombie",
+    "story": "Ophiocordyceps unilateralis is the zombie-ant fungus. Spores infect a worker ant, hyphae grow inside the body, manipulate its muscles, force the ant to climb high onto a leaf, clamp its jaws into the vein in a death grip, then the fungus erupts a long fruiting body through the ant's head and rains spores down to infect more ants below. The fungus picks the optimal altitude and humidity for spore dispersal.",
+    "material": "realistic",
+    "language": "vi",
+    "characters": [
+      {
+        "name": "Worker Ant",
+        "entity_type": "character",
+        "description": "Tropical brown-black carpenter ant, glossy segmented body about 1cm, six articulated legs, mandibles open, bent antennae, photorealistic insect macro detail."
+      },
+      {
+        "name": "Cordyceps Fruiting Body",
+        "entity_type": "visual_asset",
+        "description": "Long pale orange fungal stalk erupting from an ant's head, slender curving spore-bearing tip releasing fine yellow dust, organic alien growth, scientific specimen look."
+      },
+      {
+        "name": "Rainforest Leaf Habitat",
+        "entity_type": "location",
+        "description": "Tropical rainforest broad green leaf with vein structure, soft dappled jungle light, blurred green canopy bokeh in background, damp humid atmosphere."
+      },
+      {
+        "name": "Fungal Spore Cloud",
+        "entity_type": "visual_asset",
+        "description": "Cloud of fine yellow fungal spores drifting downward through humid air, faint golden glow under jungle light, particles visible against dark forest understory."
+      }
+    ]
+  },
+  "video": {
+    "title": "Cordyceps - Nam Zombie Kien",
+    "video_story": "Hook ant clamped on leaf with fungal stalk, science of brain hijack, internal fungal mycelium spread, spore release rain, jungle wide closer with multiple zombie ants.",
+    "display_order": 0,
+    "orientation": "VERTICAL"
+  },
+  "scenes": [
+    {
+      "display_order": 0,
+      "chain_type": "ROOT",
+      "character_names": ["Worker Ant", "Cordyceps Fruiting Body", "Rainforest Leaf Habitat"],
+      "prompt": "Extreme macro close-up of a worker ant clamped motionless to the vein of a rainforest leaf, mandibles locked tight, body hanging frozen while a long pale orange fungal stalk erupts from the top of its head curving upward. Soft dappled jungle light, dewdrops glistening, humid mist around. Vertical macro framing.",
+      "video_prompt": "Extreme macro close-up of a worker ant clamped motionless to the vein of a rainforest leaf, mandibles locked tight, body completely frozen while a long pale orange fungal stalk erupts from the top of its head curving upward. The camera slowly pushes in toward the fungal stalk as it sways imperceptibly in humid air. Soft dappled jungle light, dewdrops glistening, mist drifting through frame.\n\nAudio: tropical rainforest ambience, distant cicadas, dripping water.\nSFX: faint humid air, subtle fungal stalk creak.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Đây là một con kiến. Trong đầu nó là một loài nấm. Và nấm đang dùng cơ thể kiến để mọc lên trời."
+    },
+    {
+      "display_order": 1,
+      "chain_type": "ROOT",
+      "character_names": ["Worker Ant", "Rainforest Leaf Habitat"],
+      "prompt": "Microscopic anatomical cross-section view inside a worker ant's head, showing white fungal hyphae threads spreading through the brain and muscle tissue, connecting to nerves. Cool clinical biology-illustration aesthetic. Vertical macro composition.",
+      "video_prompt": "Microscopic anatomical cross-section view inside a worker ant's head, showing white fungal hyphae threads spreading slowly through the brain and muscle tissue, connecting to nerve fibers. The camera slowly pushes forward along one hypha as it grows. Cool clinical biology-illustration lighting with subtle warm fungal glow.\n\nAudio: low scientific drone, faint biological pulse.\nSFX: subtle hyphae growth crackle, neural fire crackle.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Bào tử Ophiocordyceps chui vào cơ thể kiến, mọc rễ trắng xuyên qua não, kiểm soát từng cơ bắp."
+    },
+    {
+      "display_order": 2,
+      "chain_type": "CONTINUATION",
+      "parent_index": 1,
+      "character_names": ["Worker Ant", "Rainforest Leaf Habitat"],
+      "prompt": "Time-lapse macro shot of a worker ant struggling against invisible control, dragging itself up a rainforest leaf vein toward the tip, then suddenly clamping its jaws hard into the leaf vein and freezing in place permanently. Soft jungle light, mist drifting. Vertical macro framing.",
+      "video_prompt": "Time-lapse macro shot of a worker ant struggling against invisible control as it drags itself up a rainforest leaf vein, then suddenly clamping its jaws hard into the leaf vein and freezing in place. The camera follows the ant's slow ascent then pushes in tight on the death-grip moment. Soft jungle light shifting, humid mist drifting through.\n\nAudio: jungle understory ambience, faint heartbeat.\nSFX: tiny ant footsteps on leaf, sharp jaw lock click, sudden silence.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Nấm ép kiến leo lên ngọn lá cao đúng độ ẩm tối ưu, rồi khóa cứng hàm vào gân lá. Kiến không bao giờ rời nữa."
+    },
+    {
+      "display_order": 3,
+      "chain_type": "ROOT",
+      "character_names": ["Cordyceps Fruiting Body", "Fungal Spore Cloud", "Rainforest Leaf Habitat"],
+      "prompt": "Macro close-up of the orange Cordyceps fruiting body fully erupted from the ant's head, releasing a cascade of fine yellow spores raining down through humid jungle air. Cinematic backlight from canopy above making spores glow golden. Vertical macro framing.",
+      "video_prompt": "Macro close-up of the orange Cordyceps fruiting body fully erupted from the ant's head, suddenly releasing a cascade of fine yellow spores that rain down through the humid jungle air. The camera tilts down slowly following the falling spore cloud. Cinematic backlight from canopy above making spores glow golden against dark forest understory.\n\nAudio: jungle ambience, gentle wind through leaves.\nSFX: soft fungal puff release, spores drifting hush.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Sau vài ngày, cuống nấm bung ra, rải hàng triệu bào tử xuống đàn kiến đang đi bên dưới. Tất cả lại bắt đầu."
+    },
+    {
+      "display_order": 4,
+      "chain_type": "ROOT",
+      "character_names": ["Worker Ant", "Cordyceps Fruiting Body", "Rainforest Leaf Habitat"],
+      "prompt": "Wide cinematic shot of a tropical rainforest understory, dozens of zombie ant corpses clamped to leaves at the same height with orange fungal stalks erupting from each head, eerie ghostly graveyard. Soft jungle light filtering down. Vertical wide-angle framing.",
+      "video_prompt": "Wide cinematic shot of a tropical rainforest understory revealing dozens of zombie ant corpses clamped to leaves at the same height with orange fungal stalks erupting from each head — an eerie ghostly graveyard. The camera slowly pulls back to reveal more and more clamped ants stretching into the distance. Soft jungle light filtering down through canopy.\n\nAudio: deep jungle ambience, faint distant calls.\nSFX: humid drip, gentle wind, subtle fungal swaying.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Một khu rừng có thể có hàng trăm con kiến cùng tư thế, cùng độ cao. Tất cả đã trở thành bãi tha ma của nấm."
+    }
+  ]
+}

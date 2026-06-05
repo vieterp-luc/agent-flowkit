@@ -1,0 +1,81 @@
+{
+  "slug": "hairworm_vn",
+  "project": {
+    "name": "KHKD - Hairworm De Nhay Nuoc",
+    "description": "Vietnamese science-horror Reel — giun horsehair dieu khien de nhay xuong nuoc",
+    "story": "The horsehair worm (Spinochordodes tellinii) is a parasite that infects crickets and grasshoppers. The worm larva enters the host through drinking water, grows inside the host's body until it's longer than the host itself by coiling, then injects neurochemicals that hijack the cricket's brain — forcing it to seek out and jump into water on cue. Once submerged, the worm emerges from the cricket's body and swims away to mate, leaving the cricket drowning.",
+    "material": "realistic",
+    "language": "vi",
+    "characters": [
+      {
+        "name": "Field Cricket",
+        "entity_type": "character",
+        "description": "Brown-black field cricket about 2cm long, antennae, glossy segmented body, six jointed legs with strong hind jumping legs, wings folded, photorealistic insect macro detail."
+      },
+      {
+        "name": "Horsehair Worm",
+        "entity_type": "visual_asset",
+        "description": "Long thin pale brown horsehair worm about 30cm long, hair-thin diameter, coiled and writhing, glossy wet surface, scientific specimen look."
+      },
+      {
+        "name": "Vietnamese Pond at Dusk",
+        "entity_type": "location",
+        "description": "Small Vietnamese rural pond at dusk, still water reflecting orange sky, water lilies, reed grasses, soft warm fading light, peaceful but ominous mood."
+      },
+      {
+        "name": "Cricket Body Cross-section",
+        "entity_type": "visual_asset",
+        "description": "Anatomical cross-section illustration of a cricket's body interior, showing the coiled horsehair worm filling most of the body cavity, clinical biology-textbook style."
+      }
+    ]
+  },
+  "video": {
+    "title": "Hairworm - De Tu Nhay Xuong Nuoc Chet",
+    "video_story": "Hook cricket walking to water at dusk, science of brain hijack, internal coiled worm reveal, cricket dives in worm emerges, wide pond closer with multiple drowning crickets.",
+    "display_order": 0,
+    "orientation": "VERTICAL"
+  },
+  "scenes": [
+    {
+      "display_order": 0,
+      "chain_type": "ROOT",
+      "character_names": ["Field Cricket", "Vietnamese Pond at Dusk"],
+      "prompt": "Macro side shot of a brown field cricket walking toward the edge of a Vietnamese rural pond at dusk, body tense and unnatural, legs moving as if controlled. Warm orange sunset reflected on still water. Vertical macro framing.",
+      "video_prompt": "Macro side shot of a brown field cricket walking determinedly toward the edge of a Vietnamese rural pond at dusk, body tense and unnatural, legs moving as if pulled by invisible strings. The camera tracks alongside the cricket at ground level as it approaches the water. Warm orange sunset reflected on still water, gentle ripples.\n\nAudio: Vietnamese rural pond at dusk, crickets chirping, distant frogs.\nSFX: cricket tiny footsteps on damp earth, soft water lapping.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Con dế này đang tự đi xuống ao. Nó sắp tự nhảy xuống nước. Vì thứ trong người nó muốn vậy."
+    },
+    {
+      "display_order": 1,
+      "chain_type": "ROOT",
+      "character_names": ["Field Cricket", "Cricket Body Cross-section", "Horsehair Worm"],
+      "prompt": "Anatomical cross-section illustration of a cricket body interior showing a long pale brown horsehair worm coiled tightly inside, filling nearly all the body cavity, the worm's body longer than the cricket itself. Clean biology-textbook lighting. Vertical scientific composition.",
+      "video_prompt": "Anatomical cross-section illustration of a cricket body interior showing a long pale brown horsehair worm coiled tightly inside, filling nearly all the body cavity. The camera slowly orbits around the cross-section revealing the worm's incredible length compressed inside the small cricket. Clean biology-textbook lighting with subtle parasite glow.\n\nAudio: low scientific drone, faint biological pulse.\nSFX: subtle wet coiling, soft parasitic shifting.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Bên trong con dế là một con giun dài gấp 3 lần thân nó, cuộn lại như sợi dây thừng sống."
+    },
+    {
+      "display_order": 2,
+      "chain_type": "CONTINUATION",
+      "parent_index": 1,
+      "character_names": ["Field Cricket", "Cricket Body Cross-section"],
+      "prompt": "Anatomical close-up of cricket head interior showing the horsehair worm injecting glowing neurochemicals into the cricket's brain ganglion, hijacking the nervous system. Cool clinical lighting with toxin glow accent. Vertical scientific composition.",
+      "video_prompt": "Anatomical close-up of cricket head interior showing the horsehair worm injecting glowing neurochemicals into the cricket's brain ganglion. The camera pushes in close on the injection point as the brain ganglion fires uncontrollably. Cool clinical lighting with bright toxin glow accent making the hijack visible.\n\nAudio: low scientific drone building tension, rising heartbeat.\nSFX: subtle neural fire, chemical injection hiss.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Giun tiêm chất điều khiển vào não dế. Dế đột nhiên khát nước cuồng dại, bị ép tìm đến chỗ có nước gần nhất."
+    },
+    {
+      "display_order": 3,
+      "chain_type": "ROOT",
+      "character_names": ["Field Cricket", "Horsehair Worm", "Vietnamese Pond at Dusk"],
+      "prompt": "Underwater macro shot of a cricket sinking through pond water as a long pale brown horsehair worm slowly emerges from the cricket's rear, uncoiling endlessly out into the water, far longer than the cricket itself. Dim murky water, soft sunset light filtering down. Vertical macro framing.",
+      "video_prompt": "Underwater macro shot of a cricket sinking slowly through pond water as a long pale brown horsehair worm emerges from the cricket's rear, uncoiling endlessly into the water — far far longer than the cricket itself. The camera pulls back slowly to reveal the worm's full length swimming away. Dim murky water with sunset light filtering down.\n\nAudio: muffled underwater ambience, bubbles rising.\nSFX: soft worm emergence wet pull, cricket sinking gurgle.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Dế nhảy xuống nước. Giun chui ra khỏi thân, dài 30 phân, bơi đi giao phối. Dế chết đuối, mãi mãi."
+    },
+    {
+      "display_order": 4,
+      "chain_type": "ROOT",
+      "character_names": ["Field Cricket", "Vietnamese Pond at Dusk"],
+      "prompt": "Wide cinematic shot of a Vietnamese rural pond at full dusk, surface dotted with dozens of drowning crickets, ripples spreading around each, an eerie still scene. Warm fading sky reflected. Vertical wide-angle framing.",
+      "video_prompt": "Wide cinematic shot of a Vietnamese rural pond at full dusk, surface dotted with dozens of drowning crickets across the water, ripples spreading around each one. The camera slowly pulls back to reveal the full scale of the synchronized cricket tragedy. Warm fading orange sky reflected on still water, ominous quiet beauty.\n\nAudio: rural pond at dusk, distant frogs, dead silence underneath.\nSFX: many faint cricket struggle sounds, gentle water ripples.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Vào mùa hè, cả ao có thể có hàng trăm con dế cùng tự nhảy xuống. Tất cả đều bị một sợi giun điều khiển."
+    }
+  ]
+}

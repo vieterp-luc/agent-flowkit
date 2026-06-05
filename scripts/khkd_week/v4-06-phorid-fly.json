@@ -1,0 +1,81 @@
+{
+  "slug": "phorid_fly_vn",
+  "project": {
+    "name": "KHKD - Phorid Fly Dau Kien Rung",
+    "description": "Vietnamese science-horror Reel — ruoi Phorid de trung vao dau kien, au trung an nao, dau rung",
+    "story": "Phorid flies of the genus Pseudacteon are tiny parasitoids that inject eggs directly into the heads of fire ants in mid-flight. The egg hatches into a larva inside the ant's head, which then eats the ant's brain and consumes the muscles and tissue inside the head capsule. As the larva grows, it releases an enzyme that dissolves the membrane connecting the ant's head to its body. The ant's head literally falls off, with the larva inside it, where the larva continues developing until it emerges as an adult fly through the ant's mouth.",
+    "material": "realistic",
+    "language": "vi",
+    "characters": [
+      {
+        "name": "Fire Ant",
+        "entity_type": "character",
+        "description": "Red imported fire ant Solenopsis invicta, glossy reddish-brown segmented body about 3mm long, large mandibles, dark eyes, photorealistic insect macro detail."
+      },
+      {
+        "name": "Phorid Fly",
+        "entity_type": "character",
+        "description": "Tiny dark Phorid fly Pseudacteon, hunchbacked posture characteristic, transparent wings, sharp ovipositor extending from abdomen, smaller than ant, photorealistic macro detail."
+      },
+      {
+        "name": "Ant Trail Habitat",
+        "entity_type": "location",
+        "description": "Dirt ground with a busy fire ant trail of workers moving in line, blurred natural outdoor setting, warm afternoon light, photorealistic ground level perspective."
+      },
+      {
+        "name": "Detached Ant Head",
+        "entity_type": "visual_asset",
+        "description": "Detached fire ant head lying on dirt ground, cleanly separated from body, jaws still slightly open, with a faint outline of a developing larva visible inside, photorealistic gory but clinical detail."
+      }
+    ]
+  },
+  "video": {
+    "title": "Phorid Fly - Dau Kien Rung Sau Vai Tuan",
+    "video_story": "Hook ant head lying detached on dirt, fly dive-bomb injection of egg, anatomical view of larva eating brain, head falls off, wide ant trail closer with multiple detached heads.",
+    "display_order": 0,
+    "orientation": "VERTICAL"
+  },
+  "scenes": [
+    {
+      "display_order": 0,
+      "chain_type": "ROOT",
+      "character_names": ["Detached Ant Head", "Ant Trail Habitat"],
+      "prompt": "Extreme macro close-up of a detached fire ant head lying alone on dirt ground, cleanly separated from the body, mandibles still slightly open, eyes intact, surrounded by other fire ants walking past it. Warm afternoon natural light. Vertical macro framing.",
+      "video_prompt": "Extreme macro close-up of a detached fire ant head lying alone on dirt ground, cleanly separated from the body, mandibles still slightly open. Other fire ants walk past it unconcerned. The camera slowly pushes in toward the empty mouth opening. Warm afternoon natural light, dust motes drifting.\n\nAudio: outdoor dirt ground ambience, ant trail movement.\nSFX: subtle ant footsteps, faint wind.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Đầu con kiến này tự rụng sau vài tuần. Vì trong não nó đã có một con ruồi sắp chui ra."
+    },
+    {
+      "display_order": 1,
+      "chain_type": "ROOT",
+      "character_names": ["Phorid Fly", "Fire Ant", "Ant Trail Habitat"],
+      "prompt": "Macro slow-motion shot of a tiny dark Phorid fly hovering above a fire ant trail, then suddenly dive-bombing one ant and injecting an egg into the top of its head with a sharp ovipositor in a fraction of a second. Vertical macro framing, dramatic action moment.",
+      "video_prompt": "Macro slow-motion shot of a tiny dark Phorid fly hovering above a fire ant trail, then suddenly dive-bombing one ant and injecting an egg into the top of its head with a sharp ovipositor in a fraction of a second. The camera holds tight on the injection moment. Warm afternoon light, dramatic action freeze.\n\nAudio: faint ant trail ambience.\nSFX: fly wing buzz, sharp ovipositor stab, ant startle.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Một con ruồi Phorid nhỏ xíu lao xuống đàn kiến, chích đúng vào đỉnh đầu một con. Tốc độ chưa tới 1 phần 10 giây."
+    },
+    {
+      "display_order": 2,
+      "chain_type": "CONTINUATION",
+      "parent_index": 1,
+      "character_names": ["Fire Ant"],
+      "prompt": "Anatomical cross-section illustration of a fire ant head interior showing a developing white Phorid larva eating through the brain and muscle tissue inside, the larva swelling visibly while consuming the ant's head contents. Clean clinical biology-textbook lighting. Vertical scientific composition.",
+      "video_prompt": "Anatomical cross-section illustration of a fire ant head interior showing a developing white Phorid larva eating through the brain and muscle tissue inside. The camera slowly pushes in as the larva visibly swells, consuming the ant's head contents. Clean clinical biology-textbook lighting with subtle horror.\n\nAudio: low scientific drone, faint biological pulse.\nSFX: subtle wet chewing, brain tissue dissolving.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Trứng nở thành ấu trùng, ăn não kiến, ăn cơ thịt, ăn tất cả các mô bên trong sọ kiến để lớn lên."
+    },
+    {
+      "display_order": 3,
+      "chain_type": "ROOT",
+      "character_names": ["Fire Ant", "Detached Ant Head"],
+      "prompt": "Macro slow-motion shot of a fire ant walking unsteadily, then suddenly its head simply falls off cleanly at the neck membrane, the head rolling to the ground while the headless body continues twitching for a moment. Vertical macro framing, dramatic detachment moment.",
+      "video_prompt": "Macro slow-motion shot of a fire ant walking unsteadily on dirt, then suddenly its head simply falls off cleanly at the neck membrane, the head rolling to the ground while the headless body continues twitching for a moment longer. The camera holds tight on the moment of separation. Warm afternoon light, dust kicked up.\n\nAudio: faint dirt ground ambience.\nSFX: soft head detachment, head rolling, body twitching.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Ấu trùng tiết enzym làm tan màng nối đầu với thân kiến. Đầu rụng xuống. Trong đầu vẫn còn con ruồi đang lớn."
+    },
+    {
+      "display_order": 4,
+      "chain_type": "ROOT",
+      "character_names": ["Detached Ant Head", "Phorid Fly", "Ant Trail Habitat"],
+      "prompt": "Wide cinematic macro shot of dirt ground covered with dozens of detached fire ant heads scattered around an active ant trail, the surviving ants still working obliviously, tiny Phorid flies hovering above. Warm afternoon light. Vertical wide-angle framing.",
+      "video_prompt": "Wide cinematic macro shot of dirt ground covered with dozens of detached fire ant heads scattered around an active ant trail, the surviving ants still working obliviously. Tiny Phorid flies hover above looking for next victims. The camera slowly pulls back revealing the full extent of the silent massacre. Warm afternoon light.\n\nAudio: outdoor ground ambience, busy ant trail.\nSFX: ant footsteps, faint fly wings hovering.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Một đàn kiến lửa có thể mất hàng trăm đầu mỗi tuần. Trên mặt đất là cả một bãi tha ma không ai chú ý."
+    }
+  ]
+}

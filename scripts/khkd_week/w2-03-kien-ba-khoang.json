@@ -1,0 +1,81 @@
+{
+  "slug": "kien_ba_khoang_vn",
+  "project": {
+    "name": "KHKD - Kien Ba Khoang",
+    "description": "Vietnamese science-horror Reel — kien ba khoang pederin bong da",
+    "story": "The rove beetle (Paederus, called kien ba khoang in Vietnam) does not bite or sting, but its body fluid contains pederin, a toxin about 12 times more potent than cobra venom. When the beetle is crushed against skin, pederin spreads and causes painful linear blistering dermatitis. Vietnamese cities see outbreaks every rainy season as the beetles swarm toward fluorescent lights at night. The key advice: never slap or crush it on your skin — blow it away gently.",
+    "material": "realistic",
+    "language": "vi",
+    "characters": [
+      {
+        "name": "Rove Beetle",
+        "entity_type": "character",
+        "description": "Small elongated rove beetle about 1cm long, alternating bright orange and glossy black body segments, pointed abdomen, tiny folded wings, slender antennae, photorealistic macro insect detail."
+      },
+      {
+        "name": "Skin Reaction",
+        "entity_type": "visual_asset",
+        "description": "Clinical close-up of human forearm skin with a linear streak of small red inflamed welts and mild blistering following a wipe mark, clean medical-reference look, not gory or extreme."
+      },
+      {
+        "name": "Pederin Diagram",
+        "entity_type": "visual_asset",
+        "description": "Scientific molecular structure diagram of the pederin toxin, glowing geometric bonds and rings floating on a dark clinical background, biochemistry illustration style."
+      },
+      {
+        "name": "Vietnamese Home Night",
+        "entity_type": "location",
+        "description": "Vietnamese home interior at night, a glowing white fluorescent tube light on the wall, warm domestic furniture in soft shadow, faint insects drawn to the light, calm nighttime atmosphere."
+      }
+    ]
+  },
+  "video": {
+    "title": "Kien Ba Khoang - Doc Manh Hon Noc Ran",
+    "video_story": "Hook beetle on arm about to be slapped, science of pederin toxin, toxin spreading when crushed, blistering skin reaction, rainy-season light-swarm closer with advice.",
+    "display_order": 0,
+    "orientation": "VERTICAL"
+  },
+  "scenes": [
+    {
+      "display_order": 0,
+      "chain_type": "ROOT",
+      "character_names": ["Rove Beetle", "Vietnamese Home Night"],
+      "prompt": "Macro close-up of a small orange-and-black rove beetle crawling on a human forearm at night, a finger from the other hand hovering just above it about to slap. Soft cool fluorescent light from a wall lamp. Vertical macro framing, tense.",
+      "video_prompt": "Macro close-up of a small orange-and-black rove beetle crawling on a human forearm at night, a finger from the other hand slowly hovering closer just above it, about to slap. The camera holds tight on the beetle, slight push as the finger approaches and freezes. Soft cool fluorescent light from a wall lamp, tense nighttime mood.\n\nAudio: quiet Vietnamese home night ambience, faint insect buzz.\nSFX: tiny beetle steps on skin, soft tense breath.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Con côn trùng này đậu trên tay bạn. Đừng đập nó. Vì trong người nó có độc mạnh hơn nọc rắn."
+    },
+    {
+      "display_order": 1,
+      "chain_type": "ROOT",
+      "character_names": ["Rove Beetle", "Pederin Diagram"],
+      "prompt": "Macro shot of the orange-and-black rove beetle on a surface under cool fluorescent light, beside it a glowing molecular diagram of the pederin toxin floating on a dark background. Clinical scientific lighting. Vertical split-focus framing.",
+      "video_prompt": "Macro shot of the orange-and-black rove beetle on a surface under cool fluorescent light. The camera slowly pushes past the beetle toward a glowing molecular diagram of the pederin toxin floating on a dark background, its geometric bonds rotating. Clinical scientific lighting, cool tones with toxin-glow accent.\n\nAudio: low scientific drone, faint electric hum.\nSFX: subtle insect movement, soft molecular shimmer.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Kiến ba khoang không cắn, không chích. Nhưng trong cơ thể nó chứa pederin, độc gấp 12 lần nọc rắn hổ."
+    },
+    {
+      "display_order": 2,
+      "chain_type": "CONTINUATION",
+      "parent_index": 1,
+      "character_names": ["Rove Beetle", "Skin Reaction"],
+      "prompt": "Macro close-up of the rove beetle crushed against human skin with a wipe motion, a faint glowing toxin spreading in a streak along the skin where it was smeared. Clinical lighting, slight warm inflammation tint. Vertical macro framing, non-gory.",
+      "video_prompt": "Macro close-up of the rove beetle crushed against human skin with a wiping motion, a faint glowing toxin spreading in a streak along the skin where it was smeared. The camera follows the wipe streak as the affected skin begins to redden. Clinical lighting with a warm inflammation tint, restrained non-gory framing.\n\nAudio: low ominous drone, quiet night ambience.\nSFX: soft wipe on skin, faint sizzling toxin spread.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Khi bạn đập nó trên da, độc tố vỡ ra và lan khắp vùng tiếp xúc, gây bỏng rát dữ dội."
+    },
+    {
+      "display_order": 3,
+      "chain_type": "ROOT",
+      "character_names": ["Skin Reaction"],
+      "prompt": "Clinical close-up of a human forearm with a linear streak of small red inflamed welts and mild blistering following the wipe mark. Soft even clinical lighting, clean medical-reference look, not gory. Vertical framing.",
+      "video_prompt": "Clinical close-up of a human forearm with a linear streak of small red inflamed welts and mild blistering following the wipe mark. The camera slowly tracks along the length of the red streak, revealing how it follows exactly where the hand wiped. Soft even clinical lighting, clean medical-reference look, restrained and non-gory.\n\nAudio: quiet clinical ambience.\nSFX: very subtle skin tension, faint room tone.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Da nổi vệt đỏ phồng rộp theo đường vệt tay quẹt. Có thể kéo dài cả tuần mới lành."
+    },
+    {
+      "display_order": 4,
+      "chain_type": "ROOT",
+      "character_names": ["Rove Beetle", "Vietnamese Home Night"],
+      "prompt": "Wide shot of a Vietnamese home interior at night, a glowing white fluorescent tube light on the wall with several rove beetles drawn to it, flying around the light. Cool nighttime lighting with warm room shadows. Vertical wide framing.",
+      "video_prompt": "Wide shot of a Vietnamese home interior at night, a glowing white fluorescent tube light on the wall with several rove beetles drawn to it, circling and landing around the light. The camera slowly pushes in toward the light and the gathering beetles. Cool fluorescent glow against warm domestic shadows, calm but cautionary mood.\n\nAudio: quiet Vietnamese home night ambience, faint fluorescent buzz.\nSFX: insect wings near the light, soft electric hum.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Mùa mưa, chúng bay vào nhà theo ánh đèn. Thấy nó trên da, hãy thổi nhẹ, đừng bao giờ đập."
+    }
+  ]
+}

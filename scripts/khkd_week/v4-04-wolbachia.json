@@ -1,0 +1,81 @@
+{
+  "slug": "wolbachia_vn",
+  "project": {
+    "name": "KHKD - Wolbachia Vi Khuan Doi Gioi Tinh",
+    "description": "Vietnamese science-horror Reel — vi khuan Wolbachia doi gioi tinh con trung",
+    "story": "Wolbachia is a bacterium living inside the cells of more than half of all insect species on Earth. It hijacks insect reproduction in unbelievable ways: kills male embryos, converts genetic males into females, sterilizes males that mate with uninfected females, and even makes infected mothers' male offspring vanish. The result: in many species, the male sex is being slowly erased and the population is becoming almost entirely female.",
+    "material": "realistic",
+    "language": "vi",
+    "characters": [
+      {
+        "name": "Butterfly Pair",
+        "entity_type": "character",
+        "description": "Tropical butterflies, one male and one female of the same species side by side, vibrant blue-purple wings, photorealistic insect macro detail."
+      },
+      {
+        "name": "Wolbachia Bacteria",
+        "entity_type": "visual_asset",
+        "description": "Microscopic rod-shaped Wolbachia bacteria, glowing pale teal, clustered inside an insect egg cell, scientific microscope visualization."
+      },
+      {
+        "name": "Tropical Garden",
+        "entity_type": "location",
+        "description": "Lush tropical garden with bright flowers, soft sunlight filtering through leaves, vibrant green foliage, peaceful daytime mood."
+      },
+      {
+        "name": "Insect Egg Cluster",
+        "entity_type": "visual_asset",
+        "description": "Cluster of tiny insect eggs on a leaf surface, translucent revealing developing embryos inside, some healthy others discolored and shrinking."
+      }
+    ]
+  },
+  "video": {
+    "title": "Wolbachia - Vi Khuan Xoa So Gioi Duc",
+    "video_story": "Hook two butterflies look identical but one has hidden bacteria, microscopic bacteria in cell, embryos dying selectively, female-only population reveal, garden closer.",
+    "display_order": 0,
+    "orientation": "VERTICAL"
+  },
+  "scenes": [
+    {
+      "display_order": 0,
+      "chain_type": "ROOT",
+      "character_names": ["Butterfly Pair", "Tropical Garden"],
+      "prompt": "Macro side shot of two identical vibrant blue-purple tropical butterflies side by side on a bright flower, one labeled female and one labeled male, looking visually identical. Soft tropical garden sunlight. Vertical macro framing.",
+      "video_prompt": "Macro side shot of two identical vibrant blue-purple tropical butterflies side by side on a bright flower, looking visually identical. The camera slowly pushes in between them. Soft tropical garden sunlight, gentle breeze making wings tremble.\n\nAudio: tropical garden ambience, soft buzzing bees.\nSFX: gentle wing flutter, faint flower rustle.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Hai con bướm trông giống hệt nhau. Nhưng trong một con đang có vi khuẩn đang âm thầm xóa sổ giới đực."
+    },
+    {
+      "display_order": 1,
+      "chain_type": "ROOT",
+      "character_names": ["Wolbachia Bacteria", "Insect Egg Cluster"],
+      "prompt": "Microscopic close-up of an insect egg cell interior, packed with hundreds of pale teal glowing rod-shaped Wolbachia bacteria swimming through the cytoplasm. Cool clinical microscope lighting with bacterial glow. Vertical scientific composition.",
+      "video_prompt": "Microscopic close-up of an insect egg cell interior, packed with hundreds of pale teal glowing rod-shaped Wolbachia bacteria swimming through the cytoplasm. The camera slowly orbits inside the cell revealing more bacteria multiplying. Cool clinical microscope lighting with bacterial glow.\n\nAudio: low scientific drone, faint biological pulse.\nSFX: subtle bacterial swimming, cellular pulse.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Wolbachia sống bên trong tế bào côn trùng, lan truyền qua trứng của mẹ — giới đực không thể di truyền nó."
+    },
+    {
+      "display_order": 2,
+      "chain_type": "CONTINUATION",
+      "parent_index": 1,
+      "character_names": ["Insect Egg Cluster", "Wolbachia Bacteria"],
+      "prompt": "Macro close-up of a cluster of insect eggs on a green leaf, translucent revealing developing embryos inside — half the embryos are healthy and growing while the other half are shrinking, discolored gray, dying selectively. Cool clinical biology lighting. Vertical scientific composition.",
+      "video_prompt": "Macro close-up of a cluster of insect eggs on a green leaf, translucent revealing developing embryos. Half the embryos are healthy and growing pink while the other half are visibly shrinking and turning discolored gray, dying selectively. The camera pushes in slowly as the dying eggs fade. Cool clinical lighting with subtle dramatic shadow.\n\nAudio: low ominous drone, faint biological pulse.\nSFX: subtle egg shifting, dying cells fading.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Để lan rộng, Wolbachia giết toàn bộ phôi đực ngay trong trứng. Chỉ con cái mới sống sót và truyền đi vi khuẩn."
+    },
+    {
+      "display_order": 3,
+      "chain_type": "ROOT",
+      "character_names": ["Butterfly Pair", "Tropical Garden"],
+      "prompt": "Wide cinematic shot of a tropical garden filled with dozens of butterflies all looking identical female, flying gracefully together among flowers, no males visible anywhere. Soft warm sunlight. Vertical wide-angle framing.",
+      "video_prompt": "Wide cinematic shot of a tropical garden filled with dozens of butterflies all looking identical female, flying gracefully together among flowers in synchronized movement, conspicuously no males visible anywhere. The camera slowly tilts up revealing the all-female population stretching to the horizon. Soft warm sunlight, ethereal beauty with quiet unease.\n\nAudio: tropical garden ambience, butterfly wings rustling.\nSFX: many butterflies fluttering, soft synchronized wings.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Có loài bướm hiện nay tỉ lệ cái lên tới 100 trên 1 đực. Wolbachia đang biến cả loài thành một giới."
+    },
+    {
+      "display_order": 4,
+      "chain_type": "ROOT",
+      "character_names": ["Butterfly Pair", "Wolbachia Bacteria"],
+      "prompt": "Wide infographic-style composition: a stylized world map outlined with glowing teal lines showing Wolbachia present in over half of all insect species on Earth, large number '60 percent' floating beside it, ominous yet beautiful. Vertical infographic framing.",
+      "video_prompt": "Wide infographic-style composition: a stylized world map outlined with glowing teal lines showing Wolbachia present in over half of all insect species across the globe. The large number '60 percent' fades in. The camera slowly orbits the spinning Earth, the teal infection lines pulsing softly. Clinical scientific lighting with subtle bacterial glow.\n\nAudio: low scientific drone, subtle global pulse.\nSFX: data infection spreading sound, soft globe rotation.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Hơn 60% loài côn trùng trên Trái Đất đang mang Wolbachia. Mỗi ngày, hành tinh này đang dần mất đi giới đực."
+    }
+  ]
+}

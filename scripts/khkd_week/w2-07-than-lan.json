@@ -1,0 +1,81 @@
+{
+  "slug": "than_lan_vn",
+  "project": {
+    "name": "KHKD - Than Lan",
+    "description": "Vietnamese science-horror Reel — than lan dut duoi va bam tran nha",
+    "story": "The common house gecko (than lan in Vietnamese) lives in nearly every Vietnamese home. Two remarkable biological feats: (1) Tail autotomy — when grabbed, the gecko sheds its tail at a pre-formed fracture plane between vertebrae; the detached tail keeps wriggling for up to 30 minutes to distract the predator, and the gecko escapes. The new tail regrows with cartilage instead of bone, shorter and different color. (2) Wall and ceiling climbing — billions of tiny hair-like setae on the toe pads create molecular-level van der Waals adhesion, letting the gecko hang upside down from glass without any glue.",
+    "material": "realistic",
+    "language": "vi",
+    "characters": [
+      {
+        "name": "House Gecko",
+        "entity_type": "character",
+        "description": "Small common Asian house gecko about 8cm long, pale pinkish-gray translucent skin, large round dark eyes, padded sticky toes with visible fine ridges, long thin tail, photorealistic reptile macro detail."
+      },
+      {
+        "name": "Vietnamese Wall Night",
+        "entity_type": "location",
+        "description": "Inside of a Vietnamese home at night, smooth white painted wall with a warm wall sconce lamp glowing, ceiling visible in shadow above, soft tropical evening atmosphere."
+      },
+      {
+        "name": "Detached Gecko Tail",
+        "entity_type": "visual_asset",
+        "description": "Pale pinkish gecko tail segment about 5cm long, smoothly detached at the base, lying on a wood floor, slightly wriggling, photorealistic macro detail with no blood."
+      },
+      {
+        "name": "Gecko Toe Pad Microscope",
+        "entity_type": "visual_asset",
+        "description": "Extreme electron-microscope view of a gecko toe pad surface, millions of densely packed microscopic hair-like setae structures branching into spatula-shaped tips, scientific microscope visualization in cool blue monochrome."
+      }
+    ]
+  },
+  "video": {
+    "title": "Than Lan - Dut Duoi Va Bam Tran Nha",
+    "video_story": "Hook gecko drops tail when grabbed, tail anatomy science, wriggling tail distraction, wall-climbing setae reveal, Vietnamese household closer.",
+    "display_order": 0,
+    "orientation": "VERTICAL"
+  },
+  "scenes": [
+    {
+      "display_order": 0,
+      "chain_type": "ROOT",
+      "character_names": ["House Gecko", "Vietnamese Wall Night", "Detached Gecko Tail"],
+      "prompt": "Macro close-up of a house gecko on a Vietnamese wall at night, a hand reaching in from the side and almost grabbing the tail, the tail visibly detaching at the base as the gecko escapes. The detached tail falling toward the floor wriggling. Warm wall-lamp lighting. Vertical macro framing, non-gory.",
+      "video_prompt": "Macro close-up of a house gecko on a Vietnamese wall at night, a hand reaching in from the side and almost grabbing the tail, the tail visibly detaching at the base as the gecko escapes upward. The detached tail falls toward the floor in slow motion, wriggling on its own. The camera follows the falling wriggling tail down. Warm wall-lamp lighting, dramatic shadow play.\n\nAudio: quiet Vietnamese night home ambience.\nSFX: sharp tail detach, soft tail landing, faint wriggling on floor.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Khi bị tấn công, con thằn lằn này tự đứt đuôi. Cái đuôi rơi xuống đất, vẫn nhảy múa như còn sống."
+    },
+    {
+      "display_order": 1,
+      "chain_type": "ROOT",
+      "character_names": ["House Gecko"],
+      "prompt": "Anatomical scientific cross-section view of gecko tail showing a pre-formed fracture plane between two vertebrae with special muscle fibers and a sealed blood vessel system. Clean clinical biology-illustration style, non-gory. Vertical scientific composition.",
+      "video_prompt": "Anatomical scientific cross-section view of gecko tail showing a pre-formed fracture plane between two vertebrae with special muscle fibers and a sealed blood vessel system. The camera slowly pushes in along the tail toward the fracture plane, revealing how cleanly it separates. Clean clinical biology-illustration lighting, restrained non-gory detail.\n\nAudio: low scientific drone.\nSFX: subtle anatomical reveal, soft fiber tension.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Đuôi nó có một đường rãnh sẵn để gãy. Khi cần, cơ co lại, đuôi tách ra mà không chảy máu."
+    },
+    {
+      "display_order": 2,
+      "chain_type": "CONTINUATION",
+      "parent_index": 1,
+      "character_names": ["Detached Gecko Tail"],
+      "prompt": "Macro time-lapse close-up of a detached gecko tail on a wood floor still wriggling and curling on its own for several minutes, drawing attention away. Warm floor light, blurred home background. Vertical macro framing, non-gory.",
+      "video_prompt": "Macro time-lapse close-up of a detached gecko tail on a wood floor still wriggling and curling on its own for several minutes, drawing attention away from where the gecko escaped. The camera holds steady on the wriggling tail as time speeds up, the tail movement gradually slowing. Warm floor light, blurred home background, restrained non-gory framing.\n\nAudio: quiet home interior ambience.\nSFX: faint floor scrape from wriggling tail, soft time-passing tone.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Đuôi rơi vẫn co giật suốt 30 phút, đánh lạc hướng kẻ săn để con thằn lằn kịp trốn thoát."
+    },
+    {
+      "display_order": 3,
+      "chain_type": "ROOT",
+      "character_names": ["House Gecko", "Gecko Toe Pad Microscope", "Vietnamese Wall Night"],
+      "prompt": "Split-frame macro: top half shows a gecko walking upside down on a ceiling at night, bottom half shows an extreme electron-microscope view of its toe pad with millions of fine setae adhering to the surface. Warm room light above, cool microscope blue below. Vertical split composition.",
+      "video_prompt": "Split-frame macro: top half shows a gecko walking confidently upside down on a Vietnamese ceiling at night, bottom half shows an extreme electron-microscope view of its toe pad with millions of fine hair-like setae adhering to the surface. The camera slowly pushes into the toe pad microscope view to reveal the molecular-scale adhesion. Warm room light above contrasting with cool clinical microscope blue below.\n\nAudio: low scientific drone over quiet room ambience.\nSFX: soft gecko footsteps on ceiling, microscopic adhesion clicks.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Còn việc đi trên trần nhà? Mỗi ngón chân nó có hàng triệu sợi lông tí hon, bám bằng lực phân tử."
+    },
+    {
+      "display_order": 4,
+      "chain_type": "ROOT",
+      "character_names": ["House Gecko", "Vietnamese Wall Night"],
+      "prompt": "Wide shot of a Vietnamese home interior at night, a single gecko walking calmly upside down on the ceiling near a warm wall lamp, the room peacefully empty below. Warm cozy domestic lighting. Vertical wide framing.",
+      "video_prompt": "Wide shot of a Vietnamese home interior at night, a single house gecko walking calmly upside down on the ceiling near a warm wall lamp, the room peacefully empty below. The camera slowly tilts up from the empty room to the gecko on the ceiling, revealing how at-home it is. Warm cozy domestic lighting, gentle nighttime stillness.\n\nAudio: quiet Vietnamese home night ambience, faint outside cricket sounds.\nSFX: soft gecko footsteps on ceiling, occasional faint gecko click call.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Nhà nào ở Việt Nam cũng có thằn lằn. Và mỗi con là một kỳ quan kỹ thuật của tự nhiên."
+    }
+  ]
+}

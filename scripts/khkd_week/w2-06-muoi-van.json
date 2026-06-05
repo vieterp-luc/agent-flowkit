@@ -1,0 +1,81 @@
+{
+  "slug": "muoi_van_vn",
+  "project": {
+    "name": "KHKD - Muoi Van",
+    "description": "Vietnamese science-horror Reel — muoi van Aedes va sot xuat huyet",
+    "story": "Aedes aegypti, the tiger mosquito (muoi van), causes more human disease than any other animal — dengue, Zika, chikungunya. Only female mosquitoes bite because they need blood protein for eggs. They find humans through exhaled CO2, body heat, and chemical signatures in sweat. Their proboscis is not one needle but six separate stylets that cut, probe for a blood vessel, and inject saliva. They breed in tiny pools of standing water. Vietnamese cities see dengue outbreaks every monsoon season.",
+    "material": "realistic",
+    "language": "vi",
+    "characters": [
+      {
+        "name": "Tiger Mosquito",
+        "entity_type": "character",
+        "description": "Female Aedes aegypti tiger mosquito, distinctive white-striped black body and legs, slender wings folded, long proboscis extended, large compound eyes, photorealistic macro insect detail."
+      },
+      {
+        "name": "Human Forearm Skin",
+        "entity_type": "location",
+        "description": "Smooth human forearm skin close-up, subtle pores and tiny hairs visible, warm natural lighting, clinical reference look."
+      },
+      {
+        "name": "Mosquito Larvae Water",
+        "entity_type": "visual_asset",
+        "description": "Small stagnant puddle of water in a discarded plastic container, dozens of small dark mosquito larvae wriggling near the surface, macro detail."
+      },
+      {
+        "name": "Vietnamese Bedroom Night",
+        "entity_type": "location",
+        "description": "Vietnamese bedroom at night with a traditional white mosquito net (mung) hung over the bed, soft warm bedside lamp, dim peaceful nighttime atmosphere."
+      }
+    ]
+  },
+  "video": {
+    "title": "Muoi Van - Loai Gay Benh Nhieu Nhat Hanh Tinh",
+    "video_story": "Hook mosquito biting at night, how they find you science, six-needle proboscis detail, larvae in puddle, Vietnamese mosquito-net bedroom closer with advice.",
+    "display_order": 0,
+    "orientation": "VERTICAL"
+  },
+  "scenes": [
+    {
+      "display_order": 0,
+      "chain_type": "ROOT",
+      "character_names": ["Tiger Mosquito", "Human Forearm Skin"],
+      "prompt": "Extreme macro close-up of a female tiger mosquito with striped black-and-white legs landing on human forearm skin at night, proboscis lowered toward the skin. Soft warm bedside lamp lighting. Vertical macro framing, tense.",
+      "video_prompt": "Extreme macro close-up of a female tiger mosquito with striped black-and-white legs landing softly on human forearm skin at night, proboscis lowering toward the skin in slow motion. The camera holds tight on the mosquito, slight push toward the contact point. Soft warm bedside lamp lighting against cool nighttime shadows.\n\nAudio: quiet bedroom night ambience.\nSFX: faint high-pitched mosquito whine, soft skin contact.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Mỗi đêm, hàng tỷ con muỗi vằn tìm bạn bằng hơi thở. Một vết đốt có thể truyền sốt xuất huyết."
+    },
+    {
+      "display_order": 1,
+      "chain_type": "ROOT",
+      "character_names": ["Tiger Mosquito", "Human Forearm Skin"],
+      "prompt": "Scientific illustration view of a sleeping human silhouette emitting visible heat and CO2 plumes, with several mosquitoes drawn toward the plumes from across the dark room. Warm thermal-imaging color palette over cool dark room. Vertical scientific composition.",
+      "video_prompt": "Scientific illustration view of a sleeping human silhouette emitting visible heat and CO2 plumes, with several mosquitoes drawn toward the plumes from across the dark room. The camera slowly tracks one mosquito following the CO2 trail toward the sleeping figure. Warm thermal-imaging color palette over cool dark room, scientific visualization aesthetic.\n\nAudio: low scientific drone, soft breathing.\nSFX: faint mosquito whines from multiple directions, thermal hum.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Muỗi tìm bạn qua hơi CO2 bạn thở ra, nhiệt cơ thể, và mùi mồ hôi đặc biệt từ da bạn."
+    },
+    {
+      "display_order": 2,
+      "chain_type": "CONTINUATION",
+      "parent_index": 1,
+      "character_names": ["Tiger Mosquito", "Human Forearm Skin"],
+      "prompt": "Extreme anatomical macro view of mosquito proboscis splitting into six separate needle-like stylets, probing into human skin, searching for a blood vessel. Clinical scientific lighting, non-gory. Vertical extreme macro framing.",
+      "video_prompt": "Extreme anatomical macro view of mosquito proboscis splitting into six separate needle-like stylets as it pierces human skin, each stylet probing independently to search for a blood vessel. The camera slowly pushes in on the six-needle action. Clinical scientific lighting with subtle warm skin tone, restrained non-gory detail.\n\nAudio: low scientific drone, biological pulse.\nSFX: delicate skin pierce sounds, subtle probing micro-clicks.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Vòi muỗi không phải một cây kim, mà sáu cây kim nhỏ. Nó cắt, dò, hút, và tiêm nước bọt vào bạn."
+    },
+    {
+      "display_order": 3,
+      "chain_type": "ROOT",
+      "character_names": ["Mosquito Larvae Water"],
+      "prompt": "Macro overhead close-up of a small stagnant puddle of water in a discarded plastic container in a Vietnamese alley, dozens of small dark mosquito larvae wriggling near the surface. Soft outdoor afternoon light. Vertical macro framing.",
+      "video_prompt": "Macro overhead close-up of a small stagnant puddle of water in a discarded plastic container in a Vietnamese alley, dozens of small dark mosquito larvae wriggling near the water surface in unison. The camera slowly pushes down toward the wriggling larvae, revealing how many there are. Soft outdoor afternoon light reflecting on the water surface.\n\nAudio: quiet outdoor Vietnamese alley ambience.\nSFX: tiny wriggling water disturbances, soft water surface ripples.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Chỉ cần một chai nước đọng trong sân là đủ. Trong vài ngày, hàng trăm ấu trùng đã nở ra."
+    },
+    {
+      "display_order": 4,
+      "chain_type": "ROOT",
+      "character_names": ["Vietnamese Bedroom Night", "Tiger Mosquito"],
+      "prompt": "Wide shot of a Vietnamese bedroom at night with a traditional white mosquito net hung over the bed, a few mosquitoes hovering outside the net, person safely sleeping inside. Soft warm bedside lamp, peaceful protected atmosphere. Vertical wide framing.",
+      "video_prompt": "Wide shot of a Vietnamese bedroom at night with a traditional white mosquito net hung over the bed, a few mosquitoes hovering outside the net unable to enter, person safely sleeping inside. The camera slowly pulls back to reveal the protective net glowing softly in the lamp light. Warm cozy bedside lamp light against cool night room.\n\nAudio: peaceful nighttime bedroom ambience, soft breathing.\nSFX: faint mosquito whines outside the net, gentle fabric rustle.\nNegative: subtitles, watermark, text overlay.",
+      "narrator_text": "Đổ hết nước đọng quanh nhà. Đó là cách duy nhất ngăn muỗi vằn và sốt xuất huyết bùng phát."
+    }
+  ]
+}
