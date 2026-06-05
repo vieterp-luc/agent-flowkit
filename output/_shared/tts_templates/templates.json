@@ -140,5 +140,13 @@
     "instruct": null,
     "ref_audio": "Quang_Vinh_TTS_ref.mp3",
     "duration": 9.87
+  },
+  "Phong_Vien_TTS": {
+    "name": "Phong_Vien_TTS",
+    "audio_path": "Phong_Vien_TTS.wav",
+    "text": "Năm hai nghìn không trăm hai mươi tư, thế giới thay đổi mãi mãi. Các quốc gia hưng thịnh và sụp đổ, anh hùng xuất hiện từ bóng tối, và những người bình thường đối mặt với thử thách phi thường.",
+    "instruct": null,
+    "ref_audio": "Phong_Vien_TTS_ref.mp3",
+    "duration": 9.0
   }
 }
