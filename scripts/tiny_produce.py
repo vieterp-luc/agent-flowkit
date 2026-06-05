@@ -14,6 +14,13 @@ import meta_video_batch
 import tiny_assemble
 from tiny_days import EPISODES, STYLE
 
+# Merge extra episodes (distinct story arcs) if present
+try:
+    from tiny_days_more import EPISODES_MORE
+    EPISODES.update(EPISODES_MORE)
+except ImportError:
+    pass
+
 BASE = "http://127.0.0.1:8100"
 LOG = "output/tiny_animals/tiny_run.log"
 MUSIC = "output/tiny_animals/_bgm/cozy_playful.mp3"
