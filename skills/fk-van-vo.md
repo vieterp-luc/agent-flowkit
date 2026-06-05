@@ -11,7 +11,7 @@ slang Gen Z + internet meme + chương đặt tên phim bom tấn + ads hài + �
 Khác biệt với `/fk-tom-tac-sach` (cùng long-form VN nhưng tone nghiêm túc):
 - Script: slang dictionary + commentary "vô tri" — **NO ad break** (user explicit rejected)
 - Chapter name: map sang title phim bom tấn (Fight Club / Endgame / No Way Home...)
-- Image: nhân vật phiên bản "boi phố" (oversized hoodie, undercut moi, sneakers) trên nền classical
+- Image: cinematic 3D Pixar Disney-style painterly rendering với authentic ancient Vietnamese costume (áo bà ba / áo tứ thân / áo nâu / royal silk robe) — warm amber + gold + magenta-purple palette
 - Voice: locked Thang_QC_TTS @ 0.9 (trẻ năng lượng cao, A/B'd qua Sơn Tinh demo)
 - Ken Burns motion: face-safe rule (static/pan/zoom_out cho character scenes, zoom_in only cho atmospheric)
 
@@ -39,9 +39,9 @@ python scripts/vanvo_render_pipeline.py            # batch all books in BOOKS di
 python scripts/vanvo_render_pipeline.py <slug>     # single book
 ```
 
-Pipeline auto-handles: project create → 15 scenes (intro+14) → batch image gen → TTS → Ken Burns → concat → mix → thumbnail + caption. Resumable via `_project.json` marker.
+Pipeline auto-handles: project create → entity refs (paced) → 15 scenes (intro+14) → paced image gen → TTS → Ken Burns → concat → mix → thumbnail + caption. Resumable via `_project.json` marker (persists `pid`, `vid`, `scene_ids`, `entity_cids`).
 
-To add new book: **STEP 1 — define character constants** at top of book block (see "Character Consistency Rule" below), THEN append to `BOOKS` dict in `vanvo_books_data.py` with fields: slug, title, story_summary, scripts[14], image_prompts[14] (built via f-string referencing constants), motions[15], caption_hook/bullets/moral.
+To add new book: **STEP 1 — define character constants** at top of book block (see "Character Consistency Rule" Step 4 below), THEN append to `BOOKS` dict in `vanvo_books_data.py` with fields: slug, title, **entities** (list of `_char.as_entity()` / `_entity()` for 2-3 main chars — see Step 4b), story_summary, scripts[14], image_prompts[14] (built via f-string referencing constants), motions[15], caption_hook/bullets/moral.
 
 ---
 
@@ -137,28 +137,35 @@ User review map → adjust if mismatched → save vào roadmap.
 
 ### Step 2 — Aesthetic profile
 
-Single preset: `vanvo_modern`. Không có alternative — đặc trưng của brand.
+Single preset: `vanvo_cinematic`. Default style từ 2026-06-01 (thay preset cũ `vanvo_modern` boi phố streetwear) — đặc trưng của brand.
 
 ```
-vanvo_modern preset (validated qua Sơn Tinh + Dế Mèn samples):
-Modern Vietnamese street fashion x classical literature setting hybrid,
-nhân vật phiên bản "boi phố" 2020s:
-- Mặc: oversized hoodie / áo khoác bomber, jeans rách, sneakers (Air Force 1, Yeezy slide),
-  hoặc áo polo + quần short streetwear — SOLID COLOR ONLY, no graffiti, no printed pattern, no logo
-- Tóc: undercut, moi style (hai bên cạo, đỉnh dài), tóc nhuộm bạch kim / bordeaux / xanh
-- Phụ kiện: dây chuyền vàng cỡ lớn, kính mát aviator, đồng hồ Casio, AirPods Pro
-- Bối cảnh: vẫn giữ era gốc (làng quê 1930s / cung đình 19th c) NHƯNG nhân vật anachronistic streetwear
-- Style: anime/manhwa Hàn Quốc colored, vibrant neon palette, dramatic rim lighting,
-  comic book panel framing, dynamic action poses
-- Pose: NATURAL confident stance (hands in pockets, leaning, walking, sitting squat)
-  — AVOID gym flex pose, AVOID bodybuilder arm pose, AVOID muscle pose
-- Mood: ironic juxtaposition — boi phố walking through áo nâu sòng làng cảnh
-- Palette lock (series consistency): cyan + gold + neon magenta accent
-- STRICTLY NO TEXT in image, NO logos, NO graffiti/printed letters on clothing, NO subtitles
-- VERTICAL/HORIZONTAL per video orientation
+vanvo_cinematic preset (validated qua Em Bé Thông Minh):
+Cinematic 3D Pixar Disney-style painterly rendering x ancient Vietnamese fairy tale,
+nhân vật authentic ancient costume:
+- Mặc: áo bà ba / áo tứ thân / áo nâu / cream linen tunic, quần ancient loose, leather
+  sandals hoặc đi chân đất — SOLID earthy colors only (cream, brown, deep red, ochre, jade),
+  no graffiti, no printed pattern, no logo
+- Vua/hoàng tộc: ornate silk royal robe with rich gold-thread dragon/phoenix embroidery,
+  tall imperial crown, golden throne accessories
+- Tóc: ancient Vietnamese hair — búi tóc thấp, khăn đầu (brown headscarf wrapped),
+  tousled black hair under hat, long white beard cho elder, hair pin gỗ/jade cho phụ nữ
+- Phụ kiện: nón lá, khăn đóng, dây thừng làm thắt lưng, gậy tre, gánh thúng — KHÔNG dùng
+  modern items (no sunglasses, no watches, no streetwear, no sneakers, no hoodies, no logos)
+- Bối cảnh: ancient Vietnamese rural countryside (bamboo huts, rice paddies, banana trees)
+  hoặc imperial court (red lacquer columns, jade tiles, hanging oil lanterns)
+- Rendering: 3D Pixar Disney painterly, hyper-detailed expressive faces với big emotive eyes,
+  warm dramatic golden rim lighting + glow halos around subjects, sharp cinematic focus,
+  rich painterly textures
+- Pose: NATURAL expressive stance với emotive face — AVOID gym flex pose, bodybuilder arm,
+  muscle pose
+- Mood: cinematic movie still — warm/dramatic/heartfelt tùy beat truyện
+- Palette lock (series consistency): warm amber + gold + magenta-purple accent
+- STRICTLY NO TEXT in image, NO logos, NO letters on clothing, NO subtitles
+- HORIZONTAL 16:9 cinematic movie still composition
 ```
 
-Side note: với nhân vật phi-người (Dế Mèn = côn trùng), apply anthropomorphic-streetwear — humanoid body + giữ đặc trưng loài (râu, mắt to, body color), trang phục SOLID COLOR (no graffiti/print), pose tự nhiên không gym flex. Vd Dế Mèn: hoodie đen solid + cargo shorts + chunky sneakers + gold chain + aviator sunglasses + tóc bạc moi, pose ngồi xổm hàng rào.
+Side note: với nhân vật phi-người (animal/sinh vật như Cóc, Dế Mèn, Cua, Ong), apply anthropomorphic-cinematic — humanoid body + giữ đặc trưng loài (râu, mắt to expressive, body color, scale/fur texture), accessory tối giản (vd Cóc khăn đỏ solid, ko dùng hoodies/chains), 3D Pixar rendering. Vd Cóc Kiện Trời: warty brown-green toad standing upright, tiny red scarf, confident determined face với big eyes — KHÔNG dùng "hoodie + cargo shorts + gold chain" của style cũ.
 
 ### Step 3 — Create Flow project
 
@@ -169,7 +176,7 @@ POST /api/projects
   "description": "Tóm tắt <Book> phong cách Văn Vở — Gen Z slang + modern hybrid visuals.",
   "story": "<2-3 câu giới thiệu sách + bối cảnh + dòng chữ 'aesthetic vanvo_modern hybrid'>",
   "material": "realistic",
-  "image_style": "Modern Vietnamese street fashion hybrid với era gốc của tác phẩm. Anime/manhwa Korean color, vibrant cyan + gold + neon magenta palette, dramatic rim lighting, comic book panel framing. Clothing SOLID COLOR ONLY — no graffiti, no printed pattern, no logo, no letters. Natural confident pose — AVOID gym flex/bodybuilder/muscle pose. STRICTLY NO TEXT, NO subtitles, NO signs. HORIZONTAL 16:9 cinematic.",
+  "image_style": "Cinematic 3D Pixar Disney-style painterly rendering, warm amber + gold + magenta-purple palette, dramatic golden rim lighting and glow halos, hyper-detailed expressive faces. CHARACTERS: authentic ancient Vietnamese clothing — áo bà ba/áo tứ thân/áo nâu, brown headscarves or conical hats, leather sandals or bare feet, royals in ornate silk robes with gold-thread embroidery. Clothing SOLID earthy colors only. NATURAL expressive pose. STRICTLY NO TEXT, NO subtitles, NO signs, NO modern items (no sunglasses, no watches, no streetwear, no sneakers, no hoodies). HORIZONTAL 16:9 cinematic movie still.",
   "language": "vi",
   "orientation": "HORIZONTAL"
 }
@@ -179,21 +186,20 @@ POST /api/projects
 
 **Rule cốt lõi:** mỗi nhân vật/quái vật/địa điểm có tên = 1 constant string DUY NHẤT, định nghĩa MỘT LẦN ở đầu book block trong `vanvo_books_data.py`, reuse qua f-string trong MỌI scene image_prompt. **Không bao giờ re-describe** trong từng scene riêng.
 
-Pattern (canonical, xem `vanvo_books_data.py` THẠCH SANH / TẤM CÁM):
+Pattern (canonical cinematic, xem `vanvo_books_data.py` EM BÉ THÔNG MINH / CÂY VÚ SỮA / CÓC KIỆN TRỜI):
 ```python
 # ===== BOOK X: <TÊN> =====
-THACH_SANH = _char("Thạch Sanh", "young Vietnamese man, kind orphan hero: brown cargo shorts + cream solid hoodie no print, white sneakers, gold chain, undercut blonde hair, gentle confident face")
-LY_THONG   = _char("Lý Thông",   "middle-aged scheming Vietnamese man: black bomber jacket solid no print + dark jeans, aviator sunglasses, slick black hair, sly smirk")
-CONG_CHUA  = _char("Princess công chúa", "...")
-# ... rồi mới đến THACH_SANH_BOOK = {...}
+EM_BE = _char("em bé thông minh", "young Vietnamese boy around 10 years old, simple cream solid linen tunic + brown trousers, leather sandals, brown headscarf wrapped around head with tousled black hair peeking out, bright clever big eyes, confident playful smile, expressive emotive face")
+VUA_EBT = _char("Vua nước Việt", "elderly Vietnamese king, ornate dark red imperial robe with rich gold-thread dragon embroidery, tall imperial crown, long white beard, amused intrigued expression on a golden throne")
+# ... rồi mới đến EM_BE_BOOK = {...}
 ```
 
 Constant string PHẢI lock đủ visual identifiers (audience cần nhận ra nhân vật khắp 14 scene):
-1. **Age + build** ("young / middle-aged / elderly", "tall thin / stocky")
-2. **Clothing** — top + bottom + footwear, SOLID COLOR (vd "cream solid hoodie no print + brown cargo shorts + white sneakers")
-3. **Hair** — style + color (vd "undercut blonde / slick black / silver bun")
-4. **Signature accessory** — gold chain / aviator sunglasses / Apple Watch / hair pin
-5. **Default expression / pose tag** ("gentle confident face" / "sly smirk" / "scolding angry hands on hips")
+1. **Age + build** ("young / middle-aged / elderly", "tall thin / stocky / frail")
+2. **Clothing** — top + bottom + footwear, SOLID EARTHY color, AUTHENTIC ancient (vd "cream solid linen tunic + brown trousers + leather sandals", "ornate dark red imperial robe with gold-thread dragon embroidery + golden imperial crown")
+3. **Hair** — ancient Vietnamese style (vd "brown headscarf wrapped + tousled black hair peeking out", "low búi tóc with wooden hair pin", "long white beard", "shaved monk head")
+4. **Signature accessory** — ancient only (nón lá / khăn đóng / hair pin gỗ-jade / cane gậy tre / scroll cuộn / gánh thúng — NEVER sunglasses/watch/chain/streetwear)
+5. **Default expression / pose tag** với emotive face ("bright clever big eyes + confident playful smile" / "amused intrigued expression" / "weary loving face with tired kind eyes")
 
 Mỗi scene image_prompt build qua f-string interpolation, KHÔNG copy-paste description:
 ```python
@@ -206,13 +212,52 @@ f"Village scene: Lý Thông (middle-aged man in blue jacket) approaching Thạch
 
 5-8 nhân vật chính + 2-3 quái vật/sinh vật + 1-2 địa điểm signature. Personality slang tag (boi phố / idol quốc dân / ông trùm / scammer) ghi vào commentary trong narrator, KHÔNG ghi vào constant (constant = thuần visual).
 
-**Variant rule:** khi story cần nhân vật thay outfit (vd Sọ Dừa head → handsome man, hoặc cưới hỏi áo cưới), define `<NAME>_VARIANT = _char(...)` riêng — KHÔNG mutate constant gốc. Vd `SO_DUA_HEAD` vs `SO_DUA_MAN` trong book 2.
+**Variant rule:** khi story cần nhân vật thay outfit (vd Sọ Dừa head → handsome man, hoặc cưới hỏi áo cưới), define `<NAME>_VARIANT = _char(...)` riêng — KHÔNG mutate constant gốc. Vd `SO_DUA_HEAD` vs `SO_DUA_MAN` trong book 2. Same person với 2 visual states (vd Thạch Sùng nghèo → Thạch Sùng giàu) → 2 entities riêng.
 
 Pause cho user review roster + visual lock trước khi viết image_prompts.
 
-### Step 5 — Gen reference images (optional, spot-check only)
+### Step 4b — Entity ref block (MANDATORY cho main chars — Flow auto-locks consistency)
 
-Pipeline thực tế (`scripts/vanvo_render_pipeline.py`) **không** dùng Flow entity ref system — character consistency 100% relies on constant-reuse pattern Step 4. Nếu muốn pre-validate 1 character trước khi render full episode: gen ảnh test với constant string riêng → spot-check → adjust constant nếu drift, RỒI mới mass batch 14 scenes.
+Sau khi define `_char()` constants Step 4, **MỖI book MUST có `entities` list** trong book dict — liệt kê 2-3 nhân vật chính. Pipeline sẽ:
+1. POST `/api/characters` tạo entity ở Flow
+2. POST `/api/projects/{pid}/characters/{cid}` link vào project
+3. POST `/api/requests` type=`GENERATE_CHARACTER_IMAGE` gen ref image (paced, 1 ref/lần)
+4. Khi tạo scenes, auto-detect entity names trong rendered `image_prompt` → set `character_names` field → Flow auto-attach ref image media_id vào prompt scene
+
+Pattern:
+```python
+TRAU_CAU_BOOK = {
+    "slug": "su-tich-trau-cau",
+    "title": "Sự Tích Trầu Cau",
+    "entities": [TAN.as_entity(), LANG.as_entity(), CO_GAI.as_entity()],
+    "story_summary": "...",
+    "scripts": [...],
+    ...
+}
+```
+
+`_CharStr.as_entity()` (defined in `vanvo_books_data.py`) trả `{name, entity_type="character", image_prompt=<descriptor>}` từ `_char()` constant — không cần re-define descriptor.
+
+Cho creatures/visual_assets (plain string, không qua `_char()`): dùng `_entity()` helper:
+```python
+"entities": [
+    ANH_NONG_DAN_TK.as_entity(),
+    _entity("con hổ", CON_HO, "creature"),
+    _entity("con trâu", CON_TRAU, "creature"),
+]
+```
+
+`entity_type` options: `character` | `creature` | `location` | `visual_asset` | `generic_troop` | `faction`. Default `character`. Locations → HORIZONTAL ref, characters → VERTICAL ref (Flow auto-handles).
+
+**Quota economy:** mỗi entity ref = +1 Imagen call. Daily quota Imagen ~10-15 calls/day (PER_MODEL_DAILY_QUOTA). 1 book = 2-3 refs + 14 scenes ≈ 17 calls → 1 book/ngày. Limit entities tới MAIN chars (xuất hiện ≥3 scenes), KHÔNG add side chars.
+
+**Auto-detection rule:** `name` field MUST khớp EXACT substring xuất hiện trong rendered `image_prompt`. `_char("anh Tân", ...)` render thành `"anh Tân (descriptor)"` → entity name = `"anh Tân"` (đúng). Đừng đặt name khác (vd "Tân" thay vì "anh Tân") — detection sẽ miss.
+
+### Step 5 — Gen reference images (auto qua pipeline)
+
+Pipeline (`scripts/vanvo_render_pipeline.py`) **TỰ ĐỘNG** chạy `create_entities_and_refs()` sau `create_video`. Không cần manual gen refs. Pipeline halt-on-quota: nếu PUBLIC_ERROR_PER_MODEL_DAILY_QUOTA_REACHED ở ref hoặc scene, raise + dừng, resume hôm sau qua `_project.json` (đã persist `entity_cids`).
+
+Nếu safety filter block ref (`UNSAFE_GENERATION`/`MINOR_INPUT_IMAGE`): pipeline skip entity đó, scene vẫn render bằng prompt-only fallback (consistency giảm cho entity đó nhưng không crash pipeline).
 
 ### Step 6 — Extract chapter map + slang assignment
 
@@ -506,11 +551,12 @@ Override per book (rare): `/fk-van-vo <slug> --voice <name> --speed 0.9`. Phải
 | Slang dùng từ BANNED list | Re-extract với constraint mạnh hơn về dictionary |
 | Narrator TTS ngắt giật cục | Check punctuation — bỏ `?!—...` thừa, gộp câu bằng `,` |
 | Image gen ra text (chữ hoodie, biển hiệu) | Defensive prompt "STRICTLY NO TEXT" + "SOLID COLOR clothing only" — nếu vẫn ra graffiti giả, regen với prompt nhấn mạnh hơn |
-| Nhân vật đổi outfit/màu tóc/mặt giữa các scene (character drift) | Re-check `vanvo_books_data.py`: nhân vật ĐÃ ĐƯỢC define thành constant ở đầu book block chưa? Mọi image_prompt liên quan ĐÃ dùng `{CONSTANT}` interpolation chưa? Nếu chưa → refactor về pattern Step 4 ngay, regen scene affected. KHÔNG re-describe nhân vật inline. |
+| Nhân vật đổi outfit/màu tóc/mặt giữa các scene (character drift) | Hai layer check: (1) `_char()` constant ĐÃ define + dùng f-string `{CONSTANT}` interpolation chưa (Step 4)? (2) Nhân vật CHÍNH ĐÃ có trong book `entities` list chưa (Step 4b)? Pipeline tự generate ref image + auto-attach qua `character_names` — nếu thiếu entities → consistency drop. Fix: thêm vào `entities`, re-run pipeline (resume sẽ skip scenes đã render, gen mới cho scenes affected). |
 | Cần nhân vật mặc outfit khác cho 1 scene đặc biệt (vd áo cưới, biến hình) | Define `<NAME>_VARIANT = _char(...)` constant mới (vd `SO_DUA_HEAD` vs `SO_DUA_MAN`), KHÔNG mutate constant gốc. Reference variant chỉ trong scene đó. |
+| Image gen FAILED `PUBLIC_ERROR_MINOR` (book nhân vật trẻ em) | Safety filter flag cảnh trẻ em + đau khổ. Cảnh nhân vật trẻ trong tình huống thường (ăn cơm, chơi, bị mắng) thì PASS — chỉ flag combo trẻ em + đói/co ro/một mình/tuyệt vọng/khóc. Fix: soften wording các cảnh distress (bỏ "hungry/alone/curled up/cold/miserable/despair/tears"), reframe cảm xúc qua môi trường + ánh sáng thay vì nỗi khổ của trẻ. KHÔNG cần age-up nếu cảnh thường đã pass. PATCH scene records trên Flow nếu đã tạo scene (`PATCH /api/scenes/{sid}` field `image_prompt`), rồi resume. |
 | Image gen ra pose gym flex/bodybuilder | Add "natural confident stance, hands in pockets / leaning / walking, AVOID muscle pose" |
 | Clothing có graffiti pattern ngẫu nhiên | Re-prompt: "clothing solid color only, no print, no graffiti, no graphic" |
-| Image gen sai hybrid (full classical OR full modern) | Re-prompt explicit: "Character wears 2020s streetwear, background remains <era>" |
+| Image gen lẫn modern items (sunglasses/sneakers/hoodie xuất hiện) | Re-check char `_char()` descriptor có còn chứa streetwear element không (undercut/aviator/Apple Watch/gold chain/cargo). Default style đã ban modern items qua PROJECT_IMAGE_STYLE — nếu vẫn xuất hiện thì char descriptor đang ghi đè. Fix: rewrite descriptor về authentic ancient (áo bà ba / áo nâu / headscarf), KHÔNG modern accessory. |
 | Movie title hallucinated năm sai | Web search verify trước khi save roadmap |
 | Moral wrap-up tone vẫn lầy lội (không shift được) | Manual edit narrator_text scene cuối, Gemini sometimes fails tone shift |
 | Ken Burns zoom_in crop mặt nhân vật | Đổi sang `static` (portrait/close-up) / `pan_*` (medium) / `zoom_out` (wide). zoom_in chỉ dùng cho atmospheric no-character scenes |

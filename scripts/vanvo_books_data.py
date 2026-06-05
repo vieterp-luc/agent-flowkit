@@ -8,8 +8,25 @@ Each book follows /fk-van-vo skill rules:
 """
 
 # Reusable character/setting snippets (keep prompts shorter + consistent)
+class _CharStr(str):
+    """String subclass that also carries entity metadata for Flow character ref system."""
+    def __new__(cls, name, desc):
+        s = super().__new__(cls, f"{name} ({desc})")
+        s.entity_name = name
+        s.entity_desc = desc
+        return s
+
+    def as_entity(self, entity_type: str = "character") -> dict:
+        return {"name": self.entity_name, "entity_type": entity_type, "image_prompt": self.entity_desc}
+
+
 def _char(name, desc):
-    return f"{name} ({desc})"
+    return _CharStr(name, desc)
+
+
+def _entity(name: str, image_prompt: str, entity_type: str = "character") -> dict:
+    """Plain entity factory for non-_char snippets (creatures, locations as visual assets)."""
+    return {"name": name, "entity_type": entity_type, "image_prompt": image_prompt}
 
 # ================ BOOK 1: THẠCH SANH ================
 THACH_SANH = _char("Thạch Sanh", "young Vietnamese man, kind orphan hero: brown cargo shorts + cream solid hoodie no print, white sneakers, gold chain, undercut blonde hair, gentle confident face")
@@ -961,6 +978,7 @@ BO_SUOI = "secluded forest stream: clear water flowing over smooth stones, mossy
 TRAU_CAU_BOOK = {
     "slug": "su-tich-trau-cau",
     "title": "Sự Tích Trầu Cau",
+    "entities": [TAN.as_entity(), LANG.as_entity(), CO_GAI.as_entity()],
     "story_summary": "Văn Vở Gen Z. Hai anh em song sinh họ Cao Tân và Lang giống nhau như đúc. Cô gái nhà thầy đồ Lưu yêu một trong hai, bữa cơm thử đũa nhận ra anh Tân, kết duyên. Lang cảm thấy thừa thãi bỏ đi, chết bên bờ suối hóa tảng đá. Tân đi tìm, ôm đá khóc chết hóa cây cau. Vợ đi tìm chồng, hóa dây trầu quấn cây cau. Vua Hùng nghe chuyện cảm động truyền tục ăn trầu. Phiên bản kiểu phim The Notebook (2004).",
     "scripts": [
         "Hôm nay chúng ta sẽ nói về một truyền thuyết bi thương nhất trong kho tàng cổ tích Việt Nam, đó là sự tích trầu cau. Câu chuyện có hai anh em song sinh giống nhau như đúc, có cô gái không phân biệt được ai là ai, có cuộc hôn nhân đầy hiểu lầm dẫn đến bi kịch ba mạng người. Và có cả ba phép biến hình kỳ diệu thành cây cau, tảng đá và dây trầu quấn vào nhau muôn đời không rời.",
@@ -1018,6 +1036,7 @@ LAND_VL = "primordial ancient Vietnamese land of Văn Lang: stylized panorama fr
 
 CON_RONG_BOOK = {
     "slug": "con-rong-chau-tien",
+    "entities": [LAC_LONG_QUAN.as_entity(), AU_CO.as_entity()],
     "title": "Con Rồng Cháu Tiên",
     "story_summary": "Văn Vở Gen Z. Truyền thuyết khởi nguyên dân tộc Việt. Lạc Long Quân nòi rồng dưới biển + Âu Cơ dòng tiên trên núi kết duyên, sinh bọc trăm trứng nở ra 100 người con. Mâu thuẫn nòi giống, chia 50 xuống biển 50 lên núi. Con cả lên ngôi Hùng Vương, mở triều đại Văn Lang — nguồn gốc 'con Rồng cháu Tiên'. Phiên bản kiểu phim House of the Dragon (2022).",
     "scripts": [
@@ -1074,6 +1093,7 @@ GOC_CAY_HO = "massive ancient tree trunk: thick gnarled bark, sprawling roots, s
 
 TRI_KHON_BOOK = {
     "slug": "tri-khon-cua-ta-day",
+    "entities": [ANH_NONG_DAN_TK.as_entity(), _entity("con hổ", CON_HO, "creature"), _entity("con trâu", CON_TRAU, "creature")],
     "title": "Trí Khôn Của Ta Đây",
     "story_summary": "Văn Vở Gen Z. Truyện ngụ ngôn hài hước: con hổ tò mò trí khôn người là gì, anh nông dân lừa trói hổ vào gốc cây rồi đốt rơm hô 'trí khôn của ta đây'. Hổ thoát chạy có vằn đen, trâu cười rụng hàm răng trên — lý giải đặc điểm sinh học. Phiên bản kiểu phim Home Alone (1990).",
     "scripts": [
@@ -1121,16 +1141,17 @@ TRI_KHON_BOOK = {
 }
 
 # ================ BOOK 15: EM BÉ THÔNG MINH ================
-EM_BE = _char("em bé thông minh", "young Vietnamese boy around 10 years old: simple cream solid tunic + brown shorts, sandals, undercut black hair, bright clever eyes, confident playful smile")
-CHA_EM_BE = _char("cha em bé", "middle-aged Vietnamese farmer father: brown solid áo nâu + cargo trousers, conical hat, weathered honest face, gentle protective expression")
-SU_GIA_EBT = _char("sứ giả Vua", "Vietnamese royal messenger: red official robe with gold trim, official conical hat, holding scroll, dignified surprised face")
-VUA_EBT = _char("Vua nước Việt", "elderly Vietnamese king: dark red royal robe with gold trim, aviator sunglasses, Apple Watch, long white beard, amused intrigued expression on golden throne")
-SU_THAN_NGOAI = _char("sứ thần ngoại quốc", "foreign envoy: ornate Chinese-style ambassador robe in green and gold, distinct foreign hat, smug arrogant face, holding ornate gift box")
-LANG_EBT = "Vietnamese rural village: bamboo huts with thatched roofs, rice paddies, banana trees, dirt paths, peaceful countryside"
+EM_BE = _char("em bé thông minh", "young Vietnamese boy around 10 years old, simple cream solid linen tunic + brown trousers, leather sandals, brown headscarf wrapped around head with tousled black hair peeking out, bright clever big eyes, confident playful smile, expressive emotive face")
+CHA_EM_BE = _char("cha em bé", "middle-aged Vietnamese farmer father, brown solid áo nâu + loose ancient trousers, conical straw hat, weathered honest face, gentle protective expression")
+SU_GIA_EBT = _char("sứ giả Vua", "Vietnamese royal messenger, red official robe with gold trim, official conical hat, holding scroll, dignified surprised face")
+VUA_EBT = _char("Vua nước Việt", "elderly Vietnamese king, ornate dark red imperial robe with rich gold-thread dragon embroidery, tall imperial crown, long white beard, amused intrigued expression on a golden throne")
+SU_THAN_NGOAI = _char("sứ thần ngoại quốc", "foreign envoy ambassador, ornate Chinese-style ambassador robe in green and gold, distinct tall foreign hat, smug arrogant face, holding ornate gift box")
+LANG_EBT = "ancient Vietnamese rural village: bamboo huts with thatched roofs, rice paddies, banana trees, dirt paths, peaceful countryside"
 TRIEU_DINH_EBT = "ancient Vietnamese royal court: red lacquered columns, hanging red oil lanterns, jade floor tiles, courtiers in áo tứ thân, gold opulent decor"
 
 EM_BE_BOOK = {
     "slug": "em-be-thong-minh",
+    "entities": [EM_BE.as_entity(), VUA_EBT.as_entity(), SU_THAN_NGOAI.as_entity()],
     "title": "Em Bé Thông Minh",
     "story_summary": "Văn Vở Gen Z. Vua tìm người tài, sứ giả đi rao gặp em bé 10 tuổi cùng cha cày ruộng. Em đáp lại câu đố ngược, giải 4 thử thách liên tiếp: trâu cày mấy đường, trâu đực đẻ con, một con chim sẻ làm 3 mâm cỗ, xâu chỉ qua ốc xoắn. Vua phong Trạng Nguyên. Phiên bản kiểu phim Slumdog Millionaire (2008).",
     "scripts": [
@@ -1186,6 +1207,14 @@ LANG_NGHEO = "poor rural Vietnamese village: small worn bamboo huts with thatche
 
 NANG_TIEN_OC_BOOK = {
     "slug": "nang-tien-oc",
+    "entities": [BA_LAO_OC.as_entity(), NANG_TIEN_OC.as_entity()],
+    "thumbnail": {
+        "pose": "the elderly poor grandmother hugging the beautiful fairy maiden tightly from behind, both with tearful joyful big eyes, the moment of binding fate",
+        "mystery": "a glowing iridescent jade-blue spiral seashell shimmering on the rim of a clay water jar, soft cyan mystical glow",
+        "proof": "a humble thatched bamboo hut interior with a traditional clay water jar in the corner glowing faintly, peaceful poor countryside backdrop",
+        "mini_scenes": "1) the lonely grandmother holding the magical blue spiral seashell at a small pond, 2) the fairy maiden gracefully emerging from the glowing water jar bathed in cyan-gold light, 3) the broken shell pieces on the floor near the jar, 4) the grandmother and fairy daughter cooking together at a clay stove in golden afternoon light",
+        "subtitle": "TRỜI THƯƠNG KẺ TỐT BỤNG",
+    },
     "title": "Nàng Tiên Ốc",
     "story_summary": "Văn Vở Gen Z. Bà lão nghèo cô đơn bắt được con ốc lạ vỏ xanh biếc, không nỡ ăn nuôi trong chum nước. Hằng ngày về nhà thấy cơm canh nóng hổi nhà cửa sạch sẽ. Bà rình thấy nàng tiên bước ra từ chum, đập vỡ vỏ ốc giữ nàng ở lại làm con báo hiếu suốt đời. Phiên bản kiểu phim The Shape of Water (2017).",
     "scripts": [
@@ -1234,14 +1263,22 @@ NANG_TIEN_OC_BOOK = {
 
 # ================ BOOK 17: THẠCH SÙNG ================
 TS_NGHEO = _char("Thạch Sùng nghèo", "young Vietnamese man, sickly poor beggar: ragged dirty brown tunic over thin frame, dirty bare feet, unkempt black hair, weathered hungry face with hidden cunning eyes")
-TS_GIAU = _char("Thạch Sùng đại gia giàu có", "same Vietnamese man transformed into wealthy merchant: luxurious silk royal robe with gold trim, aviator sunglasses, gold chains and rings, slicked black hair, smug arrogant face — same person as Thạch Sùng nghèo")
-VUONG_KHAI = _char("Vương Khải đại gia đối thủ", "rival wealthy Vietnamese merchant: elaborate jade-green silk robe with gold trim, ornate hat, gold chain, sly cunning face with knowing smirk, calculating expression")
+TS_GIAU = _char("Thạch Sùng đại gia giàu có", "same Vietnamese man transformed into wealthy ancient merchant: luxurious crimson silk robe with rich gold-thread embroidery, ornate merchant hat, golden waist sash, slicked black hair tied in a topknot, smug arrogant face with thin beard — same person as Thạch Sùng nghèo")
+VUONG_KHAI = _char("Vương Khải đại gia đối thủ", "rival wealthy Vietnamese ancient merchant: elaborate jade-green silk robe with gold-thread embroidery and trim, ornate tall merchant hat, jade pendant on golden waist sash, sly cunning face with knowing smirk, calculating expression")
 NHA_GIAU_TS = "opulent ancient Vietnamese mansion interior: red lacquered wooden columns, gold-trimmed furniture, displays of jade and antique pottery, hanging silk banners, lavish wealthy decor"
 LUT = "ancient Vietnamese village in catastrophic flood: bamboo huts partially submerged in muddy water, broken bridges, scattered debris, overcast dark sky, desperate atmosphere"
 THANG_LAN = "small Vietnamese house lizard con thằn lằn (con thạch sùng): tiny pale gray-brown gecko with translucent skin, big black eyes, clinging to a wall, suction-cup feet, gentle pitiful figure"
 
 THACH_SUNG_BOOK = {
     "slug": "thach-sung",
+    "entities": [TS_NGHEO.as_entity(), TS_GIAU.as_entity(), VUONG_KHAI.as_entity()],
+    "thumbnail": {
+        "pose": "the wealthy merchant Thạch Sùng frozen in shocked despair clutching his head as he realizes a small broken clay kho jar is missing from his lavish treasure display, mouth wide open, big horrified eyes",
+        "mystery": "a small humble broken clay 'mẻ kho' jar glowing on a dark velvet cushion, surrounded by glittering gold and jade treasures",
+        "proof": "an opulent ancient Vietnamese mansion interior with red lacquered pillars, gold-trimmed furniture, displays of jade and antique pottery, hanging silk banners",
+        "mini_scenes": "1) the ragged poor beggar Thạch Sùng eating scraps in a dirty corner, 2) two wealthy merchants competing showing off treasure displays, 3) a catastrophic ancient flood with desperate villagers in muddy water, 4) a tiny pitiful pale-gray house lizard on a wall sticking its tongue out regretfully",
+        "subtitle": "TIẾC MẺ KHO HÓA THẰN LẰN",
+    },
     "title": "Thạch Sùng",
     "story_summary": "Văn Vở Gen Z. Thạch Sùng vốn ăn xin nghèo, năm lũ lụt đầu cơ tích trữ gạo bán giá cắt cổ giàu nhanh chóng. Tiếp tục đầu cơ thành đại gia khét tiếng. Cuộc thi của hiếm với Vương Khải — thua cay đắng vì thiếu cái mẻ kho. Phát điên đập đồ chết uất ức, hóa con thằn lằn tặc lưỡi tiếc rẻ. Phiên bản kiểu phim Citizen Kane (1941).",
     "scripts": [
@@ -1299,9 +1336,17 @@ HO_BA_BE = "majestic Vietnamese highland lake Ba Bể: three interconnected emer
 HO_BA_BE_BOOK = {
     "slug": "su-tich-ho-ba-be",
     "title": "Sự Tích Hồ Ba Bể",
+    "entities": [BA_LAO_AN_XIN.as_entity(), ME_NGHEO.as_entity(), CON_NGHEO.as_entity()],
+    "thumbnail": {
+        "pose": "the kind poor widow mother gently helping the ragged scabbed beggar woman stand up, both with emotional faces, the moment of compassion",
+        "mystery": "a glowing small bundle of magical ash and two tiny rice husks glowing softly in cupped hands, swirling cyan-gold sparkle particles",
+        "proof": "the majestic emerald-green Ba Bể highland lake with three interconnected basins surrounded by towering limestone karst mountains, ancient Vietnamese countryside",
+        "mini_scenes": "1) villagers in colorful traditional festival clothing recoiling and pushing away the beggar woman, 2) the beggar transforming into a luminous golden dragon in the humble hut at midnight, 3) the catastrophic flood swallowing the village with water gushing up, 4) the humble hut floating safely on the new flood lake with the protective ash circle around it",
+        "subtitle": "LÒNG TỐT CỨU CẢ DÒNG SỐNG",
+    },
     "story_summary": "Văn Vở Gen Z. Hội cúng Phật ở Bắc Kạn — bà lão ăn xin ghẻ lở đến xin ăn bị cả làng xua đuổi. Chỉ 2 mẹ con bà góa nghèo thương tình mời về nhà ngủ. Đêm bà lão hiện nguyên hình rồng, sáng tặng gói tro + 2 mảnh trấu. Đêm rằm động đất sụt cả làng thành biển nước, 2 mẹ con thả trấu thành thuyền cứu dân. Vùng đất sụt thành hồ Ba Bể. Phiên bản kiểu phim Noah (2014).",
     "scripts": [
-        "Hôm nay chúng ta sẽ nói về một truyền thuyết về nguồn gốc một thắng cảnh nổi tiếng nhất Bắc Kạn, đó là sự tích hồ Ba Bể. Nếu phải so với một bộ phim để dễ hình dung thì tôi xếp nó vào hạng Noah, câu chuyện về một trận lụt thần thánh quét sạch cả làng nhưng chừa lại một gia đình tốt bụng được trời cảnh báo trước. Câu chuyện có bà lão ăn xin ghẻ lở hôi hám bị cả làng xua đuổi, có hai mẹ con nghèo duy nhất tử tế mời bà về nhà ngủ. Và có cả màn cả làng sụt xuống biến thành hồ chỉ trong một đêm, hai mẹ con thoát chết nhờ gói tro và hai mảnh trấu thần kỳ.",
+        "Hôm nay chúng ta sẽ nói về một truyền thuyết về nguồn gốc một thắng cảnh nổi tiếng nhất Bắc Kạn, đó là sự tích hồ Ba Bể. Câu chuyện có bà lão ăn xin ghẻ lở hôi hám bị cả làng xua đuổi, có hai mẹ con nghèo duy nhất tử tế mời bà về nhà ngủ. Và có cả màn cả làng sụt xuống biến thành hồ chỉ trong một đêm, hai mẹ con thoát chết nhờ gói tro và hai mảnh trấu thần kỳ.",
         "Câu chuyện bắt đầu vào một thời nọ, ở một làng quê vùng Bắc Kạn có tổ chức hội cúng Phật lớn nhất trong năm. Dân chúng khắp các vùng lân cận đều kéo về dự lễ, đem theo cỗ bàn linh đình hoa quả đầy đặn để cầu phước cho gia đình. Cả làng treo đèn kết hoa rộn ràng, tiếng trống chiêng vang vọng cả vùng từ sáng sớm. Profile của cái hội thì đúng kiểu một festival cấp tỉnh thời cổ, ai cũng háo hức tham gia mong được phước lành quanh năm.",
         "Đang lúc lễ hội tưng bừng nhất, bỗng xuất hiện một bà lão ăn xin rách rưới đến xin chút cơm hoa quả từ thiện. Bà lão trông cực kỳ tội nghiệp, người ghẻ lở chảy mủ, áo quần rách te tua, mùi hôi tỏa ra cả đoạn đường khiến ai đi qua cũng phải bịt mũi. Dân làng nhìn thấy bà thì đứng hình rồi lập tức xua đuổi bà ra xa, không một ai dám lại gần vì sợ bệnh lây sang. Bà lão thất thểu đi từ mâm cỗ này sang mâm cỗ khác xin ăn, nhưng đều bị xua đuổi không thương tiếc.",
         "Trong cảnh ai cũng xa lánh, có một bà góa nghèo cùng đứa con trai nhỏ đang dự lễ thấy cảnh ấy thì không cầm lòng được. Hai mẹ con dù gia cảnh cực kỳ khó khăn vẫn quyết định mời bà lão về nhà mình ngủ qua đêm. Người mẹ dìu bà lão về căn lều tranh nhỏ ven sông, đứa con vội vàng nấu một nồi cơm nóng mời bà ăn cho ấm bụng. Bà lão được ăn no liền nằm xuống chiếu cói nghỉ ngơi, hai mẹ con cũng đi ngủ sớm vì cả ngày đã quá mệt mỏi.",
@@ -1344,6 +1389,138 @@ HO_BA_BE_BOOK = {
     "caption_moral": "Câu chuyện dạy ta: lòng tốt với người yếu thế không bao giờ vô ích — đôi khi vị khách bị xua đuổi lại chính là vị thần đến thử lòng ta."
 }
 
+# ================ BOOK 19: SỰ TÍCH CÂY VÚ SỮA ================
+CAU_BE_VS = _char("cậu bé", "young Vietnamese boy around 9 years old, solid mustard-yellow ancient linen tunic + brown trousers, leather sandals, tousled black hair under a brown headscarf, round innocent face, big emotive eyes, stubborn pouty expression")
+NGUOI_ME_VS = _char("người mẹ", "middle-aged Vietnamese mother: simple solid teal áo bà ba + dark trousers, hair in a low bun, gentle weary loving face with tired kind eyes, thin frail figure")
+NHA_QUE_VS = "humble rural Vietnamese home: small thatched bamboo hut with an earthen yard, a low wooden gate, banana trees and a small vegetable garden, peaceful poor countryside"
+CAY_VU_SUA = "magical star-apple tree cây vú sữa: lush rounded tree with glossy leaves green on top and golden-bronze underneath, round purple-green milk fruits, soft mystical glow, standing in an earthen yard"
+DUONG_XA_VS = "harsh outside world: dusty long road winding past unfamiliar cold villages and busy marketplaces, overcast lonely grey sky, indifferent strangers, bleak hardship atmosphere"
+
+CAY_VU_SUA_BOOK = {
+    "slug": "su-tich-cay-vu-sua",
+    "title": "Sự Tích Cây Vú Sữa",
+    "entities": [CAU_BE_VS.as_entity(), NGUOI_ME_VS.as_entity()],
+    "thumbnail": {
+        "pose": "kneeling at the foot of a glowing magical star-apple tree, hands embracing the trunk, looking up with tearful regretful big eyes",
+        "mystery": "a ripe purple-green star-apple fruit dripping sweet white milk into an outstretched hand",
+        "proof": "a humble thatched bamboo hut yard with the towering magical star-apple tree in soft golden glow, ancient Vietnamese countryside",
+        "mini_scenes": "1) the mother lovingly feeding the boy a bowl of rice inside the hut, 2) the boy sneaking out the gate at moonlit night, 3) the boy alone hungry on a cold marketplace bench, 4) the tree leaves with green tops and golden-bronze undersides like crying eyes",
+        "subtitle": "TÌNH MẸ KHÔNG BAO GIỜ CẠN",
+    },
+    "story_summary": "Văn Vở Gen Z. Cậu bé ham chơi nghịch ngợm sống với mẹ nghèo, một hôm bị mẹ mắng liền giận dỗi bỏ nhà ra đi. Lang thang đói khổ ngoài đời, cậu hối hận quay về thì mẹ đã mất, hóa thành cây lạ giữa sân. Cậu ôm cây khóc, quả chín rơi vào tay chảy dòng sữa ngọt, lá xanh trên vàng dưới như mắt mẹ khóc mòn vì con. Dân làng cảm động trồng cây khắp nơi, gọi là cây vú sữa. Phiên bản kiểu phim Coco (2017).",
+    "scripts": [
+        "Hôm nay chúng ta sẽ nói về một câu chuyện cổ tích cảm động nhất Việt Nam, đó là Sự Tích Cây Vú Sữa. Câu chuyện có một cậu bé ham chơi giận dỗi bỏ nhà ra đi, có người mẹ nghèo ngày đêm tựa cửa ngóng con mỏi mòn. Và có cả phép màu kỳ diệu khi người mẹ hóa thành một loài cây lạ, quả chín rơi vào tay con chảy ra dòng sữa ngọt ngào như chính tình mẹ bao la không bao giờ cạn.",
+        "Ngày xửa ngày xưa ở một làng quê nghèo, có hai mẹ con sống nương tựa vào nhau trong một túp lều nhỏ đơn sơ. Người cha mất sớm từ khi cậu bé còn đỏ hỏn, một mình người mẹ tảo tần làm lụng nuôi con khôn lớn từng ngày. Profile của người mẹ thì đúng kiểu hiền lành nhẫn nhịn, thương con hết mực, có miếng ngon nào cũng nhường hết cho con ăn. Bà cưng chiều cậu con trai duy nhất như cục vàng cục bạc, chưa bao giờ để con phải thiếu thốn tình thương dù nhà nghèo xơ xác.",
+        "Thế nhưng cậu bé được mẹ chiều quá đâm ra sinh hư, suốt ngày chỉ mải mê rong chơi lêu lổng khắp xóm. Cậu chẳng chịu phụ mẹ việc nhà, hễ rảnh là chạy đi đá bóng thả diều với đám bạn tới tối mịt mới về. Mẹ cậu ngày ngày còng lưng ngoài đồng, tối về lại lo cơm nước giặt giũ, vất vả trăm bề mà chưa một lời than vãn. Cậu bé thì vô tư vô lo, coi mọi thứ mẹ làm cho mình là chuyện đương nhiên, chẳng mấy khi nghĩ đến nỗi nhọc nhằn của người mẹ.",
+        "Một hôm cậu bé mải chơi làm vỡ mất chum gạo cuối cùng trong nhà, gạo đổ tung tóe ra cả nền đất. Người mẹ đi làm về thấy vậy vừa xót vừa lo, không nhịn được mới mắng cậu vài câu cho cậu biết lỗi mà chừa. Cậu bé không những không biết lỗi mà còn giận dỗi cho rằng mẹ ghét bỏ mình, mặt nặng mày nhẹ hờn dỗi cả buổi. Trong cơn tự ái trẻ con, cậu nghĩ quẩn rằng ở nhà chẳng ai thương mình nữa, chi bằng bỏ đi cho mẹ khỏi phải mắng.",
+        "Thế là ngay đêm hôm đó, cậu bé lén gói vài bộ quần áo rồi lặng lẽ trốn khỏi nhà khi mẹ đang ngủ say. Cậu cứ thế đi mãi đi mãi theo con đường làng, lòng vẫn còn ấm ức nghĩ rằng ra ngoài sẽ sướng hơn ở nhà bị mắng. Người mẹ sáng hôm sau tỉnh dậy không thấy con đâu thì hốt hoảng chạy đi tìm khắp xóm khắp làng. Bà gọi tên con khản cả giọng, hỏi thăm từng nhà từng ngõ mà chẳng ai thấy bóng dáng cậu bé đâu cả.",
+        "Cậu bé đi lang thang ngoài đời mới biết thế nào là khổ, không còn mẹ bên cạnh thì mọi thứ đều khắc nghiệt vô cùng. Cậu đói lả người phải đi xin ăn, đêm xuống thì co ro ngủ ngoài hiên chợ lạnh lẽo, chẳng ai thèm đoái hoài tới một đứa trẻ bụi đời. Người ngoài chẳng ai thương cậu như mẹ, có người còn xua đuổi quát mắng khiến cậu tủi thân khóc thầm. Lúc này cậu mới thấm thía rằng vòng tay mẹ chính là nơi ấm áp nhất, là thứ mà cậu đã dại dột vứt bỏ vì một phút giận hờn vô cớ.",
+        "Sau bao ngày lăn lóc đói rét ngoài đường, cậu bé hối hận đến tận cùng và chỉ mong được trở về bên mẹ. Cậu nhớ da diết bữa cơm nóng mẹ nấu, nhớ bàn tay mẹ vuốt tóc mỗi đêm, nhớ cả những lời mắng mà giờ cậu hiểu đều xuất phát từ thương yêu. Cậu lê đôi chân rã rời lần mò tìm đường về quê cũ, trong lòng chỉ một ý nghĩ duy nhất là về ôm lấy mẹ xin lỗi. Cậu tự hứa với mình từ nay sẽ ngoan ngoãn nghe lời, sẽ phụ mẹ làm lụng và không bao giờ làm mẹ buồn lòng thêm lần nào nữa.",
+        "Cuối cùng cậu bé cũng về tới ngôi nhà xưa, nhưng cảnh tượng trước mắt khiến cậu chết lặng cả người. Căn nhà nhỏ giờ vắng tanh lạnh lẽo, cửa nẻo im lìm không một bóng người, bếp lửa đã nguội tắt từ bao giờ. Cậu chạy khắp nhà gọi mẹ ơi mẹ ơi con đã về rồi, nhưng đáp lại chỉ là sự im lặng đến nao lòng. Người mẹ vì ngày đêm khóc thương con, mỏi mòn tựa cửa ngóng trông đến kiệt sức mà đã lặng lẽ qua đời tự lúc nào.",
+        "Cậu bé khuỵu xuống giữa sân nhà òa khóc nức nở, gọi mẹ trong tuyệt vọng mà chẳng còn ai đáp lời. Bỗng cậu nhận ra giữa sân mọc lên một cái cây lạ xanh tốt mà trước kia chưa từng có, thân cây tỏa ra hơi ấm dịu dàng kỳ lạ. Như có linh tính mách bảo, cậu lảo đảo bước tới ôm chầm lấy thân cây mà khóc, gọi mẹ ơi có phải mẹ đây không. Vừa dứt lời thì cái cây bỗng run rẩy khẽ rung động, từng cành lá xòe ra như vòng tay người mẹ đang dang rộng ôm lấy đứa con thơ tội nghiệp.",
+        "Kỳ diệu thay, từ trên cây những trái chín mọng bỗng rơi xuống đúng vào lòng bàn tay cậu bé đang chìa ra. Cậu đưa trái lên cắn thử thì một dòng sữa trắng ngọt lịm trào ra, thơm mát ngọt ngào y hệt dòng sữa mẹ ngày xưa nuôi cậu khôn lớn. Cậu ngước nhìn lên thì thấy lá cây mặt trên xanh bóng còn mặt dưới lại đỏ hoe ánh vàng, hệt như đôi mắt mẹ khóc mòn vì thương nhớ con. Cậu bé ôm lấy thân cây nghẹn ngào, hiểu ra rằng mẹ đã hóa thân thành cây này để mãi mãi ở bên che chở và nuôi nấng cậu.",
+        "Từ ngày đó cậu bé như trở thành một người khác hẳn, không còn ham chơi lêu lổng vô tâm như xưa nữa. Cậu ngày ngày ở bên gốc cây chăm bón tưới nước, coi cái cây như chính người mẹ hiền của mình còn sống. Cậu thủ thỉ tâm sự với cây mọi buồn vui, hứa sẽ sống thật ngoan thật tốt để không phụ tấm lòng mẹ đã hy sinh cả đời vì con. Mỗi mùa cây ra trái, cậu lại hái những quả chín ngọt ngào ấy mà rưng rưng nhớ về vòng tay ấm áp của mẹ ngày nào.",
+        "Câu chuyện về cậu bé và cái cây kỳ lạ chảy ra dòng sữa ngọt nhanh chóng lan khắp làng trên xóm dưới. Dân làng nghe chuyện ai cũng cảm động rơi nước mắt trước tình mẫu tử thiêng liêng và sự hối hận muộn màng của cậu bé. Người ta kéo đến xin hạt giống mang về trồng khắp các vườn nhà, để đời đời nhắc nhau biết yêu thương và trân trọng cha mẹ khi còn có thể. Loài cây ấy được mọi người đặt tên là cây vú sữa, vì trái chín của nó chảy ra dòng sữa ngọt ngào ấm áp như tình mẹ vô bờ bến.",
+        "Câu chuyện Cây Vú Sữa dạy ta rằng tình mẹ là thứ thiêng liêng và bao dung nhất trên đời, dù con có dại dột lỗi lầm đến đâu mẹ vẫn luôn dang tay chờ đợi. Đừng bao giờ vì một phút giận hờn vô cớ mà làm tổn thương đấng sinh thành, bởi có những điều khi mất đi rồi thì hối hận cũng đã muộn màng. Hãy biết trân trọng và báo hiếu cha mẹ ngay khi còn có thể, đừng đợi đến lúc chỉ còn lại nỗi tiếc nuối khôn nguôi. Mỗi trái vú sữa ngọt ngào là lời nhắc nhở muôn đời về dòng sữa mẹ và tình yêu thương vô điều kiện mà mẹ dành cho con.",
+    ],
+    "image_prompts": [
+        f"Movie-poster composition: {CAU_BE_VS} on LEFT half looking back with regret, {NGUOI_ME_VS} on RIGHT half fading into a glowing {CAY_VU_SUA}, a single milk fruit dripping white sweet juice between them, dramatic warm-melancholy split lighting, emotional fairy-tale poster framing.",
+        f"Tender domestic scene: {NGUOI_ME_VS} lovingly feeding a younger {CAU_BE_VS} a bowl of rice inside a humble hut, {NHA_QUE_VS} backdrop, soft warm golden afternoon light, intimate mother-son tenderness mood.",
+        f"Playful careless scene: {CAU_BE_VS} running off to play with a kite and ball with village kids, while {NGUOI_ME_VS} works bent over in a rice field in the background, sunlit countryside, carefree-yet-bittersweet mood.",
+        f"Tense scene: {NGUOI_ME_VS} standing over a broken clay rice jar with spilled rice on the earthen floor, gently scolding a sulking {CAU_BE_VS} who pouts and turns his face away, dim interior of {NHA_QUE_VS}, emotional tension light.",
+        f"Departure scene: {CAU_BE_VS} sneaking out through the wooden gate of {NHA_QUE_VS} at night carrying a small bundle, moonlight casting long shadows, the dark sleeping hut behind him, lonely runaway mood.",
+        f"Wandering scene: {CAU_BE_VS} sitting on a wooden bench at the edge of a busy unfamiliar marketplace, looking around uncertainly, merchants and crowds in the background, {DUONG_XA_VS}, soft overcast grey light, wistful faraway mood.",
+        f"Journey-home scene: {CAU_BE_VS} walking thoughtfully along a long dusty road back toward home with a reflective expression, {DUONG_XA_VS} fading into a distant village, soft warm dawn light, hopeful returning mood.",
+        f"Quiet-return scene: {CAU_BE_VS} standing in the still empty yard of {NHA_QUE_VS}, the hut quiet with no one around, looking toward the doorway searchingly, soft melancholy grey afternoon light, gentle longing mood.",
+        f"Magical emotional scene: {CAU_BE_VS} gently embracing the trunk of a softly glowing {CAY_VU_SUA} that has grown in the yard, its branches curving down like a mother's embracing arms around him, mystical warm golden glow, tender heartfelt reunion mood.",
+        f"Miracle scene: close view of {CAU_BE_VS} holding a ripe star-apple fruit dripping white sweet milk into his palm, looking up at the {CAY_VU_SUA} leaves green on top and golden-red underneath, soft mystical sunlight, sacred maternal-love revelation mood.",
+        f"Devotion scene: {CAU_BE_VS} lovingly watering and tending the {CAY_VU_SUA} in the yard of {NHA_QUE_VS}, talking gently to it, baskets of harvested milk fruits nearby, warm golden afternoon light, tender healing mood.",
+        f"Community scene: villagers gathered around {CAU_BE_VS} and the {CAY_VU_SUA}, receiving seeds and young saplings to plant, moved to tears, {NHA_QUE_VS} village backdrop, warm communal sunset light, heartwarming legacy mood.",
+        f"Closing peaceful scene: a whole village dotted with flourishing star-apple trees at golden sunset, {CAU_BE_VS} now older sitting peacefully beneath the original {CAY_VU_SUA}, contemplative oil-painting feel, hopeful timeless love-of-mother mood.",
+    ],
+    "motions": ["static","static","static","static","static","pan_right","static","static","static","static","static","static","pan_right","zoom_out"],
+    "caption_hook": "Anh em đã nghe Sự Tích Cây Vú Sữa kiểu phim Coco chưa? 🌳💧 Cậu bé ham chơi giận dỗi bỏ nhà đi, ngày về thì mẹ đã hóa thành cây vú sữa đợi con — quả chín rơi vào tay chảy dòng sữa ngọt như tình mẹ!",
+    "caption_bullets": [
+        "Hai mẹ con nghèo nương tựa nhau, mẹ cưng chiều cậu con trai duy nhất",
+        "Cậu bé ham chơi sinh hư, làm vỡ chum gạo bị mẹ mắng",
+        "Giận dỗi bỏ nhà ra đi trong đêm — mẹ tìm con khản giọng",
+        "Lang thang đói rét ngoài đời, cậu mới thấm tình mẹ ấm áp",
+        "Hối hận quay về thì mẹ đã mất, hóa thành cây lạ giữa sân",
+        "Ôm cây khóc — quả chín rơi vào tay chảy dòng sữa ngọt, lá xanh trên vàng dưới như mắt mẹ khóc mòn",
+        "Dân làng cảm động trồng cây khắp nơi, gọi là cây vú sữa"
+    ],
+    "caption_moral": "Câu chuyện dạy ta: tình mẹ bao dung vô điều kiện — đừng vì một phút giận hờn mà làm tổn thương đấng sinh thành, hãy báo hiếu khi còn có thể."
+}
+
+# ================ BOOK 20: CÓC KIỆN TRỜI ================
+COC = _char("Cóc", "anthropomorphic Vietnamese toad hero: small upright warty brown-green toad with a confident determined face and big expressive eyes, a tiny solid red scarf, brave defiant leader posture")
+NGOC_HOANG = _char("Ngọc Hoàng", "Jade Emperor celestial king: elderly with a long white beard, ornate solid golden imperial robe, jade crown, dignified powerful face, seated on a cloud throne")
+CUA_CKT = "anthropomorphic crab Cua: stout reddish-orange crab standing upright with two big snapping claws, comical determined eyes"
+ONG_CKT = "swarm of anthropomorphic bees đàn Ong: small fierce yellow-and-black striped bees with tiny angry faces, buzzing in tight formation"
+CAO_CKT = "anthropomorphic fox Cáo: sly slender orange fox standing upright with a cunning grin and quick clever eyes"
+GAU_CKT = "anthropomorphic bear Gấu: large burly brown bear standing upright with strong muscular arms and a gruff friendly face"
+COP_CKT = "anthropomorphic tiger Cọp: powerful orange-and-black striped tiger standing upright with a fierce proud expression and sharp fangs"
+THIEN_LOI = "Thiên Lôi the thunder god: muscular fierce deity with dark blue skin holding a stone thunder-axe, wild hair, crackling lightning aura, fearsome yet comical"
+HA_GIOI_HAN = "drought-stricken earthly world: cracked dry parched fields, withered trees and empty dry riverbeds under a blazing harsh sun, desolate scorched landscape"
+CONG_TROI = "majestic heavenly gate of the Jade Emperor: golden cloud-palace gates floating among swirling clouds, towering celestial pillars, ethereal divine atmosphere"
+DIEN_TROI = "grand celestial throne hall of heaven: golden ornate pillars, swirling clouds, floating jade steps, radiant divine light, majestic imperial heavenly court"
+
+COC_KIEN_TROI_BOOK = {
+    "slug": "coc-kien-troi",
+    "title": "Cóc Kiện Trời",
+    "entities": [COC.as_entity("creature"), NGOC_HOANG.as_entity()],
+    "thumbnail": {
+        "pose": "standing brave and defiant on a cracked rock, one webbed hand pointing up to the sky, smug determined confident smile",
+        "mystery": "a glowing golden divine drum with crackling magenta lightning bolts",
+        "proof": "majestic golden celestial palace gates floating among swirling deep magenta-purple clouds, ancient Vietnamese imperial heaven",
+        "mini_scenes": "1) bee swarm stinging the muscular dark-blue Thien Loi thunder god, 2) a stout red-orange crab pinching with big claws, 3) a sly slender orange fox dragging a heavenly rooster off, 4) a powerful orange-black striped tiger pouncing",
+        "subtitle": "CON CÓC LÀ CẬU ÔNG TRỜI",
+    },
+    "story_summary": "Văn Vở Gen Z. Trời đại hạn mấy năm, muôn loài chết khát. Cóc tí hon gan lì rủ Cua, Ong, Cáo, Gấu, Cọp lên thiên đình kiện ông Trời đòi mưa. Bày trận thông minh ở cổng trời, lần lượt đánh bại Gà, Chó, Thiên Lôi. Ngọc Hoàng chịu thua, hẹn hễ Cóc nghiến răng là cho mưa. Từ đó có câu con cóc là cậu ông trời. Phiên bản kiểu phim A Bug's Life (1998).",
+    "scripts": [
+        "Hôm nay chúng ta sẽ nói về một câu chuyện cổ tích vừa hài hước vừa khí phách nhất Việt Nam, đó là Cóc Kiện Trời. Câu chuyện có một con cóc nhỏ bé gan lì dám rủ cả hội bạn lên tận thiên đình kiện ông Trời đòi mưa. Có màn dàn trận bày binh đánh bại cả đội quân nhà trời, và có cả cái kết ông Trời phải xuống nước nhận thua. Từ đó dân gian mới có câu con cóc là cậu ông trời, hễ ai đánh nó thì trời đánh cho.",
+        "Chuyện kể rằng vào một năm nọ, trời làm đại hạn hán suốt mấy năm liền không cho một giọt mưa nào xuống hạ giới. Đồng ruộng nứt nẻ khô cằn, sông hồ cạn trơ đáy, cây cối héo úa chết dần dưới cái nắng như thiêu như đốt. Muôn loài vật từ lớn đến nhỏ đều khát cháy cổ họng, nằm thoi thóp chờ chết mà chẳng biết kêu ai. Cả thế gian chìm trong cảnh điêu tàn khô hạn, ai nấy đều tuyệt vọng vì ông Trời trên cao mãi chẳng đoái hoài gì tới.",
+        "Giữa lúc muôn loài đang chết dần chết mòn, có một con cóc nhỏ bé xấu xí lại nghĩ ra một chuyện động trời. Cóc ta nghiến răng tuyên bố sẽ lên tận thiên đình gặp ông Trời mà hỏi cho ra lẽ, đòi bằng được mưa cho hạ giới. Các con vật nghe vậy thì cười nhạo, một con cóc bé tí mà đòi kiện ông Trời thì khác nào trứng chọi đá. Nhưng Cóc không hề nao núng, profile tuy nhỏ con nhưng gan thì to bằng trời, cứ thế quyết tâm khăn gói lên đường ngay.",
+        "Cóc đi được một quãng thì gặp một bạn Cua đang bò lổm ngổm tìm nước, liền rủ Cua cùng đi kiện trời cho có đồng đội. Đi thêm một đoạn nữa thì gặp đàn Ong vò vẽ và một chú Cáo tinh ranh cũng đang khốn khổ vì hạn hán. Cóc kể rõ kế hoạch combat với nhà trời, cả Ong và Cáo nghe xong đều hăng hái xin gia nhập đội ngay lập tức. Thế là từ một mình lẻ loi, giờ Cóc đã có cả một hội đồng đội đông vui kéo nhau rầm rộ tiến về phía trời cao.",
+        "Đoàn quân tí hon đi tiếp thì gặp thêm bác Gấu to lớn và ông Cọp oai phong cũng đang vật vờ vì khát nước. Nghe Cóc trình bày chuyện lên trời đòi mưa, cả Gấu lẫn Cọp đều gật gù tán thành rồi nhập hội liền tay. Đội hình giờ đã đủ cả lớn bé mạnh yếu, mỗi con một tài riêng bổ trợ cho nhau cực kỳ ăn ý. Cả nhóm hùng dũng kéo nhau đi suốt ngày đêm băng rừng vượt núi, cuối cùng cũng tới được cổng nhà trời cao chót vót giữa tầng mây.",
+        "Tới nơi, Cóc không hề hấp tấp xông vào mà bình tĩnh quan sát rồi bày ra một thế trận cực kỳ thông minh. Cóc sai Cua chui vào nấp trong cái chum nước cạnh điện, đàn Ong thì bay vào trốn sau cánh cửa lớn chờ thời cơ. Cáo, Gấu và Cọp thì mai phục hai bên thềm, ai nấy giữ đúng vị trí được phân công không được sai một li. Sắp xếp đâu vào đấy xong xuôi, Cóc mới ung dung nhảy lên đánh trống nhà trời thùng thùng inh ỏi để gọi ông Trời ra nói chuyện.",
+        "Ngọc Hoàng đang ngự trên điện nghe tiếng trống ầm ĩ thì giật mình, sai thiên binh ra xem đứa nào to gan dám náo loạn thiên đình. Lính về bẩm rằng chỉ có một con cóc bé tí đang đánh trống, Ngọc Hoàng nghe vậy thì bực mình cho rằng bị xem thường. Ngài liền sai con Gà thần bay xuống mổ chết con cóc hỗn láo cho hả giận. Nào ngờ Gà vừa ló mặt ra thì chú Cáo đã rình sẵn từ bao giờ, phóng ra một cú vồ gọn ghẽ tha con Gà chạy mất hút.",
+        "Đợi mãi không thấy Gà quay về, Ngọc Hoàng lại sai con Chó nhà trời hung dữ xuống cắn xé lũ phản loạn. Con Chó vừa nhe nanh lao ra sân thì bác Gấu to lớn đã chực sẵn, gầm lên một tiếng rồi xông tới quật cho Chó một trận tơi bời. Con Chó đau quá kêu ăng ẳng bỏ chạy thục mạng, không dám ngoái đầu nhìn lại. Trên điện Ngọc Hoàng thấy các tướng cử đi đều bại trận thì bắt đầu nóng mặt, không ngờ một lũ con vật hạ giới lại lì lợm khó nhằn đến vậy.",
+        "Tức giận đến cực điểm, Ngọc Hoàng đích thân sai Thiên Lôi cầm búa sấm sét hùng hổ xuống nghiền nát lũ con vật. Thiên Lôi vừa đáp xuống sân thì đàn Ong nấp sau cửa ào ra chích túi bụi vào mặt vào mắt, đau điếng không sao mở mắt nổi. Thiên Lôi hốt hoảng quăng búa nhảy đại vào chum nước định trốn, ai ngờ chú Cua nấp sẵn trong đó giơ càng kẹp cho một phát đau thấu trời. Thiên Lôi vừa nhảy ra khỏi chum thì lại đụng ngay ông Cọp đang nhe nanh chực vồ, sợ quá ba chân bốn cẳng leo tót về điện cầu cứu.",
+        "Đến nước này thì Ngọc Hoàng đành chịu thua trước cái hội con vật bé nhỏ mà lì lợm gan dạ phi thường. Ngài thở dài rồi truyền lệnh ngừng đánh, sai người xuống mời cho bằng được kẻ cầm đầu là con Cóc lên điện nói chuyện đàng hoàng. Cóc ung dung nhảy từng bước một lên thẳng điện rồng, dáng vẻ hiên ngang chẳng hề sợ sệt trước uy nghi của thiên đình. Cả thiên đình tròn mắt ngạc nhiên, không ai ngờ cái đứa khiến cả nhà trời điêu đứng lại chỉ là một con cóc xấu xí bé bằng nắm tay.",
+        "Ngọc Hoàng nhìn Cóc rồi hỏi nguyên do vì sao dám đại náo thiên đình náo loạn như vậy. Cóc lễ phép nhưng dõng dạc trình bày rằng hạ giới đã hạn hán mấy năm trời, muôn loài đang chết khát mà ông Trời chẳng cho lấy một giọt mưa. Ngọc Hoàng nghe xong mới giật mình tỉnh ngộ, hóa ra lâu nay ngài mải việc trên cao mà quên béng mất chuyện làm mưa cho hạ giới. Ngài liền rối rít xin lỗi rồi truyền lệnh cho thần mưa lập tức làm mưa thật to xuống trần gian cứu muôn loài đang khốn khổ.",
+        "Trước khi tiễn Cóc về, Ngọc Hoàng còn ân cần dặn dò một câu khiến Cóc nở mày nở mặt vô cùng. Ngài bảo từ nay về sau hễ dưới hạ giới cần mưa, Cóc chỉ việc nghiến răng kêu lên mấy tiếng là trời sẽ cho mưa ngay, khỏi phải nhọc công lên tận đây kiện cáo nữa. Cóc vui sướng cảm tạ rồi dẫn cả hội đồng đội trở về hạ giới trong tiếng reo hò của muôn loài. Vừa về tới nơi thì trời đổ mưa xối xả, cây cối hồi sinh xanh tươi, sông hồ đầy ắp nước, cả thế gian bừng bừng sức sống trở lại.",
+        "Câu chuyện Cóc Kiện Trời dạy ta rằng kẻ yếu nhỏ bé nếu biết đoàn kết và dũng cảm thì vẫn có thể làm nên chuyện lớn lay chuyển cả trời cao. Một con cóc đơn độc thì chẳng làm được gì, nhưng cả một đội đồng lòng mỗi con góp một sức thì đến ông Trời cũng phải nể phục mà nhượng bộ. Đừng bao giờ coi thường sức mạnh của sự đoàn kết và lòng can đảm dám đứng lên đòi lẽ phải. Từ đó dân gian truyền nhau câu con cóc là cậu ông trời, hễ ai đánh nó thì trời đánh cho, để nhắc nhớ mãi về chú cóc anh hùng tí hon.",
+    ],
+    "image_prompts": [
+        f"Movie-poster composition: {COC} on LEFT half standing brave and tiny, {NGOC_HOANG} on RIGHT half looking down imperiously from a cloud throne, the animal squad {CUA_CKT}, {CAO_CKT}, {GAU_CKT}, {COP_CKT} silhouetted below, dramatic divine-vs-earth split lighting, epic comedic fairy-tale poster framing.",
+        f"Establishing scene: {HA_GIOI_HAN} with assorted animals lying exhausted and parched among the cracked earth, a blazing merciless sun overhead, no rain anywhere, desolate dramatic harsh light, despairing drought mood.",
+        f"Determined scene: {COC} standing tall and defiant on a cracked dry rock gritting its teeth, other small animals around looking skeptical and mocking, {HA_GIOI_HAN} backdrop, dramatic low-angle heroic light, bold underdog mood.",
+        f"Recruiting scene: {COC} walking forward leading {CUA_CKT}, {ONG_CKT} and {CAO_CKT} who join along a dusty cracked road, everyone determined, {HA_GIOI_HAN} backdrop, warm adventurous light, growing-team mood.",
+        f"Assembling scene: {COC} at the front with the full squad {CUA_CKT}, {GAU_CKT} and {COP_CKT} marching together toward the distant {CONG_TROI} in the clouds, epic group shot, golden adventurous light, full-team-assembled mood.",
+        f"Strategy scene: {COC} directing the squad into ambush positions at {CONG_TROI} — {CUA_CKT} hiding in a water jar, {ONG_CKT} behind the great doors, {CAO_CKT} {GAU_CKT} {COP_CKT} crouched at the sides, clever tactical staging, divine cloud light, smart-plan mood.",
+        f"Action comedy scene: a heavenly rooster flying down through {CONG_TROI} only to be pounced on and dragged off by the sly {CAO_CKT}, {COC} watching confidently, swirling clouds, dynamic comedic light, first-victory mood.",
+        f"Action comedy scene: a fierce heavenly dog lunging out but met by the burly {GAU_CKT} rearing up to swat it away, the dog yelping in retreat, {CONG_TROI} gates behind, dynamic swirling clouds, comedic battle light.",
+        f"Climax battle scene: {THIEN_LOI} stumbling in pain as {ONG_CKT} stings his face and {CUA_CKT} pinches him with big claws from a water jar, {COP_CKT} baring fangs nearby, chaotic comedic divine battle, dramatic lightning light.",
+        f"Throne scene: {NGOC_HOANG} on his cloud throne in {DIEN_TROI} raising a hand to stop the fight and gesturing to invite the tiny {COC} who hops boldly up the jade steps, celestial court watching in astonishment, radiant divine light.",
+        f"Audience scene: {COC} standing small but dignified before {NGOC_HOANG} who leans forward listening with a surprised remorseful face, {DIEN_TROI} golden hall, divine warm light, turning-point diplomacy mood.",
+        f"Joyful scene: rain finally pouring down over a reviving green earth, {COC} and the animal squad celebrating with other creatures as withered fields turn lush, a rainbow in the sky, warm hopeful golden light, triumphant rebirth mood.",
+        f"Closing peaceful scene: {COC} sitting proudly on a lush green lotus leaf after the rain, gazing up at the clearing sky with the squad around, vibrant restored countryside, warm amber sunset, contemplative oil-painting feel, hopeful unity-triumph mood.",
+    ],
+    "motions": ["static","static","static","static","pan_right","pan_right","static","static","static","static","static","static","zoom_out","zoom_out"],
+    "caption_hook": "Anh em đã nghe Cóc Kiện Trời kiểu phim A Bug's Life chưa? 🐸⚡ Con cóc tí hon rủ cả hội Cua Ong Cáo Gấu Cọp lên thiên đình kiện ông Trời đòi mưa — đánh bại cả đội quân nhà trời, Ngọc Hoàng phải nhận thua!",
+    "caption_bullets": [
+        "Đại hạn hán mấy năm, muôn loài chết khát chờ mưa",
+        "Cóc tí hon gan lì quyết lên thiên đình kiện ông Trời",
+        "Chiêu mộ đồng đội: Cua, Ong, Cáo, Gấu, Cọp",
+        "Bày trận thông minh ở cổng trời — mỗi con một vị trí",
+        "Lần lượt đánh bại Gà, Chó rồi cả Thiên Lôi nhà trời",
+        "Ngọc Hoàng chịu thua, mời Cóc đàm phán cho mưa",
+        "Hẹn Cóc nghiến răng là trời cho mưa — con cóc là cậu ông trời"
+    ],
+    "caption_moral": "Câu chuyện dạy ta: kẻ yếu nhỏ bé nếu biết đoàn kết và dũng cảm thì làm nên chuyện lớn lay chuyển cả trời cao — sức mạnh của sự đồng lòng là vô địch."
+}
+
 # ================ EXPORT ================
 BOOKS = {
     "thach-sanh": THACH_SANH_BOOK,
@@ -1364,4 +1541,6 @@ BOOKS = {
     "nang-tien-oc": NANG_TIEN_OC_BOOK,
     "thach-sung": THACH_SUNG_BOOK,
     "su-tich-ho-ba-be": HO_BA_BE_BOOK,
+    "su-tich-cay-vu-sua": CAY_VU_SUA_BOOK,
+    "coc-kien-troi": COC_KIEN_TROI_BOOK,
 }

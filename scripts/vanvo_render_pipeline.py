@@ -33,29 +33,36 @@ MUSIC_SRC = ROOT / "output/lofi/vintage_cafe_60min_1778576410/concat_music.mp3"
 TTS_VOICE = "Thang_QC_TTS"
 TTS_SPEED = 0.9
 
-STYLE = ("anime manhwa Korean color grading, vibrant cyan + gold + neon magenta palette, "
-         "dramatic rim lighting, comic book panel framing. STRICTLY NO TEXT no logos no signs "
-         "no letters on clothing. 16:9 horizontal cinematic.")
+STYLE = (
+    "Cinematic 3D Pixar Disney-style painterly rendering, hyper-detailed expressive faces "
+    "with big emotive eyes, warm dramatic golden rim lighting and glow halos around subjects, "
+    "deep amber + gold + magenta-purple palette, rich painterly textures, sharp cinematic "
+    "focus. STRICTLY NO TEXT no logos no signs no letters on clothing. 16:9 horizontal "
+    "cinematic movie still composition."
+)
 
 INTRO_NARR = "Chào mừng anh em đến với seri cổ tích thời gen z."
 INTRO_IMG = (
-    "Cinematic branding intro card for a Vietnamese fairy tale series: an ornate ancient "
-    "Vietnamese storybook lying open on a dark velvet surface with glowing magical pages "
-    "emanating cyan + gold + neon magenta sparkles, traditional Vietnamese motifs (lotus, "
-    "dragon, banyan tree silhouettes) floating around in the background, dramatic spotlight "
-    "from above. Atmospheric mystical mood. STRICTLY NO TEXT no logos no signs no letters. "
-    "16:9 horizontal cinematic intro shot."
+    "Cinematic 3D Pixar Disney-style branding intro card for a Vietnamese fairy tale series: "
+    "an ornate ancient Vietnamese storybook lying open on a dark velvet surface with glowing "
+    "magical pages emanating warm amber + gold + magenta-purple sparkles, traditional "
+    "Vietnamese motifs (lotus, dragon, banyan tree silhouettes) floating around in the "
+    "background, dramatic golden spotlight from above. Atmospheric mystical mood. STRICTLY "
+    "NO TEXT no logos no signs no letters. 16:9 horizontal cinematic intro shot."
 )
 
 # Project-level image_style applied to every Flow image gen call
 PROJECT_IMAGE_STYLE = (
-    "Anime manhwa Korean color style, vibrant cyan + gold + neon magenta palette, "
-    "dramatic rim lighting, comic book panel framing. CHARACTERS: 2020s Vietnamese "
-    "streetwear hybrid — oversized hoodies/bombers, ripped jeans/shorts, sneakers, gold "
-    "chains, aviator sunglasses, undercut moi hair platinum/blonde. Clothing SOLID COLOR "
-    "ONLY — no graffiti, no printed pattern, no logo. NATURAL confident pose — AVOID gym "
-    "flex. BACKGROUND: authentic era setting matching the tale. STRICTLY NO TEXT, NO "
-    "subtitles, NO signs, NO letters on clothing. HORIZONTAL 16:9 cinematic."
+    "Cinematic 3D Pixar Disney-style painterly rendering, warm amber + gold + magenta-purple "
+    "palette, dramatic golden rim lighting and glow halos, hyper-detailed expressive faces. "
+    "CHARACTERS: authentic ancient Vietnamese clothing — simple áo bà ba / áo tứ thân / áo "
+    "nâu, traditional brown headscarves or conical hats, leather sandals or bare feet, "
+    "royals in ornate silk robes with gold-thread embroidery. Clothing SOLID earthy colors "
+    "only (cream, brown, deep red, ochre, jade). NATURAL expressive pose with emotive face. "
+    "BACKGROUND: ancient Vietnamese rural countryside or imperial court matching the tale. "
+    "STRICTLY NO TEXT, NO subtitles, NO signs, NO letters on clothing, NO modern items "
+    "(no sunglasses, no watches, no streetwear, no sneakers, no hoodies, no logos). "
+    "HORIZONTAL 16:9 cinematic movie still."
 )
 
 
@@ -98,7 +105,7 @@ def create_project(book: dict) -> str:
         "description": f"Văn Vở phong cách Gen Z — {book['title']}",
         "story": book["story_summary"],
         "material": "realistic",
-        "image_style": PROJECT_IMAGE_STYLE,
+        "image_style": book.get("project_image_style", PROJECT_IMAGE_STYLE),
         "language": "vi",
         "orientation": "HORIZONTAL",
     }
@@ -118,25 +125,102 @@ def create_video(pid: str, book: dict) -> str:
     return api_post("/api/videos", payload)["id"]
 
 
+def create_entities_and_refs(pid: str, book: dict) -> dict[str, str]:
+    """Create Flow characters + link to project + generate ref images sequentially.
+
+    Idempotent + resumable: reuses existing project characters (match by name) and skips
+    ref gen for entities that already have a media_id. Safe to re-run after a partial
+    (e.g. quota) failure without creating duplicates.
+
+    Returns {entity_name: character_id} mapping. Empty dict if book has no entities.
+    Paced (one ref at a time + 2s delay) to avoid reCAPTCHA — same pattern as scene images.
+    """
+    entities = book.get("entities", [])
+    if not entities:
+        return {}
+
+    # Reuse any characters already linked to this project (resume case)
+    existing = {c["name"]: c for c in api_get(f"/api/projects/{pid}/characters")}
+
+    print(f"  Ensuring {len(entities)} character entities (reuse {len(existing)} existing)...")
+    name_to_cid: dict[str, str] = {}
+    for ent in entities:
+        name = ent["name"]
+        if name in existing:
+            name_to_cid[name] = existing[name]["id"]
+            continue
+        payload = {k: v for k, v in ent.items() if v is not None}
+        c = api_post("/api/characters", payload)
+        cid = c["id"]
+        api_post(f"/api/projects/{pid}/characters/{cid}", {})
+        name_to_cid[name] = cid
+        print(f"    + {name} ({ent['entity_type']}) → {cid[:8]}")
+
+    # Only gen refs for entities still missing a media_id
+    todo = [(n, cid) for n, cid in name_to_cid.items()
+            if not (existing.get(n) or {}).get("media_id")]
+    print(f"  Generating {len(todo)} entity ref images (paced, {len(name_to_cid)-len(todo)} already done)...")
+    for i, (name, cid) in enumerate(todo, 1):
+        payload = {"type": "GENERATE_CHARACTER_IMAGE", "character_id": cid, "project_id": pid}
+        req = api_post("/api/requests", payload, timeout=30)
+        req_id = req["id"]
+        start = time.time()
+        while time.time() - start < 240:
+            r = api_get(f"/api/requests/{req_id}")
+            status = r["status"]
+            if status == "COMPLETED":
+                print(f"    ref [{i}/{len(todo)}] ok: {name}")
+                break
+            if status == "FAILED":
+                err = r.get("error_message", "")
+                if "reCAPTCHA" in err or "UNUSUAL_ACTIVITY" in err:
+                    raise RuntimeError(f"reCAPTCHA hit at entity ref [{i}/{len(todo)}] — halt")
+                if "UNSAFE_GENERATION" in err or "MINOR_INPUT_IMAGE" in err:
+                    print(f"    ⚠️ ref [{i}/{len(todo)}] {name}: SAFETY filter — skip (scene will fall back to prompt only)")
+                    break
+                raise RuntimeError(f"Ref gen failed for {name}: {err}")
+            time.sleep(5)
+        else:
+            raise TimeoutError(f"Ref gen timeout for {name}")
+        if i < len(todo):
+            time.sleep(2)
+    return name_to_cid
+
+
+def _detect_character_names(rendered_prompt: str, entity_names: list[str]) -> list[str]:
+    """Return entity names that appear as substring in the rendered scene prompt."""
+    return [n for n in entity_names if n in rendered_prompt]
+
+
 def create_scenes(vid: str, book: dict) -> list[str]:
-    """Create 15 scene records (0=intro, 1-14=story). Returns list of scene_ids."""
+    """Create 15 scene records (0=intro, 1-14=story). Returns list of scene_ids.
+
+    Scenes get `character_names` auto-populated from entities present in the rendered
+    image_prompt, so Flow can attach character ref images automatically.
+    """
     scene_ids = []
-    # Scene 0: intro
+    entity_names = [e["name"] for e in book.get("entities", [])]
+
+    # Scene 0: intro (atmospheric, no specific characters)
     payload = {
         "video_id": vid,
         "display_order": 1,  # Flow uses 1-indexed; we map our scene_0 → display 1
         "prompt": INTRO_NARR,
         "image_prompt": INTRO_IMG,
+        "character_names": [],
     }
     scene_ids.append(api_post("/api/scenes", payload)["id"])
     # Scenes 1-14: story
+    scene_style = book.get("image_style", STYLE)
     for i, (narr, img) in enumerate(zip(book["scripts"], book["image_prompts"]), start=2):
-        full_img = f"{img} {STYLE}"
+        full_img = f"{img} {scene_style}"
+        char_names = _detect_character_names(full_img, entity_names)
         payload = {
             "video_id": vid,
             "display_order": i,
             "prompt": narr,
             "image_prompt": full_img,
+            "character_names": char_names,
         }
         scene_ids.append(api_post("/api/scenes", payload)["id"])
     return scene_ids
@@ -382,18 +466,31 @@ def run_book(book: dict) -> None:
         print(f"  ✓ Already produced: {final_path}")
         return
 
-    # Stage 1-2: Project + scenes
+    # Stage 1-2: Project + entities + scenes (each step persisted to survive quota halts)
     project_meta = ep_dir / "_project.json"
-    if project_meta.exists():
-        meta = json.loads(project_meta.read_text())
-        pid, vid, scene_ids = meta["pid"], meta["vid"], meta["scene_ids"]
-        print(f"  Resumed project {pid}, video {vid}")
-    else:
-        pid = create_project(book)
-        vid = create_video(pid, book)
-        scene_ids = create_scenes(vid, book)
-        project_meta.write_text(json.dumps({"pid": pid, "vid": vid, "scene_ids": scene_ids}))
-        print(f"  Created project {pid}, video {vid}, {len(scene_ids)} scenes")
+    meta = json.loads(project_meta.read_text()) if project_meta.exists() else {}
+
+    def _save():
+        project_meta.write_text(json.dumps(meta))
+
+    if not meta.get("pid"):
+        meta["pid"] = create_project(book)
+        meta["vid"] = create_video(meta["pid"], book)
+        _save()
+        print(f"  Created project {meta['pid']}, video {meta['vid']}")
+    pid, vid = meta["pid"], meta["vid"]
+
+    # Entities + refs (idempotent; persist after success so a later quota halt resumes clean)
+    if not meta.get("entity_cids"):
+        meta["entity_cids"] = create_entities_and_refs(pid, book)
+        _save()
+    # Scenes
+    if not meta.get("scene_ids"):
+        meta["scene_ids"] = create_scenes(vid, book)
+        _save()
+    scene_ids = meta["scene_ids"]
+    print(f"  Project {pid}, video {vid} "
+          f"({len(meta.get('entity_cids', {}))} entities, {len(scene_ids)} scenes)")
 
     # Stage 3: Batch image gen + wait — only if scenes don't already have images on Flow
     img_dir = ep_dir / "images"
