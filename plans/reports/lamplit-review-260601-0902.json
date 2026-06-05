@@ -1,0 +1,234 @@
+{
+  "checkpoint_date": "2026-06-01T09:02:00.674436+07:00",
+  "channel": {
+    "subs": 2,
+    "total_views": 141,
+    "video_count": 15
+  },
+  "thresholds": {
+    "subs": 20,
+    "short_views": 100
+  },
+  "results": {
+    "subs_pass": false,
+    "shorts_pass": false,
+    "ep10_pass": false
+  },
+  "long_form": [
+    {
+      "id": "z4qzzACfGsQ",
+      "title": "Why Victor Fled to the Alps After His Brother's Death | Frankenstein Ep 10",
+      "privacy": "public",
+      "live_at": "2026-05-24T01:00:29+00:00",
+      "hours": 193.0254651211111,
+      "views": 0,
+      "likes": 0,
+      "cmts": 0,
+      "v_per_h": 0.0,
+      "ep": 0
+    },
+    {
+      "id": "Deg46rjRXoc",
+      "title": "Frankenstein Explained \u2014 Episode 1: Walton's Letters | Lamplit Library",
+      "privacy": "public",
+      "live_at": "2026-05-15T01:00:09+00:00",
+      "hours": 409.0310206766666,
+      "views": 13,
+      "likes": 3,
+      "cmts": 0,
+      "v_per_h": 0.03178243053178189,
+      "ep": 1
+    },
+    {
+      "id": "Vq72r9xOTgI",
+      "title": "Frankenstein Explained \u2014 Episode 2: Family and Early Years in Geneva | Lamplit L",
+      "privacy": "public",
+      "live_at": "2026-05-16T01:00:33+00:00",
+      "hours": 385.02435400999997,
+      "views": 11,
+      "likes": 1,
+      "cmts": 0,
+      "v_per_h": 0.02856962133806815,
+      "ep": 2
+    },
+    {
+      "id": "ZYGOf2DXzh0",
+      "title": "Frankenstein Explained \u2014 Episode 3: Childhood Bond and a Storm | Lamplit Library",
+      "privacy": "public",
+      "live_at": "2026-05-17T01:00:23+00:00",
+      "hours": 361.02713178777776,
+      "views": 6,
+      "likes": 1,
+      "cmts": 0,
+      "v_per_h": 0.016619249556919655,
+      "ep": 3
+    },
+    {
+      "id": "MkRfCkai2Q0",
+      "title": "Frankenstein Explained \u2014 Episode 4: A Mother's Death and the Road to Ingolstadt",
+      "privacy": "public",
+      "live_at": "2026-05-18T01:00:17+00:00",
+      "hours": 337.0287984544444,
+      "views": 10,
+      "likes": 2,
+      "cmts": 0,
+      "v_per_h": 0.029671054953933504,
+      "ep": 4
+    },
+    {
+      "id": "vCdtGhM8z3c",
+      "title": "Frankenstein Explained \u2014 Episode 5: Two Years of Obsession | Lamplit Library",
+      "privacy": "public",
+      "live_at": "2026-05-19T01:00:41+00:00",
+      "hours": 313.02213178777777,
+      "views": 4,
+      "likes": 1,
+      "cmts": 0,
+      "v_per_h": 0.012778649155427493,
+      "ep": 5
+    },
+    {
+      "id": "dZFXV9ke-dw",
+      "title": "Frankenstein Explained \u2014 Episode 6: The Night of Creation | Lamplit Library",
+      "privacy": "public",
+      "live_at": "2026-05-20T01:00:34+00:00",
+      "hours": 289.0240762322222,
+      "views": 5,
+      "likes": 1,
+      "cmts": 0,
+      "v_per_h": 0.017299596854286454,
+      "ep": 6
+    },
+    {
+      "id": "SHv1XKvvzbQ",
+      "title": "Frankenstein Explained \u2014 Episode 7: A Friend's Healing and News from Home | Lamp",
+      "privacy": "public",
+      "live_at": "2026-05-21T01:00:32+00:00",
+      "hours": 265.02463178777776,
+      "views": 6,
+      "likes": 0,
+      "cmts": 0,
+      "v_per_h": 0.022639405098030984,
+      "ep": 7
+    },
+    {
+      "id": "PWVaqDJmsXs",
+      "title": "Frankenstein Explained \u2014 Episode 8: William's Murder and the Return to Geneva |",
+      "privacy": "public",
+      "live_at": "2026-05-22T11:00:18+00:00",
+      "hours": 231.02852067666666,
+      "views": 6,
+      "likes": 1,
+      "cmts": 0,
+      "v_per_h": 0.025970819457383065,
+      "ep": 8
+    },
+    {
+      "id": "L_0hMuQvHAE",
+      "title": "Frankenstein Explained \u2014 Episode 9: Justine's Trial and Execution | Lamplit Libr",
+      "privacy": "public",
+      "live_at": "2026-05-23T01:00:29+00:00",
+      "hours": 217.0254651211111,
+      "views": 13,
+      "likes": 0,
+      "cmts": 0,
+      "v_per_h": 0.05990080469471796,
+      "ep": 9
+    },
+    {
+      "id": "foL7pqwSXtE",
+      "title": "An Innocent Condemned \u2014 Frankenstein Episode 9 #Shorts",
+      "privacy": "public",
+      "live_at": "2026-05-25T12:00:00+00:00",
+      "hours": 158.03352067666665,
+      "views": 14,
+      "likes": 1,
+      "cmts": 1,
+      "v_per_h": 0.08858880027512463,
+      "ep": 9
+    },
+    {
+      "id": "gjsYag6I09Q",
+      "title": "Frankenstein Explained \u2014 Episode 11: Confrontation on the Sea of Ice | Lamplit L",
+      "privacy": "public",
+      "live_at": "2026-05-25T01:00:05+00:00",
+      "hours": 169.03213178777776,
+      "views": 4,
+      "likes": 0,
+      "cmts": 0,
+      "v_per_h": 0.023664139815866826,
+      "ep": 11
+    },
+    {
+      "id": "YK0PgyIcXyw",
+      "title": "The Monster Returns \u2014 Frankenstein Episode 11 #Shorts",
+      "privacy": "public",
+      "live_at": "2026-05-26T12:00:16+00:00",
+      "hours": 134.02907623222222,
+      "views": 35,
+      "likes": 1,
+      "cmts": 1,
+      "v_per_h": 0.2611373664872397,
+      "ep": 11
+    },
+    {
+      "id": "l3FJmZqLoiI",
+      "title": "Frankenstein Explained \u2014 Episode 12: The Creature's Awakening | Lamplit Library",
+      "privacy": "public",
+      "live_at": "2026-05-26T01:00:08+00:00",
+      "hours": 145.03129845444445,
+      "views": 5,
+      "likes": 0,
+      "cmts": 0,
+      "v_per_h": 0.03447531707489016,
+      "ep": 12
+    },
+    {
+      "id": "OKtqDN6okOs",
+      "title": "Born Into a Cruel World \u2014 Frankenstein Episode 12 #Shorts",
+      "privacy": "public",
+      "live_at": "2026-05-27T12:00:07+00:00",
+      "hours": 110.03157623222222,
+      "views": 10,
+      "likes": 0,
+      "cmts": 1,
+      "v_per_h": 0.09088300233830103,
+      "ep": 12
+    }
+  ],
+  "shorts": [
+    {
+      "id": "foL7pqwSXtE",
+      "title": "An Innocent Condemned \u2014 Frankenstein Episode 9 #Shorts",
+      "privacy": "public",
+      "live_at": "2026-05-25T12:00:00+00:00",
+      "hours": 158.03352067666665,
+      "views": 14,
+      "likes": 1,
+      "cmts": 1,
+      "v_per_h": 0.08858880027512463
+    },
+    {
+      "id": "YK0PgyIcXyw",
+      "title": "The Monster Returns \u2014 Frankenstein Episode 11 #Shorts",
+      "privacy": "public",
+      "live_at": "2026-05-26T12:00:16+00:00",
+      "hours": 134.02907623222222,
+      "views": 35,
+      "likes": 1,
+      "cmts": 1,
+      "v_per_h": 0.2611373664872397
+    },
+    {
+      "id": "OKtqDN6okOs",
+      "title": "Born Into a Cruel World \u2014 Frankenstein Episode 12 #Shorts",
+      "privacy": "public",
+      "live_at": "2026-05-27T12:00:07+00:00",
+      "hours": 110.03157623222222,
+      "views": 10,
+      "likes": 0,
+      "cmts": 1,
+      "v_per_h": 0.09088300233830103
+    }
+  ]
+}
