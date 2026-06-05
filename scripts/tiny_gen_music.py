@@ -25,6 +25,14 @@ TRACKS = {
     "nest_build": "gentle uplifting lofi, soft plucky strings and warm bells, satisfying building progress, cozy wholesome, instrumental, seamless loop",
     "friends_play": "playful happy lofi, light pizzicato strings and glockenspiel, sweet friendship bounce, wholesome cheerful, instrumental, seamless loop",
     "festival_party": "warm festive lofi, gentle celebration bells and soft mellow brass, cozy birthday party joy, wholesome cheerful, instrumental, seamless loop",
+    # batch 3 (ep13-19)
+    "penguin_splash": "light playful lofi with soft water droplet sounds, gentle marimba and bubbly plucks, cheerful cozy splashy mood, wholesome, instrumental, seamless loop",
+    "snowy_day": "cozy winter lofi, soft music box and warm mellow pads, gentle snowfall calm, wholesome hush, instrumental, seamless loop",
+    "first_flight": "gentle uplifting lofi, soft strings swell and warm bells, hopeful soaring feeling, wholesome inspiring, instrumental, seamless loop",
+    "slow_morning": "very slow calm lofi, soft mellow piano and warm pads, sleepy lazy morning, deeply relaxing, instrumental, seamless loop",
+    "beach_day": "sunny mellow lofi, soft ukulele and gentle waves feel, warm cozy beach calm, wholesome, instrumental, seamless loop",
+    "starlit_meadow": "dreamy magical lofi, soft harp and twinkling bells, peaceful starry night, calm wondrous, instrumental, seamless loop",
+    "otter_float": "playful cozy lofi with soft water sounds, gentle pizzicato and warm marimba, floating relaxed mood, wholesome, instrumental, seamless loop",
 }
 
 

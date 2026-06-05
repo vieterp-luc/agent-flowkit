@@ -20,6 +20,11 @@ try:
     EPISODES.update(EPISODES_MORE)
 except ImportError:
     pass
+try:
+    from tiny_days_batch3 import EPISODES_B3
+    EPISODES.update(EPISODES_B3)
+except ImportError:
+    pass
 
 BASE = "http://127.0.0.1:8100"
 LOG = "output/tiny_animals/tiny_run.log"
@@ -85,21 +90,30 @@ def create_episode(e):
     return pid, vid
 
 
+PACE_S = 12  # gap between image submits — Flow throttles bursts with API_429 ("tạo quá nhanh")
+
+
 def gen_images(pid, vid, slug):
+    """Gen scene images ONE AT A TIME with a pause between each — Flow rate-limits
+    bursts (batch-of-N or back-to-back) with API_429. Submit one, wait until it
+    settles, sleep PACE_S, then the next. Returns count of images on disk."""
     outdir = f"output/{slug}/img"
     os.makedirs(outdir, exist_ok=True)
     scenes = sorted(get(f"/api/scenes?video_id={vid}"), key=lambda s: s["display_order"])
-    ids = [s["id"] for s in scenes]
-    for batch in (ids[:4], ids[4:]):
-        if not batch:
-            continue
-        post("/api/requests/batch", {"requests": [
-            {"type": "GENERATE_IMAGE", "scene_id": i, "project_id": pid,
-             "video_id": vid, "orientation": "VERTICAL"} for i in batch]})
-        for _ in range(24):
+    for idx, s in enumerate(scenes):
+        rid = post("/api/requests", {"type": "GENERATE_IMAGE", "scene_id": s["id"],
+                   "project_id": pid, "video_id": vid, "orientation": "VERTICAL"})["id"]
+        for _ in range(24):  # up to ~6 min/image
             time.sleep(15)
-            if get(f"/api/requests/batch-status?video_id={vid}&type=GENERATE_IMAGE").get("done"):
+            st = get(f"/api/requests/{rid}").get("status")
+            if st in ("COMPLETED", "FAILED"):
+                if st == "FAILED":
+                    err = get(f"/api/requests/{rid}").get("error_message", "")
+                    log(f"  img s{s['display_order']} FAILED: {err[:50]}")
                 break
+        if idx < len(scenes) - 1:
+            time.sleep(PACE_S)  # cool-down between submits
+    # download all completed
     scenes = sorted(get(f"/api/scenes?video_id={vid}"), key=lambda s: s["display_order"])
     got = 0
     for s in scenes:
@@ -123,6 +137,10 @@ def main(keys):
             log(f"  project {pid} video {vid}")
             n = gen_images(pid, vid, slug)
             log(f"  images: {n}/{len(e['scenes'])}")
+            if n == 0:
+                log(f"  ⚠ HALT — {k} got 0 images (Flow quota likely hit). "
+                    "Switch account + re-run remaining episodes.")
+                break
             meta_video_batch.main(vid, slug)
             # Per-episode music if defined + file exists, else shared default
             ep_music = e.get("music")
@@ -131,7 +149,7 @@ def main(keys):
                 log(f"  ⚠ music {ep_music} missing — fallback {MUSIC}")
             tiny_assemble.main(slug, music)
             log(f"  ✓ {slug} DONE (music={os.path.basename(music)})")
-        except Exception as ex:
+        except (Exception, SystemExit) as ex:
             log(f"  ✗ {k} ERROR: {ex}")
     log("\n===== ALL EPISODES FINISHED =====")
 
