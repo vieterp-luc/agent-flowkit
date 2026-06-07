@@ -25,6 +25,11 @@ try:
     EPISODES.update(EPISODES_B3)
 except ImportError:
     pass
+try:
+    from tiny_days_batch4 import EPISODES_B4
+    EPISODES.update(EPISODES_B4)
+except ImportError:
+    pass
 
 BASE = "http://127.0.0.1:8100"
 LOG = "output/tiny_animals/tiny_run.log"

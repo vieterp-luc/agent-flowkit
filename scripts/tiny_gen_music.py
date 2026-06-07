@@ -33,6 +33,14 @@ TRACKS = {
     "beach_day": "sunny mellow lofi, soft ukulele and gentle waves feel, warm cozy beach calm, wholesome, instrumental, seamless loop",
     "starlit_meadow": "dreamy magical lofi, soft harp and twinkling bells, peaceful starry night, calm wondrous, instrumental, seamless loop",
     "otter_float": "playful cozy lofi with soft water sounds, gentle pizzicato and warm marimba, floating relaxed mood, wholesome, instrumental, seamless loop",
+    # batch 4 (ep20-26)
+    "night_library": "cozy quiet lofi, soft felt piano and warm vinyl crackle, candle-lit late-night reading, calm studious, instrumental, seamless loop",
+    "spring_meadow": "bright gentle lofi, soft acoustic guitar and light flute, fresh spring morning in a flower meadow, wholesome cheerful, instrumental, seamless loop",
+    "eucalyptus_nap": "very lazy slow lofi, mellow warm keys and soft pads, sleepy afternoon tree-hug calm, deeply relaxing, instrumental, seamless loop",
+    "garden_stroll": "soft cozy lofi, gentle marimba and light plucks, slow curious garden stroll, wholesome calm, instrumental, seamless loop",
+    "lantern_night": "dreamy serene lofi, soft koto and warm bells, floating lanterns on a quiet night, magical peaceful, instrumental, seamless loop",
+    "washing_asmr": "gentle satisfying lofi with soft water trickle, light pizzicato and mellow keys, calm tidy ASMR mood, wholesome, instrumental, seamless loop",
+    "moon_mochi": "calm magical lofi, soft koto and gentle music box, moonlit night rhythm, peaceful wondrous, instrumental, seamless loop",
 }
 
 
