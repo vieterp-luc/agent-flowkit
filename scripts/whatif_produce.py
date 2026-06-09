@@ -15,7 +15,7 @@ import meta_assemble
 import meta_video_batch
 from whatif_days import DAYS, STYLE
 
-for _mod in ("whatif_days_week2", "whatif_days_week3", "whatif_days_week4"):
+for _mod in ("whatif_days_week2", "whatif_days_week3", "whatif_days_week4", "whatif_days_week5"):
     try:  # week 2–4 topics (day8–day28)
         DAYS.update(__import__(_mod).DAYS)
     except ImportError:
@@ -69,16 +69,16 @@ def gen_images(pid, vid, slug):
     outdir = f"output/{slug}/img"
     os.makedirs(outdir, exist_ok=True)
     scenes = sorted(get(f"/api/scenes?video_id={vid}"), key=lambda s: s["display_order"])
-    ids = [s["id"] for s in scenes]
-    for batch in (ids[:4], ids[4:]):  # small batches → avoid reCAPTCHA
-        reqs = [{"type": "GENERATE_IMAGE", "scene_id": i, "project_id": pid,
-                 "video_id": vid, "orientation": "VERTICAL"} for i in batch]
-        post("/api/requests/batch", {"requests": reqs})
-        for _ in range(24):  # poll up to ~6 min
+    # Gen ONE image at a time + pause — Flow rate-limits bursts with API_429 ("tạo quá nhanh").
+    for idx, s in enumerate(scenes):
+        rid = post("/api/requests", {"type": "GENERATE_IMAGE", "scene_id": s["id"],
+                   "project_id": pid, "video_id": vid, "orientation": "VERTICAL"})["id"]
+        for _ in range(24):  # poll up to ~6 min/image
             time.sleep(15)
-            st = get(f"/api/requests/batch-status?video_id={vid}&type=GENERATE_IMAGE")
-            if st.get("done"):
+            if get(f"/api/requests/{rid}").get("status") in ("COMPLETED", "FAILED"):
                 break
+        if idx < len(scenes) - 1:
+            time.sleep(12)  # PACE: cool-down between submits to avoid API_429
     # download whatever completed
     scenes = sorted(get(f"/api/scenes?video_id={vid}"), key=lambda s: s["display_order"])
     got = 0
@@ -105,6 +105,10 @@ def main(keys):
             log(f"  project {pid} video {vid}")
             n = gen_images(pid, vid, slug)
             log(f"  images: {n}/7")
+            if n == 0:
+                log(f"  ⚠ HALT — {k} got 0 images (Flow quota likely hit). "
+                    "Switch account + re-run remaining days.")
+                break
             meta_video_batch.main(vid, slug)          # → clips/ (own log)
             meta_assemble.main(vid, slug)             # default Phong_Vien 0.9 + pause
             # brand final with the What-if logo (top-left, 13%, 75% transparent)
@@ -114,7 +118,7 @@ def main(keys):
                 add_logo.brand(final)
                 log("  ✓ logo added")
             log(f"  ✓ {slug} DONE")
-        except Exception as e:
+        except (Exception, SystemExit) as e:
             log(f"  ✗ {k} ERROR: {e}")
     log("\n===== ALL DAYS FINISHED =====")
 

@@ -152,6 +152,72 @@ DATA = {
         "La bàn chỉ ngược, lá chắn từ trường suy yếu cho bức xạ Mặt Trời lọt vào. Điều đáng sợ: chuyện này từng xảy ra nhiều lần và có thể sắp lặp lại.",
         "Từ trường đảo cực, la bàn chỉ ngược 🧭🔄",
         ["#tutruong", "#daocuc"]),
+    # ── week 5-6 (bỏ loai_nguoi) ──
+    "neu_mat_trang_bien_mat": (
+        "Nếu Mặt Trăng biến mất?",
+        "Mất Mặt Trăng, thuỷ triều biến mất và trục Trái Đất bắt đầu lảo đảo. Người bạn bốn tỉ năm ra đi kéo theo cả nhịp sống của hành tinh.",
+        "Mặt Trăng biến mất, Trái Đất mất nhịp sống 🌑",
+        ["#mattrang", "#thuytrieu"]),
+    "neu_anh_sang_cham_lai": (
+        "Nếu tốc độ ánh sáng chậm lại?",
+        "Chỉ cần ánh sáng chậm đi, mọi định luật vật lý rạn nứt, Mặt Trời thất thường và thực tại tan rã trong lặng lẽ.",
+        "Ánh sáng chậm lại = vũ trụ tan rã 💫",
+        ["#anhsang", "#vatly"]),
+    "neu_trai_dat_mat_nua_khoi_luong": (
+        "Nếu Trái Đất mất một nửa khối lượng?",
+        "Trọng lực yếu đi, khí quyển rò ra vũ trụ, đại dương bốc hơi. Một Trái Đất hao gầy là một Trái Đất đang hấp hối.",
+        "Trái Đất nhẹ đi một nửa, khí quyển bay mất 🌍",
+        ["#traidat", "#trongluc"]),
+    "neu_bau_troi_khong_sao": (
+        "Nếu bầu trời đêm không còn ngôi sao?",
+        "Vũ trụ giãn nở kéo các thiên hà ra xa mãi mãi. Một ngày bầu trời đêm sẽ đen tuyệt đối, và ta cô độc giữa vũ trụ.",
+        "Bầu trời đêm không còn một ngôi sao 🌌",
+        ["#vutru", "#thienha"]),
+    "neu_vi_khuan_bien_mat": (
+        "Nếu mọi vi khuẩn biến mất?",
+        "Phân huỷ ngừng, tiêu hoá tê liệt, chuỗi thức ăn vỡ vụn. Kẻ thù vô hình hoá ra là người bạn thầm lặng giữ ta sống.",
+        "Vi khuẩn biến mất, thế giới chết dần 🦠",
+        ["#vikhuan", "#sinhhoc"]),
+    "neu_trai_dat_co_vanh_dai": (
+        "Nếu Trái Đất có vành đai như Sao Thổ?",
+        "Bầu trời đẹp nghẹt thở với dải sáng vắt ngang, nhưng bóng vành đai phủ giá lạnh và giam ta dưới chiếc lồng ánh sáng.",
+        "Trái Đất đeo vành đai như Sao Thổ 🪐",
+        ["#vanhdai", "#saotho"]),
+    "neu_sieu_tan_tinh_no_gan": (
+        "Nếu siêu tân tinh nổ gần Trái Đất?",
+        "Ánh sáng chói loà tuyệt đẹp, rồi bức xạ gamma xé toạc tầng ozone. Cái chết của một ngôi sao đủ kết liễu cả hành tinh.",
+        "Siêu tân tinh nổ gần, ozone bị xé toạc ☄️",
+        ["#sieutantinh", "#buxa"]),
+    "neu_trai_dat_roi_vao_mat_troi": (
+        "Nếu Trái Đất rơi vào Mặt Trời?",
+        "Đại dương sôi cạn, đất đá nóng chảy, khí quyển bị thổi bay. Ngôi nhà của ta trở về với ngọn lửa đã sinh ra nó.",
+        "Trái Đất rơi vào Mặt Trời, hoá cầu lửa ☀️🔥",
+        ["#mattroi", "#vutru"]),
+    "neu_mat_troi_tat_1_nam": (
+        "Nếu Mặt Trời tắt trong 1 năm?",
+        "Sương giá phủ cả vùng nhiệt đới, đại dương đóng băng, quang hợp ngừng. Một năm không nắng dạy ta nắng là phép màu.",
+        "Mặt Trời tắt 1 năm, Trái Đất hoá băng ❄️",
+        ["#mattroi", "#bangha"]),
+    "neu_toan_bo_cay_xanh_chet": (
+        "Nếu toàn bộ cây xanh chết?",
+        "Nguồn oxy ngừng, không khí ngột ngạt, chuỗi thức ăn sụp từ gốc rễ. Mỗi chiếc lá xanh là một hơi thở ta nhận miễn phí.",
+        "Cây xanh chết hết, oxy cạn dần 🌳💀",
+        ["#cayxanh", "#oxy"]),
+    "neu_trong_luc_gap_doi": (
+        "Nếu trọng lực mạnh gấp đôi?",
+        "Xương oằn, tim quá tải, nhà cao tầng sập. Trọng lực dịu dàng bấy lâu mới là điều cho ta đứng thẳng.",
+        "Trọng lực gấp đôi, mọi thứ bị nghiền 💪",
+        ["#trongluc", "#vatly"]),
+    "neu_trai_dat_hanh_tinh_bang": (
+        "Nếu Trái Đất hoá hành tinh băng?",
+        "Băng lan tới tận xích đạo, đại dương đóng cứng, sự sống co cụm quanh núi lửa. Snowball Earth từng xảy ra thật.",
+        "Trái Đất hoá quả cầu tuyết khổng lồ 🧊",
+        ["#bangha", "#snowballearth"]),
+    "neu_sieu_song_than_toan_cau": (
+        "Nếu một siêu sóng thần quét toàn cầu?",
+        "Sườn núi lửa sụp xuống biển tạo sóng cao ngàn mét, nhấn chìm thành phố ven biển, vẽ lại bản đồ thế giới bằng nước.",
+        "Siêu sóng thần ngàn mét quét toàn cầu 🌊",
+        ["#songthan", "#thamhoa"]),
 }
 
 
