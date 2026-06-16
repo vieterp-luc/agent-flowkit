@@ -14,6 +14,9 @@ import sys
 import time
 import urllib.request
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from phim_scene_source import load  # noqa: E402
+
 BASE = "http://127.0.0.1:8100"
 GAP_S = 30
 
@@ -28,8 +31,7 @@ def main(vid, slug):
             f.write(m + "\n")
         print(m, flush=True)
 
-    scenes = json.load(urllib.request.urlopen(f"{BASE}/api/scenes?video_id={vid}", timeout=30))
-    scenes.sort(key=lambda s: s.get("display_order", 0))
+    scenes = load(vid, slug)
     logline(f"=== START Meta image→video: {slug} ({len(scenes)} scenes) ===")
     ok = 0
     for s in scenes:

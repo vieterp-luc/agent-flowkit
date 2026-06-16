@@ -14,6 +14,9 @@ import subprocess
 import sys
 import urllib.request
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from phim_scene_source import load  # noqa: E402
+
 BASE = "http://127.0.0.1:8100"
 # BUFFER = trailing silence after each narration; audible inter-scene pause ≈ BUFFER − XFADE
 BUFFER, XFADE = 0.8, 0.4
@@ -46,8 +49,21 @@ def main(vid, slug, voice="Phong_Vien_TTS", speed=0.9):
     final = f"{out}/{name}_final_{tag}.mp4"
     for d in (tts, seg):
         os.makedirs(d, exist_ok=True)
-    scenes = json.load(urllib.request.urlopen(f"{BASE}/api/scenes?video_id={vid}", timeout=30))
-    scenes.sort(key=lambda s: s.get("display_order", 0))
+    scenes = load(vid, slug)
+
+    # auto-detect target orientation from the first available clip (landscape → 1280x720,
+    # else portrait 720x1280). Lets the same builder serve 16:9 and 9:16 without a flag.
+    W, H = 720, 1280
+    for s in scenes:
+        c = f"{clips}/scene_{s['display_order']:02d}.mp4"
+        if os.path.exists(c):
+            wh = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v",
+                                 "-show_entries", "stream=width,height", "-of", "csv=p=0", c],
+                                capture_output=True, text=True).stdout.strip().split(",")
+            if len(wh) == 2 and int(wh[0]) > int(wh[1]):
+                W, H = 1280, 720
+            break
+    print(f"[orient] target {W}x{H}")
 
     segs = []
     for s in scenes:
@@ -62,7 +78,7 @@ def main(vid, slug, voice="Phong_Vien_TTS", speed=0.9):
         target = round(dur(wav) + BUFFER, 2)
         sg = f"{seg}/seg_{n:02d}.mp4"
         factor = target / dur(clip)
-        vf = (f"scale=720:1280:force_original_aspect_ratio=increase,crop=720:1280,"
+        vf = (f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},"
               f"setpts={factor:.5f}*PTS,fps=24")
         # apad pads narrator audio with silence so the segment's AUDIO length == VIDEO
         # length (target). Without it, -t doesn't pad audio → acrossfade packs

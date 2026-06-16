@@ -30,6 +30,7 @@ logger = logging.getLogger(__name__)
 
 PROFILE_DIR = Path("output/_shared/meta_profile")
 DOWNLOAD_DIR = Path("output/_shared/meta_video")
+IMAGE_DOWNLOAD_DIR = Path("output/_shared/meta_image")
 
 LAUNCH_ARGS = [
     "--disable-blink-features=AutomationControlled",
@@ -152,6 +153,58 @@ class MetaBrowser:
                 except Exception:
                     pass
 
+    async def generate_image(
+        self, prompt: str, image_path: Optional[str] = None, timeout_s: float = 300
+    ) -> Path:
+        """Drive meta.ai: (optionally attach a REFERENCE image) → describe → generate →
+        wait for the rendered IMAGE → save → return path. Mirrors generate_video but
+        captures the `<img>` result (fbcdn CDN). `image_path` = a reference image to
+        attach (image→image) so a recurring character stays consistent across scenes;
+        omit for plain text→image. Meta renders variations; the topmost NEW image is
+        returned. Allow a generous timeout (Meta is slow)."""
+        if self._ctx is None:
+            raise MetaBrowserError("MetaBrowser not started")
+
+        async with self._lock:
+            page = await self._ctx.new_page()
+            try:
+                await page.goto(sel.APP_URL, wait_until="domcontentloaded", timeout=45_000)
+                self._check_login(page)
+                await self._dismiss_overlays(page)
+
+                composer = page.locator(sel.COMPOSER).first
+                try:
+                    await composer.wait_for(state="visible", timeout=20_000)
+                except PWTimeout as e:
+                    self._check_login(page)
+                    raise MetaBrowserError(f"COMPOSER_NOT_FOUND: {sel.COMPOSER}") from e
+
+                if image_path:
+                    await self._attach_image(page, image_path)
+
+                fingerprint = f"[fk-{uuid.uuid4().hex[:6]}]"
+                baseline_prompts = set(await self._prompt_hrefs(page))
+                baseline = set(await self._image_srcs(page))
+
+                await composer.scroll_into_view_if_needed()
+                await composer.click()
+                await page.keyboard.type(f"{prompt} {fingerprint}", delay=10)
+                await self._submit(page, composer)
+
+                src = await self._await_image_by_prompt(
+                    page, baseline_prompts, baseline, timeout_s
+                )
+                content = await self._download(page, src)
+                dest = self._unique_dest_in(IMAGE_DOWNLOAD_DIR, self._filename_from_url_img(src))
+                dest.write_bytes(content)
+                logger.info("Image saved: %s (%d KB)", dest, dest.stat().st_size // 1024)
+                return dest
+            finally:
+                try:
+                    await page.close()
+                except Exception:
+                    pass
+
     async def harvest(self, limit: int = 20) -> list:
         """Open recent /prompt/<id> pages and return {url, prompt text, video src} for
         each — lets the caller reclaim ALREADY-generated videos by matching the prompt
@@ -229,6 +282,115 @@ class MetaBrowser:
             }"""
         )
         return srcs
+
+    @staticmethod
+    async def _image_srcs(page) -> list:
+        """Ordered list (DOM order → topmost/newest first) of GENERATED-image srcs.
+
+        Filters to real result images: served from Meta's fbcdn/scontent CDN and
+        sizable (>=256px) — drops UI icons, avatars and tiny thumbnails.
+        """
+        return await page.evaluate(
+            """() => {
+               const seen = new Set(); const out = [];
+               for (const im of document.querySelectorAll('img')) {
+                 const s = im.currentSrc || im.src || '';
+                 if (!s.startsWith('http')) continue;
+                 // GENERATED content lives on scontent-*.fbcdn.net; EXCLUDE static UI
+                 // assets (static.*.fbcdn.net/rsrc.php/…, emoji, sprites, avatars).
+                 if (!/scontent[.-]/.test(s)) continue;
+                 if (/rsrc\\.php|\\/static\\.|\\/emoji|\\/rsrc\\//.test(s)) continue;
+                 const big = (im.naturalWidth || 0) >= 256 || (im.width || 0) >= 256;
+                 if (!big || seen.has(s)) continue;
+                 seen.add(s); out.push(s);
+               }
+               return out;
+            }"""
+        )
+
+    async def _await_image_by_prompt(
+        self, page, baseline_prompts: set, baseline_srcs: set, timeout_s: float
+    ) -> str:
+        """Capture OUR generated image. Phase A: poll (with reload) for a new
+        /prompt/<id> link OR a new fbcdn <img>. Phase B: if a prompt link appeared,
+        open it (shows only our generation) and reload-poll for its <img>."""
+        step, reload_every = 5, 30
+        elapsed = since_reload = 0.0
+        prompt_url = None
+        while elapsed < timeout_s and not prompt_url:
+            fresh = [h for h in (await self._prompt_hrefs(page)) if h not in baseline_prompts]
+            if fresh:
+                prompt_url = fresh[0]
+                break
+            # An inline new image may also appear without a /prompt link.
+            fresh_img = [s for s in (await self._image_srcs(page)) if s not in baseline_srcs]
+            if elapsed >= 15 and fresh_img:
+                return fresh_img[0]
+            body = (await page.text_content("body") or "").lower()
+            if any(m in body for m in sel.BLOCK_MESSAGES):
+                raise MetaBrowserError("BLOCKED — quota/safety message detected in page")
+            await asyncio.sleep(step)
+            elapsed += step
+            since_reload += step
+            if since_reload >= reload_every:
+                try:
+                    await page.reload(wait_until="domcontentloaded", timeout=30_000)
+                    await asyncio.sleep(4)
+                except Exception as e:
+                    logger.debug("reload (image phase A) failed: %s", e)
+                since_reload = 0.0
+
+        if prompt_url:
+            try:
+                await page.goto(prompt_url, wait_until="domcontentloaded", timeout=30_000)
+                await asyncio.sleep(3)
+            except Exception as e:
+                logger.debug("goto prompt page failed: %s", e)
+            since_reload = 0.0
+            while elapsed < timeout_s:
+                srcs = await self._image_srcs(page)
+                if srcs:
+                    logger.info("Prompt-page image → %s…", srcs[0][:64])
+                    return srcs[0]
+                low = (await page.text_content("body") or "").lower()
+                if any(m in low for m in sel.BLOCK_MESSAGES):
+                    raise MetaBrowserError("BLOCKED — quota/safety message detected in page")
+                await asyncio.sleep(step)
+                elapsed += step
+                since_reload += step
+                if since_reload >= reload_every:
+                    try:
+                        await page.reload(wait_until="domcontentloaded", timeout=30_000)
+                        await asyncio.sleep(4)
+                    except Exception as e:
+                        logger.debug("reload (image phase B) failed: %s", e)
+                    since_reload = 0.0
+
+        await self._dump_state(page)
+        raise MetaBrowserError(
+            f"IMAGE_TIMEOUT after {timeout_s}s — no new image rendered. "
+            "State → output/_shared/meta_timeout_state.log"
+        )
+
+    @staticmethod
+    def _filename_from_url_img(url: str) -> str:
+        m = re.search(r"/([^/?#]+\.(?:jpg|jpeg|png|webp))", url, re.I)
+        if m:
+            return m.group(1)
+        m = re.search(r"/([0-9a-f-]{8,})", url)
+        return (f"meta_image_{m.group(1)}.jpg" if m
+                else f"meta_image_{int(asyncio.get_event_loop().time() * 1000)}.jpg")
+
+    @staticmethod
+    def _unique_dest_in(dirpath: Path, filename: str) -> Path:
+        dirpath.mkdir(parents=True, exist_ok=True)
+        dest = dirpath / filename
+        i = 1
+        stem, suffix = Path(filename).stem, Path(filename).suffix or ".jpg"
+        while dest.exists():
+            dest = dirpath / f"{stem}_{i}{suffix}"
+            i += 1
+        return dest
 
     @staticmethod
     async def _attach_image(page, image_path: str) -> None:

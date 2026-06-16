@@ -56,6 +56,43 @@ async def browser_generate_video(body: GenerateVideoRequest):
         return {"ok": False, "error": f"UNEXPECTED: {e}"}
 
 
+class GenerateImageRequest(BaseModel):
+    prompt: str
+    image_path: Optional[str] = None  # reference image to attach (image→image, char consistency)
+    timeout: float = 300.0
+    headless: bool = True
+
+
+@router.post("/meta/browser/generate-image")
+async def browser_generate_image(body: GenerateImageRequest):
+    """Generate an IMAGE by driving meta.ai with Playwright. Returns the saved local
+    image path. `image_path` attaches a REFERENCE image (image→image) so a recurring
+    character stays consistent; omit for text→image. Requires a bootstrapped login
+    (scripts/meta_bootstrap.py). Meta images carry a watermark + no commercial license."""
+    try:
+        from agent.services.meta_browser import init_browser, MetaBrowserError
+    except ImportError as e:
+        return {"ok": False, "error": f"PLAYWRIGHT_NOT_INSTALLED: {e}"}
+
+    try:
+        browser = await init_browser(headless=body.headless)
+        path = await browser.generate_image(
+            body.prompt, image_path=body.image_path, timeout_s=body.timeout
+        )
+        return {
+            "ok": True,
+            "path": str(path),
+            "filename": path.name,
+            "size_kb": path.stat().st_size // 1024,
+            "format": path.suffix.lstrip("."),
+        }
+    except MetaBrowserError as e:
+        return {"ok": False, "error": str(e)}
+    except Exception as e:
+        logger.exception("browser_generate_image failed")
+        return {"ok": False, "error": f"UNEXPECTED: {e}"}
+
+
 class HarvestRequest(BaseModel):
     limit: int = 20
 
