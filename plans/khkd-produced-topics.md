@@ -5,6 +5,15 @@
 |-------|----------|---------|
 | Kiến quân đội | Eciton / Dorylus (army ants) | 2026-06-15 · `output/phim/kien_quan_doi/` · 45 scene, 4.8′, 9:16, voice Anh_Khoi · v2 (sửa trùng visual) |
 | Rồng xanh biển | Glaucus atlanticus (blue dragon) | 2026-06-15 · `output/phim/rong_xanh_bien/` · 44 scene, 4.3′, **16:9** (1280×720), voice Anh_Khoi · skill /fk-phim-khkd |
+| **TOP 10** Cây sát thủ | Drosera/Sarracenia/Venus/Utricularia/Rafflesia/Cuscuta/strangler fig/Gympie-gympie/Manchineel/Nepenthes rajah | 2026-06-16 · `output/phim/top10_cay_sat_thu/` · 46 scene, 4.8′, **16:9**, voice Anh_Khoi · format TOP-10 đếm ngược · lane thực vật (mới) |
+| **TOP 10** Loài nấm đáng sợ | Hydnellum/nematode-fungi/Entomophthora/Massospora/Chytrid/Aspergillus/Candida auris/death cap/Armillaria/Ophiocordyceps | 2026-06-17 · `output/phim/top10_nam/` · 46 scene, 6.3′, **16:9**, voice Anh_Khoi · lane nấm (mới) |
+| **TOP 10** Quái vật vực thẳm | barreleye/dragonfish/fangtooth/pelican eel/black swallower/giant isopod/frilled shark/vampire squid/anglerfish/colossal squid | 2026-06-18 · `output/phim/top10_vuc_tham/` · 46 scene, 5.5′, **16:9**, voice Anh_Khoi |
+| **TOP 10** Loài nhện đáng sợ | huntsman/camel spider/trapdoor/six-eyed sand/brown recluse/black widow/redback/mouse spider/Sydney funnel-web/Brazilian wandering | 2026-06-18 · `output/phim/top10_nhen/` · 46 scene, 6.3′, **16:9**, voice Anh_Khoi · (Meta từ chối "black widow" → reword "glossy black spider + red hourglass") |
+| **TOP 10** Ăn thịt đồng loại | hamster/cá/nòng nọc/bọ ngựa/góa phụ/bọ cạp/Stegodyphus/kỳ giông hổ/copepod/cá mập hổ cát | 2026-06-18 · `output/phim/top10_an_thit_dong_loai/` · 46 scene, 5.9′, **16:9**, voice Anh_Khoi |
+| **TOP 10** Loài rắn đáng sợ | Russell/cạp nia/hổ mang phun/taipan ven biển/đuôi chuông/rắn biển/hổ mang chúa/hổ Úc/mamba đen/taipan nội địa | 2026-06-18 · `output/phim/top10_ran/` · 45 scene, 6.2′, **16:9**, Anh_Khoi (sửa tin đồn rắn biển Belcher) |
+| **TOP 10** Quái vật sông nước ngọt | piranha/gar/snakehead/wels catfish/Goliath tigerfish/arapaima/cá đuối ngọt/lươn điện/cá sấu/anaconda | 2026-06-18 · `output/phim/top10_song_nuoc_ngot/` · 46 scene, 6.4′, **16:9**, Anh_Khoi |
+| **TOP 10** Cách tự vệ kinh dị | skunk/opossum/pangolin/cá nóc/bombardier/hải sâm/kiến tự nổ/thằn lằn sừng/hagfish/sa giông sườn TBN | 2026-06-18 · `output/phim/top10_tu_ve/` · 45 scene, 6.4′, **16:9**, Anh_Khoi |
+| **TOP 10** Nọc độc mạnh nhất | thú mỏ vịt/cu li/Gila/deathstalker/ếch phi tiêu/đốm xanh/ốc cối/Irukandji/cá đá/sứa hộp | 2026-06-18 · `output/phim/top10_noc_doc/` · 46 scene, 5.9′, **16:9**, Anh_Khoi |
 
 ## Batch v8 (sản xuất 2026-06-12, lịch 20–29/07) — ĐÃ XONG ✅ (10/10)
 Sứa hộp (box jellyfish) · Cá mập yêu tinh (goblin shark) · Candiru · Cá ngọc trai (pearlfish, sống trong hải sâm) · Ếch thủy tinh (glass frog) · Thủy tức (hydra bất tử) · Mực ma cà rồng (vampire squid) · Giun Guinea · Bạch tuộc nhại (mimic octopus) · Nhện Goliath (ăn chim). Data: `scripts/khkd_v8_videos.py`. (ếch thủy tinh scene_02 dùng Ken Burns do Meta timeout.)
@@ -118,3 +127,4 @@ Ribeiroia (ếch nhiều chân) · Tu hú (cuckoo) · Naked mole rat · Spider-t
 > **ĐÃ XẾP LỊCH (chưa sản xuất):**
 > - **Plan v7** (`plans/khkd-plan-v7-100726-190726.md`, 10–19/07): Komodo, cá mập cắt bánh quy, cá mặt quỷ, ong giữ hầm mộ, bọ rùa zombie, ếch đông cứng, giun dẹp bất tử, nhện quăng lưới, sán máng, cá nóc.
 > - **Plan v8** (`plans/khkd-plan-v8-200726-290726.md`, 20–29/07): sứa hộp, cá mập yêu tinh, candiru, cá trong hậu môn hải sâm, ếch thủy tinh, thủy tức bất tử, mực ma cà rồng, giun Guinea, bạch tuộc nhại, nhện khổng lồ ăn chim.
+> - **Plan v9** (`plans/khkd-plan-v9-300726-050826.md`, 30/07–05/08, **7 video × 7 scene, pipeline Flow `/fk-video-khkd`**): ruồi ăn thịt sống (screwworm), cà cuống sát thủ (giant water bug), cá mập diềm xếp (frilled shark), bọ biển khổng lồ (Bathynomus), kiến nhung 'giết bò' (velvet ant), rồng con trong hang (olm), bọ chét cát chui vào da (chigoe flea / Tunga penetrans).
